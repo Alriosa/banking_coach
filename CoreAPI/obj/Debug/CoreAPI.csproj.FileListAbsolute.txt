@@ -1,0 +1,13 @@
+D:\Alriosa Code\banking_coach\CoreAPI\bin\Debug\CoreAPI.dll
+D:\Alriosa Code\banking_coach\CoreAPI\bin\Debug\CoreAPI.pdb
+D:\Alriosa Code\banking_coach\CoreAPI\bin\Debug\DataAcess.dll
+D:\Alriosa Code\banking_coach\CoreAPI\bin\Debug\Entities-POJO.dll
+D:\Alriosa Code\banking_coach\CoreAPI\bin\Debug\Exceptions.dll
+D:\Alriosa Code\banking_coach\CoreAPI\bin\Debug\DataAcess.pdb
+D:\Alriosa Code\banking_coach\CoreAPI\bin\Debug\Entities-POJO.pdb
+D:\Alriosa Code\banking_coach\CoreAPI\bin\Debug\Exceptions.pdb
+D:\Alriosa Code\banking_coach\CoreAPI\obj\Debug\CoreAPI.csproj.AssemblyReference.cache
+D:\Alriosa Code\banking_coach\CoreAPI\obj\Debug\CoreAPI.csproj.CoreCompileInputs.cache
+D:\Alriosa Code\banking_coach\CoreAPI\obj\Debug\CoreAPI.csproj.CopyComplete
+D:\Alriosa Code\banking_coach\CoreAPI\obj\Debug\CoreAPI.dll
+D:\Alriosa Code\banking_coach\CoreAPI\obj\Debug\CoreAPI.pdb
