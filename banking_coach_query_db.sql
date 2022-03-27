@@ -1,8 +1,8 @@
-CREATE DATABASE BANKING_COACH_DB;
-GO
-
 USE master;
 DROP DATABASE BANKING_COACH_DB;
+GO
+CREATE DATABASE BANKING_COACH_DB;
+GO
 
 USE BANKING_COACH_DB;
 
@@ -311,7 +311,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_RECRUITER_USER]
 AS
         INSERT INTO [dbo].[TBL_RECRUITER_USER]
         VALUES
-                (@SP_Recruiter_Login,
+                (@SP_Insert_Recruiter_Login,
                 @SP_Insert_Recruiter_Password,
                 @SP_Insert_Recruiter_Status);
 GO
