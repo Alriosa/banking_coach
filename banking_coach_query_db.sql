@@ -1,6 +1,9 @@
 USE master;
+GO
+
 DROP DATABASE BANKING_COACH_DB;
 GO
+
 CREATE DATABASE BANKING_COACH_DB;
 GO
 
@@ -83,29 +86,39 @@ GO
 ---INSERTS EMPTYS----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
 
+
+
 SET IDENTITY_INSERT TBL_STUDENT ON
-SET IDENTITY_INSERT TBL_SYS_ADMIN_USER ON
-SET IDENTITY_INSERT TBL_RECRUITER_USER ON
-SET IDENTITY_INSERT TBL_FINANCIAL_USER ON
+
+INSERT INTO TBL_STUDENT (Student_ID, Banking_Student,User_Active_Status, Entry_DATE,First_Name,Second_Name,
+Last_Name,Second_Last_Name,Id_Type,Identification_Number, Birthdate,Gender,Primary_Phone, Secondary_Phone,
+Email,Laboral_Status,Work_Address,Laboral_Experience,Student_User,Student_Password,Province,Canton,District) VALUES (
+	0,0,0,'2022-03-27','DEFAULT','','','',0,0,'2022-03-27',0,0,'','DEFAULT',0,'',0,'DEFAULT','DEFAULT', 'DEFAULT','DEFAULT','DEFAULT');
 GO
 
-INSERT INTO TBL_STUDENT VALUES (
-	0,0,'2022-03-27','DEFAULT','','','',0,0,'2022-03-27',0,0,'','DEFAULT',0,'',0,'DEFAULT','DEFAULT', '','','');
-GO
+SET IDENTITY_INSERT TBL_STUDENT OFF
+
+SET IDENTITY_INSERT TBL_SYS_ADMIN_USER ON
 
 INSERT INTO TBL_SYS_ADMIN_USER(Sys_Admin_User_ID, Admin_Login,Admin_Password) VALUES (
 	0,'DEFAULT','DEFAULT');
 GO
 
+SET IDENTITY_INSERT TBL_SYS_ADMIN_USER OFF
+
+SET IDENTITY_INSERT TBL_RECRUITER_USER ON
+
 INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Password, Recruiter_Status) VALUES ( 0, 'DEFAULT', 'DEFAULT', 0);
 GO 
+
+SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
+
+SET IDENTITY_INSERT TBL_FINANCIAL_USER ON
+GO
 
 INSERT INTO TBL_FINANCIAL_USER (Financial_User_ID, Financial_User,Financial_Password, Financial_Status) VALUES ( 0, 'DEFAULT', 'DEFAULT', 0);
 GO
 
-SET IDENTITY_INSERT TBL_STUDENT OFF
-SET IDENTITY_INSERT TBL_SYS_ADMIN_USER OFF
-SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
 SET IDENTITY_INSERT TBL_FINANCIAL_USER OFF
 GO
 
