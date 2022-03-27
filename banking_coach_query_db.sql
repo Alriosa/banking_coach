@@ -63,7 +63,7 @@ CONSTRAINT UC_Financial_User UNIQUE (Financial_User)
 CREATE TABLE TBL_USER_LOG(
 Id_Record_Number INT IDENTITY(1,1) Not null, --PK
 Event_Logged VARCHAR(200),
-DATE_Logged DATE,
+Date_Logged DATETIME,
 FK_Student_ID INT NOT NULL,
 FK_Sys_Admin_User_ID INT NOT NULL,  
 FK_Recruiter_User_ID INT NOT NULL,
@@ -172,7 +172,7 @@ AS
         SELECT * FROM [dbo].[TBL_STUDENT] WHERE First_Name = @SP_Select_First_Name AND Last_Name = @SP_Select_Last_Name;
 GO
 
-
+--- UPDATE STUDENT
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Insert_Student_ID INT,
         @SP_Insert_Banking_Student INT,
@@ -224,7 +224,200 @@ AS
                 District=@SP_Insert_District
                 WHERE Student_ID = @SP_Insert_Student_ID;
 GO
+
+---DELETE STUDENT
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_STUDENT]
+        @SP_Delete_Student_ID INT
+AS
+        DELETE FROM [dbo].[TBL_STUDENT] WHERE Student_ID = @SP_Delete_Student_ID;
+GO
+
+
 /**
 -END
 STORAGE PROCEDURES FOR STUDENT
+**/
+
+
+
+/**
+-START
+STORAGE PROCEDURES FOR ADMIN USER
+**/
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_ADMIN_USER]
+        @SP_Insert_Admin_User VARCHAR(20),
+        @SP_Insert_Admin_Password VARCHAR(50),
+        @SP_Insert_Admin_Status INT
+AS
+        INSERT INTO [dbo].[TBL_ADMIN_USER]
+        VALUES
+                (@SP_Insert_Admin_User,
+                @SP_Insert_Admin_Password,
+                @SP_Insert_Admin_Status);
+GO
+
+---SELECT ALL ADMINS
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER]
+        @SP_Select_Admin_User VARCHAR(20)
+AS
+        SELECT * FROM [dbo].[TBL_ADMIN_USER];
+GO
+
+---UPDATE ADMIN STATUS
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_STATUS]
+        @SP_Insert_Admin_User VARCHAR(20),
+        @SP_Insert_Admin_Status INT
+AS
+        UPDATE [dbo].[TBL_ADMIN_USER] SET
+                Admin_User=@SP_Insert_Admin_User,
+                Admin_Status=@SP_Insert_Admin_Status
+                WHERE Admin_User = @SP_Insert_Admin_User;
+GO
+
+---UPDATE ADMIN PASSWORD
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_PASSWORD]
+        @SP_Insert_Admin_User VARCHAR(20),
+        @SP_Insert_Admin_Password VARCHAR(50)
+AS
+        UPDATE [dbo].[TBL_ADMIN_USER] SET
+                Admin_User=@SP_Insert_Admin_User,
+                Admin_Password=@SP_Insert_Admin_Password
+                WHERE Admin_User = @SP_Insert_Admin_User;                
+GO
+
+---DELETE ADMIN
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_ADMIN_USER]
+        @SP_Delete_Admin_User VARCHAR(20)
+AS
+        DELETE FROM [dbo].[TBL_ADMIN_USER] WHERE Admin_User = @SP_Delete_Admin_User;
+GO
+
+/**
+-END
+STORAGE PROCEDURES FOR ADMIN USER
+**/
+
+/**
+-START
+STORAGE PROCEDURES FOR RECRUITER USER
+**/
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_RECRUITER_USER]
+        @SP_Insert_Recruiter_Login VARCHAR(20),
+        @SP_Insert_Recruiter_Password VARCHAR(50),
+        @SP_Insert_Recruiter_Status INT
+AS
+        INSERT INTO [dbo].[TBL_RECRUITER_USER]
+        VALUES
+                (@SP_Recruiter_Login,
+                @SP_Insert_Recruiter_Password,
+                @SP_Insert_Recruiter_Status);
+GO
+
+
+--- SELECT BY USER
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_USER]
+        @SP_Select_Recruiter_Login VARCHAR(20)
+AS
+        SELECT * FROM [dbo].[TBL_RECRUITER_USER] WHERE Recruiter_Login = @SP_Select_Recruiter_Login;
+GO
+
+
+--- UPDATE RECRUITER STATUS
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_STATUS]
+        @SP_Insert_Recruiter_Login VARCHAR(20),
+        @SP_Insert_Recruiter_Status INT
+AS
+        UPDATE [dbo].[TBL_RECRUITER_USER] SET
+                Recruiter_Login=@SP_Insert_Recruiter_Login,
+                Recruiter_Status=@SP_Insert_Recruiter_Status
+                WHERE Recruiter_Login = @SP_Insert_Recruiter_Login;
+GO
+
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_PASSWORD]
+        @SP_Insert_Recruiter_Login VARCHAR(20),
+        @SP_Insert_Recruiter_Password VARCHAR(50)
+AS
+        UPDATE [dbo].[TBL_RECRUITER_USER] SET
+                Recruiter_Login=@SP_Insert_Recruiter_Login,
+                Recruiter_Password=@SP_Insert_Recruiter_Password
+                WHERE Recruiter_Login = @SP_Insert_Recruiter_Login;
+GO
+
+---DELETE RECRUITER
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_RECRUITER_USER]
+        @SP_Delete_Recruiter_Login VARCHAR(20)
+AS
+        DELETE FROM [dbo].[TBL_RECRUITER_USER] WHERE Recruiter_Login = @SP_Delete_Recruiter_Login;
+GO
+
+/**
+-END
+STORAGE PROCEDURES FOR RECRUITER USER
+**/
+
+
+
+/**
+-START
+STORAGE PROCEDURES FOR FINANCIAL USER
+**/
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_FINANCIAL_USER]
+        @SP_Insert_Financial_Login VARCHAR(20),
+        @SP_Insert_Financial_Password VARCHAR(50),
+        @SP_Insert_Financial_Status INT
+AS
+        INSERT INTO [dbo].[TBL_FINANCIAL_USER]
+        VALUES
+                (@SP_Insert_Financial_Login,
+                @SP_Insert_Financial_Password,
+                @SP_Insert_Financial_Status);
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER]
+        @SP_Select_Financial_Login VARCHAR(20)
+AS
+        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_Login = @SP_Select_Financial_Login;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_FINANCIAL_USER_STATUS]
+        @SP_Insert_Financial_Login VARCHAR(20),
+        @SP_Insert_Financial_Status INT
+AS
+        UPDATE [dbo].[TBL_FINANCIAL_USER] SET
+                Financial_Login=@SP_Insert_Financial_Login,
+                Financial_Status=@SP_Insert_Financial_Status
+                WHERE Financial_Login = @SP_Insert_Financial_Login;
+GO
+
+/**
+-END
+STORAGE PROCEDURES FOR FINANCIAL USER
+**/
+
+/**
+-START
+STORAGE PROCEDURES FOR USER LOG
+**/
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_USER_LOG]
+        @SP_Insert_User_Log_Event_Logged VARCHAR(200),
+        @SP_Insert_User_Log_Event_Date DATETIME,
+        @SP_Insert_User_Log_Event_Type INT
+AS
+        INSERT INTO [dbo].[TBL_USER_LOG]
+        VALUES
+        (@SP_Insert_User_Log_Event_Logged,
+        @SP_Insert_User_Log_Event_Date,
+        @SP_Insert_User_Log_Event_Type);
+GO
+
+
+/**
+-END
+STORAGE PROCEDURES FOR USER LOG
 **/
