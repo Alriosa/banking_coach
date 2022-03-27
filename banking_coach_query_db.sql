@@ -78,6 +78,37 @@ CONSTRAINT FK_Financial_User_ID FOREIGN KEY (FK_Financial_User_ID) REFERENCES TB
 );
 
 GO
+
+----------------------------------------------------------------------------------------------------------------------
+---INSERTS EMPTYS----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+SET IDENTITY_INSERT TBL_STUDENT ON
+SET IDENTITY_INSERT TBL_SYS_ADMIN_USER ON
+SET IDENTITY_INSERT TBL_RECRUITER_USER ON
+SET IDENTITY_INSERT TBL_FINANCIAL_USER ON
+GO
+
+INSERT INTO TBL_STUDENT VALUES (
+	0,0,'2022-03-27','DEFAULT','','','',0,0,'2022-03-27',0,0,'','DEFAULT',0,'',0,'DEFAULT','DEFAULT', '','','');
+GO
+
+INSERT INTO TBL_SYS_ADMIN_USER(Sys_Admin_User_ID, Admin_Login,Admin_Password) VALUES (
+	0,'DEFAULT','DEFAULT');
+GO
+
+INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Password, Recruiter_Status) VALUES ( 0, 'DEFAULT', 'DEFAULT', 0);
+GO 
+
+INSERT INTO TBL_FINANCIAL_USER (Financial_User_ID, Financial_User,Financial_Password, Financial_Status) VALUES ( 0, 'DEFAULT', 'DEFAULT', 0);
+GO
+
+SET IDENTITY_INSERT TBL_STUDENT OFF
+SET IDENTITY_INSERT TBL_SYS_ADMIN_USER OFF
+SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
+SET IDENTITY_INSERT TBL_FINANCIAL_USER OFF
+GO
+
 ----------------------------------------------------------------------------------------------------------------------
 ---STORAGE PROCEDURES----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
@@ -405,16 +436,86 @@ STORAGE PROCEDURES FOR FINANCIAL USER
 STORAGE PROCEDURES FOR USER LOG
 **/
 
+
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_USER_LOG]
         @SP_Insert_User_Log_Event_Logged VARCHAR(200),
         @SP_Insert_User_Log_Event_Date DATETIME,
-        @SP_Insert_User_Log_Event_Type INT
+		@SP_Insert_User_Log_Event_User_ID INT,
+        @SP_Insert_User_Log_Event_Type INT -- 1-SYS ADMIN; 2-STUDENT; 3-RECRUITER; 4-FINANCIAL
 AS
-        INSERT INTO [dbo].[TBL_USER_LOG]
-        VALUES
-        (@SP_Insert_User_Log_Event_Logged,
-        @SP_Insert_User_Log_Event_Date,
-        @SP_Insert_User_Log_Event_Type);
+		BEGIN
+			DECLARE @ID_SYS_ADMIN INT --TYPE 1
+			DECLARE @ID_STUDENT INT --TYPE 2
+			DECLARE @ID_RECRUITER INT --TYPE 3
+			DECLARE @ID_FINANCIAL INT --TYPE 4
+
+			SET @ID_SYS_ADMIN = CASE @SP_Insert_User_Log_Event_Type
+					WHEN 1 THEN @SP_Insert_User_Log_Event_User_ID
+					ELSE 0
+				END
+				
+			SET @ID_STUDENT = CASE @SP_Insert_User_Log_Event_Type
+					WHEN 2 THEN @SP_Insert_User_Log_Event_User_ID
+					ELSE 0
+				END
+
+			SET @ID_RECRUITER = CASE @SP_Insert_User_Log_Event_Type
+					WHEN 3 THEN @SP_Insert_User_Log_Event_User_ID
+					ELSE 0
+				END	
+
+			SET @ID_FINANCIAL = CASE @SP_Insert_User_Log_Event_Type
+					WHEN 4 THEN @SP_Insert_User_Log_Event_User_ID
+					ELSE 0
+				END	
+
+			INSERT INTO [dbo].[TBL_USER_LOG]
+			VALUES
+			(@SP_Insert_User_Log_Event_Logged,
+			@SP_Insert_User_Log_Event_Date,
+			@ID_STUDENT,
+			@ID_SYS_ADMIN,
+			@ID_RECRUITER,
+			@ID_FINANCIAL);
+
+		END	
+GO
+
+---SELECT ALL USER LOGS
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG]
+AS
+        SELECT * FROM [dbo].[TBL_USER_LOG];
+GO
+
+---SELECT USER LOGS BY STUDENT
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_STUDENT]
+			@SP_Insert_User_Log_Event_User_ID INT
+AS
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE FK_Student_ID = @SP_Insert_User_Log_Event_User_ID;
+GO
+
+
+---SELECT USER LOGS BY SYS ADMIN
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_SYS_ADMIN]
+			@SP_Insert_User_Log_Event_User_ID INT 
+AS
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE FK_Sys_Admin_User_ID = @SP_Insert_User_Log_Event_User_ID;
+GO
+
+---SELECT USER LOGS BY RECRUITER
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_RECRUITER]
+			@SP_Insert_User_Log_Event_User_ID INT 
+AS
+
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE FK_Recruiter_User_ID = @SP_Insert_User_Log_Event_User_ID;
+GO
+
+---SELECT USER LOGS BY FINANCIAL
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_FINANCIAL]
+			@SP_Insert_User_Log_Event_User_ID INT 
+AS
+
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE FK_Financial_User_ID = @SP_Insert_User_Log_Event_User_ID;
 GO
 
 
