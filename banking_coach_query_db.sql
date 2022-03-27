@@ -47,6 +47,7 @@ CREATE TABLE TBL_RECRUITER_USER(
 Recruiter_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Recruiter_Login VARCHAR(20) NOT NULL,
 Recruiter_Password VARCHAR(50) NOT NULL, 
+Recruiter_Status INT NOT NULL, /*True or False*/
 PRIMARY KEY(Recruiter_User_ID),
 CONSTRAINT UC_Recruiter_User UNIQUE (Recruiter_Login)
 );
@@ -56,6 +57,7 @@ CREATE TABLE TBL_FINANCIAL_USER (
 Financial_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Financial_User VARCHAR(20) NOT NULL, 
 Financial_Password VARCHAR(50) NOT NULL,
+Financial_Status INT NOT NULL, /*True or False*/
 PRIMARY KEY(Financial_User_ID),
 CONSTRAINT UC_Financial_User UNIQUE (Financial_User)
 );
@@ -69,10 +71,10 @@ FK_Sys_Admin_User_ID INT NOT NULL,
 FK_Recruiter_User_ID INT NOT NULL,
 FK_Financial_User_ID INT NOT NULL,
 PRIMARY KEY(Id_Record_Number),
-CONSTRAINT FK_Student_ID FOREIGN KEY (FK_Student_ID) REFERENCES STUDENT(Student_ID),
-CONSTRAINT FK_Sys_Admin_User_ID FOREIGN KEY (FK_Sys_Admin_User_ID) REFERENCES SYS_ADMIN_USER(Sys_Admin_User_ID),
-CONSTRAINT FK_Recruiter_User_ID FOREIGN KEY (FK_Recruiter_User_ID) REFERENCES RECRUITER_USER(Recruiter_User_ID),
-CONSTRAINT FK_Financial_User_ID FOREIGN KEY (FK_Financial_User_ID) REFERENCES FINANCIAL_USER(Financial_User_ID)
+CONSTRAINT FK_Student_ID FOREIGN KEY (FK_Student_ID) REFERENCES TBL_STUDENT(Student_ID),
+CONSTRAINT FK_Sys_Admin_User_ID FOREIGN KEY (FK_Sys_Admin_User_ID) REFERENCES TBL_SYS_ADMIN_USER(Sys_Admin_User_ID),
+CONSTRAINT FK_Recruiter_User_ID FOREIGN KEY (FK_Recruiter_User_ID) REFERENCES TBL_RECRUITER_USER(Recruiter_User_ID),
+CONSTRAINT FK_Financial_User_ID FOREIGN KEY (FK_Financial_User_ID) REFERENCES TBL_FINANCIAL_USER(Financial_User_ID)
 );
 
 GO
@@ -86,7 +88,7 @@ STORAGE PROCEDURES FOR STUDENT
 **/
 
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT] 
-        @SP_Insert_Student_ID INT,
+       
         @SP_Insert_Banking_Student INT,
         @SP_Insert_User_Active_Status INT,
         @SP_Insert_Entry_DATE DATE,
@@ -110,7 +112,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT]
         @SP_Insert_Canton VARCHAR(200),
         @SP_Insert_District VARCHAR(200)
 AS
-        INSERT INTO [dbo].[TBL_STUDENT] VALUES (@SP_Insert_Student_ID,
+        INSERT INTO [dbo].[TBL_STUDENT] VALUES (
                 @SP_Insert_Banking_Student,
                 @SP_Insert_User_Active_Status,
                 @SP_Insert_Entry_DATE,
@@ -199,7 +201,6 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Insert_District VARCHAR(200)
 AS
         UPDATE [dbo].[TBL_STUDENT] SET
-                Student_ID=@SP_Insert_Student_ID,
                 Banking_Student=@SP_Insert_Banking_Student,
                 User_Active_Status=@SP_Insert_User_Active_Status,
                 Entry_Date=@SP_Insert_Entry_Date,
@@ -365,33 +366,33 @@ STORAGE PROCEDURES FOR FINANCIAL USER
 **/
 
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_FINANCIAL_USER]
-        @SP_Insert_Financial_Login VARCHAR(20),
+        @SP_Insert_Financial_User VARCHAR(20),
         @SP_Insert_Financial_Password VARCHAR(50),
         @SP_Insert_Financial_Status INT
 AS
         INSERT INTO [dbo].[TBL_FINANCIAL_USER]
         VALUES
-                (@SP_Insert_Financial_Login,
+                (@SP_Insert_Financial_User,
                 @SP_Insert_Financial_Password,
                 @SP_Insert_Financial_Status);
 GO
 
 
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER]
-        @SP_Select_Financial_Login VARCHAR(20)
+        @SP_Select_Financial_User VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_Login = @SP_Select_Financial_Login;
+        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Select_Financial_User;
 GO
 
 
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_FINANCIAL_USER_STATUS]
-        @SP_Insert_Financial_Login VARCHAR(20),
+        @SP_Insert_Financial_User VARCHAR(20),
         @SP_Insert_Financial_Status INT
 AS
         UPDATE [dbo].[TBL_FINANCIAL_USER] SET
-                Financial_Login=@SP_Insert_Financial_Login,
+                Financial_User=@SP_Insert_Financial_User,
                 Financial_Status=@SP_Insert_Financial_Status
-                WHERE Financial_Login = @SP_Insert_Financial_Login;
+                WHERE Financial_User = @SP_Insert_Financial_User;
 GO
 
 /**
