@@ -11,5 +11,16 @@ namespace Entities_POJO
         public int Financial_User_ID { get; set; }
         public string Financial_User { get; set; }
         public string Financial_Password { get; set; }
+
+        public FinancialUser()
+        {
+            
+        }
+        public FinancialUser(int financialUserId, string financialUser, string financialPassword)
+        {
+            Financial_User_ID = financialUserId;
+            Financial_User = financialUser;
+            Financial_Password = financialPassword;
+        }
     }
 }

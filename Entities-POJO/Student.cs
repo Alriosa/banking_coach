@@ -20,18 +20,34 @@ namespace Entities_POJO
         public int IdentificationNumber { get; set; }
         public DateTime Birthdate { get; set; }
         public int Gender { get; set; }
-        public string PrimaryPhone { get; set; }
-        public string SecondaryPhone { get; set; }
-        public string Email { get; set; }
-        public int LaboralStatus { get; set; }
-        public string WorkAddress { get; set; }
-        public int LaboralExperience { get; set; }
-        public string StudentUser { get; set; }
-        public string StudentPassword { get; set; }
-        public string Province { get; set; }
         public string Canton { get; set; }
         public string District { get; set; }
 
+        public Student()
+        {
 
+        }
+        public Student(int studentId, bool bankingStudent, bool userActiveStatus, DateTime entryDate, string firstName, string secondName, string lastName, string secondLastName, int idType, int identificationNumber, DateTime birthdate, int gender, string canton, string district)
+        {
+            StudentID = studentId;
+            BankingStudent = bankingStudent;
+            UserActiveStatus = userActiveStatus;
+            EntryDate = entryDate;
+            FirstName = firstName;
+            SecondName = secondName;
+            LastName = lastName;
+            SecondLastName = secondLastName;
+            IdType = idType;
+            IdentificationNumber = identificationNumber;
+            Birthdate = birthdate;
+            Gender = gender;
+            Canton = canton;
+            District = district;
+        }
+
+        
+
+   
     }
+    
 }
