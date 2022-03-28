@@ -8,8 +8,33 @@ using Entities_POJO;
 
 namespace DataAcess.Mapper
 {
-    class StudentMapper : EntityMapper, ISqlStaments, IObjectMapper
+    public class StudentMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
+        private const string DB_COL_STUDENT_ID = "ID";
+        private const string DB_COL_BANKING_STUDENT = "NAME";
+        private const string DB_COL_USER_ACTIVE_STATUS = "LAST_NAME";
+        private const string DB_COL_ENTRY_DATE = "AGE";
+        private const string DB_COL_FIRST_NAME = "ID";
+        private const string DB_COL_SECOND_NAME = "NAME";
+        private const string DB_COL_LAST_NAME = "LAST_NAME";
+        private const string DB_COL_SECOND_LAST_NAME = "AGE";
+        private const string DB_COL_ID_TYPE = "ID";
+        private const string DB_COL_IDENTIFICATION_NUMBER = "NAME";
+        private const string DB_COL_BIRTHDATE = "LAST_NAME";
+        private const string DB_COL_GENDER = "AGE";
+        private const string DB_COL_CANTON = "ID";
+        private const string DB_COL_DISTRICT = "NAME";
+        private const string DB_COL_USER_TYPE = "LAST_NAME";
+        private const string DB_COL_STUDENT_LOGIN = "AGE";
+        private const string DB_COL_STUDENT_PASSWORD = "ID";
+        private const string DB_COL_LABORAL_STATUS = "NAME";
+        private const string DB_COL_WORK_ADDRESS = "LAST_NAME";
+        private const string DB_COL_EMAIL = "AGE";
+        private const string DB_COL_PRIMARY_PHONE = "ID";
+        private const string DB_COL_SECOND_PHONE = "NAME";
+
+
+
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
             throw new NotImplementedException();
