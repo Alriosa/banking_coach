@@ -22,12 +22,17 @@ namespace Entities_POJO
         public int Gender { get; set; }
         public string Canton { get; set; }
         public string District { get; set; }
+        public int UserType { get; set; }
+        public string Student_Login { get; set; }
+        public string Student_Password { get; set; }
+        public int LaboralStatus { get; set; }
+        public string Work_Address { get; set; }
+        public string Email { get; set; }
+        public string PrimaryPhone { get; set; }
+        public string SecondPhone { get; set; }
 
-        public Student()
-        {
 
-        }
-        public Student(int studentId, bool bankingStudent, bool userActiveStatus, DateTime entryDate, string firstName, string secondName, string lastName, string secondLastName, int idType, int identificationNumber, DateTime birthdate, int gender, string canton, string district)
+        public Student(int studentId, bool bankingStudent, bool userActiveStatus, DateTime entryDate, string firstName, string secondName, string lastName, string secondLastName, int idType, int identificationNumber, DateTime birthdate, int gender, string canton, string district, int userType, string studentLogin, string studentPassword, int laboralStatus, string workAddress, string email)
         {
             StudentID = studentId;
             BankingStudent = bankingStudent;
@@ -43,6 +48,12 @@ namespace Entities_POJO
             Gender = gender;
             Canton = canton;
             District = district;
+            UserType = userType;
+            Student_Login = studentLogin;
+            Student_Password = studentPassword;
+            LaboralStatus = laboralStatus;
+            Work_Address = workAddress;
+            Email = email;
         }
 
         
