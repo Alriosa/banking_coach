@@ -33,6 +33,7 @@ Student_Password VARCHAR(50) NOT NULL,
 Province VARCHAR(200) NOT NULL,
 Canton VARCHAR(200) NOT NULL,
 District VARCHAR(200) NOT NULL,
+User_Type INT DEFAULT (2),
 PRIMARY KEY(Student_ID),
 CONSTRAINT UC_Student UNIQUE (Identification_Number,
                                Student_User,
@@ -43,16 +44,9 @@ CREATE TABLE TBL_SYS_ADMIN_USER(
 Sys_Admin_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Admin_Login VARCHAR(20) NOT NULL, 
 Admin_Password VARCHAR(50) NOT NULL,
+Admin_Status INT NOT NULL, /*True or False*/
+User_Type INT DEFAULT (1),
 PRIMARY KEY(Sys_Admin_User_ID),
-);
-
-CREATE TABLE TBL_RECRUITER_USER(
-Recruiter_User_ID INT IDENTITY(1,1) NOT NULL, --PK
-Recruiter_Login VARCHAR(20) NOT NULL,
-Recruiter_Password VARCHAR(50) NOT NULL, 
-Recruiter_Status INT NOT NULL, /*True or False*/
-PRIMARY KEY(Recruiter_User_ID),
-CONSTRAINT UC_Recruiter_User UNIQUE (Recruiter_Login)
 );
 
 --DROP TABLE FINANCIAL_USER
@@ -61,9 +55,24 @@ Financial_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Financial_User VARCHAR(20) NOT NULL, 
 Financial_Password VARCHAR(50) NOT NULL,
 Financial_Status INT NOT NULL, /*True or False*/
+User_Type INT DEFAULT (4),
 PRIMARY KEY(Financial_User_ID),
 CONSTRAINT UC_Financial_User UNIQUE (Financial_User)
 );
+
+CREATE TABLE TBL_RECRUITER_USER(
+Recruiter_User_ID INT IDENTITY(1,1) NOT NULL, --PK
+Recruiter_Login VARCHAR(20) NOT NULL,
+Recruiter_Password VARCHAR(50) NOT NULL, 
+Recruiter_Status INT NOT NULL, /*True or False*/
+User_Type INT DEFAULT (3),
+FK_Financial_User_ID INT NOT NULL,
+PRIMARY KEY(Recruiter_User_ID),
+CONSTRAINT UC_Recruiter_User UNIQUE (Recruiter_Login),
+CONSTRAINT FK_Financial_User_ID FOREIGN KEY (FK_Financial_User_ID) REFERENCES TBL_FINANCIAL_USER(Financial_User_ID)
+);
+
+
 
 CREATE TABLE TBL_USER_LOG(
 Id_Record_Number INT IDENTITY(1,1) Not null, --PK
@@ -93,34 +102,56 @@ SET IDENTITY_INSERT TBL_STUDENT ON
 INSERT INTO TBL_STUDENT (Student_ID, Banking_Student,User_Active_Status, Entry_DATE,First_Name,Second_Name,
 Last_Name,Second_Last_Name,Id_Type,Identification_Number, Birthdate,Gender,Primary_Phone, Secondary_Phone,
 Email,Laboral_Status,Work_Address,Laboral_Experience,Student_User,Student_Password,Province,Canton,District) VALUES (
-	0,0,0,'2022-03-27','DEFAULT','','','',0,0,'2022-03-27',0,0,'','DEFAULT',0,'',0,'DEFAULT','DEFAULT', 'DEFAULT','DEFAULT','DEFAULT');
+	0,0,0,'2022-03-27','DEFAULT','','','',0,0,'2022-03-27',0,0,'','DEFAULT',0,'',0,'S_DEFAULT','DEFAULT', 'DEFAULT','DEFAULT','DEFAULT');
 GO
 
 SET IDENTITY_INSERT TBL_STUDENT OFF
 
 SET IDENTITY_INSERT TBL_SYS_ADMIN_USER ON
 
-INSERT INTO TBL_SYS_ADMIN_USER(Sys_Admin_User_ID, Admin_Login,Admin_Password) VALUES (
-	0,'DEFAULT','DEFAULT');
+INSERT INTO TBL_SYS_ADMIN_USER(Sys_Admin_User_ID, Admin_Login,Admin_Password, Admin_Status) VALUES (
+	0,'A_DEFAULT','DEFAULT',0);
 GO
 
 SET IDENTITY_INSERT TBL_SYS_ADMIN_USER OFF
 
-SET IDENTITY_INSERT TBL_RECRUITER_USER ON
-
-INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Password, Recruiter_Status) VALUES ( 0, 'DEFAULT', 'DEFAULT', 0);
-GO 
-
-SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
-
 SET IDENTITY_INSERT TBL_FINANCIAL_USER ON
 GO
 
-INSERT INTO TBL_FINANCIAL_USER (Financial_User_ID, Financial_User,Financial_Password, Financial_Status) VALUES ( 0, 'DEFAULT', 'DEFAULT', 0);
+INSERT INTO TBL_FINANCIAL_USER (Financial_User_ID, Financial_User,Financial_Password, Financial_Status) VALUES ( 0, 'F_DEFAULT', 'DEFAULT', 0);
 GO
 
 SET IDENTITY_INSERT TBL_FINANCIAL_USER OFF
 GO
+
+SET IDENTITY_INSERT TBL_RECRUITER_USER ON
+
+INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Password, Recruiter_Status,FK_Financial_User_ID ) VALUES ( 0, 'R_DEFAULT', 'DEFAULT', 0, 0);
+GO 
+
+SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
+
+--
+
+
+----------------------------------------------------------------------------------------------------------------------
+--- VIEWS ----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+CREATE VIEW VW_ALL_USER_LOGIN
+AS 
+	SELECT TB_USER_LOGIN.Login, TB_USER_LOGIN.Password, TB_USER_LOGIN.User_Type, TB_USER_LOGIN.Status FROM (
+			SELECT Student_User AS 'Login', Student_Password AS 'Password', User_Type, User_Active_Status AS 'Status' FROM dbo.TBL_STUDENT
+			UNION ALL
+			SELECT Admin_Login AS 'Login', Admin_Password AS 'Password', User_Type, Admin_Status AS 'Status' FROM dbo.TBL_SYS_ADMIN_USER
+			UNION ALL
+			SELECT Recruiter_Login AS 'Login', Recruiter_Password AS 'Password', User_Type, Recruiter_Status AS 'Status' FROM dbo.TBL_RECRUITER_USER
+			UNION ALL
+			SELECT Financial_User AS 'Login', Financial_Password AS 'Password', User_Type, Financial_Status AS 'Status' FROM dbo.TBL_FINANCIAL_USER
+		) AS TB_USER_LOGIN
+
+GO
+
 
 ----------------------------------------------------------------------------------------------------------------------
 ---STORAGE PROCEDURES----------------------------------------------------------------------------------------------------
@@ -178,7 +209,8 @@ AS
                 @SP_Insert_Student_Password,
                 @SP_Insert_Province,
                 @SP_Insert_Canton,
-                @SP_Insert_District);
+                @SP_Insert_District,
+				2);
 GO
 
 ---SELECT ALL
@@ -299,7 +331,8 @@ AS
         VALUES
                 (@SP_Insert_Admin_User,
                 @SP_Insert_Admin_Password,
-                @SP_Insert_Admin_Status);
+                @SP_Insert_Admin_Status,
+				1);
 GO
 
 ---SELECT ALL ADMINS
@@ -351,13 +384,17 @@ STORAGE PROCEDURES FOR RECRUITER USER
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_RECRUITER_USER]
         @SP_Insert_Recruiter_Login VARCHAR(20),
         @SP_Insert_Recruiter_Password VARCHAR(50),
-        @SP_Insert_Recruiter_Status INT
+        @SP_Insert_Recruiter_Status INT,
+        @SP_Insert_Recruiter_Financial_ID INT
 AS
         INSERT INTO [dbo].[TBL_RECRUITER_USER]
         VALUES
                 (@SP_Insert_Recruiter_Login,
                 @SP_Insert_Recruiter_Password,
-                @SP_Insert_Recruiter_Status);
+                @SP_Insert_Recruiter_Status,
+				3,
+				@SP_Insert_Recruiter_Financial_ID
+				);
 GO
 
 
@@ -418,7 +455,8 @@ AS
         VALUES
                 (@SP_Insert_Financial_User,
                 @SP_Insert_Financial_Password,
-                @SP_Insert_Financial_Status);
+                @SP_Insert_Financial_Status,
+				4);
 GO
 
 
@@ -534,5 +572,86 @@ GO
 
 /**
 -END
+STORAGE PROCEDURES FOR USER LOG
+**/
+
+
+/**
+-START
+STORAGE PROCEDURES FOR LOGIN
+**/
+
+--verify user name existence
+--RETURN 0 IF DONT EXIST OR 1 IF EXIST
+
+CREATE PROCEDURE [dbo].[SP_VERIFY_USERNAME]
+        @SP_Insert_Login VARCHAR(20)
+AS
+	BEGIN
+		DECLARE @COUNT_LOGIN_USERNAME VARCHAR(20) 
+		DECLARE @USER_EXIST INT = 0
+
+		SELECT @COUNT_LOGIN_USERNAME =  COUNT(T.Login) FROM (
+			SELECT Student_User AS 'Login' FROM dbo.TBL_STUDENT
+			UNION ALL
+			SELECT Admin_Login AS 'Login' FROM dbo.TBL_SYS_ADMIN_USER
+			UNION ALL
+			SELECT Recruiter_Login AS 'Login' FROM dbo.TBL_RECRUITER_USER
+			UNION ALL
+			SELECT Financial_User AS 'Login' FROM dbo.TBL_FINANCIAL_USER
+		) AS T WHERE T.Login = @SP_Insert_Login
+
+
+		IF @COUNT_LOGIN_USERNAME > 0 
+		BEGIN 
+			SET @USER_EXIST = 1
+		END 
+
+		SELECT @USER_EXIST AS 'User Exist'
+	END
+GO
+
+
+-- USER LOGIN PROCEDURE:
+--- RETURN:
+-------- 0 IF NOT USER EXISTS
+-------- 1 IF PASSWORD INCORRECT
+-------- 2 IF STATUS INACTIVE
+-------- 3 IF STATUS ACTIVE
+
+CREATE PROCEDURE [dbo].[SP_LOGIN]
+	    @SP_Insert_Login VARCHAR(20),
+        @SP_Insert_Password VARCHAR(20)
+AS
+BEGIN
+	DECLARE @RESULT INT = 0
+	DECLARE @GET_LOGIN VARCHAR(20) = 'NO'
+	DECLARE @GET_PASS VARCHAR(20) = 'NO'
+	DECLARE @GET_USER_TYPE INT = 0
+	DECLARE @GET_STATUS INT = 0
+
+	SELECT @GET_LOGIN = VW_USER.Login FROM VW_ALL_USER_LOGIN AS VW_USER
+	WHERE VW_USER.Login = @SP_Insert_Login
+
+	SELECT @GET_PASS= VW_USER.Password FROM VW_ALL_USER_LOGIN AS VW_USER
+	WHERE VW_USER.Login = @SP_Insert_Login
+
+	SELECT @GET_USER_TYPE = VW_USER.User_Type FROM VW_ALL_USER_LOGIN AS VW_USER
+	WHERE VW_USER.Login = @SP_Insert_Login
+
+	SELECT @GET_STATUS = VW_USER.Status FROM VW_ALL_USER_LOGIN AS VW_USER
+	WHERE VW_USER.Login = @SP_Insert_Login
+
+	SELECT @RESULT = CASE 
+		WHEN @GET_LOGIN = 'NO' THEN 0 -- IF NOT USER EXISTS
+		WHEN @GET_PASS != @SP_Insert_Password THEN 1 -- PASSWORD IS INCORRECT
+		WHEN @GET_STATUS = 0 THEN 2 -- STATUS INACTIVE
+		WHEN @GET_STATUS = 1 THEN 3 -- STATUS ACTIVE
+	END 
+	SELECT @RESULT AS 'Result', @GET_LOGIN AS 'Login', @GET_USER_TYPE AS 'User Type', @GET_STATUS AS 'Status';
+END
+GO
+/**
+-END 
 STORAGE PROCEDURES FOR USER LOG
 **/
