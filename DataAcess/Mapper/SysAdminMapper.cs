@@ -8,7 +8,7 @@ using Entities_POJO;
 
 namespace DataAcess.Mapper
 {
-    public class RecruiterMapper : EntityMapper, ISqlStaments, IObjectMapper
+    public class SysAdminMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
