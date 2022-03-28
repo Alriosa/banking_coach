@@ -69,7 +69,7 @@ User_Type INT DEFAULT (3),
 FK_Financial_User_ID INT NOT NULL,
 PRIMARY KEY(Recruiter_User_ID),
 CONSTRAINT UC_Recruiter_User UNIQUE (Recruiter_Login),
-CONSTRAINT FK_Financial_User_ID FOREIGN KEY (FK_Financial_User_ID) REFERENCES TBL_FINANCIAL_USER(Financial_User_ID)
+CONSTRAINT FK_Financial_ID FOREIGN KEY (FK_Financial_User_ID) REFERENCES TBL_FINANCIAL_USER(Financial_User_ID)
 );
 
 
@@ -96,14 +96,12 @@ GO
 ----------------------------------------------------------------------------------------------------------------------
 
 
-
 SET IDENTITY_INSERT TBL_STUDENT ON
 
 INSERT INTO TBL_STUDENT (Student_ID, Banking_Student,User_Active_Status, Entry_DATE,First_Name,Second_Name,
 Last_Name,Second_Last_Name,Id_Type,Identification_Number, Birthdate,Gender,Primary_Phone, Secondary_Phone,
 Email,Laboral_Status,Work_Address,Laboral_Experience,Student_User,Student_Password,Province,Canton,District) VALUES (
 	0,0,0,'2022-03-27','DEFAULT','','','',0,0,'2022-03-27',0,0,'','DEFAULT',0,'',0,'S_DEFAULT','DEFAULT', 'DEFAULT','DEFAULT','DEFAULT');
-GO
 
 SET IDENTITY_INSERT TBL_STUDENT OFF
 
@@ -114,9 +112,9 @@ INSERT INTO TBL_SYS_ADMIN_USER(Sys_Admin_User_ID, Admin_Login,Admin_Password, Ad
 GO
 
 SET IDENTITY_INSERT TBL_SYS_ADMIN_USER OFF
+GO
 
 SET IDENTITY_INSERT TBL_FINANCIAL_USER ON
-GO
 
 INSERT INTO TBL_FINANCIAL_USER (Financial_User_ID, Financial_User,Financial_Password, Financial_Status) VALUES ( 0, 'F_DEFAULT', 'DEFAULT', 0);
 GO
@@ -137,6 +135,7 @@ SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
 ----------------------------------------------------------------------------------------------------------------------
 --- VIEWS ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
+GO 
 
 CREATE VIEW VW_ALL_USER_LOGIN
 AS 
