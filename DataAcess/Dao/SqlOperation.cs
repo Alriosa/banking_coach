@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -16,7 +17,7 @@ namespace DataAcess.Dao
 
         public void AddVarcharParam(string paramName, string paramValue)
         {
-            var param = new SqlParameter("@P_" + paramName, SqlDbType.VarChar)
+            var param = new SqlParameter("@SP_" + paramName, SqlDbType.VarChar)
             {
                 Value = paramValue                            
             };
@@ -25,7 +26,7 @@ namespace DataAcess.Dao
 
         public void AddIntParam(string paramName, int paramValue)
         {
-            var param = new SqlParameter("@P_" + paramName, SqlDbType.Int)
+            var param = new SqlParameter("@SP_" + paramName, SqlDbType.Int)
             {
                 Value = paramValue
             };
@@ -34,7 +35,25 @@ namespace DataAcess.Dao
 
         public void AddDoubleParam(string paramName, double paramValue)
         {
-            var param = new SqlParameter("@P_" + paramName, SqlDbType.Decimal)
+            var param = new SqlParameter("@SP_" + paramName, SqlDbType.Decimal)
+            {
+                Value = paramValue
+            };
+            Parameters.Add(param);
+        }
+
+        public void AddDateTimeParam(string paramName, DateTime paramValue)
+        {
+            var param = new SqlParameter("@SP_" + paramName, SqlDbType.DateTime)
+            {
+                Value = paramValue
+            };
+            Parameters.Add(param);
+        }
+
+        public void AddCharParam(string paramName, char paramValue)
+        {
+            var param = new SqlParameter("@SP_" + paramName, SqlDbType.Char)
             {
                 Value = paramValue
             };
