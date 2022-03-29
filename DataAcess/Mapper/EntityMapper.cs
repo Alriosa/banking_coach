@@ -41,6 +41,14 @@ namespace DataAcess.Mapper
             return DateTime.Now;
         }
 
+        protected char GetCharValue(Dictionary<string,object> dic, string attName)
+        {
+            var val = dic[attName];
+            if (dic.ContainsKey(attName) && val is char)
+                return (char)dic[attName];
+
+            return ' ';
+        }
 
     }
 }

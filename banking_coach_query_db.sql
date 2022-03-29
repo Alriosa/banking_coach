@@ -13,14 +13,14 @@ CREATE TABLE TBL_STUDENT(
 Student_ID INT IDENTITY(1,1) NOT NULL, --PK
 Banking_Student INT NOT NULL,
 User_Active_Status INT NOT NULL, /*True or False*/
-Entry_DATE DATE NOT NULL,
+Entry_Date DATETIME NOT NULL,
 First_Name VARCHAR(200) NOT NULL,
 Second_Name VARCHAR(200),
 Last_Name VARCHAR(200) NOT NULL,
 Second_Last_Name VARCHAR(200) NOT NULL,
 Id_Type INT NOT NULL,
 Identification_Number INT NOT NULL, ---MUST BE UNIQUE ---
-Birthdate DATE NOT NULL,
+Birthdate DATETIME NOT NULL,
 Gender INT NOT NULL,
 Primary_Phone VARCHAR(200) NOT NULL, ---MUST BE UNIQUE ---
 Secondary_Phone VARCHAR(200),
