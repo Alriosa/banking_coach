@@ -8,18 +8,22 @@ namespace Entities_POJO
 {
     public class Recruiter : BaseEntity
     {
-        public int Recruiter_User_ID { get; set; }
-        public string Recruiter_Login { get; set; }
-        public string Recruiter_Password { get; set; }
+        public int RecruiterUserID { get; set; }
+        public string RecruiterLogin { get; set; }
+        public string RecruiterPassword { get; set; }
         public int FinantialAssociation { get; set; }
         public int UserType { get; set; }
-        public bool UserActiveStatus { get; set; }
+        public char UserActiveStatus { get; set; }
 
-        public Recruiter(int recruiterUserId, string recruiterLogin, string recruiterPassword, int finantialAssociation, int userType, bool userActiveStatus)
+        public Recruiter()
         {
-            Recruiter_User_ID = recruiterUserId;
-            Recruiter_Login = recruiterLogin;
-            Recruiter_Password = recruiterPassword;
+            
+        }
+        public Recruiter(int recruiterUserId, string recruiterLogin, string recruiterPassword, int finantialAssociation, int userType, char userActiveStatus)
+        {
+            RecruiterUserID = recruiterUserId;
+            RecruiterLogin = recruiterLogin;
+            RecruiterPassword = recruiterPassword;
             FinantialAssociation = finantialAssociation;
             UserType = userType;
             UserActiveStatus = userActiveStatus;
