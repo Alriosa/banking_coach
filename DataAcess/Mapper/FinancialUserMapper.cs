@@ -3,46 +3,100 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAcess.Dao;
+using DataAccess.Dao;
 using Entities_POJO;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     public class FinancialUserMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
+        private const string DB_COL_FINANCIAL_USER_ID = "Financial_User_ID";
+        private const string DB_COL_FINANCIAL_USER = "Financial_User";
+        private const string DB_COL_FINANCIAL_PASSWORD = "Financial_Password";
+        private const string DB_COL_FINANCIAL_STATUS = "Financial_Status";
+        private const string DB_COL_USER_TYPE = "User_Type";
+
+
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_FINANCIAL_USER" };
+
+            var financialUser = (FinancialUser)entity;
+            operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
+            operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
+            operation.AddVarcharParam(DB_COL_FINANCIAL_PASSWORD, financialUser.FinancialPassword);
+            operation.AddIntParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
+            operation.AddIntParam(DB_COL_USER_TYPE, financialUser.UserType);
+
+            return operation;
         }
+
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_FINANCIAL_USER_BY_ID" };
+
+            var financialUser = (FinancialUser)entity;
+            operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
+
+            return operation;
         }
 
         public SqlOperation GetRetriveAllStatement()
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_FINANCIAL_USER" };
+            return operation;
         }
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_FINANCIAL_USER_STATUS" };
+
+            var financialUser = (FinancialUser)entity;
+            operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
+            operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
+            operation.AddVarcharParam(DB_COL_FINANCIAL_PASSWORD, financialUser.FinancialPassword);
+            operation.AddIntParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
+            operation.AddIntParam(DB_COL_USER_TYPE, financialUser.UserType);
+
+            return operation;
         }
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_FINANCIAL_USER" };
+
+            var financialUser = (FinancialUser)entity;
+            operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
+            return operation;
         }
 
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)
         {
-            throw new NotImplementedException();
+            var lstResults = new List<BaseEntity>();
+
+            foreach (var row in lstRows)
+            {
+                var financialUser = BuildObject(row);
+                lstResults.Add(financialUser);
+            }
+
+            return lstResults;
         }
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
-            throw new NotImplementedException();
+            var financialUser = new FinancialUser
+            {
+                FinancialUserID = GetIntValue(row, DB_COL_FINANCIAL_USER_ID),
+                FinancialLogin = GetStringValue(row, DB_COL_FINANCIAL_USER),
+                FinancialPassword = GetStringValue(row, DB_COL_FINANCIAL_PASSWORD),
+                UserType = GetIntValue(row, DB_COL_FINANCIAL_STATUS),
+                UserActiveStatus = GetCharValue(row, DB_COL_USER_TYPE)
+            };
+
+            return financialUser;
         }
+
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAcess.Dao;
-using DataAcess.Mapper;
+using DataAccess.Dao;
+using DataAccess.Mapper;
 using Entities_POJO;
 
-namespace DataAcess.Crud
+namespace DataAccess.Crud
 {
     public class SysAdminCrudFactory : CrudFactory
     {

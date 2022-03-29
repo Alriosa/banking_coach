@@ -1,7 +1,7 @@
 ﻿using Entities_POJO;
 using System.Collections.Generic;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     interface IObjectMapper
     {

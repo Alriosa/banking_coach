@@ -1,8 +1,8 @@
-﻿using DataAcess.Dao;
-using Entities_POJO;
+﻿using Entities_POJO;
 using System.Collections.Generic;
+using DataAccess.Dao;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     public class CustomerMapper : EntityMapper, ISqlStaments, IObjectMapper
     {

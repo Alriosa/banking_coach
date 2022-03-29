@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAcess.Dao;
+using DataAccess.Dao;
 using Entities_POJO;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     public class SysAdminMapper : EntityMapper, ISqlStaments, IObjectMapper
     {

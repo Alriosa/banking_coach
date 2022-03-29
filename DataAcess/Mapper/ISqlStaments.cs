@@ -1,8 +1,8 @@
 ﻿
-using DataAcess.Dao;
+using DataAccess.Dao;
 using Entities_POJO;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     public interface ISqlStaments
     {

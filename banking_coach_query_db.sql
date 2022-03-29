@@ -412,6 +412,12 @@ AS
         SELECT * FROM [dbo].[TBL_RECRUITER_USER] WHERE Recruiter_Login = @SP_Select_Recruiter_Login;
 GO
 
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_RECRUITER_USER]
+        @SP_Select_Recruiter_Login VARCHAR(20)
+AS
+        SELECT * FROM [dbo].[TBL_RECRUITER_USER];
+GO
+
 
 --- UPDATE RECRUITER STATUS
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_STATUS]
@@ -466,11 +472,18 @@ AS
 				4);
 GO
 
+--- SELECT BY FINANCIAL USER ID
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER_BY_ID]
+        @SP_Select_Financial_ID INT
+AS
+        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_ID = @SP_Select_Financial_ID;
+GO
 
-CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER]
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_FINANCIAL_USER]
         @SP_Select_Financial_User VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Select_Financial_User;
+        SELECT * FROM [dbo].[TBL_FINANCIAL_USER]
 GO
 
 
@@ -482,6 +495,14 @@ AS
                 Financial_User=@SP_Insert_Financial_User,
                 Financial_Status=@SP_Insert_Financial_Status
                 WHERE Financial_User = @SP_Insert_Financial_User;
+GO
+
+
+---DELETE FINANCIAL
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_FINANCIAL_USER]
+        @SP_Delete_Financial_User VARCHAR(20)
+AS
+        DELETE FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Delete_Financial_User;
 GO
 
 /**

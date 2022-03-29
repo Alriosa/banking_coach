@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAcess.Dao;
+using DataAccess.Dao;
 using Entities_POJO;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     public class RecruiterMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
@@ -15,17 +15,21 @@ namespace DataAcess.Mapper
         private const string DB_COL_RECRUITER_PASSWORD = "RecruiterPassword";
         private const string DB_COL_FINANTIAL_ASSOCIATION = "FinantialAssociation";
         private const string DB_COL_USER_TYPE = "UserType";
+        private const string DB_COL_RECRUITER_STATUS = "Recruiter_Status";
+
 
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "CRE_CUSTOMER_PR" };
+            var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_RECRUITER_USER" };
 
-            var c = (Customer)entity;
-            operation.AddVarcharParam(DB_COL_ID, c.Id);
-            operation.AddVarcharParam(DB_COL_NAME, c.Name);
-            operation.AddVarcharParam(DB_COL_LAST_NAME, c.LastName);
-            operation.AddIntParam(DB_COL_AGE, c.Age);
+            var recruiter = (Recruiter)entity;
+            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
+            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
+            operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
+            operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
+            operation.AddIntParam(DB_COL_USER_TYPE, recruiter.UserType);
+            operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.RecruiterStatus);
 
             return operation;
         }
@@ -33,39 +37,41 @@ namespace DataAcess.Mapper
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "RET_CUSTOMER_PR" };
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_RECRUITER_USER" };
 
-            var c = (Customer)entity;
-            operation.AddVarcharParam(DB_COL_ID, c.Id);
+            var recruiter = (Recruiter)entity;
+            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
 
             return operation;
         }
 
         public SqlOperation GetRetriveAllStatement()
         {
-            var operation = new SqlOperation { ProcedureName = "RET_ALL_CUSTOMER_PR" };
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_RECRUITER_USER" };
             return operation;
         }
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "UPD_CUSTOMER_PR" };
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_RECRUITER_USER_STATUS" };
 
-            var c = (Customer)entity;
-            operation.AddVarcharParam(DB_COL_ID, c.Id);
-            operation.AddVarcharParam(DB_COL_NAME, c.Name);
-            operation.AddVarcharParam(DB_COL_LAST_NAME, c.LastName);
-            operation.AddIntParam(DB_COL_AGE, c.Age);
+            var recruiter = (Recruiter)entity;
+            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
+            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
+            operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
+            operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
+            operation.AddIntParam(DB_COL_USER_TYPE, recruiter.UserType);
+            operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.RecruiterStatus);
 
             return operation;
         }
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "DEL_CUSTOMER_PR" };
+            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_RECRUITER_USER" };
 
-            var c = (Customer)entity;
-            operation.AddVarcharParam(DB_COL_ID, c.Id);
+            var recruiter = (Recruiter)entity;
+            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             return operation;
         }
 
@@ -75,8 +81,8 @@ namespace DataAcess.Mapper
 
             foreach (var row in lstRows)
             {
-                var customer = BuildObject(row);
-                lstResults.Add(customer);
+                var recruiter = BuildObject(row);
+                lstResults.Add(recruiter);
             }
 
             return lstResults;
@@ -84,15 +90,17 @@ namespace DataAcess.Mapper
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
-            var customer = new Customer
+            var recruiter = new Recruiter
             {
-                Id = GetStringValue(row, DB_COL_ID),
-                Name = GetStringValue(row, DB_COL_NAME),
-                LastName = GetStringValue(row, DB_COL_LAST_NAME),
-                Age = GetIntValue(row, DB_COL_AGE)
+                RecruiterUserID = GetIntValue(row, DB_COL_RECRUITER_USER_ID),
+                RecruiterLogin = GetStringValue(row, DB_COL_RECRUITER_LOGIN),
+                RecruiterPassword = GetStringValue(row, DB_COL_RECRUITER_PASSWORD),
+                FinantialAssociation = GetIntValue(row, DB_COL_FINANTIAL_ASSOCIATION),
+                UserType = GetIntValue(row, DB_COL_USER_TYPE),
+                RecruiterStatus = GetCharValue(row, DB_COL_RECRUITER_STATUS)
             };
 
-            return customer;
+            return recruiter;
         }
     }
 }

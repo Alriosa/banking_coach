@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataAcess.Dao;
+using DataAccess.Dao;
 using Entities_POJO;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     public class AppMessageMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
