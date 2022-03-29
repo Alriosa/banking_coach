@@ -193,6 +193,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Recruiter\" />
+    <Folder Include="Views\Student\" />
+    <Folder Include="Views\SysAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -206,6 +209,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\Home\vCustomers.cshtml" />
+    <Content Include="Views\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities-POJO\Entities-POJO.csproj">
