@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataAccess.Dao;
+using DataAccess.Mapper;
 using Entities_POJO;
-using DataAcess.Mapper;
-using DataAcess.Dao;
 
-namespace DataAcess.Crud
+namespace DataAccess.Crud
 {
     public class AppMessagesCrudFactory : CrudFactory
     {

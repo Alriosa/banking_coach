@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAcess.Dao
+namespace DataAccess.Dao
 {
     public class SqlDao
     {   

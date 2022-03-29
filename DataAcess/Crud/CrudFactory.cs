@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using DataAccess.Dao;
 using Entities_POJO;
-using DataAcess.Dao;
 
-namespace DataAcess.Crud
+namespace DataAccess.Crud
 {
     public abstract class CrudFactory
     {

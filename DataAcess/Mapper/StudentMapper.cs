@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAcess.Dao;
+using DataAccess.Dao;
 using Entities_POJO;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     public class StudentMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
@@ -26,7 +26,6 @@ namespace DataAcess.Mapper
         private const string DB_COL_SECOND_PHONE = "Secondary_Phone";
         private const string DB_COL_EMAIL = "Email";
         private const string DB_COL_LABORAL_STATUS = "Laboral_Status";
-
         private const string DB_COL_WORK_ADDRESS = "Work_Address";
         private const string DB_COL_LABORAL_EXPERIENCE = "Laboral_Experience";
         private const string DB_COL_STUDENT_LOGIN = "Student_User";
@@ -35,7 +34,6 @@ namespace DataAcess.Mapper
         private const string DB_COL_CANTON = "Canton";
         private const string DB_COL_DISTRICT = "District";
         private const string DB_COL_USER_TYPE = "User_Type";
-        
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
@@ -133,7 +131,7 @@ namespace DataAcess.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "DEL_CUSTOMER_PR" };
+            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_STUDENT" };
 
             var student = (Student)entity;
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
@@ -171,16 +169,16 @@ namespace DataAcess.Mapper
                 Gender = GetCharValue(row,DB_COL_GENDER),
                 Canton = GetStringValue(row,DB_COL_CANTON),
                 District = GetStringValue(row,DB_COL_DISTRICT),
-                UserType =
-                Student_Login =
-                Student_Password =
-                LaboralStatus =
-                Work_Address =
-                Email =
-                LaboralExperience =
-                PrimaryPhone =
-                SecondaryPhone =
-                Province =
+                UserType = GetCharValue(row,DB_COL_USER_TYPE),
+                Student_Login = GetStringValue(row,DB_COL_STUDENT_LOGIN),
+                Student_Password = GetStringValue(row,DB_COL_STUDENT_PASSWORD),
+                LaboralStatus = GetCharValue(row,DB_COL_LABORAL_STATUS),
+                Work_Address = GetStringValue(row,DB_COL_WORK_ADDRESS),
+                Email = GetStringValue(row,DB_COL_EMAIL),
+                LaboralExperience = GetCharValue(row,DB_COL_LABORAL_EXPERIENCE),
+                PrimaryPhone = GetStringValue(row,DB_COL_PRIMARY_PHONE),
+                SecondaryPhone = GetStringValue(row, DB_COL_SECOND_PHONE),
+                Province = GetStringValue(row,DB_COL_PROVINCE)
             };
 
             return student;

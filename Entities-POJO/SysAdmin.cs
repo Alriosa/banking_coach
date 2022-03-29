@@ -8,17 +8,21 @@ namespace Entities_POJO
 {
     public class SysAdmin : BaseEntity
     {
-        public int Sys_Admin_User { get; set; }
-        public string Admin_Login { get; set; }
-        public string Admin_Password { get; set; }
-        public int UserType { get; set; }
-        public bool UserActiveStatus { get; set; }
+        public int SysAdminUserID { get; set; }
+        public string AdminLogin { get; set; }
+        public string AdminPassword { get; set; }
+        public char UserType { get; set; }
+        public char UserActiveStatus { get; set; }
 
-        public SysAdmin(int sysAdminUser, string adminLogin, string adminPassword, bool userActiveStatus, int userType)
+        public SysAdmin()
         {
-            Sys_Admin_User = sysAdminUser;
-            Admin_Login = adminLogin;
-            Admin_Password = adminPassword;
+            
+        }
+        public SysAdmin(int sysAdminUserId, string adminLogin, string adminPassword, char userActiveStatus, char userType)
+        {
+            SysAdminUserID = sysAdminUserId;
+            AdminLogin = adminLogin;
+            AdminPassword = adminPassword;
             UserActiveStatus = userActiveStatus;
             UserType = userType;
         }

@@ -33,6 +33,10 @@ namespace Entities_POJO
         public string SecondaryPhone { get; set; }
         public char LaboralExperience { get; set; }
 
+        public Student()
+        {
+            
+        }
         public Student(int studentId, char bankingStudent, char userActiveStatus, DateTime entryDate, string firstName, string secondName, string lastName, string secondLastName, char idType, string identificationNumber, DateTime birthdate, char gender, string canton, string district, char userType, string studentLogin, string studentPassword, char laboralStatus, string workAddress, string email, char laboralExperience, string primaryPhone, string secondaryPhone, string province)
         {
             StudentID = studentId;

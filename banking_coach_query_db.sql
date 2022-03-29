@@ -321,8 +321,16 @@ AS
 				'1');
 GO
 
+
+---SELECT ADMIN BY ID
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER_BY_ID]
+        @SP_Select_Admin_ID INT
+AS
+        SELECT * FROM [dbo].[TBL_ADMIN_USER] WHERE Admin_ID = @SP_Select_Admin_ID;
+GO
+
 ---SELECT ALL ADMINS
-CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER]
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_ADMIN_USER]
         @SP_Select_Admin_User VARCHAR(20)
 AS
         SELECT * FROM [dbo].[TBL_ADMIN_USER];
@@ -399,6 +407,13 @@ AS
         SELECT * FROM [dbo].[TBL_RECRUITER_USER] WHERE Recruiter_Login = @SP_Select_Recruiter_Login;
 GO
 
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_RECRUITER_USER]
+        @SP_Select_Recruiter_Login VARCHAR(20)
+AS
+        SELECT * FROM [dbo].[TBL_RECRUITER_USER];
+GO
+
+
 --- UPDATE RECRUITER STATUS
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_STATUS]
         @SP_Insert_Recruiter_Login VARCHAR(20),
@@ -452,10 +467,18 @@ AS
 				'4');
 GO
 
-CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER]
+--- SELECT BY FINANCIAL USER ID
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER_BY_ID]
+        @SP_Select_Financial_ID INT
+AS
+        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_ID = @SP_Select_Financial_ID;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_FINANCIAL_USER]
         @SP_Select_Financial_User VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Select_Financial_User;
+        SELECT * FROM [dbo].[TBL_FINANCIAL_USER]
 GO
 
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_FINANCIAL_USER_STATUS]
@@ -466,6 +489,14 @@ AS
                 Financial_User=@SP_Insert_Financial_User,
                 User_Active_Status=@SP_Insert_Financial_Status
                 WHERE Financial_User = @SP_Insert_Financial_User;
+GO
+
+
+---DELETE FINANCIAL
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_FINANCIAL_USER]
+        @SP_Delete_Financial_User VARCHAR(20)
+AS
+        DELETE FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Delete_Financial_User;
 GO
 
 /**
@@ -521,8 +552,15 @@ AS
 		END	
 GO
 
+---SELECT USER LOG BY ID
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_ID]
+        @SP_Select_User_Log_ID INT
+AS
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE User_Log_ID = @SP_Select_User_Log_ID;
+GO
+
 ---SELECT ALL USER LOGS
-CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG]
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_USER_LOG]
 AS
         SELECT * FROM [dbo].[TBL_USER_LOG];
 GO

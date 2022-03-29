@@ -8,22 +8,21 @@ namespace Entities_POJO
 {
     public class FinancialUser : BaseEntity
     {
-        public int Financial_User_ID { get; set; }
-        public string Financial_Login { get; set; }
-        public string Financial_Password { get; set; }
+        public int FinancialUserID { get; set; }
+        public string FinancialLogin { get; set; }
+        public string FinancialPassword { get; set; }
         public int UserType { get; set; }
-        public bool UserActiveStatus { get; set; }
+        public char UserActiveStatus { get; set; }
 
-        public FinancialUser(int userType, bool userActiveStatus)
+        public FinancialUser()
         {
-            UserType = userType;
-            UserActiveStatus = userActiveStatus;
+          
         }
-        public FinancialUser(int financialUserId, string financialUser, string financialPassword, int userType, bool userActiveStatus)
+        public FinancialUser(int financialUserId, string financialUser, string financialPassword, int userType, char userActiveStatus)
         {
-            Financial_User_ID = financialUserId;
-            Financial_Login = financialUser;
-            Financial_Password = financialPassword;
+            FinancialUserID = financialUserId;
+            FinancialLogin = financialUser;
+            FinancialPassword = financialPassword;
             UserType = userType;
             UserActiveStatus = userActiveStatus;
         }

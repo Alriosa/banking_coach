@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAcess.Mapper
+namespace DataAccess.Mapper
 {
     public abstract class EntityMapper
     {      

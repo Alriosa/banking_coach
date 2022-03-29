@@ -8,9 +8,9 @@ namespace Entities_POJO
 {
     public class UserLog : BaseEntity
     {
-        public int Id_Record_Number {get;set;}
-        public string Event_Logged { get; set; }
-        public DateTime Date_Logged { get; set; }
+        public int IdRecordNumber {get;set;}
+        public string EventLogged { get; set; }
+        public DateTime DateLogged { get; set; }
 
         public UserLog()
         {
@@ -19,9 +19,9 @@ namespace Entities_POJO
 
         public UserLog(int idRecordNumber, string eventLogged, DateTime dateLogged)
         {
-            Id_Record_Number = idRecordNumber;
-            Event_Logged = eventLogged;
-            Date_Logged = dateLogged;
+            IdRecordNumber = idRecordNumber;
+            EventLogged = eventLogged;
+            DateLogged = dateLogged;
         }
     }
 }
