@@ -38,12 +38,13 @@ namespace WebApp.Helpers
             return new HtmlString(ctrl.GetHtml());
         }
 
-        public static HtmlString CtrlButton(this HtmlHelper html, string viewName, string id, string label, string onClickFunction="", string buttonType="primary")
+        public static HtmlString CtrlButton(this HtmlHelper html, string viewName, string id, string type, string label, string onClickFunction="", string buttonType="primary")
         {
             var ctrl = new CtrlButtonModel
             {
                 ViewName = viewName,
                 Id = id,
+                Type = type,
                 Label = label,
                 FunctionName = onClickFunction,
                 ButtonType = buttonType

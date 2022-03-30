@@ -13,7 +13,7 @@ namespace WebApp.Models.Controls
 
         private string ReadFileText()
         {
-            string path = @"C:\Users\dcordoba.SSVMN\CloudStation\Cenfotec\Proyecto 2\repo\cenfo_proyecto_2\WEB UI\Components\WebApp\Models\Controls\";
+            string path = HttpContext.Current.Server.MapPath("/Models/Controls/");
             string fileName = this.GetType().Name + ".html";
 
             path = path + fileName;

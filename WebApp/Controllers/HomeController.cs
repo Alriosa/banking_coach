@@ -21,7 +21,7 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public ActionResult eCustomers()
+        public ActionResult vUpdateStudent()
         {
             return View();
         }

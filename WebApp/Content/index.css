@@ -1,0 +1,15 @@
+﻿.bg-gray {
+    background-color:#252424;
+}
+
+.bg-top {
+    top: 0;
+    position: absolute;
+    right: 0;
+}
+
+.bg-bottom{
+    bottom: 0;
+    position: absolute;
+    left: 0;
+}

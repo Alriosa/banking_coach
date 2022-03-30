@@ -1,4 +1,56 @@
 ﻿<!-- Background Image -->
+@using WebApp.Helpers;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <div>
-   Example Customers App.   
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+
+                <h1 class="card-title">BOLSA DE EMPLEO</h1>
+                <p>
+                    En está sección, todos los estudiantes podrán subir sus hojas de vida,
+                    para ser evaluados por los reclutadores de entidades financieras
+                </p>
+                <p class="card-subtitle">Exclusiva para egresados de Banking Coach</p>
+
+            </div>
+            <div class="col-7">
+                <div class=" text-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <h1>INGRESA A TU CUENTA</h1>
+                        </div>
+                    </div>
+
+                    <form id="formLogin">
+                        <div class="col-sm-12 text-center">
+                            <div class="form-row">
+                                <div class="col-lg-6">
+                                    @Html.CtrlInput(id: "txtLogin", type: "text", label: "Nombre de Usuario", placeHolder: "Nombre de Usuario", columnDataName: "Login")
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-6">
+                                    @Html.CtrlInput(id: "txtPassword", type: "password", label: "**********", placeHolder: "Contraseña", columnDataName: "Password")
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="margin: 20px auto;">
+                            <div style="margin: 60px auto;">
+                                
+                                @Html.CtrlButton(viewName: "Index", type: "button", id: "btnLogin", label: "Ingresar", onClickFunction: "Login", buttonType: "primary")
+                            </div>
+                        </div>
+                 </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    
 </div>
