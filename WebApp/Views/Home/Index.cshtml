@@ -1,56 +1,44 @@
 ﻿<!-- Background Image -->
 @using WebApp.Helpers;
-
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div>
+<div class="home">
     <div class="container">
-        <div class="row">
-            <div class="col-5">
-
-                <h1 class="card-title">BOLSA DE EMPLEO</h1>
-                <p>
-                    En está sección, todos los estudiantes podrán subir sus hojas de vida,
-                    para ser evaluados por los reclutadores de entidades financieras
-                </p>
-                <p class="card-subtitle">Exclusiva para egresados de Banking Coach</p>
-
+        <div class="row text-center justify-content-between">
+            <div class="col-lg-6 col-sm-11">
+                <div class=" text-box">
+                    <h1 class="home-title">BOLSA DE EMPLEO</h1>
+                    <p class="subtitle home-subtitle-1">
+                        En está sección, todos los estudiantes podrán subir sus hojas de vida,
+                        para ser evaluados por los reclutadores de entidades financieras
+                    </p>
+                    <p class="subtitle home-subtitle-2">Exclusiva para egresados de Banking Coach</p>
+                </div>
             </div>
-            <div class="col-7">
-                <div class=" text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <h1>INGRESA A TU CUENTA</h1>
+            <div class="col-lg-5 col-sm-11">
+                <div class="text-center">
+                    <h1 class="home-subtitle-1">INGRESA A TU CUENTA</h1>
+                </div>
+                <form id="formLogin" class="formLogin">
+                    <div class="col-sm-12 text-center">
+                        <div class="form-row ">
+                            <div class="col-lg-12">
+                                @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "Login")
+                                @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "Password")
+                                <div class="rememberme">
+                                    @Html.CtrlCheckbox(id: "ckbRememberme", type: "checkbox", label: "Recordarme?", classes: "ckbRememberme", columnDataName: "RememberMe")
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <form id="formLogin">
-                        <div class="col-sm-12 text-center">
-                            <div class="form-row">
-                                <div class="col-lg-6">
-                                    @Html.CtrlInput(id: "txtLogin", type: "text", label: "Nombre de Usuario", placeHolder: "Nombre de Usuario", columnDataName: "Login")
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-lg-6">
-                                    @Html.CtrlInput(id: "txtPassword", type: "password", label: "**********", placeHolder: "Contraseña", columnDataName: "Password")
-                                </div>
-                            </div>
+                    <div class="form-row" style="margin: 0px auto;">
+                        <div style="margin: 20px auto;">
+                            @Html.CtrlButton(viewName: "Index", type: "button", id: "btnLogin", label: "Ingresar", onClickFunction: "Login", buttonType: "orange")
                         </div>
-
-                        <div class="form-row" style="margin: 20px auto;">
-                            <div style="margin: 60px auto;">
-                                
-                                @Html.CtrlButton(viewName: "Index", type: "button", id: "btnLogin", label: "Ingresar", onClickFunction: "Login", buttonType: "primary")
-                            </div>
-                        </div>
-                 </form>
-
+                    </div>
+                </form>
             </div>
-
         </div>
-
-    </div>
-    
 </div>

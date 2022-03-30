@@ -9,16 +9,7 @@ namespace WebApp.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult vRegisterStudent()
-        {
-            return View();
-        }
-
-
-        public ActionResult vListStudent()
-        {
-            return View();
-        }
+      
 
 
       

@@ -14,9 +14,9 @@
         <div class="row pull-right">
             <div class="col-md-8">Customer edition</div>
             <div class="col-md-4">
-                @Html.CtrlButton(viewName: "vCustomers", id: "btnCreate", label: "Save", onClickFunction: "Create", buttonType:"success")
-                @Html.CtrlButton(viewName: "vCustomers", id: "btnUpdate", label: "Save changes", onClickFunction: "Update", buttonType: "info")
-                @Html.CtrlButton(viewName: "vCustomers", id: "btnDelete", label: "Delete", onClickFunction: "Delete",buttonType: "danger")
+                @Html.CtrlButton(viewName: "vCustomers", type: "button", id: "btnCreate", label: "Save", onClickFunction: "Create", buttonType:"success")
+                @Html.CtrlButton(viewName: "vCustomers", type: "button", id: "btnUpdate", label: "Save changes", onClickFunction: "Update", buttonType: "info")
+                @Html.CtrlButton(viewName: "vCustomers", type: "button", id: "btnDelete", label: "Delete", onClickFunction: "Delete",buttonType: "danger")
             </div>
         </div>
     </div>
@@ -25,10 +25,10 @@
             <div class="col-lg-6">
                 <div class="bs-component">
                     <form id="frmEdition">
-                        @Html.CtrlInput(id: "txtId", type: "text", label: "Id", columnDataName: "Id")
-                        @Html.CtrlInput(id: "txtName", type: "text", label: "Name", columnDataName: "Name")
-                        @Html.CtrlInput(id: "txtLastName", type: "text", label: "LastName", columnDataName: "LastName")
-                        @Html.CtrlInput(id: "txtAge", type: "number", label: "Age", columnDataName: "Age")
+                        @Html.CtrlInput(id: "txtId", label: "Id", type: "text", columnDataName: "Id")
+                        @Html.CtrlInput(id: "txtName", label: "Name", type: "text", columnDataName: "Name")
+                        @Html.CtrlInput(id: "txtLastName", label: "LastName", type: "text", columnDataName: "LastName")
+                        @Html.CtrlInput(id: "txtAge", label: "Age", type: "number", columnDataName: "Age")
                         @Html.CtrlDropDown(id: "drpGender", label: "Gender", listId: "LST_GENERO")
                     </form>
                 </div>

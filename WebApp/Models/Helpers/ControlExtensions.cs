@@ -38,6 +38,20 @@ namespace WebApp.Helpers
             return new HtmlString(ctrl.GetHtml());
         }
 
+
+        public static HtmlString CtrlInputSecond(this HtmlHelper html, string id, string type, string placeHolder = "", string columnDataName = "")
+        {
+            var ctrl = new CtrlInputSecondModel
+            {
+                Id = id,
+                Type = type,
+                PlaceHolder = placeHolder,
+                ColumnDataName = columnDataName
+            };
+
+            return new HtmlString(ctrl.GetHtml());
+        }
+
         public static HtmlString CtrlButton(this HtmlHelper html, string viewName, string id, string type, string label, string onClickFunction="", string buttonType="primary")
         {
             var ctrl = new CtrlButtonModel
@@ -65,5 +79,18 @@ namespace WebApp.Helpers
             return new HtmlString(ctrl.GetHtml());
         }
 
+        public static HtmlString CtrlCheckbox(this HtmlHelper html, string id, string type, string label, string classes, string columnDataName = "")
+        {
+            var ctrl = new CtrlCheckboxModel
+            {
+                Id = id,
+                Type = type,
+                Label = label,
+                Class = classes,
+                ColumnDataName = columnDataName
+            };
+
+            return new HtmlString(ctrl.GetHtml());
+        }
     }
 }
