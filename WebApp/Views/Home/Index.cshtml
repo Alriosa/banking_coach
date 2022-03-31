@@ -6,7 +6,7 @@
 <div class="home">
     <div class="container">
         <div class="row text-center justify-content-between">
-            <div class="col-lg-6 col-sm-11">
+            <div class="col-lg-5 col-sm-11">
                 <div class=" text-box">
                     <h1 class="home-title">BOLSA DE EMPLEO</h1>
                     <p class="subtitle home-subtitle-1">
@@ -16,39 +16,47 @@
                     <p class="subtitle home-subtitle-2">Exclusiva para egresados de Banking Coach</p>
                 </div>
             </div>
-            <div class="col-lg-5 col-sm-11">
-                <div class="text-center my-5">
-                    <h1 class="form-title">INGRESA A TU CUENTA</h1>
-                </div>
-                <form id="formLogin" class="formLogin">
-                    <div class="col-sm-12 text-center">
-                        <div class="form-row ">
-                            <div class="col-lg-12">
-                                @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "Login")
-                                @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "Password")
-                                <div class="rememberme">
-                                    @Html.CtrlCheckbox(id: "ckbRememberme", type: "checkbox", label: "Recordarme?", classes: "ckbRememberme my-1", columnDataName: "RememberMe")
+            <div class="col-lg-6 col-sm-11">
+                <img class="img" src="~/Content/imgs/Empleo.jpg" alt="">
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="text-center my-4">
+
+                            <h1 class="form-title">INGRESA A TU CUENTA</h1>
+                        </div>
+                        <form id="formLogin" class="formLogin">
+                            <div class="col-sm-12 text-center">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "Login")
+                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "Password")
+                                        <div class="rememberme">
+                                            @Html.CtrlCheckbox(id: "ckbRememberme", type: "checkbox", label: "Recordarme?", classes: "ckbRememberme my-1", columnDataName: "RememberMe")
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="form-row" style="margin: 0px auto;">
+                                <div style="margin: 0px auto 10px;">
+                                    @Html.CtrlButton(viewName: "Index", type: "button", id: "btnLogin", label: "Ingresar", onClickFunction: "Login", buttonType: "orange")
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <a>¿Olvidaste tu contraseña?</a>
+                                        </div>
+                                        <div class="col-12">
+                                            <a>¿Necesitas ayuda para iniciar sesión?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
-                    <div class="form-row" style="margin: 0px auto;">
-                        <div style="margin: 0px auto 10px;">
-                            @Html.CtrlButton(viewName: "Index", type: "button", id: "btnLogin", label: "Ingresar", onClickFunction: "Login", buttonType: "orange")
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                        <a>¿Olvidaste tu contraseña?</a>
-                                </div>
-                                <div class="col-12">
-                                        <a>¿Necesitas ayuda para iniciar sesión?</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
 </div>

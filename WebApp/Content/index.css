@@ -1,18 +1,24 @@
 ﻿
 .bg-gray {
     background-color: #252424;
+    background:url(imgs/background.png);
+    background-repeat:repeat-y;
+    background-size:cover;
 }
+
 
 .bg-top {
     top: 0;
     position: absolute;
     right: 0;
+    position: fixed;
 }
 
 .bg-bottom {
     bottom: 0;
     position: absolute;
     left: 0;
+    position: fixed;
 }
 
 .home .text-box {
@@ -41,6 +47,7 @@
 
 .formLogin {
     margin: 40px auto;
+    width: 100%;
 }
 
 input {
@@ -56,27 +63,30 @@ input {
     background-color: rgba(255, 255, 255, 0.329);
     background-position: 10px 10px;
     background-repeat: no-repeat;
-    padding: 20px 20px;
+    padding: 14px 20px;
     margin: 0px auto;
 }
-    .form-row input::placeholder {
-        color: #fff;
-        opacity: 1;
-    }
+
+.form-row input::placeholder {
+    color: #fff;
+    opacity: 1;
+}
 
 .form-row .rememberme {
     margin: 8px 20px;
 }
-.form-row .rememberme label {
-    color: #fff;
-    display: flex !important;
-    align-content: space-around;
-}
+
+    .form-row .rememberme label {
+        color: #fff;
+        display: flex !important;
+        align-content: space-around;
+    }
 
 .ckbRememberme {
     width: 7%;
     height: 16px;
 }
+
 .btn-orange {
     width: 200px;
     border: none;
@@ -97,4 +107,13 @@ input {
     font-size: 2em;
 }
 
-
+.img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.4;
+    z-index: -2;
+    border-radius: 40px;
+}

@@ -6,27 +6,20 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class StudentController : Controller
+    public class RecruiterController : Controller
     {
-        // GET: Student
-
-        public ActionResult vRegisterStudent()
+        // GET: Recruiter
+        public ActionResult vRegisterRecruiter()
         {
             return View();
         }
-
-
-        public ActionResult vListStudent()
+        public ActionResult vListRecruiter()
         {
             return View();
         }
-
-        public ActionResult vUpdateStudent()
+        public ActionResult vUpdateRecruiter()
         {
             return View();
-
         }
-
-
     }
 }
