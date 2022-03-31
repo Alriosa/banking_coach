@@ -17,8 +17,8 @@
                 </div>
             </div>
             <div class="col-lg-5 col-sm-11">
-                <div class="text-center">
-                    <h1 class="home-subtitle-1">INGRESA A TU CUENTA</h1>
+                <div class="text-center my-5">
+                    <h1 class="form-title">INGRESA A TU CUENTA</h1>
                 </div>
                 <form id="formLogin" class="formLogin">
                     <div class="col-sm-12 text-center">
@@ -27,15 +27,25 @@
                                 @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "Login")
                                 @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "Password")
                                 <div class="rememberme">
-                                    @Html.CtrlCheckbox(id: "ckbRememberme", type: "checkbox", label: "Recordarme?", classes: "ckbRememberme", columnDataName: "RememberMe")
+                                    @Html.CtrlCheckbox(id: "ckbRememberme", type: "checkbox", label: "Recordarme?", classes: "ckbRememberme my-1", columnDataName: "RememberMe")
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-row" style="margin: 0px auto;">
-                        <div style="margin: 20px auto;">
+                        <div style="margin: 0px auto 10px;">
                             @Html.CtrlButton(viewName: "Index", type: "button", id: "btnLogin", label: "Ingresar", onClickFunction: "Login", buttonType: "orange")
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                        <a>¿Olvidaste tu contraseña?</a>
+                                </div>
+                                <div class="col-12">
+                                        <a>¿Necesitas ayuda para iniciar sesión?</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>

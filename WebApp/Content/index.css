@@ -1,4 +1,5 @@
-﻿.bg-gray {
+﻿
+.bg-gray {
     background-color: #252424;
 }
 
@@ -29,13 +30,12 @@
 }
 
 .home-subtitle-1 {
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: #ffffff;
 }
 
-
 .home-subtitle-2 {
-    font-size: 2em;
+    font-size: 1.5em;
     color: #fa8d00;
 }
 
@@ -56,18 +56,16 @@ input {
     background-color: rgba(255, 255, 255, 0.329);
     background-position: 10px 10px;
     background-repeat: no-repeat;
-    padding: 12px 20px;
+    padding: 20px 20px;
     margin: 0px auto;
 }
-
-
     .form-row input::placeholder {
         color: #fff;
         opacity: 1;
     }
 
-.form-row .rememberme{
-    margin: 0 20px;
+.form-row .rememberme {
+    margin: 8px 20px;
 }
 .form-row .rememberme label {
     color: #fff;
@@ -75,16 +73,10 @@ input {
     align-content: space-around;
 }
 
-
 .ckbRememberme {
     width: 7%;
     height: 16px;
-    margin: 2px 0;
 }
-
-
-
-
 .btn-orange {
     width: 200px;
     border: none;
@@ -92,7 +84,17 @@ input {
     background: rgb(250,141,0);
     background: linear-gradient(90deg, rgba(250,141,0,1) 12%, rgba(254,211,90,1) 97%);
     color: #fff;
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: 600;
-    padding: 13px 20px;
+    padding: 12px 20px;
 }
+
+.form-group {
+    margin-bottom: 0.2rem;
+}
+
+.form-title {
+    font-size: 2em;
+}
+
+
