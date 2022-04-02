@@ -7,3 +7,12 @@ D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CoreCompileI
 D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CopyComplete
 D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAcess.dll
 D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAcess.pdb
+F:\Otros proyectos\banking_coach\DataAcess\bin\Debug\DataAcess.dll
+F:\Otros proyectos\banking_coach\DataAcess\bin\Debug\DataAcess.pdb
+F:\Otros proyectos\banking_coach\DataAcess\bin\Debug\Entities-POJO.dll
+F:\Otros proyectos\banking_coach\DataAcess\bin\Debug\Entities-POJO.pdb
+F:\Otros proyectos\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+F:\Otros proyectos\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+F:\Otros proyectos\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CopyComplete
+F:\Otros proyectos\banking_coach\DataAcess\obj\Debug\DataAcess.dll
+F:\Otros proyectos\banking_coach\DataAcess\obj\Debug\DataAcess.pdb

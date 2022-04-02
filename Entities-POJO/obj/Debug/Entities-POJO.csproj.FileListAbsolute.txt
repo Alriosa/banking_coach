@@ -4,3 +4,8 @@ D:\Alriosa Code\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.csproj.CoreC
 D:\Alriosa Code\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.dll
 D:\Alriosa Code\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.pdb
 D:\Alriosa Code\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.csproj.AssemblyReference.cache
+F:\Otros proyectos\banking_coach\Entities-POJO\bin\Debug\Entities-POJO.dll
+F:\Otros proyectos\banking_coach\Entities-POJO\bin\Debug\Entities-POJO.pdb
+F:\Otros proyectos\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.csproj.CoreCompileInputs.cache
+F:\Otros proyectos\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.dll
+F:\Otros proyectos\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.pdb

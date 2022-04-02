@@ -143,14 +143,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\SysAdminController.cs" />
+    <Compile Include="Controllers\FinancialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RecruiterController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Controls\CtrlBaseModel.cs" />
     <Compile Include="Models\Controls\CtrlButtonModel.cs" />
+    <Compile Include="Models\Controls\CtrlCheckboxModel.cs" />
     <Compile Include="Models\Controls\CtrlInputModel.cs" />
     <Compile Include="Models\Controls\CtrlDropDownModel.cs" />
+    <Compile Include="Models\Controls\CtrlInputSecondModel.cs" />
     <Compile Include="Models\Controls\CtrlTableModel.cs" />
     <Compile Include="Models\Helpers\ControlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -164,9 +170,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Controls\CtrlCheckboxModel.html" />
     <Content Include="Models\Controls\CtrlDropDownModel.html" />
     <Content Include="Models\Controls\CtrlInputModel.html" />
     <Content Include="Models\Controls\CtrlButtonModel.html" />
+    <Content Include="Models\Controls\CtrlInputSecondModel.html" />
     <Content Include="Models\Controls\CtrlTableModel.html" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -175,6 +183,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\Views\ControlActions.js" />
+    <Content Include="Scripts\Views\Financial\vFinancialList.js" />
+    <Content Include="Scripts\Views\Recruiter\vRecruiterList.js" />
+    <Content Include="Scripts\Views\Student\vStudentList.js" />
+    <Content Include="Scripts\Views\SysAdmin\vSysAdminList.js" />
     <Content Include="Scripts\Views\vCustomers.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -193,9 +205,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Recruiter\" />
-    <Folder Include="Views\Student\" />
-    <Folder Include="Views\SysAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -210,6 +219,18 @@
     <None Include="packages.config" />
     <Content Include="Views\Home\vCustomers.cshtml" />
     <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\Recruiter\vRecruiterList.cshtml" />
+    <Content Include="Views\Recruiter\vRecruiterRegistration.cshtml" />
+    <Content Include="Views\Recruiter\vRecruiterUpdate.cshtml" />
+    <Content Include="Views\Student\vStudentList.cshtml" />
+    <Content Include="Views\Student\vStudentRegistration.cshtml" />
+    <Content Include="Views\Student\vStudentUpdate.cshtml" />
+    <Content Include="Views\SysAdmin\vSysAdminList.cshtml" />
+    <Content Include="Views\SysAdmin\vSysAdminRegistration.cshtml" />
+    <Content Include="Views\SysAdmin\vSysAdminUpdate.cshtml" />
+    <Content Include="Views\Financial\vFinancialList.cshtml" />
+    <Content Include="Views\Financial\vFinancialRegistration.cshtml" />
+    <Content Include="Views\Financial\vFinancialUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities-POJO\Entities-POJO.csproj">
