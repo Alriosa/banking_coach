@@ -1,15 +1,19 @@
 ﻿using System;
-using CoreAPI;
-using Entities_POJO;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using WebAPI.Models;
+using CoreAPI;
+using Entities_POJO;
 using Exceptions;
+
 
 namespace WebAPI.Controllers
 {
-    [RoutePrefix("api/student")]
-    public class StudentController : ApiController
+    [RoutePrefix("api/userlog")]
+    public class UserLogController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
         [Route("")]
@@ -17,27 +21,27 @@ namespace WebAPI.Controllers
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
-            var mng = new StudentManager();
+            var mng = new UserLogManager();
             apiResp.Data = mng.RetrieveAll();
 
             return Ok(apiResp);
         }
 
         [Route("{id}")]
-        public IHttpActionResult Get(string id)
+        public IHttpActionResult Get(int id)
         {
             try
             {
-                var mng = new StudentManager();
-                var student = new Student
+                var mng = new UserLogManager();
+                var userLog = new UserLog
                 {
-                    IdentificationNumber = id
+                    IdRecordNumber = id
                 };
 
-                student = mng.RetrieveById(student);
+                userLog = mng.RetrieveById(userLog);
                 apiResp = new ApiResponse
                 {
-                    Data = student
+                    Data = userLog
                 };
                 return Ok(apiResp);
             }
@@ -49,16 +53,16 @@ namespace WebAPI.Controllers
 
 
         [Route("")]
-        public IHttpActionResult Put(Student student)
+        public IHttpActionResult Put(UserLog userLog)
         {
             try
             {
-                var mng = new StudentManager();
-                mng.Update(student);
+                var mng = new UserLogManager();
+                mng.Update(userLog);
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student Modified."
+                    Message = "UserLog Modified."
                 };
 
                 return Ok(apiResp);
@@ -70,16 +74,16 @@ namespace WebAPI.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult Delete(Student student)
+        public IHttpActionResult Delete(UserLog userLog)
         {
             try
             {
-                var mng = new StudentManager();
-                mng.Delete(student);
+                var mng = new UserLogManager();
+                mng.Delete(userLog);
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student deleted."
+                    Message = "UserLog deleted."
                 };
 
                 return Ok(apiResp);

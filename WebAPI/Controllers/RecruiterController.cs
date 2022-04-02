@@ -8,8 +8,8 @@ using Exceptions;
 
 namespace WebAPI.Controllers
 {
-    [RoutePrefix("api/student")]
-    public class StudentController : ApiController
+    [RoutePrefix("api/recruiter")]
+    public class RecruiterController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
         [Route("")]
@@ -17,27 +17,27 @@ namespace WebAPI.Controllers
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
-            var mng = new StudentManager();
+            var mng = new RecruiterManager();
             apiResp.Data = mng.RetrieveAll();
 
             return Ok(apiResp);
         }
 
         [Route("{id}")]
-        public IHttpActionResult Get(string id)
+        public IHttpActionResult Get(int id)
         {
             try
             {
-                var mng = new StudentManager();
-                var student = new Student
+                var mng = new RecruiterManager();
+                var recruiter = new Recruiter
                 {
-                    IdentificationNumber = id
+                    RecruiterUserID = id
                 };
 
-                student = mng.RetrieveById(student);
+                recruiter = mng.RetrieveById(recruiter);
                 apiResp = new ApiResponse
                 {
-                    Data = student
+                    Data = recruiter
                 };
                 return Ok(apiResp);
             }
@@ -49,16 +49,16 @@ namespace WebAPI.Controllers
 
 
         [Route("")]
-        public IHttpActionResult Put(Student student)
+        public IHttpActionResult Put(Recruiter recruiter)
         {
             try
             {
-                var mng = new StudentManager();
-                mng.Update(student);
+                var mng = new RecruiterManager();
+                mng.Update(recruiter);
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student Modified."
+                    Message = "Recruiter Modified."
                 };
 
                 return Ok(apiResp);
@@ -70,16 +70,16 @@ namespace WebAPI.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult Delete(Student student)
+        public IHttpActionResult Delete(Recruiter recruiter)
         {
             try
             {
-                var mng = new StudentManager();
-                mng.Delete(student);
+                var mng = new RecruiterManager();
+                mng.Delete(recruiter);
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student deleted."
+                    Message = "Recruiter deleted."
                 };
 
                 return Ok(apiResp);

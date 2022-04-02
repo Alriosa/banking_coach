@@ -1,15 +1,18 @@
-﻿using System;
-using CoreAPI;
+﻿using CoreAPI;
 using Entities_POJO;
+using Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using WebAPI.Models;
-using Exceptions;
 
 namespace WebAPI.Controllers
 {
-    [RoutePrefix("api/student")]
-    public class StudentController : ApiController
+    [RoutePrefix("api/sysadmin")]
+    public class SysAdminController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
         [Route("")]
@@ -17,27 +20,27 @@ namespace WebAPI.Controllers
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
-            var mng = new StudentManager();
+            var mng = new SysAdminManager();
             apiResp.Data = mng.RetrieveAll();
 
             return Ok(apiResp);
         }
 
         [Route("{id}")]
-        public IHttpActionResult Get(string id)
+        public IHttpActionResult Get(int id)
         {
             try
             {
-                var mng = new StudentManager();
-                var student = new Student
+                var mng = new SysAdminManager();
+                var sysAdmin = new SysAdmin
                 {
-                    IdentificationNumber = id
+                    SysAdminUserID = id
                 };
 
-                student = mng.RetrieveById(student);
+                sysAdmin = mng.RetrieveById(sysAdmin);
                 apiResp = new ApiResponse
                 {
-                    Data = student
+                    Data = sysAdmin
                 };
                 return Ok(apiResp);
             }
@@ -49,16 +52,16 @@ namespace WebAPI.Controllers
 
 
         [Route("")]
-        public IHttpActionResult Put(Student student)
+        public IHttpActionResult Put(SysAdmin sysAdmin)
         {
             try
             {
-                var mng = new StudentManager();
-                mng.Update(student);
+                var mng = new SysAdminManager();
+                mng.Update(sysAdmin);
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student Modified."
+                    Message = "SysAdmin Modified."
                 };
 
                 return Ok(apiResp);
@@ -70,16 +73,16 @@ namespace WebAPI.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult Delete(Student student)
+        public IHttpActionResult Delete(SysAdmin sysAdmin)
         {
             try
             {
-                var mng = new StudentManager();
-                mng.Delete(student);
+                var mng = new SysAdminManager();
+                mng.Delete(sysAdmin);
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student deleted."
+                    Message = "SysAdmin deleted."
                 };
 
                 return Ok(apiResp);

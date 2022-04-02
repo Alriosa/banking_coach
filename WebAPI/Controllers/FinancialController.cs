@@ -8,8 +8,8 @@ using Exceptions;
 
 namespace WebAPI.Controllers
 {
-    [RoutePrefix("api/student")]
-    public class StudentController : ApiController
+    [RoutePrefix("api/financial")]
+    public class FinancialController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
         [Route("")]
@@ -17,27 +17,27 @@ namespace WebAPI.Controllers
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
-            var mng = new StudentManager();
+            var mng = new FinancialUserManager();
             apiResp.Data = mng.RetrieveAll();
 
             return Ok(apiResp);
         }
 
         [Route("{id}")]
-        public IHttpActionResult Get(string id)
+        public IHttpActionResult Get(int id)
         {
             try
             {
-                var mng = new StudentManager();
-                var student = new Student
+                var mng = new FinancialUserManager();
+                var financial = new FinancialUser
                 {
-                    IdentificationNumber = id
+                    FinancialUserID = id
                 };
 
-                student = mng.RetrieveById(student);
+                financial = mng.RetrieveById(financial);
                 apiResp = new ApiResponse
                 {
-                    Data = student
+                    Data = financial
                 };
                 return Ok(apiResp);
             }
@@ -49,16 +49,16 @@ namespace WebAPI.Controllers
 
 
         [Route("")]
-        public IHttpActionResult Put(Student student)
+        public IHttpActionResult Put(FinancialUser financial)
         {
             try
             {
-                var mng = new StudentManager();
-                mng.Update(student);
+                var mng = new FinancialUserManager();
+                mng.Update(financial);
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student Modified."
+                    Message = "Financial Modified."
                 };
 
                 return Ok(apiResp);
@@ -70,16 +70,16 @@ namespace WebAPI.Controllers
         }
 
         [Route("")]
-        public IHttpActionResult Delete(Student student)
+        public IHttpActionResult Delete(FinancialUser financial)
         {
             try
             {
-                var mng = new StudentManager();
-                mng.Delete(student);
+                var mng = new FinancialUserManager();
+                mng.Delete(financial);
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student deleted."
+                    Message = "Financial deleted."
                 };
 
                 return Ok(apiResp);

@@ -6,18 +6,18 @@ using System.Web.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class RecruiterController : Controller
+    public class SysAdminController : Controller
     {
-        // GET: Recruiter
-        public ActionResult vRecruiterRegistration()
+        // GET: Financial
+        public ActionResult vSysAdminRegistration()
         {
             return View();
         }
-        public ActionResult vRecruiterList()
+        public ActionResult vSysAdminList()
         {
             return View();
         }
-        public ActionResult vRecruiterUpdate()
+        public ActionResult vSysAdminUpdate()
         {
             return View();
         }
