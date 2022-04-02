@@ -1,0 +1,11 @@
+﻿@using WebApp.Helpers;
+@{
+    ViewBag.Title = "vSysAdminList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-top: 20px;" id="sysAdminList" class="d-inline">
+    @Html.CtrlTable(viewName: "vSysAdminList", id: "tblSysAdmin", title: "Administradores del sistema",
+    columnsTitle: "Lista de administradores", ColumnsDataName: "UserName", onSelectFunction: "BindFields")
+</div>
+ 

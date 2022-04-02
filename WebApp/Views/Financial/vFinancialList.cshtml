@@ -1,0 +1,14 @@
+﻿@using WebApp.Helpers;
+
+@{
+    ViewBag.Title = "vFinancialList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="margin-top: 20px;" id="financialList" class="d-inline">
+    @Html.CtrlTable(viewName: "vFinancialList", id: "tblFinancial", title: "Entidades Financiaeras",
+    columnsTitle: "Lista de entidades financieras", ColumnsDataName: "UserName", onSelectFunction: "BindFields")
+</div>
+
+ 

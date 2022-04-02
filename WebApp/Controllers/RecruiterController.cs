@@ -9,15 +9,15 @@ namespace WebApp.Controllers
     public class RecruiterController : Controller
     {
         // GET: Recruiter
-        public ActionResult vRegisterRecruiter()
+        public ActionResult vRecruiterRegistration()
         {
             return View();
         }
-        public ActionResult vListRecruiter()
+        public ActionResult vRecruiteListr()
         {
             return View();
         }
-        public ActionResult vUpdateRecruiter()
+        public ActionResult vRecruiterUpdate()
         {
             return View();
         }

@@ -1,6 +1,6 @@
 ﻿@using WebApp.Helpers;
 @{
-    ViewBag.Title = "vRegisterFinancial";
+    ViewBag.Title = "vRecruiterRegistration";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -24,7 +24,7 @@
                     <div class="row justify-content-center">
                         <div class="text-center my-4">
 
-                            <h1 class="form-title">REGISTRA A LA ENTIDAD FINANCIERA</h1>
+                            <h1 class="form-title">REGISTRA AL RECLUTADOR</h1>
                         </div>
                         <form id="formLogin" class="formLogin">
                             <div class="col-sm-12 text-center">
@@ -33,13 +33,13 @@
                                         @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "Login")
                                         @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "Password")
                                         @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", placeHolder: "*********", columnDataName: "ConfirmPassword")
-                                       
+
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row" style="margin: 0px auto;">
                                 <div style="margin: 0px auto 10px;">
-                                    @Html.CtrlButton(viewName: "vRegisterFinancial", type: "button", id: "btnLogin", label: "Registrar", onClickFunction: "RegisterFinancial", buttonType: "orange")
+                                    @Html.CtrlButton(viewName: "vRegisterRecruiter", type: "button", id: "btnLogin", label: "Registrar", onClickFunction: "RegisterFinancial", buttonType: "orange")
                                 </div>
                             </div>
                         </form>

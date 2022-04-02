@@ -10,18 +10,18 @@ namespace WebApp.Controllers
     {
         // GET: Student
 
-        public ActionResult vRegisterStudent()
+        public ActionResult vStudentRegistration()
         {
             return View();
         }
 
 
-        public ActionResult vListStudent()
+        public ActionResult vStudentList()
         {
             return View();
         }
 
-        public ActionResult vUpdateStudent()
+        public ActionResult vStudentUpdate()
         {
             return View();
 

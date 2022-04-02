@@ -1,0 +1,12 @@
+﻿@using WebApp.Helpers;
+@{
+    ViewBag.Title = "vRecruiterList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-top: 20px;" id="recruiterList" class="d-inline">
+    @Html.CtrlTable(viewName: "vRecruiterList", id: "tblRecruiter", title: "Reclutadores",
+    columnsTitle: "Lista de reclutadores", ColumnsDataName: "UserName", onSelectFunction: "BindFields")
+</div>
+
+ 

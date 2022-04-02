@@ -9,15 +9,15 @@ namespace WebApp.Controllers
     public class FinancialController : Controller
     {
         // GET: Financial
-        public ActionResult vRegisterFinancial()
+        public ActionResult vFinancialRegistration()
         {
             return View();
         }
-        public ActionResult vListFinancial()
+        public ActionResult vFinancialList()
         {
             return View();
         }
-        public ActionResult vUpdateFinancial()
+        public ActionResult vFinancialUpdate()
         {
             return View();
         }
