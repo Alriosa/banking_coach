@@ -471,7 +471,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER_BY_ID]
         @SP_Select_Financial_ID INT
 AS
-        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_ID = @SP_Select_Financial_ID;
+        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User_ID = @SP_Select_Financial_ID;
 GO
 
 
@@ -556,7 +556,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_ID]
         @SP_Select_User_Log_ID INT
 AS
-        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE User_Log_ID = @SP_Select_User_Log_ID;
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE Id_Record_Number = @SP_Select_User_Log_ID;
 GO
 
 ---SELECT ALL USER LOGS
