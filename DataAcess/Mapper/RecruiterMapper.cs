@@ -10,12 +10,12 @@ namespace DataAccess.Mapper
 {
     public class RecruiterMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
-        private const string DB_COL_RECRUITER_USER_ID = "RecruiterUserID";
-        private const string DB_COL_RECRUITER_LOGIN = "RecruiterLogin";
-        private const string DB_COL_RECRUITER_PASSWORD = "RecruiterPassword";
-        private const string DB_COL_FINANTIAL_ASSOCIATION = "FinantialAssociation";
-        private const string DB_COL_USER_TYPE = "UserType";
-        private const string DB_COL_RECRUITER_STATUS = "Recruiter_Status";
+        private const string DB_COL_RECRUITER_USER_ID = "Recruiter_User_ID";
+        private const string DB_COL_RECRUITER_LOGIN = "Recruiter_Login";
+        private const string DB_COL_RECRUITER_PASSWORD = "Recruiter_Password";
+        private const string DB_COL_FINANTIAL_ASSOCIATION = "Finantial_Association";
+        private const string DB_COL_USER_TYPE = "User_Type";
+        private const string DB_COL_RECRUITER_STATUS = "User_Active_Status";
 
 
 
@@ -27,8 +27,8 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
-            operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
-            operation.AddIntParam(DB_COL_USER_TYPE, recruiter.UserType);
+            operation.AddCharParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
+            operation.AddCharParam(DB_COL_USER_TYPE, recruiter.UserType);
             operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.RecruiterStatus);
 
             return operation;
@@ -59,8 +59,8 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
-            operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
-            operation.AddIntParam(DB_COL_USER_TYPE, recruiter.UserType);
+            operation.AddCharParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
+            operation.AddCharParam(DB_COL_USER_TYPE, recruiter.UserType);
             operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.RecruiterStatus);
 
             return operation;
@@ -95,8 +95,8 @@ namespace DataAccess.Mapper
                 RecruiterUserID = GetIntValue(row, DB_COL_RECRUITER_USER_ID),
                 RecruiterLogin = GetStringValue(row, DB_COL_RECRUITER_LOGIN),
                 RecruiterPassword = GetStringValue(row, DB_COL_RECRUITER_PASSWORD),
-                FinantialAssociation = GetIntValue(row, DB_COL_FINANTIAL_ASSOCIATION),
-                UserType = GetIntValue(row, DB_COL_USER_TYPE),
+                FinantialAssociation = GetCharValue(row, DB_COL_FINANTIAL_ASSOCIATION),
+                UserType = GetCharValue(row, DB_COL_USER_TYPE),
                 RecruiterStatus = GetCharValue(row, DB_COL_RECRUITER_STATUS)
             };
 

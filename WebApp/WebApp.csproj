@@ -184,8 +184,12 @@
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\Views\ControlActions.js" />
     <Content Include="Scripts\Views\Financial\vFinancialList.js" />
+    <Content Include="Scripts\Views\Financial\vFinancialRegistration.js" />
+    <Content Include="Scripts\Views\Recruiter\vRecruiterRegistration.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterList.js" />
     <Content Include="Scripts\Views\Student\vStudentList.js" />
+    <Content Include="Scripts\Views\Student\vStudentRegistration.js" />
+    <Content Include="Scripts\Views\SysAdmin\vSysAdminRegistration.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminList.js" />
     <Content Include="Scripts\Views\vCustomers.js" />
     <Content Include="Web.config" />

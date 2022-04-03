@@ -11,8 +11,8 @@ USE BANKING_COACH_DB;
 
 CREATE TABLE TBL_STUDENT(
 Student_ID INT IDENTITY(1,1) NOT NULL, --PK
-Banking_Student CHAR NOT NULL DEFAULT('0'),
-User_Active_Status CHAR NOT NULL DEFAULT('0'), /*True or False*/
+Banking_Student CHAR NOT NULL DEFAULT('1'),
+User_Active_Status CHAR NOT NULL DEFAULT('1'), /*True or False*/
 Entry_DATE DATE NOT NULL,
 First_Name VARCHAR(200) NOT NULL,
 Second_Name VARCHAR(200),
@@ -44,7 +44,7 @@ CREATE TABLE TBL_SYS_ADMIN_USER(
 Sys_Admin_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Admin_Login VARCHAR(20) NOT NULL, 
 Admin_Password VARCHAR(50) NOT NULL,
-User_Active_Status CHAR NOT NULL DEFAULT ('0'), /*True or False*/
+User_Active_Status CHAR NOT NULL DEFAULT ('1'), /*True or False*/
 User_Type CHAR DEFAULT ('1'),
 PRIMARY KEY(Sys_Admin_User_ID),
 );
@@ -54,7 +54,7 @@ CREATE TABLE TBL_FINANCIAL_USER (
 Financial_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Financial_User VARCHAR(20) NOT NULL, 
 Financial_Password VARCHAR(50) NOT NULL,
-User_Active_Status INT NOT NULL, /*True or False*/
+User_Active_Status CHAR NOT NULL DEFAULT ('1'), /*True or False*/
 User_Type CHAR DEFAULT ('4'),
 PRIMARY KEY(Financial_User_ID),
 CONSTRAINT UC_Financial_User UNIQUE (Financial_User)
@@ -64,7 +64,7 @@ CREATE TABLE TBL_RECRUITER_USER(
 Recruiter_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Recruiter_Login VARCHAR(20) NOT NULL,
 Recruiter_Password VARCHAR(50) NOT NULL, 
-User_Active_Status INT NOT NULL, /*True or False*/
+User_Active_Status CHAR NOT NULL DEFAULT ('1'), /*True or False*/
 User_Type CHAR DEFAULT ('3'),
 FK_Financial_User_ID INT NOT NULL,
 PRIMARY KEY(Recruiter_User_ID),
@@ -476,7 +476,6 @@ GO
 
 
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_FINANCIAL_USER]
-        @SP_Select_Financial_User VARCHAR(20)
 AS
         SELECT * FROM [dbo].[TBL_FINANCIAL_USER]
 GO

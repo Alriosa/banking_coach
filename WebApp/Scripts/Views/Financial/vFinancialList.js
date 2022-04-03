@@ -3,7 +3,7 @@
 	this.tblFinancialId = 'tblFinancial';
 	this.ctrlActions = new ControlActions();
 	this.service = 'financial';
-	this.columns = "UserName";
+	this.columns = "FinancialLogin";
 
 
 
@@ -19,16 +19,13 @@
 	this.ReloadTable = function () {
 		this.ctrlActions.FillTable(this.service, this.tblFinancialId, true);
 	}
-
-
-
-
-	$(document).ready(function () {
-
-		var financialList = new vFinancialList();
-		financialList.RetrieveAll();
-
-
-	});
-
 }
+
+
+$(document).ready(function () {
+
+	var financialList = new vFinancialList();
+	financialList.RetrieveAll();
+
+
+});

@@ -11,9 +11,9 @@ namespace DataAccess.Mapper
     public class SysAdminMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
         private const string DB_COL_SYS_ADMIN_USER_ID = "Sys_Admin_User_ID";
-        private const string DB_COL_ADMIN_LOGIN = "AdminLogin";
-        private const string DB_COL_ADMIN_PASSWORD = "AdminPassword";
-        private const string DB_COL_ADMIN_STATUS = "Admin_Status";
+        private const string DB_COL_ADMIN_LOGIN = "Admin_Login";
+        private const string DB_COL_ADMIN_PASSWORD = "Admin_Password";
+        private const string DB_COL_ADMIN_STATUS = "User_Active_Status";
         private const string DB_COL_USER_TYPE = "User_Type";
 
 
@@ -26,7 +26,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
             operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
             operation.AddCharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
-            operation.AddIntParam(DB_COL_USER_TYPE, sysAdmin.UserType);
+            operation.AddCharParam(DB_COL_USER_TYPE, sysAdmin.UserType);
 
             return operation;
         }
@@ -57,7 +57,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
             operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
             operation.AddCharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
-            operation.AddIntParam(DB_COL_USER_TYPE, sysAdmin.UserType);
+            operation.AddCharParam(DB_COL_USER_TYPE, sysAdmin.UserType);
 
             return operation;
         }

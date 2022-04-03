@@ -24,3 +24,16 @@ F:\Otros proyectos\banking_coach\CoreAPI\obj\Debug\CoreAPI.csproj.CoreCompileInp
 F:\Otros proyectos\banking_coach\CoreAPI\obj\Debug\CoreAPI.csproj.CopyComplete
 F:\Otros proyectos\banking_coach\CoreAPI\obj\Debug\CoreAPI.dll
 F:\Otros proyectos\banking_coach\CoreAPI\obj\Debug\CoreAPI.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\bin\Debug\CoreAPI.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\bin\Debug\CoreAPI.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\bin\Debug\DataAcess.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\bin\Debug\Entities-POJO.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\bin\Debug\Exceptions.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\bin\Debug\DataAcess.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\bin\Debug\Entities-POJO.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\bin\Debug\Exceptions.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\obj\Debug\CoreAPI.csproj.AssemblyReference.cache
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\obj\Debug\CoreAPI.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\obj\Debug\CoreAPI.csproj.CopyComplete
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\obj\Debug\CoreAPI.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\CoreAPI\obj\Debug\CoreAPI.pdb

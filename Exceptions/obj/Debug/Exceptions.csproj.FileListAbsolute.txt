@@ -20,3 +20,14 @@ F:\Otros proyectos\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CoreComp
 F:\Otros proyectos\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CopyComplete
 F:\Otros proyectos\banking_coach\Exceptions\obj\Debug\Exceptions.dll
 F:\Otros proyectos\banking_coach\Exceptions\obj\Debug\Exceptions.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\bin\Debug\Exceptions.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\bin\Debug\Exceptions.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\bin\Debug\DataAcess.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\bin\Debug\Entities-POJO.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\bin\Debug\DataAcess.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\bin\Debug\Entities-POJO.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.AssemblyReference.cache
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CopyComplete
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\obj\Debug\Exceptions.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\obj\Debug\Exceptions.pdb
