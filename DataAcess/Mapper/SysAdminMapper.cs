@@ -15,6 +15,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_ADMIN_PASSWORD = "Admin_Password";
         private const string DB_COL_ADMIN_STATUS = "User_Active_Status";
         private const string DB_COL_USER_TYPE = "User_Type";
+        private const string DB_COL_USER_EXIST = "Login";
 
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
@@ -68,6 +69,16 @@ namespace DataAccess.Mapper
 
             var sysAdmin = (SysAdmin)entity;
             operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
+            return operation;
+        }
+
+        public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_VERIFY_USERNAME" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+
             return operation;
         }
 

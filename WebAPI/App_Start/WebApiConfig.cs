@@ -14,7 +14,7 @@ namespace WebAPI
             // Web API configuration and services
 
             // Web API routes
-            var cors = new EnableCorsAttribute("http://localhost:52014", "*", "*");
+            var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
             config.MapHttpAttributeRoutes();
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));

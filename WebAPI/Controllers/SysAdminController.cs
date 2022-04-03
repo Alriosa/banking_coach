@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using WebAPI.Models;
 
@@ -15,8 +14,9 @@ namespace WebAPI.Controllers
     public class SysAdminController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
-        [Route("")]
+        
         [HttpGet]
+        [Route("")]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -26,6 +26,7 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
+        [HttpGet]
         [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
@@ -50,7 +51,27 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("")]
+        public IHttpActionResult Post(SysAdmin sysAdmin)
+        {
+            try
+            {
+                var mng = new SysAdminManager();
+                mng.Create(sysAdmin);
 
+                apiResp = new ApiResponse();
+                apiResp.Message = "El Admin fue creado";
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPut]
         [Route("")]
         public IHttpActionResult Put(SysAdmin sysAdmin)
         {
@@ -72,6 +93,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpDelete]
         [Route("")]
         public IHttpActionResult Delete(SysAdmin sysAdmin)
         {
@@ -84,6 +106,42 @@ namespace WebAPI.Controllers
                 {
                     Message = "SysAdmin deleted."
                 };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPost]
+        [Route("validateuser")]
+        public IHttpActionResult PostValidateUser(SysAdmin sysAdmin)
+        {
+            try
+            {
+
+                var mng = new SysAdminManager();
+                //var usuario = new Usuario
+                //{
+                //    Correo = correo,
+                //    Identificacion = id
+                //};
+
+                sysAdmin = mng.ValidateExist(sysAdmin);
+                apiResp = new ApiResponse
+                {
+                    Data = sysAdmin.AdminLogin //Return 0 if doesn't exists or return 1 if that user exists
+                };
+                if (sysAdmin.AdminLogin.Equals("0"))
+                {
+                    apiResp.Message = "El usuario no existe";
+                }
+                else
+                {
+                    apiResp.Message = "El usuario si existe";
+                }
 
                 return Ok(apiResp);
             }

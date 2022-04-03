@@ -75,5 +75,22 @@ namespace CoreAPI
         {
             crudSysAdmin.Delete(sysAdmin);
         }
+
+
+        public SysAdmin ValidateExist(String admin_login)
+        {
+            SysAdmin s = null;
+            try
+            {
+                s = crudSysAdmin.ValidateUserExistence<SysAdmin>(admin_login);
+
+            }
+            catch (Exception ex)
+            {
+                ExceptionManager.GetInstance().Process(ex);
+            }
+
+            return s;
+        }
     }
 }

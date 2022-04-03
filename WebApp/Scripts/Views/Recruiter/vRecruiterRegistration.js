@@ -29,8 +29,8 @@ this.RulesValidateCreate = function () {
         errorClass: "is-invalid",
         rules: {
             txtUserName: { required: true },
-            textPassword: { required: true },
-            textConfirmPassword: { required: true, equalTo: "#textPassword"  },
+            txtPassword: { required: true },
+            txtConfirmPassword: { required: true, equalTo: "#txtPassword"  },
         },
         errorPlacement: function (error, element) {
             element: "div";
