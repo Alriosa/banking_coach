@@ -3,7 +3,7 @@
 	this.tblRecruiterId = 'tblRecruiter';
 	this.ctrlActions = new ControlActions();
 	this.service = 'recruiter';
-	this.columns = "UserName";
+	this.columns = "RecruiterLogin,FinantialAssociation,UserActiveStatus";
 
 
 
@@ -19,16 +19,9 @@
 	this.ReloadTable = function () {
 		this.ctrlActions.FillTable(this.service, this.tblRecruiterId, true);
 	}
-	 
-
-
-
-	$(document).ready(function () {
-
-		var recruiterList = new vRecruiterList();
-		recruiterList.RetrieveAll();
-
-
-	});
-
 }
+
+$(document).ready(function () {
+	var recruiterList = new vRecruiterList();
+	recruiterList.RetrieveAll();
+});

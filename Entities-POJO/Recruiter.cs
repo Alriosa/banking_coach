@@ -11,9 +11,9 @@ namespace Entities_POJO
         public int RecruiterUserID { get; set; }
         public string RecruiterLogin { get; set; }
         public string RecruiterPassword { get; set; }
-        public char FinantialAssociation { get; set; }
+        public int FinantialAssociation { get; set; }
         public char UserType { get; set; }
-        public char RecruiterStatus { get; set; }
+        public char UserActiveStatus { get; set; }
 
         public Recruiter()
         {
@@ -26,7 +26,7 @@ namespace Entities_POJO
             RecruiterPassword = recruiterPassword;
             FinantialAssociation = finantialAssociation;
             UserType = userType;
-            RecruiterStatus = recruiterStatus;
+            UserActiveStatus = recruiterStatus;
         }
     }
 }

@@ -20,7 +20,7 @@ this.ValidateInputs = function () {
     }
 }
 
-ReglasValidacionCrear = function () {
+this.RulesValidateCreate = function () {
     $("#frmSysAdminCreate").submit(function (e) {
         e.preventDefault();
     }).validate({
@@ -43,13 +43,13 @@ ReglasValidacionCrear = function () {
 
 
 
-function limpiarFormulario() {
+function resetForm() {
     $("#frmSysAdminCreate")[0].reset();
 }
 
 
 $(document).ready(function () {
-    ReglasValidacionCrear();
+    RulesValidateCreate();
 });
 
 

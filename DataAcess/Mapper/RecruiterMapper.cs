@@ -27,9 +27,9 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
-            operation.AddCharParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
+            operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
             operation.AddCharParam(DB_COL_USER_TYPE, recruiter.UserType);
-            operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.RecruiterStatus);
+            operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
         }
@@ -59,9 +59,9 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
-            operation.AddCharParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
+            operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
             operation.AddCharParam(DB_COL_USER_TYPE, recruiter.UserType);
-            operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.RecruiterStatus);
+            operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
         }
@@ -95,9 +95,9 @@ namespace DataAccess.Mapper
                 RecruiterUserID = GetIntValue(row, DB_COL_RECRUITER_USER_ID),
                 RecruiterLogin = GetStringValue(row, DB_COL_RECRUITER_LOGIN),
                 RecruiterPassword = GetStringValue(row, DB_COL_RECRUITER_PASSWORD),
-                FinantialAssociation = GetCharValue(row, DB_COL_FINANTIAL_ASSOCIATION),
+                FinantialAssociation = GetIntValue(row, DB_COL_FINANTIAL_ASSOCIATION),
                 UserType = GetCharValue(row, DB_COL_USER_TYPE),
-                RecruiterStatus = GetCharValue(row, DB_COL_RECRUITER_STATUS)
+                UserActiveStatus = GetCharValue(row, DB_COL_RECRUITER_STATUS)
             };
 
             return recruiter;

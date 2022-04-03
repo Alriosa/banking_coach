@@ -20,7 +20,7 @@ this.ValidateInputs = function () {
     }
 }
 
-ReglasValidacionCrear = function () {
+this.RulesValidateCreate = function () {
     $("#frmStudentCreate").submit(function (e) {
         e.preventDefault();
     }).validate({
@@ -64,13 +64,13 @@ ReglasValidacionCrear = function () {
 
 
 
-function limpiarFormulario() {
+function resetForm() {
     $("#frmStudentCreate")[0].reset();
 }
 
 
 $(document).ready(function () {
-    ReglasValidacionCrear();
+    RulesValidateCreate();
 });
 
 

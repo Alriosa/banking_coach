@@ -4,15 +4,11 @@
 
     financialData = this.ctrlActions.GetDataForm('frmFinancialCreate');
 
-
-
     this.ctrlActions.PostToAPI('financial', financialData, function () {
             var vFinancial = new vFinancialList();
             vFinancial.ReloadTable();
     });
-
 }
-
 
 this.ValidateInputs = function () {
     if ($("#frmFinancialCreate").valid()) {
@@ -20,7 +16,7 @@ this.ValidateInputs = function () {
     }
 }
 
-ReglasValidacionCrear = function () {
+this.RulesValidateCreate = function () {
     $("#frmFinancialCreate").submit(function (e) {
         e.preventDefault();
     }).validate({
@@ -42,12 +38,12 @@ ReglasValidacionCrear = function () {
 
 }
 
-function limpiarFormulario() {
+function resetForm() {
     $("#frmFinancialCreate")[0].reset();
 }
 
 
 $(document).ready(function () {
-    ReglasValidacionCrear();
+    RulesValidateCreate();
 });
 

@@ -20,7 +20,7 @@ this.ValidateInputs = function () {
     }
 }
 
-this.ReglasValidacionCrear = function () {
+this.RulesValidateCreate = function () {
     $("#frmRecruiterCreate").submit(function (e) {
         e.preventDefault();
     }).validate({
@@ -43,7 +43,7 @@ this.ReglasValidacionCrear = function () {
 
 
 
-function limpiarFormulario() {
+function resetForm() {
     $("#frmRecruiterCreate")[0].reset();
 }
 

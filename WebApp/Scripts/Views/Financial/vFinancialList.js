@@ -7,11 +7,6 @@
 
 
 
-	this.BindFields = function (data) {
-
-
-	}
-
 	this.RetrieveAll = function () {
 		this.ctrlActions.FillTable(this.service, this.tblFinancialId, false);
 	}

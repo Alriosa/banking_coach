@@ -1,4 +1,4 @@
-USE master;
+USE master
 GO
 
 DROP DATABASE BANKING_COACH_DB;
@@ -13,7 +13,7 @@ CREATE TABLE TBL_STUDENT(
 Student_ID INT IDENTITY(1,1) NOT NULL, --PK
 Banking_Student CHAR NOT NULL DEFAULT('1'),
 User_Active_Status CHAR NOT NULL DEFAULT('1'), /*True or False*/
-Entry_DATE DATE NOT NULL,
+Entry_Date DATE NOT NULL,
 First_Name VARCHAR(200) NOT NULL,
 Second_Name VARCHAR(200),
 Last_Name VARCHAR(200) NOT NULL,
@@ -66,25 +66,25 @@ Recruiter_Login VARCHAR(20) NOT NULL,
 Recruiter_Password VARCHAR(50) NOT NULL, 
 User_Active_Status CHAR NOT NULL DEFAULT ('1'), /*True or False*/
 User_Type CHAR DEFAULT ('3'),
-FK_Financial_User_ID INT NOT NULL,
+Finantial_Association INT NOT NULL,
 PRIMARY KEY(Recruiter_User_ID),
 CONSTRAINT UC_Recruiter_User UNIQUE (Recruiter_Login),
-CONSTRAINT FK_Financial_ID FOREIGN KEY (FK_Financial_User_ID) REFERENCES TBL_FINANCIAL_USER(Financial_User_ID)
+CONSTRAINT FK_Financial_Association_ID FOREIGN KEY (Finantial_Association) REFERENCES TBL_FINANCIAL_USER(Financial_User_ID)
 );
 
 CREATE TABLE TBL_USER_LOG(
 Id_Record_Number INT IDENTITY(1,1) Not null, --PK
 Event_Logged VARCHAR(200),
 Date_Logged DATETIME,
-FK_Student_ID INT NOT NULL,
-FK_Sys_Admin_User_ID INT NOT NULL,  
-FK_Recruiter_User_ID INT NOT NULL,
-FK_Financial_User_ID INT NOT NULL,
+Student_ID INT NOT NULL,
+Sys_Admin_User_ID INT NOT NULL,  
+Recruiter_User_ID INT NOT NULL,
+Financial_User_ID INT NOT NULL,
 PRIMARY KEY(Id_Record_Number),
-CONSTRAINT FK_Student_ID FOREIGN KEY (FK_Student_ID) REFERENCES TBL_STUDENT(Student_ID),
-CONSTRAINT FK_Sys_Admin_User_ID FOREIGN KEY (FK_Sys_Admin_User_ID) REFERENCES TBL_SYS_ADMIN_USER(Sys_Admin_User_ID),
-CONSTRAINT FK_Recruiter_User_ID FOREIGN KEY (FK_Recruiter_User_ID) REFERENCES TBL_RECRUITER_USER(Recruiter_User_ID),
-CONSTRAINT FK_Financial_User_ID FOREIGN KEY (FK_Financial_User_ID) REFERENCES TBL_FINANCIAL_USER(Financial_User_ID)
+CONSTRAINT FK_Student_ID FOREIGN KEY (Student_ID) REFERENCES TBL_STUDENT(Student_ID),
+CONSTRAINT FK_Sys_Admin_ID FOREIGN KEY (Sys_Admin_User_ID) REFERENCES TBL_SYS_ADMIN_USER(Sys_Admin_User_ID),
+CONSTRAINT FK_Recruiter_ID FOREIGN KEY (Recruiter_User_ID) REFERENCES TBL_RECRUITER_USER(Recruiter_User_ID),
+CONSTRAINT FK_Financial_ID FOREIGN KEY (Financial_User_ID) REFERENCES TBL_FINANCIAL_USER(Financial_User_ID)
 );
 
 GO
@@ -95,7 +95,7 @@ GO
 
 SET IDENTITY_INSERT TBL_STUDENT ON
 
-INSERT INTO TBL_STUDENT (Student_ID, Banking_Student,User_Active_Status, Entry_DATE,First_Name,Second_Name,
+INSERT INTO TBL_STUDENT (Student_ID, Banking_Student,User_Active_Status, Entry_Date,First_Name,Second_Name,
 Last_Name,Second_Last_Name,Id_Type,Identification_Number, Birthdate,Gender,Primary_Phone, Secondary_Phone,
 Email,Laboral_Status,Work_Address,Laboral_Experience,Student_User,Student_Password,Province,Canton,District) VALUES (
 	0,'','0','2022-03-27','DEFAULT','','','','0',0,'2022-03-27','O','0','','DEFAULT','','','','S_DEFAULT','DEFAULT', 'DEFAULT','DEFAULT','DEFAULT');
@@ -121,7 +121,7 @@ GO
 
 SET IDENTITY_INSERT TBL_RECRUITER_USER ON
 
-INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Password, User_Active_Status,FK_Financial_User_ID ) VALUES ( 0, 'R_DEFAULT', 'DEFAULT', '0', '0');
+INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Password, User_Active_Status,Finantial_Association ) VALUES ( 0, 'R_DEFAULT', 'DEFAULT', '0', 0);
 GO 
 
 SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
@@ -313,7 +313,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_ADMIN_USER]
         @SP_Insert_Admin_Password VARCHAR(50),
         @SP_Insert_Admin_Status CHAR
 AS
-        INSERT INTO [dbo].[TBL_ADMIN_USER]
+        INSERT INTO [dbo].[TBL_SYS_ADMIN_USER]
         VALUES
                 (@SP_Insert_Admin_User,
                 @SP_Insert_Admin_Password,
@@ -326,14 +326,13 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER_BY_ID]
         @SP_Select_Admin_ID INT
 AS
-        SELECT * FROM [dbo].[TBL_ADMIN_USER] WHERE Admin_ID = @SP_Select_Admin_ID;
+        SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID = @SP_Select_Admin_ID;
 GO
 
 ---SELECT ALL ADMINS
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_ADMIN_USER]
-        @SP_Select_Admin_User VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_ADMIN_USER];
+        SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER];
 GO
 
 ---UPDATE ADMIN STATUS
@@ -341,10 +340,10 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_STATUS]
         @SP_Insert_Admin_User VARCHAR(20),
         @SP_Insert_Admin_Status CHAR
 AS
-        UPDATE [dbo].[TBL_ADMIN_USER] SET
-                Admin_User=@SP_Insert_Admin_User,
+        UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
+                Admin_Login=@SP_Insert_Admin_User,
                 User_Active_Status=@SP_Insert_Admin_Status
-                WHERE Admin_User = @SP_Insert_Admin_User;
+                WHERE Admin_Login = @SP_Insert_Admin_User;
 GO
 
 ---UPDATE ADMIN PASSWORD
@@ -352,26 +351,25 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_PASSWORD]
         @SP_Insert_Admin_User VARCHAR(20),
         @SP_Insert_Admin_Password VARCHAR(50)
 AS
-        UPDATE [dbo].[TBL_ADMIN_USER] SET
-                Admin_User=@SP_Insert_Admin_User,
+        UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
                 Admin_Password=@SP_Insert_Admin_Password
-                WHERE Admin_User = @SP_Insert_Admin_User;                
+                WHERE Admin_Login = @SP_Insert_Admin_User;                
 GO
 
 ---DELETE ADMIN
 CREATE PROCEDURE [dbo].[SP_DELETE_TBL_ADMIN_USER]
         @SP_Delete_Admin_User VARCHAR(20)
 AS	
-        DELETE FROM [dbo].[TBL_ADMIN_USER] WHERE Admin_User = @SP_Delete_Admin_User;
+        DELETE FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Admin_Login = @SP_Delete_Admin_User;
 GO
 
 --SOFT DELETE ADMIN
 CREATE PROCEDURE [dbo].[SP_SOFT_DELETE_TBL_ADMIN_USER]
         @SP_Delete_Admin_User VARCHAR(20)
 AS	
-		UPDATE [dbo].[TBL_ADMIN_USER] SET
+		UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
 				 User_Active_Status ='0'
-				 WHERE Admin_User = @SP_Delete_Admin_User; 
+				 WHERE Admin_Login = @SP_Delete_Admin_User; 
 GO
 
 /**
@@ -408,7 +406,6 @@ AS
 GO
 
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_RECRUITER_USER]
-        @SP_Select_Recruiter_Login VARCHAR(20)
 AS
         SELECT * FROM [dbo].[TBL_RECRUITER_USER];
 GO
@@ -568,7 +565,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_STUDENT]
 			@SP_Insert_User_Log_Event_User_ID INT
 AS
-        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE FK_Student_ID = @SP_Insert_User_Log_Event_User_ID;
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE Student_ID = @SP_Insert_User_Log_Event_User_ID;
 GO
 
 
@@ -576,7 +573,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_SYS_ADMIN]
 			@SP_Insert_User_Log_Event_User_ID INT 
 AS
-        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE FK_Sys_Admin_User_ID = @SP_Insert_User_Log_Event_User_ID;
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE Sys_Admin_User_ID = @SP_Insert_User_Log_Event_User_ID;
 GO
 
 ---SELECT USER LOGS BY RECRUITER
@@ -584,7 +581,7 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_RECRUITER]
 			@SP_Insert_User_Log_Event_User_ID INT 
 AS
 
-        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE FK_Recruiter_User_ID = @SP_Insert_User_Log_Event_User_ID;
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE Recruiter_User_ID = @SP_Insert_User_Log_Event_User_ID;
 GO
 
 ---SELECT USER LOGS BY FINANCIAL
@@ -592,7 +589,7 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_USER_LOG_BY_FINANCIAL]
 			@SP_Insert_User_Log_Event_User_ID INT 
 AS
 
-        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE FK_Financial_User_ID = @SP_Insert_User_Log_Event_User_ID;
+        SELECT * FROM [dbo].[TBL_USER_LOG] WHERE Financial_User_ID = @SP_Insert_User_Log_Event_User_ID;
 GO
 
 /**

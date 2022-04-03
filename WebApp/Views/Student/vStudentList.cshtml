@@ -1,8 +1,19 @@
 ﻿
+@using WebApp.Helpers;
+<script src="~/Scripts/Views/Student/vStudentList.js"></script>
 @{
     ViewBag.Title = "vStudentList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>vListStudent</h2>
+
+<div style="margin-top: 20px;" id="studentList" class="d-inline">
+    @Html.CtrlTable(viewName: "vStudentList", id: "tblStudent", title: "Estudiantes",
+    columnsTitle: "Identificación,Correo Electrónico,Estudiante de Banking Coach,Estado", ColumnsDataName: "IdentificationNumber,Email,BankingStudent,UserActiveStatus", onSelectFunction: "BindFields")
+</div>
+
+
+
+
+
 
