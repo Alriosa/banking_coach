@@ -1,14 +1,3 @@
-D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\Exceptions.dll
-D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\Exceptions.pdb
-D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\DataAcess.dll
-D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\Entities-POJO.dll
-D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\DataAcess.pdb
-D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\Entities-POJO.pdb
-D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.AssemblyReference.cache
-D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CoreCompileInputs.cache
-D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CopyComplete
-D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.dll
-D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.pdb
 F:\Otros proyectos\banking_coach\Exceptions\bin\Debug\Exceptions.dll
 F:\Otros proyectos\banking_coach\Exceptions\bin\Debug\Exceptions.pdb
 F:\Otros proyectos\banking_coach\Exceptions\bin\Debug\DataAcess.dll
@@ -31,3 +20,14 @@ C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CopyComplete
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\obj\Debug\Exceptions.dll
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Exceptions\obj\Debug\Exceptions.pdb
+D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\Exceptions.dll
+D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\Exceptions.pdb
+D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\DataAcess.dll
+D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\Entities-POJO.dll
+D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\DataAcess.pdb
+D:\Alriosa Code\banking_coach\Exceptions\bin\Debug\Entities-POJO.pdb
+D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.AssemblyReference.cache
+D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CoreCompileInputs.cache
+D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.csproj.CopyComplete
+D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.dll
+D:\Alriosa Code\banking_coach\Exceptions\obj\Debug\Exceptions.pdb
