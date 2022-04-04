@@ -1,22 +1,22 @@
-﻿this.Create = function () {
+﻿function vRecruiterRegistration() {
+    this.Create = function () {
 
-    var recruiterData = {};
+        var recruiterData = {};
 
-    recruiterData = this.ctrlActions.GetDataForm('frmRecruiterCreate');
-
-
-
-    this.ctrlActions.PostToAPI('recruiter', recruiterData, function () {
-            var vRecruiter = new vRecruiterlList();
-            vRecruiter.ReloadTable();
-    });
-
-}
+        recruiterData = this.ctrlActions.GetDataForm('frmRecruiterCreate');
 
 
-this.ValidateInputs = function () {
-    if ($("#frmRecruiterCreate").valid()) {
-        this.Create();
+
+        this.ctrlActions.PostToAPI('recruiter', recruiterData, function () {
+        });
+
+    }
+
+
+    this.ValidateInputs = function () {
+        if ($("#frmRecruiterCreate").valid()) {
+            this.Create();
+        }
     }
 }
 

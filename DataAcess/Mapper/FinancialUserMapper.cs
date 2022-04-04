@@ -15,6 +15,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_FINANCIAL_PASSWORD = "Financial_Password";
         private const string DB_COL_FINANCIAL_STATUS = "User_Active_Status";
         private const string DB_COL_USER_TYPE = "User_Type";
+        private const string DB_COL_USER_EXIST = "User_Login";
 
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
@@ -22,11 +23,9 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_FINANCIAL_USER" };
 
             var financialUser = (FinancialUser)entity;
-            operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
             operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
             operation.AddVarcharParam(DB_COL_FINANCIAL_PASSWORD, financialUser.FinancialPassword);
             operation.AddVarcharParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, financialUser.UserType);
 
             return operation;
         }
@@ -68,6 +67,16 @@ namespace DataAccess.Mapper
 
             var financialUser = (FinancialUser)entity;
             operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
+            return operation;
+        }
+
+        public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_VERIFY_USERNAME" };
+
+            var financialUser = (FinancialUser)entity;
+            operation.AddVarcharParam(DB_COL_USER_EXIST, financialUser.FinancialLogin);
+
             return operation;
         }
 

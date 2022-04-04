@@ -1,20 +1,22 @@
-﻿this.Create = function () {
+﻿function vFinancialRegistration() {
+    this.Create = function () {
 
-    var financialData = {};
+        var financialData = {};
 
-    financialData = this.ctrlActions.GetDataForm('frmFinancialCreate');
+        financialData = this.ctrlActions.GetDataForm('frmFinancialCreate');
 
-    this.ctrlActions.PostToAPI('financial', financialData, function () {
-            var vFinancial = new vFinancialList();
-            vFinancial.ReloadTable();
-    });
-}
+        this.ctrlActions.PostToAPI('financial', financialData, function () {
+            
+        });
+    }
 
-this.ValidateInputs = function () {
-    if ($("#frmFinancialCreate").valid()) {
-        this.Create();
+    this.ValidateInputs = function () {
+        if ($("#frmFinancialCreate").valid()) {
+            this.Create();
+        }
     }
 }
+
 
 this.RulesValidateCreate = function () {
     $("#frmFinancialCreate").submit(function (e) {
@@ -24,6 +26,7 @@ this.RulesValidateCreate = function () {
         lang: 'es',
         errorClass: "is-invalid",
         rules: {
+            txtFinancial: { required: true },
             txtUserName: { required: true },
             txtPassword: { required: true },
             txtConfirmPassword: { required: true, equalTo: "#txtPassword" },

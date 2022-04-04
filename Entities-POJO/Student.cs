@@ -33,6 +33,7 @@ namespace Entities_POJO
         public string SecondaryPhone { get; set; }
         public string LaboralExperience { get; set; }
 
+        public string User_Login { get; set; }
         public Student()
         {
             

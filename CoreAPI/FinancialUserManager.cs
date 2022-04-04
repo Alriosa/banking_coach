@@ -20,27 +20,19 @@ namespace CoreAPI
 
         public void Create(FinancialUser financialUser)
         {
-            var c = financialUserCrudFactory.Retrieve<FinancialUser>(financialUser);
-            //try
-            //{
-                
+            try
+            {
 
-            //    //    if (c != null)
-            //    //    {
-            //    //        //FinancialUser already exist
-            //    //        throw new BussinessException(3);
-            //    //    }
+                // if (temp.FinancialLogin.Equals("0"))
+                financialUserCrudFactory.Create(financialUser);
 
-            //    //    if (financialUser.Age >= 18)
-            //    //        financialUserCrudFactory.Create(financialUser);
-            //    //    else
-            //    //        throw new BussinessException(2);
-            //    //}
-            //    //catch (Exception ex)
-            //    //{
-            //    //    ExceptionManager.GetInstance().Process(ex);
-            //    //}
-            //}
+                // else
+                //       throw new BussinessException(2);
+            }
+            catch (Exception ex)
+            {
+                // ExceptionManager.GetInstance().Process(ex);
+            }
         }
 
         public List<FinancialUser> RetrieveAll()
@@ -75,6 +67,20 @@ namespace CoreAPI
         public void Delete(FinancialUser financialUser)
         {
             financialUserCrudFactory.Delete(financialUser);
+        }
+
+        public bool ValidateExist(FinancialUser financial)
+        {
+            bool repeated = false;
+            try
+            {
+                repeated = financialUserCrudFactory.ValidateUserExistence(financial);
+            }
+            catch (Exception ex)
+            {
+                //ExceptionManager.GetInstance().Process(ex);
+            }
+            return repeated;
         }
     }
 }

@@ -20,26 +20,19 @@ namespace CoreAPI
 
         public void Create(Recruiter recruiter)
         {
-            var c = crudRecruiter.Retrieve<Recruiter>(recruiter);
-            //try
-            //{
-              
+            try
+            {
 
-            //    if (c != null)
-            //    {
-            //        //Recruiter already exist
-            //        throw new BussinessException(3);
-            //    }
+                // if (temp.RecruiterLogin.Equals("0"))
+                crudRecruiter.Create(recruiter);
 
-            //    if (recruiter.Age >= 18)
-            //        crudRecruiter.Create(recruiter);
-            //    else
-            //        throw new BussinessException(2);
-            //}
-            //catch (Exception ex)
-            //{
-            //    ExceptionManager.GetInstance().Process(ex);
-            //}
+                // else
+                //       throw new BussinessException(2);
+            }
+            catch (Exception ex)
+            {
+                // ExceptionManager.GetInstance().Process(ex);
+            }
         }
 
         public List<Recruiter> RetrieveAll()
@@ -74,6 +67,19 @@ namespace CoreAPI
         public void Delete(Recruiter recruiter)
         {
             crudRecruiter.Delete(recruiter);
+        }
+        public bool ValidateExist(Recruiter recruiter)
+        {
+            bool repeated = false;
+            try
+            {
+                repeated = crudRecruiter.ValidateUserExistence(recruiter);
+            }
+            catch (Exception ex)
+            {
+                //ExceptionManager.GetInstance().Process(ex);
+            }
+            return repeated;
         }
     }
 }

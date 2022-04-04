@@ -14,6 +14,7 @@ namespace WebApp.Models.Controls
        
         public string Label { get; set; }
         public string ListId { get; set; }
+        public string ColumnDataName { get; set; }
 
         private string URL_API_LISTs = "http://localhost:57056/api/List/";
 

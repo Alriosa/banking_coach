@@ -15,6 +15,7 @@ namespace Entities_POJO
         public string NameFinantialAssociation { get; set; }
         public string UserType { get; set; }
         public string UserActiveStatus { get; set; }
+        public string User_Login { get; set; }
 
         public Recruiter()
         {

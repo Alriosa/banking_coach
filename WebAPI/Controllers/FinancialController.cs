@@ -8,12 +8,9 @@ using Exceptions;
 
 namespace WebAPI.Controllers
 {
-    [RoutePrefix("api/financial")]
     public class FinancialController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
-        [Route("")]
-        [HttpGet]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -23,7 +20,6 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
-        [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
             try
@@ -47,8 +43,37 @@ namespace WebAPI.Controllers
             }
         }
 
+        public IHttpActionResult Post(FinancialUser financial)
+        {
+            try
+            {
+                apiResp = new ApiResponse();
 
-        [Route("")]
+                var mng = new FinancialUserManager();
+
+                var c = mng.ValidateExist(financial);
+
+                if (c == false)
+                {
+                    financial.UserActiveStatus = "1";
+                    mng.Create(financial);
+                    apiResp.Message = "Entidad financiera creada";
+                }
+                else
+                {
+                    apiResp.Message = "Nombre de usuario ya existe";
+                    apiResp.Data = "error";
+
+                }
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
         public IHttpActionResult Put(FinancialUser financial)
         {
             try
@@ -69,7 +94,6 @@ namespace WebAPI.Controllers
             }
         }
 
-        [Route("")]
         public IHttpActionResult Delete(FinancialUser financial)
         {
             try

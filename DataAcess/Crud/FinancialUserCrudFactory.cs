@@ -68,5 +68,21 @@ namespace DataAccess.Crud
             var financialUserCrud = (FinancialUser)entity;
             dao.ExecuteProcedure(mapper.GetDeleteStatement(financialUserCrud));
         }
+
+
+        public bool ValidateUserExistence(BaseEntity entity)
+        {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetValidateUserNameExistenceStatement(entity));
+            var dic = new Dictionary<string, object>();
+
+            bool response = false;
+
+            var result = lstResult.SelectMany(d => d.Values).ToList().ToArray()[0];
+            if (result.Equals("1"))
+            {
+                response = true;
+            }
+            return response;
+        }
     }
 }

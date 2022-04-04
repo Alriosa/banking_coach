@@ -16,6 +16,8 @@ namespace DataAccess.Mapper
         private const string DB_COL_FINANTIAL_ASSOCIATION = "Finantial_Association";
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_RECRUITER_STATUS = "User_Active_Status";
+        private const string DB_COL_USER_EXIST = "User_Login";
+
 
 
 
@@ -24,12 +26,10 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_RECRUITER_USER" };
 
             var recruiter = (Recruiter)entity;
-            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
             operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
             operation.AddVarcharParam(DB_COL_USER_TYPE, recruiter.UserType);
-            operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
         }
@@ -72,6 +72,15 @@ namespace DataAccess.Mapper
 
             var recruiter = (Recruiter)entity;
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
+            return operation;
+        }
+        public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_VERIFY_USERNAME" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddVarcharParam(DB_COL_USER_EXIST, recruiter.RecruiterLogin);
+
             return operation;
         }
 

@@ -8,12 +8,9 @@ using Exceptions;
 
 namespace WebAPI.Controllers
 {
-    [RoutePrefix("api/recruiter")]
     public class RecruiterController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
-        [Route("")]
-        [HttpGet]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -23,7 +20,6 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
-        [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
             try
@@ -47,8 +43,37 @@ namespace WebAPI.Controllers
             }
         }
 
+        public IHttpActionResult Post(Recruiter recruiter)
+        {
+            try
+            {
+                apiResp = new ApiResponse();
 
-        [Route("")]
+                var mng = new RecruiterManager();
+
+                var c = mng.ValidateExist(recruiter);
+
+                if (c == false)
+                {
+                    recruiter.UserActiveStatus = "1";
+                    mng.Create(recruiter);
+                    apiResp.Message = "Entidad financiera creada";
+                }
+                else
+                {
+                    apiResp.Message = "Nombre de usuario ya existe";
+                    apiResp.Data = "error";
+
+                }
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
         public IHttpActionResult Put(Recruiter recruiter)
         {
             try
@@ -69,7 +94,6 @@ namespace WebAPI.Controllers
             }
         }
 
-        [Route("")]
         public IHttpActionResult Delete(Recruiter recruiter)
         {
             try
