@@ -28,8 +28,8 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
             operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
-            operation.AddCharParam(DB_COL_USER_TYPE, recruiter.UserType);
-            operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
+            operation.AddVarcharParam(DB_COL_USER_TYPE, recruiter.UserType);
+            operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
         }
@@ -60,8 +60,8 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
             operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
-            operation.AddCharParam(DB_COL_USER_TYPE, recruiter.UserType);
-            operation.AddCharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
+            operation.AddVarcharParam(DB_COL_USER_TYPE, recruiter.UserType);
+            operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
         }
@@ -96,8 +96,8 @@ namespace DataAccess.Mapper
                 RecruiterLogin = GetStringValue(row, DB_COL_RECRUITER_LOGIN),
                 RecruiterPassword = GetStringValue(row, DB_COL_RECRUITER_PASSWORD),
                 FinantialAssociation = GetIntValue(row, DB_COL_FINANTIAL_ASSOCIATION),
-                UserType = GetCharValue(row, DB_COL_USER_TYPE),
-                UserActiveStatus = GetCharValue(row, DB_COL_RECRUITER_STATUS)
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS)
             };
 
             return recruiter;

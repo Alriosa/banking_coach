@@ -12,14 +12,15 @@ namespace Entities_POJO
         public string RecruiterLogin { get; set; }
         public string RecruiterPassword { get; set; }
         public int FinantialAssociation { get; set; }
-        public char UserType { get; set; }
-        public char UserActiveStatus { get; set; }
+        public string NameFinantialAssociation { get; set; }
+        public string UserType { get; set; }
+        public string UserActiveStatus { get; set; }
 
         public Recruiter()
         {
             
         }
-        public Recruiter(int recruiterUserId, string recruiterLogin, string recruiterPassword, char finantialAssociation, char userType, char recruiterStatus)
+        public Recruiter(int recruiterUserId, string recruiterLogin, string recruiterPassword, int finantialAssociation,  string userType, string recruiterStatus)
         {
             RecruiterUserID = recruiterUserId;
             RecruiterLogin = recruiterLogin;

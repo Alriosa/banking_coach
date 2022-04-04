@@ -25,8 +25,8 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
             operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
             operation.AddVarcharParam(DB_COL_FINANCIAL_PASSWORD, financialUser.FinancialPassword);
-            operation.AddCharParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
-            operation.AddCharParam(DB_COL_USER_TYPE, financialUser.UserType);
+            operation.AddVarcharParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
+            operation.AddVarcharParam(DB_COL_USER_TYPE, financialUser.UserType);
 
             return operation;
         }
@@ -56,8 +56,8 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
             operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
             operation.AddVarcharParam(DB_COL_FINANCIAL_PASSWORD, financialUser.FinancialPassword);
-            operation.AddCharParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
-            operation.AddCharParam(DB_COL_USER_TYPE, financialUser.UserType);
+            operation.AddVarcharParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
+            operation.AddVarcharParam(DB_COL_USER_TYPE, financialUser.UserType);
 
             return operation;
         }
@@ -91,8 +91,8 @@ namespace DataAccess.Mapper
                 FinancialUserID = GetIntValue(row, DB_COL_FINANCIAL_USER_ID),
                 FinancialLogin = GetStringValue(row, DB_COL_FINANCIAL_USER),
                 FinancialPassword = GetStringValue(row, DB_COL_FINANCIAL_PASSWORD),
-                UserType = GetCharValue(row, DB_COL_FINANCIAL_STATUS),
-                UserActiveStatus = GetCharValue(row, DB_COL_USER_TYPE)
+                UserType = GetStringValue(row, DB_COL_FINANCIAL_STATUS),
+                UserActiveStatus = GetStringValue(row, DB_COL_USER_TYPE)
             };
 
             return financialUser;

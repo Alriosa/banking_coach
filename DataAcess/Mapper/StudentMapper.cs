@@ -41,29 +41,29 @@ namespace DataAccess.Mapper
 
             var student = (Student)entity;
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
-            operation.AddCharParam(DB_COL_BANKING_STUDENT,student.BankingStudent);
-            operation.AddCharParam(DB_COL_USER_ACTIVE_STATUS,student.UserActiveStatus);
+            operation.AddVarcharParam(DB_COL_BANKING_STUDENT,student.BankingStudent);
+            operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS,student.UserActiveStatus);
             operation.AddDateTimeParam(DB_COL_ENTRY_DATE, student.EntryDate);
             operation.AddVarcharParam(DB_COL_FIRST_NAME,student.FirstName);
             operation.AddVarcharParam(DB_COL_SECOND_NAME, student.SecondName);
             operation.AddVarcharParam(DB_COL_LAST_NAME, student.LastName);
             operation.AddVarcharParam(DB_COL_SECOND_LAST_NAME, student.SecondLastName);
-            operation.AddCharParam(DB_COL_ID_TYPE,student.IdType);
+            operation.AddVarcharParam(DB_COL_ID_TYPE,student.IdType);
             operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, student.IdentificationNumber);
             operation.AddDateTimeParam(DB_COL_BIRTHDATE,student.Birthdate);
-            operation.AddCharParam(DB_COL_GENDER,student.Gender);
+            operation.AddVarcharParam(DB_COL_GENDER,student.Gender);
             operation.AddVarcharParam(DB_COL_PRIMARY_PHONE,student.PrimaryPhone);
             operation.AddVarcharParam(DB_COL_SECOND_PHONE,student.SecondaryPhone);
             operation.AddVarcharParam(DB_COL_EMAIL,student.Email);
-            operation.AddCharParam(DB_COL_LABORAL_STATUS,student.LaboralStatus);
+            operation.AddVarcharParam(DB_COL_LABORAL_STATUS,student.LaboralStatus);
             operation.AddVarcharParam(DB_COL_WORK_ADDRESS,student.Work_Address);
-            operation.AddCharParam(DB_COL_LABORAL_EXPERIENCE,student.LaboralExperience);
+            operation.AddVarcharParam(DB_COL_LABORAL_EXPERIENCE,student.LaboralExperience);
             operation.AddVarcharParam(DB_COL_STUDENT_LOGIN,student.Student_Login);
             operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD,student.Student_Password);
             operation.AddVarcharParam(DB_COL_PROVINCE,student.Province);
             operation.AddVarcharParam(DB_COL_CANTON,student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT,student.District);
-            operation.AddCharParam(DB_COL_USER_TYPE,student.UserType);
+            operation.AddVarcharParam(DB_COL_USER_TYPE,student.UserType);
 
             return operation;
         }
@@ -102,29 +102,29 @@ namespace DataAccess.Mapper
 
             var student = (Student)entity;
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
-            operation.AddCharParam(DB_COL_BANKING_STUDENT, student.BankingStudent);
-            operation.AddCharParam(DB_COL_USER_ACTIVE_STATUS, student.UserActiveStatus);
+            operation.AddVarcharParam(DB_COL_BANKING_STUDENT, student.BankingStudent);
+            operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS, student.UserActiveStatus);
             operation.AddDateTimeParam(DB_COL_ENTRY_DATE, student.EntryDate);
             operation.AddVarcharParam(DB_COL_FIRST_NAME, student.FirstName);
             operation.AddVarcharParam(DB_COL_SECOND_NAME, student.SecondName);
             operation.AddVarcharParam(DB_COL_LAST_NAME, student.LastName);
             operation.AddVarcharParam(DB_COL_SECOND_LAST_NAME, student.SecondLastName);
-            operation.AddCharParam(DB_COL_ID_TYPE, student.IdType);
+            operation.AddVarcharParam(DB_COL_ID_TYPE, student.IdType);
             operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, student.IdentificationNumber);
             operation.AddDateTimeParam(DB_COL_BIRTHDATE, student.Birthdate);
-            operation.AddCharParam(DB_COL_GENDER, student.Gender);
+            operation.AddVarcharParam(DB_COL_GENDER, student.Gender);
             operation.AddVarcharParam(DB_COL_PRIMARY_PHONE, student.PrimaryPhone);
             operation.AddVarcharParam(DB_COL_SECOND_PHONE, student.SecondaryPhone);
             operation.AddVarcharParam(DB_COL_EMAIL, student.Email);
-            operation.AddCharParam(DB_COL_LABORAL_STATUS, student.LaboralStatus);
+            operation.AddVarcharParam(DB_COL_LABORAL_STATUS, student.LaboralStatus);
             operation.AddVarcharParam(DB_COL_WORK_ADDRESS, student.Work_Address);
-            operation.AddCharParam(DB_COL_LABORAL_EXPERIENCE, student.LaboralExperience);
+            operation.AddVarcharParam(DB_COL_LABORAL_EXPERIENCE, student.LaboralExperience);
             operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.Student_Login);
             operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.Student_Password);
             operation.AddVarcharParam(DB_COL_PROVINCE, student.Province);
             operation.AddVarcharParam(DB_COL_CANTON, student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT, student.District);
-            operation.AddCharParam(DB_COL_USER_TYPE, student.UserType);
+            operation.AddVarcharParam(DB_COL_USER_TYPE, student.UserType);
 
             return operation;
         }
@@ -156,26 +156,26 @@ namespace DataAccess.Mapper
             var student = new Student
             {
                 StudentID = GetIntValue(row, DB_COL_STUDENT_ID),
-                BankingStudent = GetCharValue(row, DB_COL_BANKING_STUDENT),
-                UserActiveStatus = GetCharValue(row, DB_COL_USER_ACTIVE_STATUS),
+                BankingStudent = GetStringValue(row, DB_COL_BANKING_STUDENT),
+                UserActiveStatus = GetStringValue(row, DB_COL_USER_ACTIVE_STATUS),
                 EntryDate = GetDateValue(row, DB_COL_ENTRY_DATE),
                 FirstName = GetStringValue(row, DB_COL_FIRST_NAME),
                 SecondName = GetStringValue(row, DB_COL_SECOND_NAME),
                 LastName = GetStringValue(row, DB_COL_LAST_NAME),
                 SecondLastName = GetStringValue(row,DB_COL_SECOND_LAST_NAME),
-                IdType = GetCharValue(row,DB_COL_ID_TYPE),
+                IdType = GetStringValue(row,DB_COL_ID_TYPE),
                 IdentificationNumber = GetStringValue(row,DB_COL_IDENTIFICATION_NUMBER),
                 Birthdate = GetDateValue(row,DB_COL_BIRTHDATE),
-                Gender = GetCharValue(row,DB_COL_GENDER),
+                Gender = GetStringValue(row,DB_COL_GENDER),
                 Canton = GetStringValue(row,DB_COL_CANTON),
                 District = GetStringValue(row,DB_COL_DISTRICT),
-                UserType = GetCharValue(row,DB_COL_USER_TYPE),
+                UserType = GetStringValue(row,DB_COL_USER_TYPE),
                 Student_Login = GetStringValue(row,DB_COL_STUDENT_LOGIN),
                 Student_Password = GetStringValue(row,DB_COL_STUDENT_PASSWORD),
-                LaboralStatus = GetCharValue(row,DB_COL_LABORAL_STATUS),
+                LaboralStatus = GetStringValue(row,DB_COL_LABORAL_STATUS),
                 Work_Address = GetStringValue(row,DB_COL_WORK_ADDRESS),
                 Email = GetStringValue(row,DB_COL_EMAIL),
-                LaboralExperience = GetCharValue(row,DB_COL_LABORAL_EXPERIENCE),
+                LaboralExperience = GetStringValue(row,DB_COL_LABORAL_EXPERIENCE),
                 PrimaryPhone = GetStringValue(row,DB_COL_PRIMARY_PHONE),
                 SecondaryPhone = GetStringValue(row, DB_COL_SECOND_PHONE),
                 Province = GetStringValue(row,DB_COL_PROVINCE)
