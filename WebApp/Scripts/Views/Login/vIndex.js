@@ -1,15 +1,14 @@
 ﻿function vLogin() {
 
-    this.service = 'seguridad';
+    this.service = 'security';
     this.ctrlActions = new ControlActions();
 
     this.Login = function () {
         var data = {};
-        data = this.ctrlActions.GetDataForm('frmEdition');
-        var paginaInicio = "/home/vHoteles";//pagina de inicio del usuario
-       
+        data = this.ctrlActions.GetDataForm('frmLogin');
 
-        this.ctrlActions.Login(this.service + "/login", data, paginaInicio);
+
+        this.ctrlActions.Login(this.service + "/login", data);
     }
 
     this.ValidarInputs = function () {
@@ -20,15 +19,16 @@
     
    
 }
-
+function resetForm() {
+    $("#frmLogin")[0].reset();
+}
 //ON DOCUMENT READY
 $(document).ready(function () {
-    var vlogIn = new vLogin();
-    ReglasValidacionLogin();
+    RulesValidateCreate();
 });
 
-ReglasValidacionLogin = function () {
-    $("#frmEdition").submit(function (e) {
+RulesValidateCreate = function () {
+    $("#frmLogin").submit(function (e) {
         e.preventDefault();
     }).validate({
         lang: 'es',

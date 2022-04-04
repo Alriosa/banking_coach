@@ -45,7 +45,7 @@
     color: #fa8d00;
 }
 
-form {
+.form {
     margin: 40px auto;
     width: 100%;
 }
@@ -116,4 +116,47 @@ input {
     opacity: 0.4;
     z-index: -2;
     border-radius: 40px;
+}
+
+
+
+.card {
+    background-color: #ffffff2e;
+    color: #fff;
+}
+
+
+table.dataTable tbody tr {
+    background-color: #fffcfc00;
+}
+
+
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    color: #fff;
+}
+
+
+
+table.dataTable tbody tr {
+    background-color: #fffcfc00;
+}
+
+
+
+table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+    background-color: #ffffff05;
+}
+
+table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+    background-color: #ffffff05;
+}
+
+
+table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
+    background-color: f1f1f100;
+}
+
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+    background-color: #878787;
 }

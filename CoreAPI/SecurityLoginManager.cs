@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CoreAPI
 {
-    public class SecurityManager : BaseManager
+    public class SecurityLoginManager : BaseManager
     {
         private SecurityCrudFactory crudSecurity;
 
-        public SecurityManager()
+        public SecurityLoginManager()
         {
             crudSecurity = new SecurityCrudFactory();
         }

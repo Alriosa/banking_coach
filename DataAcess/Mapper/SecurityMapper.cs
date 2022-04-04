@@ -72,7 +72,15 @@ namespace DataAcess.Mapper
 
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)
         {
-            throw new NotImplementedException();
+            var lstResults = new List<BaseEntity>();
+
+            foreach (var row in lstRows)
+            {
+                var sysAdmin = BuildObject(row);
+                lstResults.Add(sysAdmin);
+            }
+
+            return lstResults;
         }
 
 

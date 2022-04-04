@@ -49,6 +49,7 @@
     <Compile Include="OptionList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recruiter.cs" />
+    <Compile Include="Security.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="SysAdmin.cs" />
     <Compile Include="UserLog.cs" />

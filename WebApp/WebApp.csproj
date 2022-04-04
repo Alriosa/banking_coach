@@ -154,7 +154,6 @@
     <Compile Include="Models\Controls\CtrlBaseModel.cs" />
     <Compile Include="Models\Controls\CtrlButtonModel.cs" />
     <Compile Include="Models\Controls\CtrlCheckboxModel.cs" />
-    <Compile Include="Models\Controls\CtrlDropDownCitiesModel.cs" />
     <Compile Include="Models\Controls\CtrlInputModel.cs" />
     <Compile Include="Models\Controls\CtrlDropDownModel.cs" />
     <Compile Include="Models\Controls\CtrlInputSecondModel.cs" />

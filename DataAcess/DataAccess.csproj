@@ -46,6 +46,7 @@
     <Compile Include="Crud\CrudFactory.cs" />
     <Compile Include="Crud\FinancialUserCrudFactory.cs" />
     <Compile Include="Crud\RecruiterCrudFactory.cs" />
+    <Compile Include="Crud\SecurityCrudFactory.cs" />
     <Compile Include="Crud\StudentCrudFactory.cs" />
     <Compile Include="Crud\SysAdminCrudFactory.cs" />
     <Compile Include="Crud\UserLogCrudFactory.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Mapper\IObjectMapper.cs" />
     <Compile Include="Mapper\ISqlStaments.cs" />
     <Compile Include="Mapper\RecruiterMapper.cs" />
+    <Compile Include="Mapper\SecurityMapper.cs" />
     <Compile Include="Mapper\StudentMapper.cs" />
     <Compile Include="Mapper\SysAdminMapper.cs" />
     <Compile Include="Mapper\UserLogMapper.cs" />

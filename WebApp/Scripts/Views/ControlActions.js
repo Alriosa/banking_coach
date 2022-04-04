@@ -130,16 +130,17 @@ function ControlActions() {
 	this.Login = function (service, data) {
 		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
+
 			
-			$.ajax({
-				type: "POST",
-				url: '/home/SetUser',
-				data: response.Data,
-				dataType: 'json',
-				success: window.location.href = inicio
-			}).done(function () {
-				window.location = inicio;
-			});
+			if(response.Data == "error") {
+				ctrlActions.ShowMessage('E', response.Message);
+			} else {
+				var data = response.Data;
+				ctrlActions.ShowMessage('I', response.Message);
+			}
+			
+
+		
 
 		})
 			.fail(function (response) {
