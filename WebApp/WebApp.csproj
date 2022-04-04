@@ -217,6 +217,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< Updated upstream
+=======
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\Recruiter\" />
+    <Folder Include="Views\Student\" />
+    <Folder Include="Views\SysAdmin\" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
