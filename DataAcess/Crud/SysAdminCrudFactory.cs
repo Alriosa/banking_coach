@@ -72,18 +72,19 @@ namespace DataAccess.Crud
         }
 
 
-        public T ValidateUserExistence<T>(BaseEntity entity)
+        public bool ValidateUserExistence(BaseEntity entity)
         {
             var lstResult = dao.ExecuteQueryProcedure(mapper.GetValidateUserNameExistenceStatement(entity));
             var dic = new Dictionary<string, object>();
-            if (lstResult.Count > 0)
-            {
-                dic = lstResult[0];
-                var objs = mapper.BuildObject(dic);
-                return (T)Convert.ChangeType(objs, typeof(T));
-            }
 
-            return default(T);
+            bool response = false;
+
+            var result = lstResult.SelectMany(d => d.Values).ToList().ToArray()[0];
+            if(result.Equals("1"))
+               {
+                   response = true;
+               }
+            return response;
         }
     }
 }

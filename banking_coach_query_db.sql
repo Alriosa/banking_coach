@@ -11,29 +11,29 @@ USE BANKING_COACH_DB;
 
 CREATE TABLE TBL_STUDENT(
 Student_ID INT IDENTITY(1,1) NOT NULL, --PK
-Banking_Student CHAR NOT NULL DEFAULT('1'),
-User_Active_Status CHAR NOT NULL DEFAULT('1'), /*True or False*/
+Banking_Student VARCHAR(1) NOT NULL DEFAULT '1',
+User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
 Entry_Date DATE NOT NULL,
 First_Name VARCHAR(200) NOT NULL,
 Second_Name VARCHAR(200),
 Last_Name VARCHAR(200) NOT NULL,
 Second_Last_Name VARCHAR(200) NOT NULL,
-Id_Type CHAR NOT NULL,
+Id_Type VARCHAR(1) NOT NULL,
 Identification_Number VARCHAR(20) NOT NULL, ---MUST BE UNIQUE ---
 Birthdate DATE NOT NULL,
-Gender CHAR NOT NULL,
+Gender VARCHAR(1) NOT NULL,
 Primary_Phone VARCHAR(200) NOT NULL, ---MUST BE UNIQUE ---
 Secondary_Phone VARCHAR(200),
 Email VARCHAR(200) NOT NULL,
-Laboral_Status CHAR NOT NULL, /*True or False*/
+Laboral_Status VARCHAR(1) NOT NULL, /*True or False*/
 Work_Address VARCHAR(200) NOT NULL,
-Laboral_Experience CHAR NOT NULL,
+Laboral_Experience VARCHAR(1) NOT NULL,
 Student_User VARCHAR(20) NOT NULL,---MUST BE UNIQUE ---
 Student_Password VARCHAR(50) NOT NULL,
 Province VARCHAR(200) NOT NULL,
 Canton VARCHAR(200) NOT NULL,
 District VARCHAR(200) NOT NULL,
-User_Type CHAR DEFAULT ('2'),
+User_Type VARCHAR(1)  NOT NULL DEFAULT '2',
 PRIMARY KEY(Student_ID),
 CONSTRAINT UC_Student UNIQUE (Identification_Number,
                                Student_User,
@@ -44,8 +44,8 @@ CREATE TABLE TBL_SYS_ADMIN_USER(
 Sys_Admin_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Admin_Login VARCHAR(20) NOT NULL, 
 Admin_Password VARCHAR(50) NOT NULL,
-User_Active_Status CHAR NOT NULL DEFAULT ('1'), /*True or False*/
-User_Type CHAR DEFAULT ('1'),
+User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
+User_Type VARCHAR(1) NOT NULL  DEFAULT '1',
 PRIMARY KEY(Sys_Admin_User_ID),
 );
 
@@ -54,8 +54,8 @@ CREATE TABLE TBL_FINANCIAL_USER (
 Financial_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Financial_User VARCHAR(20) NOT NULL, 
 Financial_Password VARCHAR(50) NOT NULL,
-User_Active_Status CHAR NOT NULL DEFAULT ('1'), /*True or False*/
-User_Type CHAR DEFAULT ('4'),
+User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
+User_Type VARCHAR(1) NOT NULL DEFAULT '4',
 PRIMARY KEY(Financial_User_ID),
 CONSTRAINT UC_Financial_User UNIQUE (Financial_User)
 );
@@ -64,8 +64,8 @@ CREATE TABLE TBL_RECRUITER_USER(
 Recruiter_User_ID INT IDENTITY(1,1) NOT NULL, --PK
 Recruiter_Login VARCHAR(20) NOT NULL,
 Recruiter_Password VARCHAR(50) NOT NULL, 
-User_Active_Status CHAR NOT NULL DEFAULT ('1'), /*True or False*/
-User_Type CHAR DEFAULT ('3'),
+User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
+User_Type VARCHAR(1) NOT NULL DEFAULT '3',
 Finantial_Association INT NOT NULL,
 PRIMARY KEY(Recruiter_User_ID),
 CONSTRAINT UC_Recruiter_User UNIQUE (Recruiter_Login),
@@ -155,23 +155,23 @@ STORAGE PROCEDURES FOR STUDENT
 
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT] 
        
-        @SP_Insert_Banking_Student CHAR,
-        @SP_Insert_User_Active_Status CHAR,
+        @SP_Insert_Banking_Student VARCHAR(1),
+        @SP_Insert_User_Active_Status VARCHAR(1),
         @SP_Insert_Entry_DATE DATE,
         @SP_Insert_First_Name VARCHAR(200),
         @SP_Insert_Second_Name VARCHAR(200),
         @SP_Insert_Last_Name VARCHAR(200),
         @SP_Insert_Second_Last_Name VARCHAR(200),
-        @SP_Insert_Id_Type CHAR,
+        @SP_Insert_Id_Type VARCHAR(1),
         @SP_Insert_Identification_Number VARCHAR(20),
         @SP_Insert_Birthdate DATE,
-        @SP_Insert_Gender CHAR,
+        @SP_Insert_Gender VARCHAR(1),
         @SP_Insert_Primary_Phone VARCHAR(200),
         @SP_Insert_Secondary_Phone VARCHAR(200),
         @SP_Insert_Email VARCHAR(200),
-        @SP_Insert_Laboral_Status CHAR,
+        @SP_Insert_Laboral_Status VARCHAR(1),
         @SP_Insert_Work_Address VARCHAR(200),
-        @SP_Insert_Laboral_Experience CHAR,
+        @SP_Insert_Laboral_Experience VARCHAR(1),
         @SP_Insert_Student_User VARCHAR(20),
         @SP_Insert_Student_Password VARCHAR(50),
         @SP_Insert_Province VARCHAR(200),
@@ -242,23 +242,23 @@ GO
 --- UPDATE STUDENT
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Insert_Student_ID INT,
-        @SP_Insert_Banking_Student CHAR,
-        @SP_Insert_User_Active_Status CHAR,
+        @SP_Insert_Banking_Student VARCHAR(1),
+        @SP_Insert_User_Active_Status VARCHAR(1),
         @SP_Insert_Entry_DATE DATE,
         @SP_Insert_First_Name VARCHAR(200),
         @SP_Insert_Second_Name VARCHAR(200),
         @SP_Insert_Last_Name VARCHAR(200),
         @SP_Insert_Second_Last_Name VARCHAR(200),
-        @SP_Insert_Id_Type CHAR,
+        @SP_Insert_Id_Type VARCHAR(1),
         @SP_Insert_Identification_Number INT,
         @SP_Insert_Birthdate DATE,
-        @SP_Insert_Gender CHAR,
+        @SP_Insert_Gender VARCHAR(1),
         @SP_Insert_Primary_Phone VARCHAR(200),
         @SP_Insert_Secondary_Phone VARCHAR(200),
         @SP_Insert_Email VARCHAR(200),
-        @SP_Insert_Laboral_Status CHAR,
+        @SP_Insert_Laboral_Status VARCHAR(1),
         @SP_Insert_Work_Address VARCHAR(200),
-        @SP_Insert_Laboral_Experience CHAR,
+        @SP_Insert_Laboral_Experience VARCHAR(1),
         @SP_Insert_Student_User VARCHAR(20),
         @SP_Insert_Student_Password VARCHAR(50),
         @SP_Insert_Province VARCHAR(200),
@@ -309,15 +309,15 @@ STORAGE PROCEDURES FOR ADMIN USER
 **/
 
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_ADMIN_USER]
-        @SP_Insert_Admin_User VARCHAR(20),
-        @SP_Insert_Admin_Password VARCHAR(50),
-        @SP_Insert_Admin_Status CHAR
+        @SP_Admin_Login VARCHAR(20),
+        @SP_Admin_Password VARCHAR(50),
+        @SP_User_Active_Status VARCHAR(1)
 AS
         INSERT INTO [dbo].[TBL_SYS_ADMIN_USER]
         VALUES
-                (@SP_Insert_Admin_User,
-                @SP_Insert_Admin_Password,
-                @SP_Insert_Admin_Status,
+                (@SP_Admin_Login,
+                @SP_Admin_Password,
+                @SP_User_Active_Status,
 				'1');
 GO
 
@@ -338,7 +338,7 @@ GO
 ---UPDATE ADMIN STATUS
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_STATUS]
         @SP_Insert_Admin_User VARCHAR(20),
-        @SP_Insert_Admin_Status CHAR
+        @SP_Insert_Admin_Status VARCHAR(1)
 AS
         UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
                 Admin_Login=@SP_Insert_Admin_User,
@@ -385,8 +385,8 @@ STORAGE PROCEDURES FOR RECRUITER USER
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_RECRUITER_USER]
         @SP_Insert_Recruiter_Login VARCHAR(20),
         @SP_Insert_Recruiter_Password VARCHAR(50),
-        @SP_Insert_Recruiter_Status CHAR,
-        @SP_Insert_Recruiter_Financial_ID CHAR
+        @SP_Insert_Recruiter_Status VARCHAR(1),
+        @SP_Insert_Recruiter_Financial_ID VARCHAR(1)
 AS
         INSERT INTO [dbo].[TBL_RECRUITER_USER]
         VALUES
@@ -414,7 +414,7 @@ GO
 --- UPDATE RECRUITER STATUS
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_STATUS]
         @SP_Insert_Recruiter_Login VARCHAR(20),
-        @SP_Insert_Recruiter_Status CHAR
+        @SP_Insert_Recruiter_Status VARCHAR(1)
 AS
         UPDATE [dbo].[TBL_RECRUITER_USER] SET
                 Recruiter_Login=@SP_Insert_Recruiter_Login,
@@ -454,7 +454,7 @@ STORAGE PROCEDURES FOR FINANCIAL USER
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_FINANCIAL_USER]
         @SP_Insert_Financial_User VARCHAR(20),
         @SP_Insert_Financial_Password VARCHAR(50),
-        @SP_Insert_Financial_Status CHAR
+        @SP_Insert_Financial_Status VARCHAR(1)
 AS
         INSERT INTO [dbo].[TBL_FINANCIAL_USER]
         VALUES
@@ -479,7 +479,7 @@ GO
 
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_FINANCIAL_USER_STATUS]
         @SP_Insert_Financial_User VARCHAR(20),
-        @SP_Insert_Financial_Status CHAR
+        @SP_Insert_Financial_Status VARCHAR(1)
 AS
         UPDATE [dbo].[TBL_FINANCIAL_USER] SET
                 Financial_User=@SP_Insert_Financial_User,
@@ -509,13 +509,13 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_USER_LOG]
         @SP_Insert_User_Log_Event_Logged VARCHAR(200),
         @SP_Insert_User_Log_Event_Date DATETIME,
 		@SP_Insert_User_Log_Event_User_ID INT,
-        @SP_Insert_User_Log_Event_Type CHAR -- 1-SYS ADMIN; 2-STUDENT; 3-RECRUITER; 4-FINANCIAL
+        @SP_Insert_User_Log_Event_Type VARCHAR(1) -- 1-SYS ADMIN; 2-STUDENT; 3-RECRUITER; 4-FINANCIAL
 AS
 		BEGIN
-			DECLARE @ID_SYS_ADMIN CHAR --TYPE 1
-			DECLARE @ID_STUDENT CHAR --TYPE 2
-			DECLARE @ID_RECRUITER CHAR --TYPE 3
-			DECLARE @ID_FINANCIAL CHAR --TYPE 4
+			DECLARE @ID_SYS_ADMIN VARCHAR(1) --TYPE 1
+			DECLARE @ID_STUDENT VARCHAR(1) --TYPE 2
+			DECLARE @ID_RECRUITER VARCHAR(1) --TYPE 3
+			DECLARE @ID_FINANCIAL VARCHAR(1) --TYPE 4
 
 			SET @ID_SYS_ADMIN = CASE @SP_Insert_User_Log_Event_Type
 					WHEN '1' THEN @SP_Insert_User_Log_Event_User_ID
@@ -606,13 +606,13 @@ STORAGE PROCEDURES FOR LOGIN
 --RETURN 0 IF DONT EXIST OR 1 IF EXIST
 
 CREATE PROCEDURE [dbo].[SP_VERIFY_USERNAME]
-        @SP_Insert_Login VARCHAR(20)
+        @SP_User_Login VARCHAR(20)
 AS
 	BEGIN
 		DECLARE @COUNT_LOGIN_USERNAME INT 
-		DECLARE @USER_EXIST CHAR = '0'
+		DECLARE @USER_EXIST VARCHAR(1) = '0'
 
-		SELECT @COUNT_LOGIN_USERNAME =  COUNT(User_Login) FROM VW_ALL_USER_LOGIN WHERE User_Login = @SP_Insert_Login
+		SELECT @COUNT_LOGIN_USERNAME =  COUNT(User_Login) FROM VW_ALL_USER_LOGIN WHERE User_Login = @SP_User_Login
 
 		IF @COUNT_LOGIN_USERNAME > 0 
 		BEGIN 
@@ -635,11 +635,11 @@ CREATE PROCEDURE [dbo].[SP_LOGIN]
         @SP_Insert_Password VARCHAR(20)
 AS
 BEGIN
-	DECLARE @RESULT CHAR = '0'
+	DECLARE @RESULT VARCHAR(1) = '0'
 	DECLARE @GET_LOGIN VARCHAR(20) = 'NO'
 	DECLARE @GET_PASS VARCHAR(20) = 'NO'
-	DECLARE @GET_USER_TYPE CHAR = '0'
-	DECLARE @GET_STATUS CHAR = '0'
+	DECLARE @GET_USER_TYPE VARCHAR(1) = '0'
+	DECLARE @GET_STATUS VARCHAR(1) = '0'
 
 	SELECT @GET_LOGIN = VW_USER.User_Login FROM VW_ALL_USER_LOGIN AS VW_USER
 	WHERE VW_USER.User_Login = @SP_Insert_Login

@@ -11,14 +11,15 @@ namespace Entities_POJO
         public int SysAdminUserID { get; set; }
         public string AdminLogin { get; set; }
         public string AdminPassword { get; set; }
-        public char UserType { get; set; }
-        public char UserActiveStatus { get; set; }
+        public string UserType { get; set; }
+        public string UserActiveStatus { get; set; }
+        public string User_Login { get; set; }
 
         public SysAdmin()
         {
             
         }
-        public SysAdmin(int sysAdminUserId, string adminLogin, string adminPassword, char userActiveStatus, char userType)
+        public SysAdmin(int sysAdminUserId, string adminLogin, string adminPassword, string userActiveStatus, string userType)
         {
             SysAdminUserID = sysAdminUserId;
             AdminLogin = adminLogin;

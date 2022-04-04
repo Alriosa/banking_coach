@@ -15,7 +15,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_ADMIN_PASSWORD = "Admin_Password";
         private const string DB_COL_ADMIN_STATUS = "User_Active_Status";
         private const string DB_COL_USER_TYPE = "User_Type";
-        private const string DB_COL_USER_EXIST = "Login";
+        private const string DB_COL_USER_EXIST = "User_Login";
 
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
@@ -23,11 +23,9 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_ADMIN_USER" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
             operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
-            operation.AddCharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
-            operation.AddCharParam(DB_COL_USER_TYPE, sysAdmin.UserType);
+            operation.AddVarcharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
 
             return operation;
         }
@@ -57,8 +55,8 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
             operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
-            operation.AddCharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
-            operation.AddCharParam(DB_COL_USER_TYPE, sysAdmin.UserType);
+            operation.AddVarcharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
+            operation.AddVarcharParam(DB_COL_USER_TYPE, sysAdmin.UserType);
 
             return operation;
         }
@@ -77,7 +75,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_VERIFY_USERNAME" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            operation.AddVarcharParam(DB_COL_USER_EXIST, sysAdmin.AdminLogin);
 
             return operation;
         }
@@ -102,8 +100,8 @@ namespace DataAccess.Mapper
                 SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
                 AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
                 AdminPassword = GetStringValue(row, DB_COL_ADMIN_PASSWORD),
-                UserType = GetCharValue(row, DB_COL_ADMIN_STATUS),
-                UserActiveStatus= GetCharValue(row, DB_COL_USER_TYPE)
+                UserType = GetStringValue(row, DB_COL_ADMIN_STATUS),
+                UserActiveStatus= GetStringValue(row, DB_COL_USER_TYPE)
             };
 
             return sysAdmin;

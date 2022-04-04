@@ -10,13 +10,10 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [RoutePrefix("api/sysadmin")]
     public class SysAdminController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
         
-        [HttpGet]
-        [Route("")]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -26,8 +23,6 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
-        [HttpGet]
-        [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
             try
@@ -50,18 +45,30 @@ namespace WebAPI.Controllers
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
-
+        
         [HttpPost]
-        [Route("")]
         public IHttpActionResult Post(SysAdmin sysAdmin)
         {
             try
             {
-                var mng = new SysAdminManager();
-                mng.Create(sysAdmin);
-
                 apiResp = new ApiResponse();
-                apiResp.Message = "El Admin fue creado";
+
+                var mng = new SysAdminManager();
+
+                var c = mng.ValidateExist(sysAdmin);
+
+                if (c == false)
+                {
+                    sysAdmin.UserActiveStatus = "1";
+                    mng.Create(sysAdmin);
+                    apiResp.Message = "Administrador creado";
+                }
+                else
+                {
+                    apiResp.Message = "Nombre de usuario ya existe";
+                    apiResp.Data = "error";
+
+                }
 
                 return Ok(apiResp);
             }
@@ -71,8 +78,6 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("")]
         public IHttpActionResult Put(SysAdmin sysAdmin)
         {
             try
@@ -93,8 +98,6 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("")]
         public IHttpActionResult Delete(SysAdmin sysAdmin)
         {
             try
@@ -115,40 +118,6 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("validateuser")]
-        public IHttpActionResult PostValidateUser(SysAdmin sysAdmin)
-        {
-            try
-            {
-
-                var mng = new SysAdminManager();
-                //var usuario = new Usuario
-                //{
-                //    Correo = correo,
-                //    Identificacion = id
-                //};
-
-                sysAdmin = mng.ValidateExist(sysAdmin);
-                apiResp = new ApiResponse
-                {
-                    Data = sysAdmin.AdminLogin //Return 0 if doesn't exists or return 1 if that user exists
-                };
-                if (sysAdmin.AdminLogin.Equals("0"))
-                {
-                    apiResp.Message = "El usuario no existe";
-                }
-                else
-                {
-                    apiResp.Message = "El usuario si existe";
-                }
-
-                return Ok(apiResp);
-            }
-            catch (BussinessException bex)
-            {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
-            }
-        }
+       
     }
 }

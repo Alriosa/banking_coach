@@ -20,8 +20,8 @@ C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\bin\Debug\DataAcess.pdb
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\bin\Debug\Entities-POJO.dll
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\bin\Debug\Entities-POJO.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CopyComplete
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAcess.dll
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAcess.pdb
-C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.AssemblyReference.cache

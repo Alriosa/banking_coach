@@ -9,9 +9,9 @@ F:\Otros proyectos\banking_coach\Entities-POJO\bin\Debug\Entities-POJO.pdb
 F:\Otros proyectos\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.csproj.CoreCompileInputs.cache
 F:\Otros proyectos\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.dll
 F:\Otros proyectos\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.pdb
-C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.csproj.AssemblyReference.cache
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\bin\Debug\Entities-POJO.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\bin\Debug\Entities-POJO.pdb
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.dll
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.pdb
-C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\bin\Debug\Entities-POJO.dll
-C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\bin\Debug\Entities-POJO.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\Entities-POJO\obj\Debug\Entities-POJO.csproj.AssemblyReference.cache

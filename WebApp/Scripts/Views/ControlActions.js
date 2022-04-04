@@ -32,7 +32,10 @@ function ControlActions() {
 					"url": this.GetUrlApiService(service),
 					dataSrc: 'Data'
 				},
-				"columns": arrayColumnsData
+				"columns": arrayColumnsData,
+				"language": {
+					"url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+				}
 			});
 		} else {
 			//RECARGA LA TABLA
@@ -83,7 +86,12 @@ function ControlActions() {
 	this.PostToAPI = function (service, data) {
 		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
-			ctrlActions.ShowMessage('I', response.Message);
+
+			if (response.Data == "error") {
+				ctrlActions.ShowMessage('E', response.Message);
+			} else {
+				ctrlActions.ShowMessage('I', response.Message);
+            }
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;

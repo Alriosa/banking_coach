@@ -20,26 +20,19 @@ namespace CoreAPI
 
         public void Create(SysAdmin sysAdmin)
         {
-            var c = crudSysAdmin.Retrieve<SysAdmin>(sysAdmin);
-            //try
-            //{
-               
+          try
+            {
 
-            //    if (c != null)
-            //    {
-            //        //SysAdmin already exist
-            //        throw new BussinessException(3);
-            //    }
-
-            //    if (sysAdmin.Age >= 18)
-            //        crudSysAdmin.Create(sysAdmin);
-            //    else
-            //        throw new BussinessException(2);
-            //}
-            //catch (Exception ex)
-            //{
-            //    ExceptionManager.GetInstance().Process(ex);
-            //}
+               // if (temp.AdminLogin.Equals("0"))
+                  crudSysAdmin.Create(sysAdmin);
+                    
+              // else
+             //       throw new BussinessException(2);
+            }
+            catch (Exception ex)
+            {
+               // ExceptionManager.GetInstance().Process(ex);
+            }
         }
 
         public List<SysAdmin> RetrieveAll()
@@ -60,7 +53,7 @@ namespace CoreAPI
             }
             catch (Exception ex)
             {
-                ExceptionManager.GetInstance().Process(ex);
+                //ExceptionManager.GetInstance().Process(ex);
             }
 
             return c;
@@ -77,20 +70,18 @@ namespace CoreAPI
         }
 
 
-        public SysAdmin ValidateExist(String admin_login)
+        public bool ValidateExist(SysAdmin sysAdmin)
         {
-            SysAdmin s = null;
+            bool repeated = false;
             try
             {
-                s = crudSysAdmin.ValidateUserExistence<SysAdmin>(admin_login);
-
+                repeated = crudSysAdmin.ValidateUserExistence(sysAdmin);
             }
             catch (Exception ex)
             {
-                ExceptionManager.GetInstance().Process(ex);
+                //ExceptionManager.GetInstance().Process(ex);
             }
-
-            return s;
+            return repeated;
         }
     }
 }

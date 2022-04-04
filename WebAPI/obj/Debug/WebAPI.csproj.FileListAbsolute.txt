@@ -118,10 +118,6 @@ F:\Otros proyectos\banking_coach\WebAPI\obj\Debug\WebAPI.csproj.CoreCompileInput
 F:\Otros proyectos\banking_coach\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
 F:\Otros proyectos\banking_coach\WebAPI\obj\Debug\WebAPI.dll
 F:\Otros proyectos\banking_coach\WebAPI\obj\Debug\WebAPI.pdb
-C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.csproj.AssemblyReference.cache
-C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.csproj.CoreCompileInputs.cache
-C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.dll
-C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.pdb
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\bin\ApplicationInsights.config
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\bin\WebAPI.dll.config
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\bin\WebAPI.dll
@@ -177,4 +173,8 @@ C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\bin
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\bin\Microsoft.AI.Web.xml
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\bin\DataAcess.pdb
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.csproj.AssemblyReference.cache
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.dll
+C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\WebAPI\obj\Debug\WebAPI.pdb
