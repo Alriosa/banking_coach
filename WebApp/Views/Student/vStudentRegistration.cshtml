@@ -25,22 +25,41 @@
                     <div class="row justify-content-center">
                         <div class="text-center my-4">
 
-                            <h1 class="form-title">REGISTRA A UN ADMINISTRADOR</h1>
+                            <h1 class="form-title">REGISTRA A UN ESTUDIANTE</h1>
                         </div>
-                        <form id="formLogin" class="formLogin">
+                        <form id="frmStudentCreate" class="form frmStudentCreate">
                             <div class="col-sm-12 text-center">
                                 <div class="form-row ">
                                     <div class="col-lg-12">
-                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "Admin_Login")
-                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "Admin_Password")
+                                        @Html.CtrlInputSecond(id: "txtBankingStudent", type: "date", placeHolder: "Estudiante del Banco", columnDataName: "BankingStudent")
+                                        @Html.CtrlInputSecond(id: "txtEntryDate", type: "date", placeHolder: "Fecha de Registro", columnDataName: "EntryDate")
+                                        @Html.CtrlInputSecond(id: "txtFirstName", type: "text", placeHolder: "Primer Nombre", columnDataName: "FirstName")
+                                        @Html.CtrlInputSecond(id: "txtSecondName", type: "text", placeHolder: "Segundo Nombre", columnDataName: "SecondName")
+                                        @Html.CtrlInputSecond(id: "txtLastName", type: "text", placeHolder: "Primer Apellido", columnDataName: "LastName")
+                                        @Html.CtrlInputSecond(id: "txtSecondLastName", type: "text", placeHolder: "Segundo Apellido", columnDataName: "SecondLastName")
+                                        @Html.CtrlInputSecond(id: "txtFirstName", type: "text", placeHolder: "Primer Nombre", columnDataName: "FirstName")
+                                        @Html.CtrlInputSecond(id: "txtIdType", type: "text", placeHolder: "Primer Nombre", columnDataName: "IdType")
+                                        @Html.CtrlInputSecond(id: "txtIdentificationNumber", type: "text", placeHolder: "Número de identficaciÓN", columnDataName: "IdentificationNumber")
+                                        @Html.CtrlInputSecond(id: "txtBirthdate", type: "date", placeHolder: "Fecha de Nacimiento", columnDataName: "Birthdate")
+                                        @Html.CtrlInputSecond(id: "txtGender", type: "text", placeHolder: "Género", columnDataName: "Gender")
+                                        @Html.CtrlInputSecond(id: "txProvince", type: "text", placeHolder: "Provincia", columnDataName: "Province")
+                                        @Html.CtrlInputSecond(id: "txtCanton", type: "text", placeHolder: "Cantón", columnDataName: "Canton")
+                                        @Html.CtrlInputSecond(id: "txtDistrict", type: "text", placeHolder: "Distrito", columnDataName: "District")
+                                        @Html.CtrlInputSecond(id: "txtEmail", type: "email", placeHolder: "Email", columnDataName: "Email")
+                                        @Html.CtrlInputSecond(id: "txtStudentLogin", type: "text", placeHolder: "Nombre de usuario", columnDataName: "Student_Login")
+                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "Student_Password")
                                         @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", placeHolder: "*********", columnDataName: "")
-
+                                        @Html.CtrlInputSecond(id: "txtLaboralStatus", type: "text", placeHolder: "Estado Laboral", columnDataName: "LaboralStatus")
+                                        @Html.CtrlInputSecond(id: "txtWork_Address", type: "text", placeHolder: "Dirección del Trabajo", columnDataName: "Work_Address")
+                                        @Html.CtrlInputSecond(id: "txtPrimaryPhone", type: "text", placeHolder: "Número de Teléfono", columnDataName: "PrimaryPhone")
+                                        @Html.CtrlInputSecond(id: "txtSecondaryPhone", type: "text", placeHolder: "Número de Teléfono Secundario", columnDataName: "SecondaryPhone")
+                                        @Html.CtrlInputSecond(id: "txtLaboralExperience", type: "text", placeHolder: "Experiencia Laboral", columnDataName: "LaboralExperience")
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row" style="margin: 0px auto;">
                                 <div style="margin: 0px auto 10px;">
-                                    @Html.CtrlButton(viewName: "vSysAdminRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                    @Html.CtrlButton(viewName: "vStudentRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
                                 </div>
                             </div>
                         </form>

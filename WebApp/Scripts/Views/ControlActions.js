@@ -126,6 +126,28 @@ function ControlActions() {
 				console.log(data);
 			})
 	};
+
+	this.Login = function (service, data) {
+		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
+			var ctrlActions = new ControlActions();
+			
+			$.ajax({
+				type: "POST",
+				url: '/home/SetUser',
+				data: response.Data,
+				dataType: 'json',
+				success: window.location.href = inicio
+			}).done(function () {
+				window.location = inicio;
+			});
+
+		})
+			.fail(function (response) {
+				var data = response.responseJSON;
+				var ctrlActions = new ControlActions();
+				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+			})
+	};
 }
 
 //Custom jquery actions

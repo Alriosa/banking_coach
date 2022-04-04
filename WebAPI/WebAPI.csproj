@@ -191,6 +191,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\FinancialController.cs" />
+    <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="ExceptionFilter.cs" />

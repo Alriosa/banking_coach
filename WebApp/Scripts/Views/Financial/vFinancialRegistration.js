@@ -6,7 +6,7 @@
         financialData = this.ctrlActions.GetDataForm('frmFinancialCreate');
 
         this.ctrlActions.PostToAPI('financial', financialData, function () {
-            
+            resetForm();
         });
     }
 

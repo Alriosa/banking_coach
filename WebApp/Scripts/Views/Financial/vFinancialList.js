@@ -3,7 +3,7 @@
 	this.tblFinancialId = 'tblFinancial';
 	this.ctrlActions = new ControlActions();
 	this.service = 'financial';
-	this.columns = "FinancialLogin";
+	this.columns = "FinancialLogin,UserActiveStatus";
 
 
 
@@ -21,6 +21,5 @@ $(document).ready(function () {
 
 	var financialList = new vFinancialList();
 	financialList.RetrieveAll();
-
 
 });

@@ -34,13 +34,14 @@ namespace DataAccess.Mapper
         private const string DB_COL_CANTON = "Canton";
         private const string DB_COL_DISTRICT = "District";
         private const string DB_COL_USER_TYPE = "User_Type";
+        private const string DB_COL_USER_EXIST = "User_Login";
+
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_STUDENT" };
 
             var student = (Student)entity;
-            operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
             operation.AddVarcharParam(DB_COL_BANKING_STUDENT,student.BankingStudent);
             operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS,student.UserActiveStatus);
             operation.AddDateTimeParam(DB_COL_ENTRY_DATE, student.EntryDate);
@@ -63,7 +64,6 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_PROVINCE,student.Province);
             operation.AddVarcharParam(DB_COL_CANTON,student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT,student.District);
-            operation.AddVarcharParam(DB_COL_USER_TYPE,student.UserType);
 
             return operation;
         }
@@ -124,7 +124,6 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_PROVINCE, student.Province);
             operation.AddVarcharParam(DB_COL_CANTON, student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT, student.District);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, student.UserType);
 
             return operation;
         }
@@ -137,6 +136,27 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
             return operation;
         }
+
+        public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_VERIFY_USERNAME" };
+
+            var student = (Student)entity;
+            operation.AddVarcharParam(DB_COL_USER_EXIST, student.Student_Login);
+
+            return operation;
+        }
+
+        public SqlOperation GetValidateEmailExistenceStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_VERIFY_EMAIL" };
+
+            var student = (Student)entity;
+            operation.AddVarcharParam(DB_COL_EMAIL, student.Email);
+
+            return operation;
+        }
+
 
         public List<BaseEntity> BuildObjects(List<Dictionary<string, object>> lstRows)
         {

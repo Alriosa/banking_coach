@@ -8,6 +8,7 @@
 
 
         this.ctrlActions.PostToAPI('recruiter', recruiterData, function () {
+            resetForm();
         });
 
     }
@@ -16,6 +17,8 @@
     this.ValidateInputs = function () {
         if ($("#frmRecruiterCreate").valid()) {
             this.Create();
+            resetForm();
+
         }
     }
 }

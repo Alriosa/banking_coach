@@ -1,22 +1,18 @@
-﻿this.Create = function () {
+﻿function vStudentRegistration() {
+    this.Create = function () {
 
-    var studentData = {};
+        var studentData = {};
+        studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
+        this.ctrlActions.PostToAPI('student', studentData, function () {
+            resetForm();
+        });
+    }
 
-    studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
+    this.ValidateInputs = function () {
+        if ($("#frmStudentCreate").valid()) {
+            this.Create();
 
-    this.ctrlActions.PostToAPI('student', studentData, function () {
-            var vRecruiter = new vRecruiterlList();
-            vRecruiter.ReloadTable();
-    });
-
-}
-
-
-
-
-this.ValidateInputs = function () {
-    if ($("#frmStudentCreate").valid()) {
-        this.Create();
+        }
     }
 }
 
@@ -51,7 +47,6 @@ this.RulesValidateCreate = function () {
             textSecondaryPhone: { required: true },
             textLaboralExperience: { required: true },
             textDistrict: { required: true },
-            textConfirmPassword: { required: true, equalTo: "#textPassword" },
         },
         errorPlacement: function (error, element) {
             element: "div";

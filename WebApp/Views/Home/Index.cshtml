@@ -25,12 +25,12 @@
 
                             <h1 class="form-title">INGRESA A TU CUENTA</h1>
                         </div>
-                        <form id="formLogin" class="formLogin">
+                        <form id="frmLogin" class="form frmLogin">
                             <div class="col-sm-12 text-center">
                                 <div class="form-row ">
                                     <div class="col-lg-12">
-                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "Login")
-                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "Password")
+                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "User_Login")
+                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "User_Password")
                                         <div class="rememberme">
                                             @Html.CtrlCheckbox(id: "ckbRememberme", type: "checkbox", label: "Recordarme?", classes: "ckbRememberme my-1", columnDataName: "RememberMe")
                                         </div>

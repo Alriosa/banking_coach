@@ -70,5 +70,35 @@ namespace DataAccess.Crud
             var student = (Student)entity;
             dao.ExecuteProcedure(mapper.GetDeleteStatement(student));
         }
+
+         public string ValidateUserExistence(BaseEntity entity)
+        {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetValidateUserNameExistenceStatement(entity));
+            var dic = new Dictionary<string, object>();
+
+            var response = "0";
+
+            var result = lstResult.SelectMany(d => d.Values).ToList().ToArray()[0];
+            if(result.Equals("1"))
+               {
+                   response = "1";
+               }
+            return response;
+        }
+
+        public string ValidateEmailExistence(BaseEntity entity)
+        {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetValidateEmailExistenceStatement(entity));
+            var dic = new Dictionary<string, object>();
+
+            var response = "0";
+
+            var result = lstResult.SelectMany(d => d.Values).ToList().ToArray()[0];
+            if (result.Equals("1"))
+            {
+                response = "2";
+            }
+            return response;
+        }
     }
 }

@@ -9,13 +9,14 @@
 
         sysAdmin = this.ctrlActions.GetDataForm('frmSysAdminCreate');
 
-        this.ctrlActions.PostToAPI('sysadmin', sysAdmin);
+        this.ctrlActions.PostToAPI('sysadmin', sysAdmin, function () {
+            resetForm();
+        });
     }
 
     this.ValidateInputs = function () {
         if ($("#frmSysAdminCreate").valid()) {
             this.Create();
-           
         }
     }
 

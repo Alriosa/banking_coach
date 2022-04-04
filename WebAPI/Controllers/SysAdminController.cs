@@ -46,7 +46,6 @@ namespace WebAPI.Controllers
             }
         }
         
-        [HttpPost]
         public IHttpActionResult Post(SysAdmin sysAdmin)
         {
             try

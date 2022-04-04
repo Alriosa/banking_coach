@@ -20,26 +20,18 @@ namespace CoreAPI
 
         public void Create(Student student)
         {
-            var c = crudStudent.Retrieve<Student>(student);
-            //try
-            //{
-               
+            try{
 
-            //    if (c != null)
-            //    {
-            //        //Student already exist
-            //        throw new BussinessException(3);
-            //    }
+                // if (temp.AdminLogin.Equals("0"))
+                crudStudent.Create(student);
 
-            //    if (student.Age >= 18)
-            //        crudStudent.Create(student);
-            //    else
-            //        throw new BussinessException(2);
-            //}
-            //catch (Exception ex)
-            //{
-            //    ExceptionManager.GetInstance().Process(ex);
-            //}
+                // else
+                //       throw new BussinessException(2);
+            }
+            catch (Exception ex)
+            {
+                // ExceptionManager.GetInstance().Process(ex);
+            }
         }
 
         public List<Student> RetrieveAll()
@@ -74,6 +66,24 @@ namespace CoreAPI
         public void Delete(Student student)
         {
             crudStudent.Delete(student);
+        }
+
+        public string ValidateExist(Student student)
+        {
+            var response = "0";
+            try
+            {
+                response = crudStudent.ValidateUserExistence(student);
+                if(response == "0")
+                {
+                    response = crudStudent.ValidateEmailExistence(student);
+                }
+            }
+            catch (Exception ex)
+            {
+                //ExceptionManager.GetInstance().Process(ex);
+            }
+            return response;
         }
     }
 }
