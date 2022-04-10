@@ -29,7 +29,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
             operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, recruiter.UserType);
+            operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
         }

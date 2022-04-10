@@ -2,8 +2,7 @@
 .bg-gray {
     background-color: #252424;
     background:url(imgs/background.png);
-    background-repeat:repeat-y;
-    background-size:cover;
+    background-size:contain;
 }
 
 

@@ -28,33 +28,45 @@
                             <h1 class="form-title">INGRESA A TU CUENTA</h1>
                         </div>
                         <form id="frmLogin" class="form frmLogin">
-                            <div class="col-sm-12 text-center">
-                                <div class="form-row ">
-                                    <div class="col-lg-12">
-                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", required: true, placeHolder: "Nombre de Usuario", columnDataName: "UserLogin")
-                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", required: true, placeHolder: "*********", columnDataName: "UserPassword")
-                                        <div class="rememberme">
-                                            @Html.CtrlCheckbox(id: "ckbRememberme", type: "checkbox", label: "Recordarme?", classes: "ckbRememberme my-1", columnDataName: "RememberMe")
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="row align-content-sm-center">
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtLogin", type: "text", required: true, placeHolder: "Nombre de Usuario", columnDataName: "UserLogin")
 
-                            <div class="form-row" style="margin: 0px auto;">
-                                <div style="margin: 0px auto 10px;">
-                                    @Html.CtrlButton(viewName: "vLogin", type: "button", id: "btnLogin", label: "Ingresar", onClickFunction: "Login", buttonType: "orange")
-                                </div>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <a>¿Olvidaste tu contraseña?</a>
                                         </div>
-                                        <div class="col-12">
-                                            <a>¿Necesitas ayuda para iniciar sesión?</a>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtPassword", type: "password", required: true, placeHolder: "*********", columnDataName: "UserPassword")
+
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <div class="rememberme">
+                                                @Html.CtrlCheckbox(id: "ckbRememberme", type: "checkbox", label: "Recordarme?", classes: "ckbRememberme my-1", columnDataName: "RememberMe")
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row" style="margin: 0px auto;">
+                                        <div style="margin: 0px auto 10px;">
+                                            @Html.CtrlButton(viewName: "vLogin", type: "button", id: "btnLogin", label: "Ingresar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a>¿Olvidaste tu contraseña?</a>
+                                                </div>
+                                                <div class="col-12">
+                                                    <a>¿Necesitas ayuda para iniciar sesión?</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                             </div>
                         </form>
                     </div>
 
@@ -62,3 +74,4 @@
             </div>
         </div>
     </div>
+</div>

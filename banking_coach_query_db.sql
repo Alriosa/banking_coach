@@ -386,7 +386,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_RECRUITER_USER]
         @SP_Recruiter_Login VARCHAR(20),
         @SP_Recruiter_Password VARCHAR(50),
         @SP_User_Active_Status VARCHAR(1),
-        @SP_Finantial_Association VARCHAR(1)
+        @SP_Finantial_Association INT
 AS
         INSERT INTO [dbo].[TBL_RECRUITER_USER]
         VALUES

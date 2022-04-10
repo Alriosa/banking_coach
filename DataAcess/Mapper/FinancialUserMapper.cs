@@ -100,8 +100,8 @@ namespace DataAccess.Mapper
                 FinancialUserID = GetIntValue(row, DB_COL_FINANCIAL_USER_ID),
                 FinancialLogin = GetStringValue(row, DB_COL_FINANCIAL_USER),
                 FinancialPassword = GetStringValue(row, DB_COL_FINANCIAL_PASSWORD),
-                UserType = GetStringValue(row, DB_COL_FINANCIAL_STATUS),
-                UserActiveStatus = GetStringValue(row, DB_COL_USER_TYPE)
+                UserActiveStatus = GetStringValue(row, DB_COL_FINANCIAL_STATUS),
+                UserType = GetStringValue(row, DB_COL_USER_TYPE)
             };
 
             return financialUser;

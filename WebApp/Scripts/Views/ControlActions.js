@@ -130,18 +130,12 @@ function ControlActions() {
 	this.Login = function (service, data) {
 		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
-
-			
 			if(response.Data == "error") {
 				ctrlActions.ShowMessage('E', response.Message);
 			} else {
 				var data = response.Data;
 				ctrlActions.ShowMessage('I', response.Message);
 			}
-			
-
-		
-
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;
@@ -149,7 +143,23 @@ function ControlActions() {
 				ctrlActions.ShowMessage('E', data.ExceptionMessage);
 			})
 	};
+
+	this.GetById = function (service, callbackFunction) {
+		var jqxhr = $.get(this.GetUrlApiService(service), function (response) {
+			//var ctrlActions = new ControlActions();
+			//ctrlActions.ShowMessage('I', response.Message);//no trae respuesta, la respuesta es el objeto
+			callbackFunction(response.Data);// la diferencia es una B cuando debe ser una b
+		})
+			.fail(function (response) {
+				var data = response.responseJSON;
+				var ctrlActions = new ControlActions();
+				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+
+			})
+	}
 }
+
+
 
 //Custom jquery actions
 $.put = function (url, data, callback) {

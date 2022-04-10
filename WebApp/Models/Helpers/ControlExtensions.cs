@@ -80,6 +80,20 @@ namespace WebApp.Helpers
             return new HtmlString(ctrl.GetHtml());
         }
 
+        public static HtmlString CtrlDropDownSecond(this HtmlHelper html, string id, string title, string label, string name, string columnDataName)
+        {
+            var ctrl = new CtrlDropDownSecondModel
+            {
+                Id = id,
+                Title = title,
+                Label = label,
+                Name = name,
+                ColumnDataName = columnDataName
+            };
+
+            return new HtmlString(ctrl.GetHtml());
+        }
+
         public static HtmlString CtrlCheckbox(this HtmlHelper html, string id, string type, string label, string classes, string columnDataName = "")
         {
             var ctrl = new CtrlCheckboxModel

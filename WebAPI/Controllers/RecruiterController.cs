@@ -57,7 +57,7 @@ namespace WebAPI.Controllers
                 {
                     recruiter.UserActiveStatus = "1";
                     mng.Create(recruiter);
-                    apiResp.Message = "Entidad financiera creada";
+                    apiResp.Message = "Reclutador creado";
                 }
                 else
                 {

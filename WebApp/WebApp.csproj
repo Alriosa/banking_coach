@@ -154,6 +154,7 @@
     <Compile Include="Models\Controls\CtrlBaseModel.cs" />
     <Compile Include="Models\Controls\CtrlButtonModel.cs" />
     <Compile Include="Models\Controls\CtrlCheckboxModel.cs" />
+    <Compile Include="Models\Controls\CtrlDropDownSecondModel.cs" />
     <Compile Include="Models\Controls\CtrlInputModel.cs" />
     <Compile Include="Models\Controls\CtrlDropDownModel.cs" />
     <Compile Include="Models\Controls\CtrlInputSecondModel.cs" />
@@ -173,6 +174,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\Controls\CtrlCheckboxModel.html" />
     <Content Include="Models\Controls\CtrlDropDownModel.html" />
+    <Content Include="Models\Controls\CtrlDropDownSecondModel.html" />
     <Content Include="Models\Controls\CtrlInputModel.html" />
     <Content Include="Models\Controls\CtrlButtonModel.html" />
     <Content Include="Models\Controls\CtrlInputSecondModel.html" />

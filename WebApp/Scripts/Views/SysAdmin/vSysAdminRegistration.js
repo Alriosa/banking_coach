@@ -1,8 +1,5 @@
 ﻿function vSysAdminRegistration() {
-
-    this.service = 'sysadmin';
     this.ctrlActions = new ControlActions();
-
 
     this.Create = function () {
         var sysAdmin = {};
@@ -16,13 +13,10 @@
 
     this.ValidateInputs = function () {
         if ($("#frmSysAdminCreate").valid()) {
-            //this.Create();
-        } else {
-            console.log("hola");
-        }
-    }
-
-   
+            this.Create();
+            resetForm();
+        } 
+    }  
 }
 
 RulesValidateCreate = function () {
@@ -35,17 +29,18 @@ RulesValidateCreate = function () {
                 regexp.lastIndex = 0;
             return this.optional(element) || regexp.test(value);
         },
-        "Please check your input."
+        "Revisa los campos."
     );
 
     $("#frmSysAdminCreate").validate({
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
-
             txtLogin: {
                 required: "Ingrese un nombre de usuario",
-                regex: "Solo se permiten minusculas, numeros y el _"
+                minlength: "El nombre de usuario debe contener mínimo 6 caracteres",
+                maxlength: "El nombre de usuario debe contener máximo 10 caracteres",
+                regex: "Solo se permiten minusculas, numeros y el _",
             },
             txtPassword: {
                 required: "Ingrese una contraseña",
@@ -59,20 +54,18 @@ RulesValidateCreate = function () {
             },
         },
         rules: {
-            txtLogin: { required: true, regex: "/^[a-z0-9_]$/" },
+            txtLogin: { required: true, regex: /^[a-z0-9_]+$/, minlength: 6, maxlength: 10 },
             txtPassword: { required: true, minlength: 6, maxlength:20 },
             txtConfirmPassword: { required: true, equalTo: "#txtPassword" },
         }
     });
 }
 
-
 $("#txtLogin").rules("add", { pattern: "/^[a-z0-9_]{2,10}$/" })
 
 function resetForm() {
     $("#frmSysAdminCreate")[0].reset();
 }
-
 
 $(document).ready(function () {
     RulesValidateCreate();

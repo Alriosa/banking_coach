@@ -1,5 +1,5 @@
 ﻿@using WebApp.Helpers;
-<script src="~/Scripts/Views/SysAdmin/vSysAdminRegistration.js"></script>
+<script src="~/Scripts/Views/Recruiter/vRecruiterRegistration.js"></script>
 @{
     ViewBag.Title = "vRecruiterRegistration";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,8 +31,21 @@
                             <div class="col-sm-12 text-center">
                                 <div class="form-row ">
                                     <div class="col-lg-12">
+                                        @Html.CtrlDropDownSecond(id: "selectFinancial", title:"Entidad Financiera", label: "labelFinancial", name:"financialfinancial", columnDataName: "RecruiterLogin")
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
                                         @Html.CtrlInputSecond(id: "txtLogin", type: "text", required: true, placeHolder: "Nombre de Usuario", columnDataName: "RecruiterLogin")
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
                                         @Html.CtrlInputSecond(id: "txtPassword", type: "password", required: true, placeHolder: "*********", columnDataName: "RecruiterPassword")
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
                                         @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", required: true, placeHolder: "*********", columnDataName: "ConfirmPassword")
                                     </div>
                                 </div>
