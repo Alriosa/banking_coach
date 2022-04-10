@@ -35,6 +35,24 @@ namespace CoreAPI
             }
         }
 
+        public SysAdmin RetrieveByUserLogin(SysAdmin sysAdmin)
+        {
+            SysAdmin c = null;
+            try
+            {
+                c = crudSysAdmin.RetrieveByUserLogin<SysAdmin>(sysAdmin);
+                /* if (c == null)
+                 {
+                     throw new BussinessException(4);
+                 }*/
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+            }
+
+            return c;
+        }
         public List<SysAdmin> RetrieveAll()
         {
             return crudSysAdmin.RetrieveAll<SysAdmin>();

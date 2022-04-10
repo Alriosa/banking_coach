@@ -41,6 +41,16 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveUserLoginStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_FINANCIAL_USER" };
+
+            var financialUser = (FinancialUser)entity;
+            operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
+
+            return operation;
+        }
+
         public SqlOperation GetRetriveAllStatement()
         {
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_FINANCIAL_USER" };

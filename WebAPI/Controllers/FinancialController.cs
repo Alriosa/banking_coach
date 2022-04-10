@@ -8,6 +8,7 @@ using Exceptions;
 
 namespace WebAPI.Controllers
 {
+    [RoutePrefix("api/financial")]
     public class FinancialController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
@@ -20,6 +21,7 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
+        [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
             try
@@ -43,6 +45,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [Route("")]
         public IHttpActionResult Post(FinancialUser financial)
         {
             try
@@ -74,6 +77,32 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("getUser/{id}")]
+        public IHttpActionResult GetUser(string id)
+        {
+            try
+            {
+                var mng = new FinancialUserManager();
+                var financial = new FinancialUser
+                {
+                    FinancialLogin = id
+                };
+
+                financial = mng.RetrieveByUserLogin(financial);
+                apiResp = new ApiResponse
+                {
+                    Data = financial
+                };
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [Route("")]
         public IHttpActionResult Put(FinancialUser financial)
         {
             try
@@ -94,6 +123,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [Route("")]
         public IHttpActionResult Delete(FinancialUser financial)
         {
             try

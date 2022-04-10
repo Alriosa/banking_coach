@@ -34,6 +34,7 @@ namespace CoreAPI
             }
         }
 
+
         public List<Student> RetrieveAll()
         {
             return crudStudent.RetrieveAll<Student>();
@@ -53,6 +54,25 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 ExceptionManager.GetInstance().Process(ex);
+            }
+
+            return c;
+        }
+
+        public Student RetrieveByUserLogin(Student student)
+        {
+            Student c = null;
+            try
+            {
+                c = crudStudent.RetrieveByUserLogin<Student>(student);
+                /* if (c == null)
+                 {
+                     throw new BussinessException(4);
+                 }*/
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
             }
 
             return c;

@@ -45,6 +45,16 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveUserLoginStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_RECRUITER_USER" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
+
+            return operation;
+        }
+
         public SqlOperation GetRetriveAllStatement()
         {
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_RECRUITER_USER" };

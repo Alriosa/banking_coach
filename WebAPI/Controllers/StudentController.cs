@@ -11,6 +11,7 @@ namespace WebAPI.Controllers
     public class StudentController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
+        [Route("")]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -20,6 +21,7 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
+        [Route("{id}")]
         public IHttpActionResult Get(string id)
         {
             try
@@ -42,6 +44,35 @@ namespace WebAPI.Controllers
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
+
+
+        [HttpGet]
+        [Route("getUser/{id}")]
+        public IHttpActionResult GetUser(string id)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                var student = new Student
+                {
+                    Student_Login = id
+                };
+
+                student = mng.RetrieveByUserLogin(student);
+                apiResp = new ApiResponse
+                {
+                    Data = student
+                };
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+
+        [Route("")]
         public IHttpActionResult Post(Student student)
         {
             try
@@ -78,6 +109,7 @@ namespace WebAPI.Controllers
         }
 
 
+        [Route("")]
         public IHttpActionResult Put(Student student)
         {
             try
@@ -98,6 +130,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [Route("")]
         public IHttpActionResult Delete(Student student)
         {
             try

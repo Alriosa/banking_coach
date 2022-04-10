@@ -90,6 +90,15 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveUserLoginStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_STUDENT_BY_USER" };
+
+            var student = (Student)entity;
+            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.Student_Login);
+
+            return operation;
+        }
         public SqlOperation GetRetriveAllStatement()
         {
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_STUDENT" };

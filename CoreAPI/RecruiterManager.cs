@@ -59,6 +59,26 @@ namespace CoreAPI
             return c;
         }
 
+
+        public Recruiter RetrieveByUserLogin(Recruiter recruiter)
+        {
+            Recruiter c = null;
+            try
+            {
+                c = crudRecruiter.RetrieveByUserLogin<Recruiter>(recruiter);
+               /* if (c == null)
+                {
+                    throw new BussinessException(4);
+                }*/
+            }
+            catch (Exception ex)
+            {
+               //s ExceptionManager.GetInstance().Process(ex);
+            }
+
+            return c;
+        }
+
         public void Update(Recruiter recruiter)
         {
             crudRecruiter.Update(recruiter);

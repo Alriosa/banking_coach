@@ -67,5 +67,10 @@ namespace DataAccess.Crud
             var customer = (Customer)entity;
             dao.ExecuteProcedure(mapper.GetDeleteStatement(customer));
         }
+
+        public override T RetrieveByUserLogin<T>(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

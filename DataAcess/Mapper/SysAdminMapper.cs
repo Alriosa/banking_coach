@@ -41,6 +41,16 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveUserLoginStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_ADMIN_USER" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+
+            return operation;
+        }
+
         public SqlOperation GetRetriveAllStatement()
         {
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_ADMIN_USER" };

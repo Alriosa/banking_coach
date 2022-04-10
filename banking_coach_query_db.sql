@@ -329,6 +329,14 @@ AS
         SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID = @SP_Admin_ID;
 GO
 
+
+---SELECT ADMIN BY ID
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER]
+        @SP_Admin_Login VARCHAR(20)
+AS
+        SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Admin_Login = @SP_Admin_Login;
+GO
+
 ---SELECT ALL ADMINS
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_ADMIN_USER]
 AS
@@ -337,39 +345,38 @@ GO
 
 ---UPDATE ADMIN STATUS
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_STATUS]
-        @SP_Admin_User VARCHAR(20),
+        @SP_Admin_Login VARCHAR(20),
         @SP_Admin_Status VARCHAR(1)
 AS
         UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
-                Admin_Login=@SP_Admin_User,
                 User_Active_Status=@SP_Admin_Status
-                WHERE Admin_Login = @SP_Admin_User;
+                WHERE Admin_Login = @SP_Admin_Login;
 GO
 
 ---UPDATE ADMIN PASSWORD
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_PASSWORD]
-        @SP_Admin_User VARCHAR(20),
+        @SP_Admin_Login VARCHAR(20),
         @SP_Admin_Password VARCHAR(50)
 AS
         UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
                 Admin_Password=@SP_Admin_Password
-                WHERE Admin_Login = @SP_Admin_User;                
+                WHERE Admin_Login = @SP_Admin_Login;                
 GO
 
 ---DELETE ADMIN
 CREATE PROCEDURE [dbo].[SP_DELETE_TBL_ADMIN_USER]
-        @SP_Admin_User VARCHAR(20)
+        @SP_Admin_Login VARCHAR(20)
 AS	
-        DELETE FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Admin_Login = @SP_Admin_User;
+        DELETE FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Admin_Login = @SP_Admin_Login;
 GO
 
 --SOFT DELETE ADMIN
 CREATE PROCEDURE [dbo].[SP_SOFT_DELETE_TBL_ADMIN_USER]
-        @SP_Admin_User VARCHAR(20)
+        @SP_Admin_Login VARCHAR(20)
 AS	
 		UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
 				 User_Active_Status ='0'
-				 WHERE Admin_Login = @SP_Admin_User; 
+				 WHERE Admin_Login = @SP_Admin_Login; 
 GO
 
 /**
@@ -471,6 +478,13 @@ AS
         SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User_ID = @SP_Financial_User_ID;
 GO
 
+
+--- SELECT BY FINANCIAL USER LOGIN
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER]
+        @SP_Financial_User VARCHAR(20)
+AS
+        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Financial_User;
+GO
 
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_FINANCIAL_USER]
 AS

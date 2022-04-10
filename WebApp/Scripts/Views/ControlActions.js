@@ -127,15 +127,33 @@ function ControlActions() {
 			})
 	};
 
-	this.Login = function (service, data) {
+	this.Login = function (service, data, callBackFunction) {
 		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
 			if(response.Data == "error") {
 				ctrlActions.ShowMessage('E', response.Message);
 			} else {
 				var data = response.Data;
+
 				ctrlActions.ShowMessage('I', response.Message);
+
 			}
+			callBackFunction(data);
+
+		})
+			.fail(function (response) {
+				var data = response.responseJSON;
+				var ctrlActions = new ControlActions();
+				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+			})
+	};
+
+
+	this.LoginByUser = function (service, data, callBackFunction) {
+		var jqxhr = $.get(this.GetUrlApiService(service), data, function (response) {
+			
+			var data = response.Data;
+			sessionStorage.setItem('user', JSON.stringify(data));
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;

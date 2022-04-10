@@ -86,5 +86,10 @@ namespace DataAccess.Crud
                }
             return response;
         }
+
+        public override T RetrieveByUserLogin<T>(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

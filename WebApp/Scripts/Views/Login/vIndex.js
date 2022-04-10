@@ -6,14 +6,40 @@
     this.Login = function () {
         var data = {};
         data = this.ctrlActions.GetDataForm('frmLogin');
-        this.ctrlActions.Login(this.service + "/login", data);
+        this.ctrlActions.Login(this.service + "/login", data, function (response) {
+            var control = new ControlActions();
+            var userLogin = response["UserLogin"];
+            switch (response["UserType"]) {
+                case "1":
+                    control.LoginByUser("sysadmin/getUser/" + userLogin, this.redirection);
+                    break;
+                case "2":
+                    control.LoginByUser("student/getUser/" + userLogin, this.redirection);
+                    break;
+                case "3":
+                    control.LoginByUser("recruiter/getUser/" + userLogin, this.redirection);
+                    break;
+                case "4":
+                    control.LoginByUser("financial/getUser/" + userLogin, this.redirection);
+                    break;
+                default:
+                    console.log("404");
+                    break;
+            }
+        });
     }
 
     this.ValidateInputs = function () {
         if ($("#frmLogin").valid()) {
-            //this.Login();
+            this.Login();
+            
         }
     }
+
+    this.redirection = function () {
+        window.location.href = '/Student/vStudentList';
+    }
+
     
    
 }

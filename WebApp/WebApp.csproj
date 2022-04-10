@@ -165,7 +165,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\imgs\background-bottom.png" />
+    <Content Include="Content\imgs\background-top.png" />
+    <Content Include="Content\imgs\background.png" />
     <Content Include="Content\imgs\background2.jpg" />
+    <Content Include="Content\imgs\Empleo.jpg" />
     <Content Include="Content\index.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="favicon.ico" />
