@@ -13,7 +13,7 @@
 
     this.ValidarInputs = function () {
         if ($("#frmLogin").valid()) {
-            this.Login();
+            //this.Login();
         }
     }
     

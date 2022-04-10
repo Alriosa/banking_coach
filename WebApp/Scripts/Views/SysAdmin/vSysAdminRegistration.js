@@ -16,7 +16,9 @@
 
     this.ValidateInputs = function () {
         if ($("#frmSysAdminCreate").valid()) {
-            this.Create();
+            //this.Create();
+        } else {
+            console.log("hola");
         }
     }
 
@@ -24,24 +26,48 @@
 }
 
 RulesValidateCreate = function () {
-    $("#frmSysAdminCreate").submit(function (e) {
-        e.preventDefault();
-    }).validate({
-        ignore: [],
+    $.validator.addMethod(
+        "regex",
+        function (value, element, regexp) {
+            if (regexp.constructor != RegExp)
+                regexp = new RegExp(regexp);
+            else if (regexp.global)
+                regexp.lastIndex = 0;
+            return this.optional(element) || regexp.test(value);
+        },
+        "Please check your input."
+    );
+
+    $("#frmSysAdminCreate").validate({
         lang: 'es',
         errorClass: "is-invalid",
-        rules: {
-            txtLogin: { required: true },
-            txtPassword: { required: true },
-            txtConfirmPassword: { required: true, equalTo: "#txtPassword" },
+        messages: {
+
+            txtLogin: {
+                required: "Ingrese un nombre de usuario",
+                regex: "Solo se permiten minusculas, numeros y el _"
+            },
+            txtPassword: {
+                required: "Ingrese una contraseña",
+                minlength: "La contraseña debe de tener mínimo 6 caracteres",
+                maxlength: "La contraseña debe de tener máximo 20 caracteres",
+            },
+
+            txtConfirmPassword: {
+                required: "Ingrese una contraseña",
+                equalTo: "No coinciden las contraseñas"
+            },
         },
-        errorPlacement: function (error, element) {
-            element: "div";
-            $(error).addClass('input-group mb-3');
-            error.css({ 'padding-left': '10px', 'margin-right': '20px', 'padding-bottom': '2px', 'color': 'red' });
+        rules: {
+            txtLogin: { required: true, regex: "/^[a-z0-9_]$/" },
+            txtPassword: { required: true, minlength: 6, maxlength:20 },
+            txtConfirmPassword: { required: true, equalTo: "#txtPassword" },
         }
     });
 }
+
+
+$("#txtLogin").rules("add", { pattern: "/^[a-z0-9_]{2,10}$/" })
 
 function resetForm() {
     $("#frmSysAdminCreate")[0].reset();

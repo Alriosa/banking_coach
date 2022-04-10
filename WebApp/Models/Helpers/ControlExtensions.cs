@@ -39,14 +39,15 @@ namespace WebApp.Helpers
         }
 
 
-        public static HtmlString CtrlInputSecond(this HtmlHelper html, string id, string type, string placeHolder = "", string columnDataName = "")
+        public static HtmlString CtrlInputSecond(this HtmlHelper html, string id, string type, bool required, string placeHolder = "", string columnDataName = "")
         {
             var ctrl = new CtrlInputSecondModel
             {
                 Id = id,
                 Type = type,
                 PlaceHolder = placeHolder,
-                ColumnDataName = columnDataName
+                ColumnDataName = columnDataName,
+                Required = required
             };
 
             return new HtmlString(ctrl.GetHtml());

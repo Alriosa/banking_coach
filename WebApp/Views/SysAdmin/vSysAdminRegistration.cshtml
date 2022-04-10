@@ -27,20 +27,30 @@
 
                             <h1 class="form-title">REGISTRA A UN ADMINISTRADOR</h1>
                         </div>
-                        <form id="frmSysAdminCreate" class="form frmSysAdminCreate">
-                            <div class="col-sm-12 text-center">
-                                <div class="form-row ">
-                                    <div class="col-lg-12">
-                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "AdminLogin")
-                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "AdminPassword")
-                                        @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", placeHolder: "*********", columnDataName: "")
+                        <form id="frmSysAdminCreate" class="form frmSysAdminCreate"action="" method="post">
+                            <div class="row align-content-sm-center">
 
+                                <div class="col-sm-12">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtLogin", type: "text", required: true, placeHolder: "Nombre de Usuario", columnDataName: "AdminLogin")
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-row" style="margin: 0px auto;">
-                                <div style="margin: 0px auto 10px;">
-                                    @Html.CtrlButton(viewName: "vSysAdminRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtPassword", type: "password", required: true, placeHolder: "*********", columnDataName: "AdminPassword")
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                             @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", required: true, placeHolder: "*********", columnDataName: "")
+                                         </div>
+                                    </div>
+                                    <div class="form-row" style="margin: 10px auto;">
+                                        <div style="margin: 0px auto 10px;">
+                                            @Html.CtrlButton(viewName: "vSysAdminRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
