@@ -45,6 +45,7 @@
     <Compile Include="Crud\CustomerCrudFactory.cs" />
     <Compile Include="Crud\CrudFactory.cs" />
     <Compile Include="Crud\FinancialUserCrudFactory.cs" />
+    <Compile Include="Crud\ListCrudFactory.cs" />
     <Compile Include="Crud\RecruiterCrudFactory.cs" />
     <Compile Include="Crud\SecurityCrudFactory.cs" />
     <Compile Include="Crud\StudentCrudFactory.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Mapper\FinancialUserMapper.cs" />
     <Compile Include="Mapper\IObjectMapper.cs" />
     <Compile Include="Mapper\ISqlStaments.cs" />
+    <Compile Include="Mapper\ListMapper.cs" />
     <Compile Include="Mapper\RecruiterMapper.cs" />
     <Compile Include="Mapper\SecurityMapper.cs" />
     <Compile Include="Mapper\StudentMapper.cs" />

@@ -76,6 +76,52 @@ function resetForm() {
 
 
 $(document).ready(function () {
+
+    $(function () {
+        var showCanton = function (selectedProvince) {
+            $('#txtCanton option').hide();
+          //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
+            //$('#txtCanton').find(`option`).hide(); // hide all
+
+            $('#txtCanton').find(`option[data-parent=${selectedProvince}]`).show();
+
+            //set default value
+            var defaultCanton = "Seleccione una provincia";
+          //  $('#txtCanton').val(defaultCanton);
+            $("#txtCanton").val($("#txtCanton option:first").val());
+
+        };
+
+        var showDistrict = function (selectedCanton) {
+            $('#txtDistrict option').hide();
+            //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
+            $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
+            //set default value
+            var defaultDistrito = "Seleccione un cantón";
+            //$('#txtDistrict').val(defaultDistrito);
+            $("#txtDistrict").val($("#txtDistrict option:first").val());
+
+        };
+
+        //set default provincia
+        var province = $('#txtProvince').val();
+        showCanton(province);
+        $('#txtProvince').change(function () {
+            showCanton($(this).val());
+        });
+
+        //set default canton
+        var canton = $('#txtCanton').val();
+        showDistrict(canton);
+        $('#txtCanton').change(function () {
+            showDistrict($(this).val());
+        });
+
+        $('#txtDistrict').change(function () {
+
+        });
+    });
+
     RulesValidateCreate();
 });
 

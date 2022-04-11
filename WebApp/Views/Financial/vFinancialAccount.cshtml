@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "vFinancialAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mi Cuenta</h2>
+
+<h4 id="P_NombreUsuario">>Nombre de usuario</h4>
+
+
+
+<div class="dashboard-heading d-flex justify-content-center">
+    <h2>Cambiar <span>Contraseña</span></h2>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="custom-form custom-form-fields text-center col-lg-6">
+        <h3>Cambiar Contraseña</h3>
+        <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
+        <form id="frmChangePassword" method="get" action="">
+            @Html.CtrlInput(id: "txtOldPassword", type: "password", label: "Contraseña actual",
+            placeHolder: "", columnDataName: "OldPassword")
+
+            @Html.CtrlInput(id: "txtNewPassword", type: "password", label: "Nueva contraseña",
+            placeHolder: "", columnDataName: "NewPassowrd")
+
+            @Html.CtrlInput(id: "txtConfirmNewPassword", type: "password", label: "Confirmar nueva contraseña",
+            placeHolder: "", columnDataName: "")
+
+            @Html.CtrlButton(viewName: "vFinancialAccount", id: "btnChangePassword", type: "button",
+                label: "Cambiar Contraseña", onClickFunction: "ValidateInputs", buttonType: "orange")
+        </form>
+    </div><!-- end custom-form -->
+</div><!-- end form-content -->
