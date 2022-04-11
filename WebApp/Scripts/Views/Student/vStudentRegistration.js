@@ -35,29 +35,7 @@ this.RulesValidateCreate = function () {
         lang: 'es',
         errorClass: "is-invalid",
         rules: {
-            txtBankingStudent: { required: true },
-            textEntryDate: { required: true },
-            textFirstName: { required: true },
-            textSecondName: { required: true },
-            textLastName: { required: true },
-            textSecondLastName: { required: true },
-            textIdType: { required: true },
-            textIdentificationNumber: { required: true },
-            textBirthdate: { required: true },
-            textGender: { required: true },
-            textProvince: { required: true },
-            textCanton: { required: true },
-            textDistrict: { required: true },
-            textStudent_Login: { required: true },
-            textStudent_Password: { required: true },
-            textStudent_Password_Confirm: { required: true, equalTo: "#textStudent_Password" },
-            textLaboralStatus: { required: true },
-            textWork_Address: { required: true },
-            textEmail: { required: true },
-            textPrimaryPhone: { required: true },
-            textSecondaryPhone: { required: true },
-            textLaboralExperience: { required: true },
-            textDistrict: { required: true },
+           
         },
         errorPlacement: function (error, element) {
             element: "div";
@@ -65,6 +43,72 @@ this.RulesValidateCreate = function () {
             error.css({ 'padding-left': '10px', 'margin-right': '20px', 'padding-bottom': '2px', 'color': 'red' });
 
         }
+    });
+
+
+    $.validator.addMethod(
+        "regex",
+        function (value, element, regexp) {
+            if (regexp.constructor != RegExp)
+                regexp = new RegExp(regexp);
+            else if (regexp.global)
+                regexp.lastIndex = 0;
+            return this.optional(element) || regexp.test(value);
+        },
+        "Revisa los campos."
+    );
+
+    $("#frmRecruiterCreate").validate({
+        lang: 'es',
+        errorClass: "is-invalid",
+        messages: {
+            txtEntryDate: {
+                required: "Debe ingresar una fecha de ingreso"
+            },
+            txtFirstName: {
+                required: "Debe ingresar el primer nombre"
+            },
+            txtStudentLogin: {
+                required: "Ingrese un nombre de usuario",
+                minlength: "El nombre de usuario debe contener mínimo 6 caracteres",
+                maxlength: "El nombre de usuario debe contener máximo 10 caracteres",
+                regex: "Solo se permiten minusculas, numeros y el _",
+            },
+            txtPassword: {
+                required: "Ingrese una contraseña",
+                minlength: "La contraseña debe de tener mínimo 6 caracteres",
+                maxlength: "La contraseña debe de tener máximo 20 caracteres",
+            },
+
+ 
+            txtConfirmPassword: {
+                required: "Ingrese una contraseña",
+                equalTo: "No coinciden las contraseñas"
+            },
+        },
+        rules: {
+            txtBankingStudent: { required: true },
+            txtEntryDate: { required: true },
+            txtFirstName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ]+$/ },
+            txtSecondName: { regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ]+$/ },
+            txtLastName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ]+$/},
+            txtSecondLastName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ]+$/ },
+            txtIdType: { required: true },
+            txtIdentificationNumber: { required: true },
+            txtBirthdate: { required: true },
+            txtGender: { required: true },
+            txtProvince: { required: true, notEqual: "0" },
+            txtCanton: { required: true, notEqual: "0" },
+            txtDistrict: { required: true, notEqual: "0" },
+            txtStudentLogin: { required: true, regex: /^[a-z0-9_]+$/, minlength: 6, maxlength: 10 },
+            txtPassword: { required: true, minlength: 6, maxlength: 20 },
+            txtConfirmPassword: { required: true, equalTo: "#txtPassword" },
+            txtLaboralStatus: { required: true },
+            txtWorkAddress: { required: true },
+            txtEmail: { required: true, email: true },
+            txtPrimaryPhone: { required: true, digits: true },
+            txtLaboralExperience: { required: true },
+        },
     });
 }
 

@@ -9,7 +9,7 @@
 
 <div class="home">
     <div class="container">
-        <div class="row text-center justify-content-between">
+        <div class="row justify-content-between">
             <div class="col-lg-5 col-sm-11">
                 <div class=" text-box">
                     <h1 class="home-title">BOLSA DE EMPLEO</h1>
@@ -31,15 +31,42 @@
                         </div>
                         <form id="frmStudentCreate" class="form frmStudentCreate">
                             <div class="row align-content-sm-center">
-                                <div class="col-sm-12 text-center">
+                                <div class="col-sm-12">
                                     <div class="form-row ">
                                         <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtBankingStudent", type: "date", required: true, placeHolder: "Estudiante del Banco", columnDataName: "BankingStudent")
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelBankingStudent">Estudiante del banco</label>
+                                                </div>
+                                                <select class="form-control" id="txtBankingStudent" name="BankingStudent" ColumnDataName="BankingStudent" required>
+                                                    <option value="S">Sí</option>
+                                                    <option value="N">No</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row ">
                                         <div class="col-lg-12">
+                                            <label>Fecha de ingreso</label>
                                             @Html.CtrlInputSecond(id: "txtEntryDate", type: "date", required: true, placeHolder: "Fecha de Registro", columnDataName: "EntryDate")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelIdType">Tipo de identificación</label>
+                                                </div>
+                                                <select class="form-control" id="txtIdType" name="IdType" ColumnDataName="IdType" required>
+                                                    <option value="N">Nacional</option>
+                                                    <option value="P">Pasaporte</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtIdentificationNumber", type: "text", required: true, placeHolder: "Número de identificación", columnDataName: "IdentificationNumber")
                                         </div>
                                     </div>
                                     <div class="form-row ">
@@ -62,24 +89,63 @@
                                             @Html.CtrlInputSecond(id: "txtSecondLastName", type: "text", required: true, placeHolder: "Segundo Apellido", columnDataName: "SecondLastName")
                                         </div>
                                     </div>
+
                                     <div class="form-row ">
                                         <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtIdType", type: "text", required: true, placeHolder: "Primer Nombre", columnDataName: "IdType")
-                                        </div>
-                                    </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtIdentificationNumber", type: "text", required: true, placeHolder: "Número de identficaciÓN", columnDataName: "IdentificationNumber")
-                                        </div>
-                                    </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
+                                            <label>Fecha de Nacimiento</label>
                                             @Html.CtrlInputSecond(id: "txtBirthdate", type: "date", required: true, placeHolder: "Fecha de Nacimiento", columnDataName: "Birthdate")
                                         </div>
                                     </div>
                                     <div class="form-row ">
                                         <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtGender", type: "text", required: true, placeHolder: "Género", columnDataName: "Gender")
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelGender">Género</label>
+                                                </div>
+                                                <select class="form-control" id="txtGender" name="Gender" ColumnDataName="Gender" required>
+                                                    <option value="F">Femenino</option>
+                                                    <option value="M">Masculino</option>
+                                                    <option value="O">Otro</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtPrimaryPhone", type: "text", required: true, placeHolder: "Número de Teléfono", columnDataName: "PrimaryPhone")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtSecondaryPhone", type: "text", required: true, placeHolder: "Número de Teléfono Secundario", columnDataName: "SecondaryPhone")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtEmail", type: "email", required: true, placeHolder: "Email", columnDataName: "Email")
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtLaboralExperience", type: "text", required: true, placeHolder: "Experiencia Laboral", columnDataName: "LaboralExperience")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtLaboralStatus", type: "text", required: true, placeHolder: "Estado Laboral", columnDataName: "LaboralStatus")
+                                            <div class="col-lg-12">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01" id="labelLaboralStatus">Estado Laboral</label>
+                                                    </div>
+                                                    <select class="form-control" id="txtLaboralStatus" name="LaboralStatus" ColumnDataName="LaboralStatus" required>
+                                                        <option value="S">Sí</option>
+                                                        <option value="N">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row ">
@@ -99,7 +165,7 @@
                                     </div>
                                     <div class="form-row ">
                                         <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtEmail", type: "email", required: true, placeHolder: "Email", columnDataName: "Email")
+                                            @Html.CtrlInputSecond(id: "txtWorkAddress", type: "text", required: true, placeHolder: "Dirección del Trabajo", columnDataName: "Work_Address")
                                         </div>
                                     </div>
                                     <div class="form-row ">
@@ -117,31 +183,7 @@
                                             @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", required: true, placeHolder: "*********", columnDataName: "")
                                         </div>
                                     </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtLaboralStatus", type: "text", required: true, placeHolder: "Estado Laboral", columnDataName: "LaboralStatus")
-                                        </div>
-                                    </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtWork_Address", type: "text", required: true, placeHolder: "Dirección del Trabajo", columnDataName: "Work_Address")
-                                        </div>
-                                    </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtPrimaryPhone", type: "text", required: true, placeHolder: "Número de Teléfono", columnDataName: "PrimaryPhone")
-                                        </div>
-                                    </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtSecondaryPhone", type: "text", required: true, placeHolder: "Número de Teléfono Secundario", columnDataName: "SecondaryPhone")
-                                        </div>
-                                    </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtLaboralExperience", type: "text", required: true, placeHolder: "Experiencia Laboral", columnDataName: "LaboralExperience")
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="form-row" style="margin: 0px auto;">
                                     <div style="margin: 0px auto 10px;">
