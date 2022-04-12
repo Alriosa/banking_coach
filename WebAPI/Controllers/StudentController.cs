@@ -8,6 +8,7 @@ using Exceptions;
 
 namespace WebAPI.Controllers
 {
+    [RoutePrefix ("api/student")]
     public class StudentController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
@@ -104,6 +105,7 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
+                bex.AppMessage.Message = "Hubo un error al registrar al usaurio";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }

@@ -57,7 +57,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_SECOND_PHONE,student.SecondaryPhone);
             operation.AddVarcharParam(DB_COL_EMAIL,student.Email);
             operation.AddVarcharParam(DB_COL_LABORAL_STATUS,student.LaboralStatus);
-            operation.AddVarcharParam(DB_COL_WORK_ADDRESS,student.Work_Address);
+            operation.AddVarcharParam(DB_COL_WORK_ADDRESS,student.WorkAddress);
             operation.AddVarcharParam(DB_COL_LABORAL_EXPERIENCE,student.LaboralExperience);
             operation.AddVarcharParam(DB_COL_STUDENT_LOGIN,student.Student_Login);
             operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD,student.Student_Password);
@@ -126,7 +126,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_SECOND_PHONE, student.SecondaryPhone);
             operation.AddVarcharParam(DB_COL_EMAIL, student.Email);
             operation.AddVarcharParam(DB_COL_LABORAL_STATUS, student.LaboralStatus);
-            operation.AddVarcharParam(DB_COL_WORK_ADDRESS, student.Work_Address);
+            operation.AddVarcharParam(DB_COL_WORK_ADDRESS, student.WorkAddress);
             operation.AddVarcharParam(DB_COL_LABORAL_EXPERIENCE, student.LaboralExperience);
             operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.Student_Login);
             operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.Student_Password);
@@ -202,7 +202,7 @@ namespace DataAccess.Mapper
                 Student_Login = GetStringValue(row,DB_COL_STUDENT_LOGIN),
                 Student_Password = GetStringValue(row,DB_COL_STUDENT_PASSWORD),
                 LaboralStatus = GetStringValue(row,DB_COL_LABORAL_STATUS),
-                Work_Address = GetStringValue(row,DB_COL_WORK_ADDRESS),
+                WorkAddress = GetStringValue(row,DB_COL_WORK_ADDRESS),
                 Email = GetStringValue(row,DB_COL_EMAIL),
                 LaboralExperience = GetStringValue(row,DB_COL_LABORAL_EXPERIENCE),
                 PrimaryPhone = GetStringValue(row,DB_COL_PRIMARY_PHONE),

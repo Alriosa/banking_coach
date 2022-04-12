@@ -1,10 +1,18 @@
 ﻿function vStudentRegistration() {
+
+    this.ctrlActions = new ControlActions();
+
     this.Create = function () {
 
         var studentData = {};
         studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
+
+
+
         this.ctrlActions.PostToAPI('student', studentData, function () {
             resetForm();
+            //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+
         });
     }
 
@@ -17,6 +25,10 @@
 }
 
 this.RulesValidateCreate = function () {
+
+    $.validator.addMethod("notEqual", function (value, element, param) {
+        return this.optional(element) || value != param;
+    }),
 
     $.validator.addMethod(
         "regex",
@@ -31,42 +43,53 @@ this.RulesValidateCreate = function () {
     );
 
     $("#frmStudentCreate").validate({
-        ignore: [],
-        lang: 'es',
-        errorClass: "is-invalid",
-        rules: {
-           
-        },
-        errorPlacement: function (error, element) {
-            element: "div";
-            $(error).addClass('input-group mb-3');
-            error.css({ 'padding-left': '10px', 'margin-right': '20px', 'padding-bottom': '2px', 'color': 'red' });
-
-        }
-    });
-
-
-    $.validator.addMethod(
-        "regex",
-        function (value, element, regexp) {
-            if (regexp.constructor != RegExp)
-                regexp = new RegExp(regexp);
-            else if (regexp.global)
-                regexp.lastIndex = 0;
-            return this.optional(element) || regexp.test(value);
-        },
-        "Revisa los campos."
-    );
-
-    $("#frmRecruiterCreate").validate({
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
             txtEntryDate: {
-                required: "Debe ingresar una fecha de ingreso"
+                required: "Debe ingresar una fecha de ingreso",
+                regex: "No se permiten números ni caracteres especiales",
             },
             txtFirstName: {
-                required: "Debe ingresar el primer nombre"
+                regex: "No se permiten números ni caracteres especiales",
+            },
+            txtFirstName: {
+                required: "Debe ingresar el primer nombre",
+                regex: "No se permiten números ni caracteres especiales",
+            },
+            txtLastName: {
+                required: "Debe ingresar el primer apellido",
+                regex: "No se permiten números ni caracteres especiales"
+            },
+            txtSecondLastName: {
+                required: "Debe ingresar el segundo apellido",
+                regex: "No se permiten números ni caracteres especiales"
+            },
+            txtIdentificationNumber: {
+                required: "Debe ingresar el número de identificación"
+            },
+            txtBirthdate: {
+                required: "Debe ingresar la fecha de nacimiento"
+            },
+            txtLaboralStatus: {
+                required: "Debe ingresar el estado laboral"
+            },
+            txtWorkAddress: {
+                required: "Debe ingresar la dirección del trabajo"
+            },
+            txtEmail: {
+                required: "Debe ingresar el correo electrónico",
+                email: "Debe ingresar un correo electrónico con el formato correcto"
+            },
+            txtPrimaryPhone: {
+                required: "Debe ingresar el número de teléfono principal",
+                digits: "Debe ingresar digitos"
+            },
+            txtSecondaryPhone: {
+                digits: "Debe ingresar digitos"
+            },
+            txtLaboralExperience: {
+                required: "Debe ingresar la experiencia laboral"
             },
             txtStudentLogin: {
                 required: "Ingrese un nombre de usuario",
@@ -89,10 +112,10 @@ this.RulesValidateCreate = function () {
         rules: {
             txtBankingStudent: { required: true },
             txtEntryDate: { required: true },
-            txtFirstName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ]+$/ },
-            txtSecondName: { regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ]+$/ },
-            txtLastName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ]+$/},
-            txtSecondLastName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ]+$/ },
+            txtFirstName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ ]+$/ },
+            txtSecondName: { regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ ]+$/ },
+            txtLastName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ ]+$/},
+            txtSecondLastName: { required: true, regex: /^[a-zA-ZáäéëíïóöúüñÑÁÄÉËÍÏÓÖÚÜ ]+$/ },
             txtIdType: { required: true },
             txtIdentificationNumber: { required: true },
             txtBirthdate: { required: true },
@@ -107,6 +130,7 @@ this.RulesValidateCreate = function () {
             txtWorkAddress: { required: true },
             txtEmail: { required: true, email: true },
             txtPrimaryPhone: { required: true, digits: true },
+            txtSecondaryPhone: { digits: true  },
             txtLaboralExperience: { required: true },
         },
     });

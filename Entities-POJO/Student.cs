@@ -27,7 +27,7 @@ namespace Entities_POJO
         public string Student_Login { get; set; }
         public string Student_Password { get; set; }
         public string LaboralStatus { get; set; }
-        public string Work_Address { get; set; }
+        public string WorkAddress { get; set; }
         public string Email { get; set; }
         public string PrimaryPhone { get; set; }
         public string SecondaryPhone { get; set; }
@@ -52,18 +52,18 @@ namespace Entities_POJO
             IdentificationNumber = identificationNumber;
             Birthdate = birthdate;
             Gender = gender;
+            Province = province;
             Canton = canton;
             District = district;
             UserType = userType;
             Student_Login = studentLogin;
             Student_Password = studentPassword;
             LaboralStatus = laboralStatus;
-            Work_Address = workAddress;
+            WorkAddress = workAddress;
             Email = email;
             LaboralExperience = laboralExperience;
             PrimaryPhone = primaryPhone;
             SecondaryPhone = secondaryPhone;
-            Province = province;
         }
 
        
