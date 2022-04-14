@@ -62,11 +62,8 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_FINANCIAL_USER_STATUS" };
 
             var financialUser = (FinancialUser)entity;
-            operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
             operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
             operation.AddVarcharParam(DB_COL_FINANCIAL_PASSWORD, financialUser.FinancialPassword);
-            operation.AddVarcharParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, financialUser.UserType);
 
             return operation;
         }

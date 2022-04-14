@@ -905,7 +905,7 @@ AS
         INSERT INTO [dbo].[TBL_SYS_ADMIN_USER]
         VALUES
                 (@SP_Admin_Login,
-                @SP_Admin_Password,
+                HashBytes('MD5',@SP_Admin_Password),
                 @SP_User_Active_Status,
 				'1');
 GO
@@ -948,7 +948,7 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_PASSWORD]
         @SP_Admin_Password VARCHAR(50)
 AS
         UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
-                Admin_Password=@SP_Admin_Password
+                Admin_Password= HashBytes('MD5', @SP_Admin_Password)
                 WHERE Admin_Login = @SP_Admin_Login;                
 GO
 
@@ -987,7 +987,7 @@ AS
         INSERT INTO [dbo].[TBL_RECRUITER_USER]
         VALUES
                 (@SP_Recruiter_Login,
-                @SP_Recruiter_Password,
+                HashBytes('MD5',@SP_Recruiter_Password),
                 @SP_User_Active_Status,
 				'3',
 				@SP_Finantial_Association
@@ -1023,8 +1023,7 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_PASSWORD]
         @SP_Recruiter_Password VARCHAR(50)
 AS
         UPDATE [dbo].[TBL_RECRUITER_USER] SET
-                Recruiter_Login=@SP_Recruiter_Login,
-                Recruiter_Password=@SP_Recruiter_Password
+                Recruiter_Password=HashBytes('MD5',@SP_Recruiter_Password)
                 WHERE Recruiter_Login = @SP_Recruiter_Login;
 GO
 
@@ -1055,7 +1054,7 @@ AS
         INSERT INTO [dbo].[TBL_FINANCIAL_USER]
         VALUES
                 (@SP_Financial_User,
-                @SP_Financial_Password,
+                HashBytes('MD5',@SP_Financial_Password),
                 @SP_User_Active_Status,
 				'4');
 GO
@@ -1080,12 +1079,21 @@ AS
         SELECT * FROM [dbo].[TBL_FINANCIAL_USER]
 GO
 
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_FINANCIAL_USER]
+        @SP_Financial_User VARCHAR(20),
+		 @SP_Financial_Password VARCHAR(50)
+AS
+        UPDATE [dbo].[TBL_FINANCIAL_USER] SET
+                Financial_Password=HashBytes('MD5',@SP_Financial_Password)
+                WHERE Financial_User = @SP_Financial_User;
+GO
+
+
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_FINANCIAL_USER_STATUS]
         @SP_Financial_User VARCHAR(20),
         @SP_User_Active_Status VARCHAR(1)
 AS
         UPDATE [dbo].[TBL_FINANCIAL_USER] SET
-                Financial_User=@SP_Financial_User,
                 User_Active_Status=@SP_User_Active_Status
                 WHERE Financial_User = @SP_Financial_User;
 GO
@@ -1258,7 +1266,7 @@ BEGIN
 
 	SELECT @RESULT = CASE 
 		WHEN @GET_LOGIN = 'NO' THEN '0' -- IF NOT USER EXISTS
-		WHEN @GET_PASS != @SP_User_Password THEN '1' -- PASSWORD IS INCORRECT
+		WHEN @GET_PASS != HashBytes('MD5',@SP_User_Password) THEN '1' -- PASSWORD IS INCORRECT
 		WHEN @GET_STATUS = '0' THEN '2' -- STATUS INACTIVE
 		WHEN @GET_STATUS = '1' THEN '3' -- STATUS ACTIVE
 	END 
