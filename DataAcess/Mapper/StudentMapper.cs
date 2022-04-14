@@ -59,8 +59,8 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_LABORAL_STATUS,student.LaboralStatus);
             operation.AddVarcharParam(DB_COL_WORK_ADDRESS,student.WorkAddress);
             operation.AddVarcharParam(DB_COL_LABORAL_EXPERIENCE,student.LaboralExperience);
-            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN,student.Student_Login);
-            operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD,student.Student_Password);
+            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN,student.StudentLogin);
+            operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD,student.StudentPassword);
             operation.AddVarcharParam(DB_COL_PROVINCE,student.Province);
             operation.AddVarcharParam(DB_COL_CANTON,student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT,student.District);
@@ -95,7 +95,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_STUDENT_BY_USER" };
 
             var student = (Student)entity;
-            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.Student_Login);
+            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.StudentLogin);
 
             return operation;
         }
@@ -110,7 +110,6 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_STUDENT" };
 
             var student = (Student)entity;
-            operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
             operation.AddVarcharParam(DB_COL_BANKING_STUDENT, student.BankingStudent);
             operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS, student.UserActiveStatus);
             operation.AddDateTimeParam(DB_COL_ENTRY_DATE, student.EntryDate);
@@ -128,8 +127,8 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_LABORAL_STATUS, student.LaboralStatus);
             operation.AddVarcharParam(DB_COL_WORK_ADDRESS, student.WorkAddress);
             operation.AddVarcharParam(DB_COL_LABORAL_EXPERIENCE, student.LaboralExperience);
-            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.Student_Login);
-            operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.Student_Password);
+            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.StudentLogin);
+            operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.StudentPassword);
             operation.AddVarcharParam(DB_COL_PROVINCE, student.Province);
             operation.AddVarcharParam(DB_COL_CANTON, student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT, student.District);
@@ -151,7 +150,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_VERIFY_USERNAME" };
 
             var student = (Student)entity;
-            operation.AddVarcharParam(DB_COL_USER_EXIST, student.Student_Login);
+            operation.AddVarcharParam(DB_COL_USER_EXIST, student.StudentLogin);
 
             return operation;
         }
@@ -199,8 +198,8 @@ namespace DataAccess.Mapper
                 Canton = GetStringValue(row,DB_COL_CANTON),
                 District = GetStringValue(row,DB_COL_DISTRICT),
                 UserType = GetStringValue(row,DB_COL_USER_TYPE),
-                Student_Login = GetStringValue(row,DB_COL_STUDENT_LOGIN),
-                Student_Password = GetStringValue(row,DB_COL_STUDENT_PASSWORD),
+                StudentLogin = GetStringValue(row,DB_COL_STUDENT_LOGIN),
+                StudentPassword = GetStringValue(row,DB_COL_STUDENT_PASSWORD),
                 LaboralStatus = GetStringValue(row,DB_COL_LABORAL_STATUS),
                 WorkAddress = GetStringValue(row,DB_COL_WORK_ADDRESS),
                 Email = GetStringValue(row,DB_COL_EMAIL),

@@ -13,17 +13,17 @@ CREATE TABLE TBL_STUDENT(
 Student_ID INT IDENTITY(1,1) NOT NULL, --PK
 Banking_Student VARCHAR(1) NOT NULL DEFAULT '1',
 User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
-Entry_Date DATE NOT NULL,
+Entry_Date DATETIME NOT NULL,
 First_Name VARCHAR(200) NOT NULL,
-Second_Name VARCHAR(200),
+Second_Name VARCHAR(200) NULL,
 Last_Name VARCHAR(200) NOT NULL,
 Second_Last_Name VARCHAR(200) NOT NULL,
 Id_Type VARCHAR(1) NOT NULL,
 Identification_Number VARCHAR(20) NOT NULL, ---MUST BE UNIQUE ---
-Birthdate DATE NOT NULL,
+Birthdate DATETIME NOT NULL,
 Gender VARCHAR(1) NOT NULL,
 Primary_Phone VARCHAR(200) NOT NULL, ---MUST BE UNIQUE ---
-Secondary_Phone VARCHAR(200),
+Secondary_Phone VARCHAR(200) NULL,
 Email VARCHAR(200) NOT NULL,
 Laboral_Status VARCHAR(1) NOT NULL, /*True or False*/
 Work_Address VARCHAR(200) NOT NULL,
@@ -121,7 +121,7 @@ SET IDENTITY_INSERT TBL_STUDENT ON
 INSERT INTO TBL_STUDENT (Student_ID, Banking_Student,User_Active_Status, Entry_Date,First_Name,Second_Name,
 Last_Name,Second_Last_Name,Id_Type,Identification_Number, Birthdate,Gender,Primary_Phone, Secondary_Phone,
 Email,Laboral_Status,Work_Address,Laboral_Experience,Student_User,Student_Password,Province,Canton,District) VALUES (
-	0,'','0','2022-03-27','DEFAULT','','','','0',0,'2022-03-27','O','0','','DEFAULT','','','','S_DEFAULT','DEFAULT', '1','01','01');
+	0,'','0','2022-03-27','DEFAULT','','','','0',0,'2022-03-27','O','0',NULL,'DEFAULT','','','','S_DEFAULT','DEFAULT', '1','01','01');
 
 SET IDENTITY_INSERT TBL_STUDENT OFF
 
@@ -748,17 +748,17 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT]
        
         @SP_Banking_Student VARCHAR(1),
         @SP_User_Active_Status VARCHAR(1),
-        @SP_Entry_DATE DATE,
+        @SP_Entry_DATE DATETIME,
         @SP_First_Name VARCHAR(200),
-        @SP_Second_Name VARCHAR(200),
+        @SP_Second_Name VARCHAR(200) = null,
         @SP_Last_Name VARCHAR(200),
         @SP_Second_Last_Name VARCHAR(200),
         @SP_Id_Type VARCHAR(1),
         @SP_Identification_Number VARCHAR(20),
-        @SP_Birthdate DATE,
+        @SP_Birthdate DATETIME,
         @SP_Gender VARCHAR(1),
         @SP_Primary_Phone VARCHAR(200),
-        @SP_Secondary_Phone VARCHAR(200),
+        @SP_Secondary_Phone VARCHAR(200) = null,
         @SP_Email VARCHAR(200),
         @SP_Laboral_Status VARCHAR(1),
         @SP_Work_Address VARCHAR(200),
@@ -769,7 +769,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT]
         @SP_Canton VARCHAR(200),
         @SP_District VARCHAR(200)
 AS
-        INSERT INTO [dbo].[TBL_STUDENT] VALUES (
+        INSERT INTO [dbo].[TBL_STUDENT] (Banking_Student,User_Active_Status,Entry_DATE, First_Name, Second_Name, Last_Name, Second_Last_Name, Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, User_Type) VALUES (
                 @SP_Banking_Student,
                 @SP_User_Active_Status,
                 @SP_Entry_DATE,
@@ -832,20 +832,19 @@ GO
 
 --- UPDATE STUDENT
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
-        @SP_Student_ID INT,
         @SP_Banking_Student VARCHAR(1),
         @SP_User_Active_Status VARCHAR(1),
-        @SP_Entry_DATE DATE,
+        @SP_Entry_DATE DATETIME,
         @SP_First_Name VARCHAR(200),
         @SP_Second_Name VARCHAR(200),
         @SP_Last_Name VARCHAR(200),
-        @SP_Second_Last_Name VARCHAR(200),
+        @SP_Second_Last_Name VARCHAR(200) = null,
         @SP_Id_Type VARCHAR(1),
-        @SP_Identification_Number INT,
-        @SP_Birthdate DATE,
+        @SP_Identification_Number VARCHAR(20),
+        @SP_Birthdate DATETIME,
         @SP_Gender VARCHAR(1),
         @SP_Primary_Phone VARCHAR(200),
-        @SP_Secondary_Phone VARCHAR(200),
+        @SP_Secondary_Phone VARCHAR(200) = null,
         @SP_Email VARCHAR(200),
         @SP_Laboral_Status VARCHAR(1),
         @SP_Work_Address VARCHAR(200),
@@ -874,12 +873,11 @@ AS
                 Laboral_Status=@SP_Laboral_Status,
                 Work_Address=@SP_Work_Address,
                 Laboral_Experience=@SP_Laboral_Experience,
-                Student_User=@SP_Student_User,
                 Student_Password=@SP_Student_Password,
                 Province=@SP_Province,
                 Canton=@SP_Canton,
                 District=@SP_District
-                WHERE Student_ID = @SP_Student_ID;
+                WHERE Student_User = @SP_Student_User;
 GO
 
 ---DELETE STUDENT

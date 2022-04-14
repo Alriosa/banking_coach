@@ -8,6 +8,11 @@
         studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
 
 
+        if (studentData["SecondName"] == null) {
+            studentData["SecondName"] = "";
+        } else if (studentData["SecondaryPhone"]) {
+            studentData["SecondaryPhone"] = "";
+        }
 
         this.ctrlActions.PostToAPI('student', studentData, function () {
             resetForm();

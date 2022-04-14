@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
                 var mng = new StudentManager();
                 var student = new Student
                 {
-                    Student_Login = id
+                    StudentLogin = id
                 };
 
                 student = mng.RetrieveByUserLogin(student);
