@@ -54,7 +54,8 @@ namespace CoreAPI
             }
             catch (Exception ex)
             {
-                ExceptionManager.GetInstance().Process(ex);
+                // ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
             }
 
             return c;
@@ -74,6 +75,7 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
             }
 
             return c;
@@ -103,6 +105,7 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 //ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al validar datos", ex);
             }
             return response;
         }

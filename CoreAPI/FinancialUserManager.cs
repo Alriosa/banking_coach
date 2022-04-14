@@ -32,6 +32,7 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 // ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al insertar datos", ex);
             }
         }
 
