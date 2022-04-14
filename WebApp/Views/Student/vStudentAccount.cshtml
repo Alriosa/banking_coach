@@ -1,7 +1,7 @@
 ﻿@using WebApp.Helpers;
-<script src="~/Scripts/Views/SysAdmin/vSysAdminAccount.js"></script>
+<script src="~/Scripts/Views/Student/vStudentAccount.js"></script>
 @{
-    ViewBag.Title = "vSysAdminAccount";
+    ViewBag.Title = "vStudentAccount";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
 <h2>Mi Cuenta</h2>
 
 <h4 id="P_UserName">>Nombre de usuario</h4>
-<input type="text" id="txtIdSysAdmin" class="d-none">
+<input type="text" id="txtIdStudent" class="d-none">
 
 
 <div class="dashboard-heading d-flex justify-content-center">
@@ -20,7 +20,7 @@
     <div class="custom-form custom-form-fields text-center col-lg-6">
         <h3>Cambiar Contraseña</h3>
         <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
-        <form id="frmSysAdminUpdatePassword" method="get" action="">
+        <form id="frmStudentUpdatePassword" method="get" action="">
             @Html.CtrlInput(id: "txtOldPassword", type: "password", label: "Contraseña actual",
             placeHolder: "", columnDataName: "OldPassword")
 
@@ -30,12 +30,11 @@
             @Html.CtrlInput(id: "txtConfirmNewPassword", type: "password", label: "Confirmar nueva contraseña",
             placeHolder: "", columnDataName: "")
 
-            @Html.CtrlButton(viewName: "vSysAdminAccount", id: "btnChangePassword", type: "button",
+            @Html.CtrlButton(viewName: "vStudentAccount", id: "btnChangePassword", type: "button",
                 label: "Cambiar Contraseña", onClickFunction: "ValidateInputs", buttonType: "orange")
         </form>
     </div><!-- end custom-form -->
 </div><!-- end form-content -->
-
 <script>
 
     $(document).ready(function () {

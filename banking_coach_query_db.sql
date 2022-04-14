@@ -913,9 +913,9 @@ GO
 
 ---SELECT ADMIN BY ID
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER_BY_ID]
-        @SP_Admin_ID INT
+        @SP_Sys_Admin_User_ID INT
 AS
-        SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID = @SP_Admin_ID;
+        SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID = @SP_Sys_Admin_User_ID;
 GO
 
 
@@ -943,7 +943,7 @@ AS
 GO
 
 ---UPDATE ADMIN PASSWORD
-CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER_PASSWORD]
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER]
         @SP_Admin_Login VARCHAR(20),
         @SP_Admin_Password VARCHAR(50)
 AS

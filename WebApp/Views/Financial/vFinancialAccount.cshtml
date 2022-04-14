@@ -1,4 +1,6 @@
-﻿
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/Financial/vFinancialAccount.js"></script>
+
 @{
     ViewBag.Title = "vFinancialAccount";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,8 +8,8 @@
 
 <h2>Mi Cuenta</h2>
 
-<h4 id="P_NombreUsuario">>Nombre de usuario</h4>
-
+<h4 id="P_UserName">>Nombre de usuario</h4>
+<input type="text" id="txtIdFinancial" class="d-none">
 
 
 <div class="dashboard-heading d-flex justify-content-center">
@@ -23,7 +25,7 @@
             placeHolder: "", columnDataName: "OldPassword")
 
             @Html.CtrlInput(id: "txtNewPassword", type: "password", label: "Nueva contraseña",
-            placeHolder: "", columnDataName: "NewPassowrd")
+            placeHolder: "", columnDataName: "Password")
 
             @Html.CtrlInput(id: "txtConfirmNewPassword", type: "password", label: "Confirmar nueva contraseña",
             placeHolder: "", columnDataName: "")
@@ -33,3 +35,13 @@
         </form>
     </div><!-- end custom-form -->
 </div><!-- end form-content -->
+<script>
+
+    $(document).ready(function () {
+        var vfinancialAccount = new vFinancialAccount();
+        document.getElementById("txtIdFinancial").value = "@ViewBag.IdFinancial";
+
+        vfinancialAccount.GetData();
+
+    });
+</script>

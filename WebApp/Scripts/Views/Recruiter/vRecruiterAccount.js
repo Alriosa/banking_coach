@@ -1,36 +1,35 @@
-﻿function vFinancialAccount() {
+﻿function vRecruiterAccount() {
     this.ctrlActions = new ControlActions();
-    var FinancialProfileData = {};
-    FinancialProfileData = JSON.parse(sessionStorage.getItem("user"));
-  
+    var RecruiterProfileData = {};
+    RecruiterProfileData = JSON.parse(sessionStorage.getItem("user"));
+    var idRecruiter = document.getElementById("txtIdRecruiter").value;
 
     this.GetData = function () {
-        var idFinancial = document.getElementById("txtIdFinancial").value;
-        if (idFinancial != 'null') {
-            this.ctrlActions.GetById("financial/" + idFinancial, this.FillData);
+        if (idRecruiter != 'null') {
+            this.ctrlActions.GetById("recruiter/" + idRecruiter, this.FillData);
         }
     }
 
     this.FillData = function (data) {
         if (data != null) {
-            document.querySelector('#P_UserName').append(data['FinancialLogin']);
+            document.querySelector('#P_UserName').append(data['RecruiterLogin']);
         }
     }
 
 
     this.Update = function () {
 
-        var financialData = {};
+        var recruiterData = {};
 
-        financialData = this.ctrlActions.GetDataForm('frmFinancialUpdatePassword');
-        financialData.FinancialPassword = financialData["Password"];
-        this.ctrlActions.PutToAPI('financial', financialData, function () {
+        recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdatePassword');
+        recruiterData.RecruiterPassword = recruiterData["Password"];
+        this.ctrlActions.PutToAPI('recruiter', recruiterData, function () {
             resetForm();
         });
     }
 
     this.ValidateInputs = function () {
-        if ($("#frmFinancialUpdatePassword").valid()) {
+        if ($("#frmRecruiterUpdatePassword").valid()) {
             this.Update();
             resetForm();
         }
@@ -42,7 +41,7 @@
 RulesValidateCreate = function () {
 
 
-    $("#frmFinancialUpdatePassword").validate({
+    $("#frmRecruiterUpdatePassword").validate({
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
@@ -72,7 +71,7 @@ RulesValidateCreate = function () {
 }
 
 function resetForm() {
-    $("#frmFinancialUpdatePassword")[0].reset();
+    $("#frmRecruiterUpdatePassword")[0].reset();
 }
 
 

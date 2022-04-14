@@ -149,11 +149,12 @@ function ControlActions() {
 	};
 
 
-	this.LoginByUser = function (service, data, callBackFunction) {
-		var jqxhr = $.get(this.GetUrlApiService(service), data, function (response) {
+	this.LoginByUser = function (service, callBackFunction) {
+		var jqxhr = $.get(this.GetUrlApiService(service), function (response) {
 			
 			var data = response.Data;
 			sessionStorage.setItem('user', JSON.stringify(data));
+			callBackFunction(data);
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;

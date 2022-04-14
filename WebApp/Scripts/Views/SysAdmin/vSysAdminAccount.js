@@ -1,36 +1,37 @@
-﻿function vFinancialAccount() {
+﻿function vSysAdminAccount() {
     this.ctrlActions = new ControlActions();
-    var FinancialProfileData = {};
-    FinancialProfileData = JSON.parse(sessionStorage.getItem("user"));
-  
+    var SysAdminProfileData = {};
+    SysAdminProfileData = JSON.parse(sessionStorage.getItem("user"));
+    var idSysAdmin = document.getElementById("txtIdSysAdmin").value;
 
     this.GetData = function () {
-        var idFinancial = document.getElementById("txtIdFinancial").value;
-        if (idFinancial != 'null') {
-            this.ctrlActions.GetById("financial/" + idFinancial, this.FillData);
+        if (idSysAdmin != 'null') {
+            this.ctrlActions.GetById("sysadmin/" + idSysAdmin, this.FillData);
         }
     }
 
     this.FillData = function (data) {
         if (data != null) {
-            document.querySelector('#P_UserName').append(data['FinancialLogin']);
+            document.querySelector('#P_UserName').append(data['SysAdminLogin']);
         }
     }
 
 
     this.Update = function () {
 
-        var financialData = {};
+        var sysadminData = {};
 
-        financialData = this.ctrlActions.GetDataForm('frmFinancialUpdatePassword');
-        financialData.FinancialPassword = financialData["Password"];
-        this.ctrlActions.PutToAPI('financial', financialData, function () {
+        sysadminData = this.ctrlActions.GetDataForm('frmSysAdminUpdatePassword');
+
+        sysadminData.AdminPassword = sysadminData["Password"];
+
+        this.ctrlActions.PutToAPI('sysadmin', sysadminData, function () {
             resetForm();
         });
     }
 
     this.ValidateInputs = function () {
-        if ($("#frmFinancialUpdatePassword").valid()) {
+        if ($("#frmSysAdminUpdatePassword").valid()) {
             this.Update();
             resetForm();
         }
@@ -39,10 +40,11 @@
 
 
 
+
 RulesValidateCreate = function () {
 
 
-    $("#frmFinancialUpdatePassword").validate({
+    $("#frmSysAdminUpdatePassword").validate({
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
@@ -72,7 +74,7 @@ RulesValidateCreate = function () {
 }
 
 function resetForm() {
-    $("#frmFinancialUpdatePassword")[0].reset();
+    $("#frmSysAdminUpdatePassword")[0].reset();
 }
 
 

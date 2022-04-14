@@ -57,16 +57,26 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+      
+
         public SqlOperation GetUpdateStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_ADMIN_USER" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
+
+            return operation;
+        }
+
+        public SqlOperation GetUpdateStatusStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_ADMIN_USER_STATUS" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
-            operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
             operation.AddVarcharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, sysAdmin.UserType);
 
             return operation;
         }

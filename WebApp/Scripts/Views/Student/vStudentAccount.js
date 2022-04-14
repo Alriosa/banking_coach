@@ -1,36 +1,36 @@
-﻿function vFinancialAccount() {
+﻿function vStudentAccount() {
     this.ctrlActions = new ControlActions();
-    var FinancialProfileData = {};
-    FinancialProfileData = JSON.parse(sessionStorage.getItem("user"));
-  
+    var StudentProfileData = {};
+    StudentProfileData = JSON.parse(sessionStorage.getItem("user"));
+    var idStudent = document.getElementById("txtIdStudent").value;
 
     this.GetData = function () {
-        var idFinancial = document.getElementById("txtIdFinancial").value;
-        if (idFinancial != 'null') {
-            this.ctrlActions.GetById("financial/" + idFinancial, this.FillData);
+        if (idStudent != 'null') {
+            this.ctrlActions.GetById("student/" + idStudent, this.FillData);
         }
     }
 
     this.FillData = function (data) {
         if (data != null) {
-            document.querySelector('#P_UserName').append(data['FinancialLogin']);
+            servicioData = {};
+            document.querySelector('#P_UserName').append(data['StudentLogin']);
         }
     }
 
 
     this.Update = function () {
 
-        var financialData = {};
+        var studentData = {};
 
-        financialData = this.ctrlActions.GetDataForm('frmFinancialUpdatePassword');
-        financialData.FinancialPassword = financialData["Password"];
-        this.ctrlActions.PutToAPI('financial', financialData, function () {
+        studentData = this.ctrlActions.GetDataForm('frmStudentUpdatePassword');
+        studentData.StudentPassword = studentData["Password"];
+        this.ctrlActions.PutToAPI('student', studentData, function () {
             resetForm();
         });
     }
 
     this.ValidateInputs = function () {
-        if ($("#frmFinancialUpdatePassword").valid()) {
+        if ($("#frmStudentUpdatePassword").valid()) {
             this.Update();
             resetForm();
         }
@@ -42,7 +42,7 @@
 RulesValidateCreate = function () {
 
 
-    $("#frmFinancialUpdatePassword").validate({
+    $("#frmStudentUpdatePassword").validate({
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
@@ -72,7 +72,7 @@ RulesValidateCreate = function () {
 }
 
 function resetForm() {
-    $("#frmFinancialUpdatePassword")[0].reset();
+    $("#frmStudentUpdatePassword")[0].reset();
 }
 
 
