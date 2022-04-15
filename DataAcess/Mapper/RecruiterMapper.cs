@@ -38,7 +38,7 @@ namespace DataAccess.Mapper
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_RECRUITER_USER" };
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_RECRUITER_USER_BY_ID" };
 
             var recruiter = (Recruiter)entity;
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);

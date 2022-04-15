@@ -23,14 +23,14 @@ namespace WebAPI.Controllers
         }
 
         [Route("{id}")]
-        public IHttpActionResult Get(string id)
+        public IHttpActionResult Get(int id)
         {
             try
             {
                 var mng = new StudentManager();
                 var student = new Student
                 {
-                    IdentificationNumber = id
+                    StudentID = id
                 };
 
                 student = mng.RetrieveById(student);

@@ -2,9 +2,10 @@
     this.ctrlActions = new ControlActions();
     var RecruiterProfileData = {};
     RecruiterProfileData = JSON.parse(sessionStorage.getItem("user"));
-    var idRecruiter = document.getElementById("txtIdRecruiter").value;
 
     this.GetData = function () {
+        var idRecruiter = document.getElementById("txtIdRecruiter").value;
+
         if (idRecruiter != 'null') {
             this.ctrlActions.GetById("recruiter/" + idRecruiter, this.FillData);
         }

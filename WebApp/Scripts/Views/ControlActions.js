@@ -89,6 +89,8 @@ function ControlActions() {
 
 			if (response.Data == "error") {
 				ctrlActions.ShowMessage('E', response.Message);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
 			} else {
 				ctrlActions.ShowMessage('I', response.Message);
             }

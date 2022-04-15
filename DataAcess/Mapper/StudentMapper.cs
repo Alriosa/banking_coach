@@ -71,10 +71,10 @@ namespace DataAccess.Mapper
         //Select by Identification
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_STUDENT_BY_IDENTIFICATION" };
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_STUDENT_BY_ID" };
 
             var student = (Student)entity;
-            operation.AddVarcharParam(DB_COL_STUDENT_ID, student.IdentificationNumber);
+            operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
 
             return operation;
         }

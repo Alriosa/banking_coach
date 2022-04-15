@@ -2,9 +2,10 @@
     this.ctrlActions = new ControlActions();
     var StudentProfileData = {};
     StudentProfileData = JSON.parse(sessionStorage.getItem("user"));
-    var idStudent = document.getElementById("txtIdStudent").value;
 
     this.GetData = function () {
+        var idStudent = document.getElementById("txtIdStudent").value;
+
         if (idStudent != 'null') {
             this.ctrlActions.GetById("student/" + idStudent, this.FillData);
         }
@@ -14,6 +15,23 @@
         if (data != null) {
             servicioData = {};
             document.querySelector('#P_UserName').append(data['StudentLogin']);
+            document.querySelector('#P_Email').append(data['Email']);
+            document.querySelector('#P_First_Name').append(data['FirstName']);
+            document.querySelector('#P_Second_Name').append(data['SecondName']);
+            document.querySelector('#P_Last_Name').append(data['LastName']);
+            document.querySelector('#P_Second_Last_Name').append(data['SecondLastName']);
+            document.querySelector('#P_Id_Type').append(data['IdType']);
+            document.querySelector('#P_Identification_Number').append(data['IdentificationNumber']);
+            document.querySelector('#P_Birthdate').append(data['Birthdate']);
+            document.querySelector('#P_Gender').append(data['Gender']);
+            document.querySelector('#P_Primary_Phone').append(data['PrimaryPhone']);
+            document.querySelector('#P_Secondary_Phone').append(data['SecondaryPhone']);
+            /*document.querySelector('#P_Last_Name').append(data['LaboralExperience']);
+            document.querySelector('#P_LaboralStatus').append(data['LaboralStatus']);
+            document.querySelector('#P_Province').append(data['Province']);
+            document.querySelector('#P_Canton').append(data['Canton']);
+            document.querySelector('#P_District').append(data['District']);
+            document.querySelector('#P_BankingStudent').append(data['BankingStudent']);*/
         }
     }
 

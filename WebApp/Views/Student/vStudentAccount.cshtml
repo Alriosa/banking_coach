@@ -6,39 +6,67 @@
 }
 
 
-<h2>Mi Cuenta</h2>
+<div class="home">
+    <div class="container">
+        <h2 class="text-center">Perfil Estudiante</h2>
+        <br/>
+        <div class="row justify-content-between">
 
-<h4 id="P_UserName">>Nombre de usuario</h4>
-<input type="text" id="txtIdStudent" class="d-none">
+            <div class="col-lg-6 col-sm-11">
+                <div class=" text-box">
 
+                    <h5>Nombre de usuario:</h5>
+                    <p id="P_UserName"></p>
+                    <br />
+                    <h5>Correo electrónico:</h5>
+                    <p id="P_Email"></p>
+                    <br />
+                    <h5>Primer Nombre:</h5>
+                    <p id="P_First_Name"></p>
+                    <br />
 
-<div class="dashboard-heading d-flex justify-content-center">
-    <h2>Cambiar <span>Contraseña</span></h2>
+                    <h5>Segundo Nombre:</h5>
+                    <p id="P_Second_Name"></p>
+                    <br />
+                    <h5>Primer Apellido:</h5>
+                    <p id="P_Last_Name"></p>
+                    <br />
+                    <h5>Segundo Apellido:</h5>
+                    <p id="P_Second_Last_Name"></p>
+                    <br />
+                    <input type="text" id="txtIdStudent" class="d-none">
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-11">
+                <div class=" text-box">
+
+                    <h5>Tipo de Identificiación:</h5>
+                    <p id="P_Id_Type"></p>
+                    <br />
+                    <h5>Número de identificación:</h5>
+                    <p id="P_Identification_Number"></p>
+                    <br />
+                    <h5>Fecha de Nacimiento:</h5>
+                    <p id="P_Birthdate"></p>
+                    <br />
+                    <h5>Género:</h5>
+                    <p id="P_Gender"></p>
+                    <br />
+                    <h5>Télefono Principal:</h5>
+                    <p id="P_Primary_Phone"></p>
+                    <br />
+                    <h5>Teléfono Secundario:</h5>
+                    <p id="P_Secondary_Phone"></p>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="d-flex justify-content-center">
-    <div class="custom-form custom-form-fields text-center col-lg-6">
-        <h3>Cambiar Contraseña</h3>
-        <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
-        <form id="frmStudentUpdatePassword" method="get" action="">
-            @Html.CtrlInput(id: "txtOldPassword", type: "password", label: "Contraseña actual",
-            placeHolder: "", columnDataName: "OldPassword")
-
-            @Html.CtrlInput(id: "txtNewPassword", type: "password", label: "Nueva contraseña",
-            placeHolder: "", columnDataName: "Password")
-
-            @Html.CtrlInput(id: "txtConfirmNewPassword", type: "password", label: "Confirmar nueva contraseña",
-            placeHolder: "", columnDataName: "")
-
-            @Html.CtrlButton(viewName: "vStudentAccount", id: "btnChangePassword", type: "button",
-                label: "Cambiar Contraseña", onClickFunction: "ValidateInputs", buttonType: "orange")
-        </form>
-    </div><!-- end custom-form -->
-</div><!-- end form-content -->
 <script>
 
     $(document).ready(function () {
-        var vstundentAccount = new vSysAdminAccount();
+        var vstundentAccount = new vStudentAccount();
         document.getElementById("txtIdStudent").value = "@ViewBag.IdStudent";
 
         vstundentAccount.GetData();

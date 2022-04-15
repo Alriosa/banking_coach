@@ -788,7 +788,7 @@ AS
                 @SP_Work_Address,
                 @SP_Laboral_Experience,
                 @SP_Student_User,
-                @SP_Student_Password,
+                HashBytes('MD5',@SP_Student_Password),
                 @SP_Province,
                 @SP_Canton,
                 @SP_District,
@@ -842,6 +842,18 @@ AS
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Student_User = @SP_Student_User AND Student_ID != 0;
+GO
+
+---BY ID
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_ID]
+        @SP_Student_ID VARCHAR(20)
+AS
+        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
+		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
+		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Student_ID = @SP_Student_ID AND Student_ID != 0;
 GO
 
 ---BY FIRSTNAME AND LASTNAME
@@ -900,7 +912,7 @@ AS
                 Laboral_Status=@SP_Laboral_Status,
                 Work_Address=@SP_Work_Address,
                 Laboral_Experience=@SP_Laboral_Experience,
-                Student_Password=@SP_Student_Password,
+                Student_Password= HashBytes('MD5',@SP_Student_Password),
                 Province=@SP_Province,
                 Canton=@SP_Canton,
                 District=@SP_District
@@ -1028,6 +1040,20 @@ AS
 				'3',
 				@SP_Finantial_Association
 				);
+GO
+
+
+--- SELECT BY ID
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_USER_BY_ID]
+        @SP_Recruiter_User_ID VARCHAR(20)
+AS
+       SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Finantial_Association, F.Financial_User AS 'Finantial_Association_Name', CASE  
+		WHEN R.User_Active_Status= '1' THEN 'Activo'
+		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
+		INNER JOIN 
+		TBL_FINANCIAL_USER AS F ON R.Finantial_Association = F.Financial_User_ID
+		WHERE Recruiter_User_ID = @SP_Recruiter_User_ID AND Recruiter_User_ID != 0;
 GO
 
 --- SELECT BY USER
@@ -1355,13 +1381,13 @@ GO
 --RETURN 0 IF DONT EXIST OR 1 IF EXIST
 
 CREATE PROCEDURE [dbo].[SP_VERIFY_EMAIL]
-        @SP_Email	 VARCHAR(20)
+        @SP_Email VARCHAR(200)
 AS
 	BEGIN
 		DECLARE @COUNT_EMAIL INT 
 		DECLARE @EMAIL_EXIST VARCHAR(1) = '0'
 
-		SELECT @COUNT_EMAIL =  COUNT(Email) FROM TBL_STUDENT WHERE Email = @SP_Email
+		SELECT @COUNT_EMAIL = COUNT(Email) FROM TBL_STUDENT WHERE Email = @SP_Email
 
 		IF @COUNT_EMAIL > 0 
 		BEGIN 
@@ -1406,6 +1432,8 @@ GO
 
 EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'prueba_admin', 'prueba_admin', '1'
 
-EXEC [dbo].[SP_INSERT_TBL_FINANCIAL_USER] 'prueba_financial', 'prueba_financial', '1'
+EXEC [dbo].[SP_INSERT_TBL_FINANCIAL_USER] 'prueba_financiero', 'prueba_financiero', '1'
 
-EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'prueba_recruiter', 'prueba_recruiter', '1', 1
+EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'prueba_reclutador', 'prueba_reclutador', '1', 1
+
+EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1','1','2022-03-27','prueba', 'estudiante', 'prueba', 'estudiante', 'N', '123456789', '2002-03-27','M', '87878787', NULL, 'example@gmail.com', '1', 'Ejemplo Dirección', '1', 'prueba_estudiante', 'prueba_estudiante','1','01', '10'
