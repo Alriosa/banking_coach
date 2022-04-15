@@ -22,10 +22,6 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public ActionResult vFinancialAccount()
-        {
-            return View();
-        }
 
         public ActionResult vFinancialAccount(string id)
         {

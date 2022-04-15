@@ -41,7 +41,7 @@ RulesValidateCreate = function () {
             txtLogin: {
                 required: "Ingrese un nombre de usuario",
                 minlength: "El nombre de usuario debe contener mínimo 6 caracteres",
-                maxlength: "El nombre de usuario debe contener máximo 10 caracteres",
+                maxlength: "El nombre de usuario debe contener máximo 20 caracteres",
                 regex: "Solo se permiten minusculas, numeros y el _",
             },
             txtPassword: {
@@ -56,7 +56,7 @@ RulesValidateCreate = function () {
             },
         },
         rules: {
-            txtLogin: { required: true, regex: /^[a-z0-9_]+$/, minlength: 6, maxlength: 10 },
+            txtLogin: { required: true, regex: /^[a-z0-9_]+$/, minlength: 6, maxlength: 20 },
             txtPassword: { required: true, minlength: 6, maxlength: 20 },
             txtConfirmPassword: { required: true, equalTo: "#txtPassword" },
         }

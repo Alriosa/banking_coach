@@ -51,6 +51,7 @@ namespace DataAccess.Crud
                 foreach (var c in objs)
                 {
                     lstFinancialUser.Add((T)Convert.ChangeType(c, typeof(T)));
+                    
                 }
             }
 

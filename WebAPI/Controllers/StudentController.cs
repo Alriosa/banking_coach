@@ -90,10 +90,10 @@ namespace WebAPI.Controllers
                         apiResp.Message = "Nombre de usuario ya existe";
                         apiResp.Data = "error";
                         break;
-                    /*case "2":
+                      case "2":
                         apiResp.Message = "Email ya existe";
                         apiResp.Data = "error";
-                        break;*/
+                        break;
                     default:
                         student.UserActiveStatus = "1";
                         mng.Create(student);

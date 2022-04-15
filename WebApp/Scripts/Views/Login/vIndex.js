@@ -22,12 +22,12 @@
                     break;
                 case "3":
                     control.LoginByUser("recruiter/getUser/" + userLogin, function (data) {
-                        setTimeout(function redirection() { window.location.href = "/financial/vFinancialAccount/" + data["FinancialUserID"] }, 3000);
+                        setTimeout(function redirection() { window.location.href = "/recruiter/vRecruiterAccount/" + data["RecruiterUserID"] }, 3000);
                     });
                     break;
                 case "4":
                     control.LoginByUser("financial/getUser/" + userLogin, function (data) {
-                        setTimeout(function redirection() { window.location.href = "/recruiter/vRecruiterAccount/" + data["RecruiterUserID"] }, 3000);
+                        setTimeout(function redirection() { window.location.href = "/financial/vFinancialAccount/" + data["FinancialUserID"] }, 3000);
                     });
                     break;
                 default:

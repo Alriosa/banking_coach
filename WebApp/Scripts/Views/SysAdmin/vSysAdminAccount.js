@@ -2,9 +2,10 @@
     this.ctrlActions = new ControlActions();
     var SysAdminProfileData = {};
     SysAdminProfileData = JSON.parse(sessionStorage.getItem("user"));
-    var idSysAdmin = document.getElementById("txtIdSysAdmin").value;
+   
 
     this.GetData = function () {
+        var idSysAdmin = document.getElementById("txtIdSysAdmin").value;
         if (idSysAdmin != 'null') {
             this.ctrlActions.GetById("sysadmin/" + idSysAdmin, this.FillData);
         }
@@ -12,7 +13,7 @@
 
     this.FillData = function (data) {
         if (data != null) {
-            document.querySelector('#P_UserName').append(data['SysAdminLogin']);
+            document.querySelector('#P_UserName').append(data['AdminLogin']);
         }
     }
 

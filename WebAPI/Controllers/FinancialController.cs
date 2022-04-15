@@ -12,6 +12,8 @@ namespace WebAPI.Controllers
     public class FinancialController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
+
+        [Route("")]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();

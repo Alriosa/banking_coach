@@ -120,8 +120,8 @@ namespace DataAccess.Mapper
                 SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
                 AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
                 AdminPassword = GetStringValue(row, DB_COL_ADMIN_PASSWORD),
-                UserType = GetStringValue(row, DB_COL_ADMIN_STATUS),
-                UserActiveStatus= GetStringValue(row, DB_COL_USER_TYPE)
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                UserActiveStatus= GetStringValue(row, DB_COL_ADMIN_STATUS)
             };
 
             return sysAdmin;

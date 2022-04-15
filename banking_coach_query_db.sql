@@ -24,7 +24,7 @@ Birthdate DATETIME NOT NULL,
 Gender VARCHAR(1) NOT NULL,
 Primary_Phone VARCHAR(200) NOT NULL, ---MUST BE UNIQUE ---
 Secondary_Phone VARCHAR(200) NULL,
-Email VARCHAR(200) NOT NULL,
+Email VARCHAR(200) NOT NULL UNIQUE,
 Laboral_Status VARCHAR(1) NOT NULL, /*True or False*/
 Work_Address VARCHAR(200) NOT NULL,
 Laboral_Experience VARCHAR(1) NOT NULL,
@@ -798,28 +798,50 @@ GO
 ---SELECT ALL
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_STUDENT]
 AS
-        SELECT * FROM [dbo].[TBL_STUDENT];
+
+
+        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
+		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
+		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Student_ID != 0;
 GO
 
 ---BY IDENTIFICATION NUMBER
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_IDENTIFICATION]
         @SP_Identification_Number VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_STUDENT] WHERE Identification_Number = @SP_Identification_Number;
+        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
+		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
+		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Identification_Number = @SP_Identification_Number AND Student_ID != 0;;
 GO
 
 ---BY EMAIL
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_EMAIL]
         @SP_Student_Email VARCHAR(200)
 AS
-        SELECT * FROM [dbo].[TBL_STUDENT] WHERE Email = @SP_Student_Email;
+        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
+		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
+		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Email = @SP_Student_Email AND Student_ID != 0;
 GO
 
 ---BY USER
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_USER]
         @SP_Student_User VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_STUDENT] WHERE Student_User = @SP_Student_User;
+        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
+		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
+		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Student_User = @SP_Student_User AND Student_ID != 0;
 GO
 
 ---BY FIRSTNAME AND LASTNAME
@@ -827,7 +849,12 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_FIRST_NAME_AND_LAST_NAME]
         @SP_First_Name VARCHAR(200),
         @SP_Last_Name VARCHAR(200)
 AS
-        SELECT * FROM [dbo].[TBL_STUDENT] WHERE First_Name = @SP_First_Name AND Last_Name = @SP_Last_Name;
+        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
+		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
+		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE First_Name = @SP_First_Name AND Last_Name = @SP_Last_Name AND Student_ID != 0;
 GO
 
 --- UPDATE STUDENT
@@ -915,7 +942,10 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER_BY_ID]
         @SP_Sys_Admin_User_ID INT
 AS
-        SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID = @SP_Sys_Admin_User_ID;
+        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID = @SP_Sys_Admin_User_ID AND Sys_Admin_User_ID != 0;
 GO
 
 
@@ -923,13 +953,19 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER]
         @SP_Admin_Login VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Admin_Login = @SP_Admin_Login;
+        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Admin_Login = @SP_Admin_Login;
 GO
 
 ---SELECT ALL ADMINS
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_ADMIN_USER]
 AS
-        SELECT * FROM [dbo].[TBL_SYS_ADMIN_USER];
+        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID != 0;
 GO
 
 ---UPDATE ADMIN STATUS
@@ -998,12 +1034,24 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_USER]
         @SP_Recruiter_Login VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_RECRUITER_USER] WHERE Recruiter_Login = @SP_Recruiter_Login;
+       SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Finantial_Association, F.Financial_User AS 'Finantial_Association_Name', CASE  
+		WHEN R.User_Active_Status= '1' THEN 'Activo'
+		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
+		INNER JOIN 
+		TBL_FINANCIAL_USER AS F ON R.Finantial_Association = F.Financial_User_ID
+		WHERE Recruiter_Login = @SP_Recruiter_Login AND Recruiter_User_ID != 0;
 GO
 
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_RECRUITER_USER]
 AS
-        SELECT * FROM [dbo].[TBL_RECRUITER_USER];
+        SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Finantial_Association, F.Financial_User AS 'Finantial_Association_Name', CASE  
+		WHEN R.User_Active_Status= '1' THEN 'Activo'
+		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
+		INNER JOIN 
+		TBL_FINANCIAL_USER AS F ON R.Finantial_Association = F.Financial_User_ID
+		WHERE Recruiter_User_ID != 0;
 GO
 
 
@@ -1013,10 +1061,29 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_STATUS]
         @SP_User_Active_Status VARCHAR(1)
 AS
         UPDATE [dbo].[TBL_RECRUITER_USER] SET
-                Recruiter_Login=@SP_Recruiter_Login,
                 User_Active_Status=@SP_User_Active_Status
                 WHERE Recruiter_Login = @SP_Recruiter_Login;
 GO
+
+/*
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_STATUS]
+        @SP_Recruiter_Login VARCHAR(20),
+AS
+		DECLARE @GET_STATUS VARCHAR(1)
+		DECLARE @NEW_STATUS VARCHAR(1) = '1'
+		SELECT @GET_STATUS = User_Active_Status FROM TBL_RECRUITER_USER WHERE Recruiter_Login = @SP_Recruiter_Login
+
+		IF @GET_STATUS = '1' 
+		BEGIN
+			@NEW_STATUS = '0'
+		END
+
+        UPDATE [dbo].[TBL_RECRUITER_USER] SET
+                User_Active_Status=@NEW_STATUS
+                WHERE Recruiter_Login = @SP_Recruiter_Login;
+GO
+
+*/
 
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_PASSWORD]
         @SP_Recruiter_Login VARCHAR(20),
@@ -1063,7 +1130,10 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER_BY_ID]
         @SP_Financial_User_ID INT
 AS
-        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User_ID = @SP_Financial_User_ID;
+        SELECT Financial_User_ID, Financial_User, Financial_Password, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User_ID = @SP_Financial_User_ID AND Financial_User_ID != 0;
 GO
 
 
@@ -1071,12 +1141,18 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_FINANCIAL_USER]
         @SP_Financial_User VARCHAR(20)
 AS
-        SELECT * FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Financial_User;
+        SELECT Financial_User_ID, Financial_User, Financial_Password, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Financial_User AND Financial_User_ID != 0;
 GO
 
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_FINANCIAL_USER]
 AS
-        SELECT * FROM [dbo].[TBL_FINANCIAL_USER]
+        SELECT Financial_User_ID, Financial_User, Financial_Password, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo'
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User_ID != 0
 GO
 
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_FINANCIAL_USER]
@@ -1273,6 +1349,31 @@ BEGIN
 	SELECT @RESULT AS 'Result', @GET_LOGIN AS 'User_Login', @GET_USER_TYPE AS 'User_Type', @GET_STATUS AS 'User_Active_Status';
 END
 GO
+
+
+--verify user name existence
+--RETURN 0 IF DONT EXIST OR 1 IF EXIST
+
+CREATE PROCEDURE [dbo].[SP_VERIFY_EMAIL]
+        @SP_Email	 VARCHAR(20)
+AS
+	BEGIN
+		DECLARE @COUNT_EMAIL INT 
+		DECLARE @EMAIL_EXIST VARCHAR(1) = '0'
+
+		SELECT @COUNT_EMAIL =  COUNT(Email) FROM TBL_STUDENT WHERE Email = @SP_Email
+
+		IF @COUNT_EMAIL > 0 
+		BEGIN 
+			SET @EMAIL_EXIST = '1'
+		END 
+
+		SELECT @EMAIL_EXIST AS 'Email'
+	END
+GO
+
+
+
 /**
 -END 
 STORAGE PROCEDURES FOR USER LOG
@@ -1300,3 +1401,11 @@ CREATE PROCEDURE RET_LST_DISTRICTS
 AS
 	SELECT P_Code, Code, Name_Value from LST_DISTRICTS
 GO
+
+
+
+EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'prueba_admin', 'prueba_admin', '1'
+
+EXEC [dbo].[SP_INSERT_TBL_FINANCIAL_USER] 'prueba_financial', 'prueba_financial', '1'
+
+EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'prueba_recruiter', 'prueba_recruiter', '1', 1

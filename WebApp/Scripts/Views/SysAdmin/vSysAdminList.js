@@ -5,6 +5,10 @@
 	this.service = 'sysadmin';
 	this.columns = "AdminLogin,UserActiveStatus";
 
+	this.BindFields = function (data) {
+
+
+	}
 
 	this.RetrieveAll = function () {
 		this.ctrlActions.FillTable(this.service, this.tblSysAdminId, false);

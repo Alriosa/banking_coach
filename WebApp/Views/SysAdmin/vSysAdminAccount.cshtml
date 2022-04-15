@@ -8,7 +8,7 @@
 
 <h2>Mi Cuenta</h2>
 
-<h4 id="P_UserName">>Nombre de usuario</h4>
+<h4 id="P_UserName"></h4>
 <input type="text" id="txtIdSysAdmin" class="d-none">
 
 
@@ -18,20 +18,18 @@
 
 <div class="d-flex justify-content-center">
     <div class="custom-form custom-form-fields text-center col-lg-6">
-        <h3>Cambiar Contraseña</h3>
         <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
-        <form id="frmSysAdminUpdatePassword" method="get" action="">
-            @Html.CtrlInput(id: "txtOldPassword", type: "password", label: "Contraseña actual",
-            placeHolder: "", columnDataName: "OldPassword")
+        <form id="frmSysAdminUpdatePassword" class="form" method="get" action="">
+            @Html.CtrlInputSecond(id: "txtOldPassword", type: "password", required: true, placeHolder: "Contraseña actual", columnDataName: "OldPassword")
 
-            @Html.CtrlInput(id: "txtNewPassword", type: "password", label: "Nueva contraseña",
-            placeHolder: "", columnDataName: "Password")
+            @Html.CtrlInputSecond(id: "txtNewPassword", type: "password", required: true,
+            placeHolder: "Nueva contraseña", columnDataName: "Password")
 
-            @Html.CtrlInput(id: "txtConfirmNewPassword", type: "password", label: "Confirmar nueva contraseña",
-            placeHolder: "", columnDataName: "")
+            @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "password", required: true,
+            placeHolder: "Confirmar nueva contraseña", columnDataName: "")
 
-            @Html.CtrlButton(viewName: "vSysAdminAccount", id: "btnChangePassword", type: "button",
-                label: "Cambiar Contraseña", onClickFunction: "ValidateInputs", buttonType: "orange")
+            @Html.CtrlButton(viewName: "vFinancialAccount", id: "btnChangePassword", type: "button",
+                label: "Modificar", onClickFunction: "ValidateInputs", buttonType: "orange")
         </form>
     </div><!-- end custom-form -->
 </div><!-- end form-content -->
@@ -39,10 +37,10 @@
 <script>
 
     $(document).ready(function () {
-        var vstundentAccount = new vSysAdminAccount();
-        document.getElementById("txtIdStudent").value = "@ViewBag.IdStudent";
+        var sysAdminAccount = new vSysAdminAccount();
+        document.getElementById("txtIdSysAdmin").value = "@ViewBag.IdSysAdmin";
 
-        vstundentAccount.GetData();
+        sysAdminAccount.GetData();
 
     });
 </script>
