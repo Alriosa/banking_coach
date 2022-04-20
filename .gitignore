@@ -10,3 +10,7 @@ CoreAPI/obj/
 *.dll
 
 *.pdb
+
+Entities-POJO/obj/Debug/
+
+WebAPI/obj/Debug/
