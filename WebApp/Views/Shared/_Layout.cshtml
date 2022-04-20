@@ -13,6 +13,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/index.css" rel="stylesheet" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Scripts/Views/Layout.js"></script>
     <script src="~/Scripts/Views/ControlActions.js"></script>
 </head>
 <body class="bg-gray">
@@ -73,6 +74,8 @@
             </div>
         </div>
     </div>
+
+    @Html.CtrlNavBarMenu(id: "navbar", optionsName: "", optionsActionName: "");
 
     <div class="container body-content">
         <div class="alert alert-success alert-dismissable" style="display: none" id="alert_container">

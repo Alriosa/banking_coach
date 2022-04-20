@@ -116,6 +116,7 @@ CREATE TABLE TBL_VIEWS (
 	View_ID	INT IDENTITY(1,1) PRIMARY KEY NOT NULL, --PK
 	Controller_Name VARCHAR(50) NOT NULL, 
 	View_Name VARCHAR(50) NOT NULL,
+	View_Description VARCHAR(50) NOT NULL
 );
 
 
@@ -737,22 +738,22 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('474',  '81', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('475',  '81', '05', 'DUACARÍ');
 
 
-INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'SysAdminRegistration')
-INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminList')
-INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminAccount')
-INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminUpdate')
-INSERT INTO TBL_VIEWS VALUES ('Financial', 'FinancialRegistration')
-INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialList')
-INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialAccount')
-INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialUpdate')
-INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterRegistration')
-INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterList')
-INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterAccount')
-INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterUpdate')
-INSERT INTO TBL_VIEWS VALUES ('Student', 'StudentRegistration')
-INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentList')
-INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentAccount')
-INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentUpdate')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminRegistration', 'Registrar Administrador')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminList', 'Listar Administradores')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminAccount', 'Mi Cuenta')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminUpdate','Actualizar Administrador')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialRegistration', 'Registrar Financiero')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialList', 'Listar Financieros')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialAccount', 'Mi Cuenta')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialUpdate','Actualizar Financiero')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterRegistration', 'Registrar Reclutador')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterList', 'Listar Reclutadores')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterAccount', 'Perfil Reclutador')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterUpdate','Actualizar Reclutador')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentRegistration', 'Registrar Estudiante')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentList', 'Listar Estudiantes')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentAccount', 'Perfil Estudiante')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentUpdate','Actualizar Estudiante')
 
 
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '1')
@@ -1514,7 +1515,7 @@ STORAGE PROCEDURES FOR PERMISSIONS
 CREATE PROCEDURE RET_VIEW_BY_USER
 	@SP_Id_User_Type VARCHAR(1) 
 AS
-	SELECT P.Id_User_Type, V.Controller_Name, V.View_Name
+	SELECT P.Id_User_Type, V.Controller_Name, V.View_Name, V.View_Description
 	FROM TBL_PERMISSIONS AS P
 	JOIN 
 	TBL_VIEWS AS V ON P.Id_View = V.View_ID 

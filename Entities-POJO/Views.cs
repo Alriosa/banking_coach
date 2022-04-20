@@ -9,18 +9,21 @@ namespace Entities_POJO
     public class Views : BaseEntity
     {
         public int ViewID { get; set; }
-        public string Controller_Name { get; set; }
-        public int View_Name { get; set; }
+        public string ControllerName { get; set; }
+        public int ViewName { get; set; }
+        public string ViewDescription { get; set; }
+
         public Views()
         {
 
         }
 
-        public Views(int viewID, string controller_Name, int view_Name)
+        public Views(int viewID, string controller_Name, int view_Name, string view_Description)
         {
             ViewID = viewID;
-            Controller_Name = controller_Name;
-            View_Name = view_Name;
+            ControllerName = controller_Name;
+            ViewName = view_Name;
+            ViewDescription = view_Description;
         }
     }
 }

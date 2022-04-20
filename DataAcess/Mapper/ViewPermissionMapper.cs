@@ -14,6 +14,7 @@ namespace DataAcess.Mapper
         private const string DB_COL_ID_USER_TYPE = "Id_User_Type";
         private const string DB_COL_CONTROLLER_NAME = "Controller_Name";
         private const string DB_COL_VIEW_NAME = "View_Name";
+        private const string DB_COL_VIEW_DESCRIPTION = "View_Description";
 
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
@@ -50,8 +51,9 @@ namespace DataAcess.Mapper
             var viewPermission = new ViewPermission
             {
                 IdUserType = GetStringValue(row, DB_COL_ID_USER_TYPE),
-                Controller_Name = GetStringValue(row, DB_COL_CONTROLLER_NAME),
-                View_Name = GetStringValue(row, DB_COL_VIEW_NAME)
+                ControllerName = GetStringValue(row, DB_COL_CONTROLLER_NAME),
+                ViewName = GetStringValue(row, DB_COL_VIEW_NAME),
+                ViewDescription = GetStringValue(row, DB_COL_VIEW_DESCRIPTION)
             };
 
             return viewPermission;

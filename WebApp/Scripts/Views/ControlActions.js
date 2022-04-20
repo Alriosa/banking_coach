@@ -155,7 +155,12 @@ function ControlActions() {
 		var jqxhr = $.get(this.GetUrlApiService(service), function (response) {
 			
 			var data = response.Data;
-			sessionStorage.setItem('user', JSON.stringify(data));
+			sessionStorage.setItem('type', response.Data['UserType']);
+			setCookie('type', response.Data['UserType'], 30);
+
+			setCookie('user', JSON.stringify(data), 30);
+
+
 			callBackFunction(data);
 		})
 			.fail(function (response) {
@@ -178,6 +183,17 @@ function ControlActions() {
 
 			})
 	}
+}
+
+
+function setCookie(name, value, days) {
+	var expires = "";
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		expires = "; expires=" + date.toUTCString();
+	}
+	document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
 

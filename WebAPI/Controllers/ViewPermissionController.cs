@@ -15,12 +15,10 @@ namespace WebAPI.Controllers
     public class ViewPermissionController : ApiController
     {
 
-        ApiResponse apiResp = new ApiResponse();
-
         [Route("")]
         public IHttpActionResult Get()
         {
-            apiResp = new ApiResponse();
+            ApiResponse apiResp = new ApiResponse();
             var mng = new SysAdminManager();
             apiResp.Data = mng.RetrieveAll();
 
@@ -37,9 +35,9 @@ namespace WebAPI.Controllers
                 {
                     IdUserType = id
                 };
-                apiResp = new ApiResponse();
+                ApiResponse apiResp = new ApiResponse();
                 apiResp.Data = mng.RetrieveByUser(view);
-                return Ok(apiResp);
+                return Ok(apiResp.Data);
             }
             catch (BussinessException bex)
             {

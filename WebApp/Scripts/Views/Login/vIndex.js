@@ -53,6 +53,7 @@ function resetForm() {
 //ON DOCUMENT READY
 $(document).ready(function () {
     RulesValidateCreate();
+
 });
 
 RulesValidateCreate = function () {

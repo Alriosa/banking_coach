@@ -1,7 +1,9 @@
 ﻿using Entities_POJO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace WebApp.Models.Controls
@@ -17,7 +19,7 @@ namespace WebApp.Models.Controls
 
         private string user_type { get; set; }
 
-        private string URL_API_LISTs = "http://localhost:57056/api/vista/";
+        private string URL_API_LISTs = "http://localhost:57056/api/permits/";
 
 
         public int OptionsCount => Options.Split(',').Length;
@@ -26,42 +28,78 @@ namespace WebApp.Models.Controls
         {
             Options = "";
             ViewName = "";
+            //this.user_type = HttpContext.Current.Request.Cookies["type"].Value;
         }
 
 
-        public string prueba
+        public string ActionLinks
         {
             get
             {
-                var htmlOptions = "";
-                Console.WriteLine(HttpContext.Current.Request.Cookies["user_type"]);
-                return htmlOptions;
+                var links = "";
+                HttpCookie nameCookie = HttpContext.Current.Request.Cookies["type"];
+                if (nameCookie != null)
+                {
+                    this.user_type = nameCookie.Value;
+                    var views = GetViewsFromAPI(user_type.ToString());
+
+                    var lstGrupos = views.OrderBy(d => d.ControllerName).GroupBy(x => x.ControllerName).ToList();
+
+
+                    foreach (var group in lstGrupos)
+                    {
+                        if (group.Key != "")
+                        {
+                            links +=
+                                "<li class='nav-item dropdown'>" +
+                                    "<a class='nav-link' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" + group.Key + "<span><i class='fa fa-angle-down '></i></span></a>" +
+                                    "<ul class='dropdown-menu' aria-labelledby='navbarDropdown'>";
+
+                            foreach (var item in group)
+                            {
+                                links += "<li>" +
+                                "<a href=\"/" + item.ControllerName + "/" + item.ViewName + "\" class=\"dropdown-item\">" + item.ViewDescription + "</a>" +
+                                "</li>";
+                            }
+
+                            links += "</ul></li>";
+                        }
+                        else
+                        {
+                            foreach (var item in group)
+                            {
+                                links += "<li>" +
+                                "<a href=\"/" + item.ControllerName + "/" + item.ViewName + "\" class=\"dropdown-item\">" + item.ViewDescription + "</a>" +
+                                "</li>";
+                            }
+                        }
+
+                    }
+                    links += "<li>" +
+                            "<a id=\"btnLogout\" href =\"#\" class=\"nav-link\">Cerrar sesión</a>" +
+                            "</li>";
+                }
+                else
+                {
+                    //None
+                }
+
+                return links;
             }
           
         }
-        /*public string ActionLinks
+        
+
+        private List<ViewPermission> GetViewsFromAPI(string idUserType)
         {
-            get
+            var client = new WebClient
             {
-                this.user_type = HttpContext.Current.Request.Cookies["user_type"].Value;
-
-                switch (user_type)
-                {
-                    case "1":
-                        //this.A = (SysAdmin)HttpContext.Current.Request.Cookies["user"];
-                        break;
-                    case "2":
-                        break;
-                    case "3":
-                        break;
-                    case "4":
-                        break;
-                }
-
-            }
-        }*/
-
-
+                Encoding = System.Text.Encoding.UTF8
+            };
+            var response = client.DownloadString(URL_API_LISTs + idUserType);
+            var options = JsonConvert.DeserializeObject<List<ViewPermission>>(response);
+            return options;
+        }
 
 
     }

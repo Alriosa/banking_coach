@@ -201,6 +201,7 @@
     <Content Include="Scripts\Views\Financial\vFinancialAccount.js" />
     <Content Include="Scripts\Views\Financial\vFinancialList.js" />
     <Content Include="Scripts\Views\Financial\vFinancialRegistration.js" />
+    <Content Include="Scripts\Views\Layout.js" />
     <Content Include="Scripts\Views\Login\vIndex.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterAccount.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterRegistration.js" />
