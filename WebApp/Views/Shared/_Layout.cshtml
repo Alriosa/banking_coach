@@ -17,85 +17,91 @@
     <script src="~/Scripts/Views/ControlActions.js"></script>
 </head>
 <body class="bg-gray">
-    <img class="bg-top" src="~/Content/imgs/background-top.png" />
-    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-transparent">
-        <div class="container">
-            <a href="../" class="navbar-brand">Banking Coach</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Home")">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Home")">Noticias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Home")">Matrícula</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Home")">Contáctenos</a>
-                    </li>
-                    <!--<li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Administradores<span class="caret"></span></a>
-          <div class="dropdown-menu">
-              <a class="dropdown-item" href="@Url.Action("vSysAdminRegistration","SysAdmin")">Registrar Administrador</a>
-              <a class="dropdown-item" href="@Url.Action("vSysAdminList","SysAdmin")">Listar Administradores</a>
-              <a class="dropdown-item" href="@Url.Action("vSysAdminUpdate","SysAdmin")">Actualizar Administrador</a>
-          </div>
-      </li>
-
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Financieros<span class="caret"></span></a>
-          <div class="dropdown-menu">
-              <a class="dropdown-item" href="@Url.Action("vFinancialRegistration","Financial")">Registrar Financiero</a>
-              <a class="dropdown-item" href="@Url.Action("vFinancialList","Financial")">Listar Financieros</a>
-              <a class="dropdown-item" href="@Url.Action("vFinancialUpdate","Financial")">Actualizar Financiero</a>
-          </div>
-      </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Reclutadores <span class="caret"></span></a>
-          <div class="dropdown-menu">
-              <a class="dropdown-item" href="@Url.Action("vRecruiterRegistration","Recruiter")">Registrar Reclutador</a>
-              <a class="dropdown-item" href="@Url.Action("vRecruiterList","Recruiter")">Listar Reclutadores</a>
-              <a class="dropdown-item" href="@Url.Action("vRecruiterUpdate","Recruiter")">Actualizar Reclutador</a>
-          </div>
-      </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Estudiantes <span class="caret"></span></a>
-          <div class="dropdown-menu">
-              <a class="dropdown-item" href="@Url.Action("vStudentRegistration","Student")">Registrar Estudiante</a>
-              <a class="dropdown-item" href="@Url.Action("vStudentList","Student")">Listar Estudiantes</a>
-              <a class="dropdown-item" href="@Url.Action("vStudentUpdate","Student")">Actualizar Estudiante</a>
-          </div>
-      </li>
-    -->
-                </ul>
-
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <img class="bg-top" src="~/Content/imgs/background-top.png" />
+                @Html.CtrlNavBarMenu(id: "navbar", optionsName: "Administradores,Financieros,Reclutadores,Estudiantes", optionsActionName: "SysAdmin,Financial,Recruiter,Students")
             </div>
         </div>
-    </div>
+                    <!-- <a href="../" class="navbar-brand">Banking Coach</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarResponsive">
+                      <ul class="navbar-nav">
+                          <li class="nav-item">
+                              <a class="nav-link" href="@Url.Action("Index","Home")">Inicio</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="@Url.Action("Index","Home")">Servicios</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="@Url.Action("Index","Home")">Noticias</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="@Url.Action("Index","Home")">Matrícula</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="@Url.Action("Index","Home")">Contáctenos</a>
+                          </li>
+                         <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Administradores<span class="caret"></span></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("vSysAdminRegistration","SysAdmin")">Registrar Administrador</a>
+                    <a class="dropdown-item" href="@Url.Action("vSysAdminList","SysAdmin")">Listar Administradores</a>
+                    <a class="dropdown-item" href="@Url.Action("vSysAdminUpdate","SysAdmin")">Actualizar Administrador</a>
+                </div>
+            </li>
 
-    @Html.CtrlNavBarMenu(id: "navbar", optionsName: "", optionsActionName: "");
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Financieros<span class="caret"></span></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("vFinancialRegistration","Financial")">Registrar Financiero</a>
+                    <a class="dropdown-item" href="@Url.Action("vFinancialList","Financial")">Listar Financieros</a>
+                    <a class="dropdown-item" href="@Url.Action("vFinancialUpdate","Financial")">Actualizar Financiero</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Reclutadores <span class="caret"></span></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("vRecruiterRegistration","Recruiter")">Registrar Reclutador</a>
+                    <a class="dropdown-item" href="@Url.Action("vRecruiterList","Recruiter")">Listar Reclutadores</a>
+                    <a class="dropdown-item" href="@Url.Action("vRecruiterUpdate","Recruiter")">Actualizar Reclutador</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Estudiantes <span class="caret"></span></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("vStudentRegistration","Student")">Registrar Estudiante</a>
+                    <a class="dropdown-item" href="@Url.Action("vStudentList","Student")">Listar Estudiantes</a>
+                    <a class="dropdown-item" href="@Url.Action("vStudentUpdate","Student")">Actualizar Estudiante</a>
+                </div>
+            </li>
 
-    <div class="container body-content">
-        <div class="alert alert-success alert-dismissable" style="display: none" id="alert_container">
-            <button type="button" class="close" onclick="$('.alert').hide()">&times;</button>
-            <span id="alert_message"></span>
-        </div>
-        @RenderBody()
-        <hr />
+                  </ul>
 
-    </div>
+              </div>-->
+                 
 
-    <footer>
-        @Html.Partial("~/Views/Shared/_Footer.cshtml")
-    </footer>
+            </div>
+
+
+
+            <div class="container body-content">
+                <div class="alert alert-success alert-dismissable" style="display: none" id="alert_container">
+                    <button type="button" class="close" onclick="$('.alert').hide()">&times;</button>
+                    <span id="alert_message"></span>
+                </div>
+                @RenderBody()
+                <hr />
+
+            </div>
+
+            <footer>
+                @Html.Partial("~/Views/Shared/_Footer.cshtml")
+            </footer>
 </body>
 @*<script>
     $(document).ready(function () {
