@@ -32,6 +32,7 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 // ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al insertar datos", ex);
             }
         }
 
@@ -59,6 +60,24 @@ namespace CoreAPI
             return c;
         }
 
+        public FinancialUser RetrieveByUserLogin(FinancialUser financial)
+        {
+            FinancialUser c = null;
+            try
+            {
+                c = financialUserCrudFactory.RetrieveByUserLogin<FinancialUser>(financial);
+                /* if (c == null)
+                 {
+                     throw new BussinessException(4);
+                 }*/
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+            }
+
+            return c;
+        }
         public void Update(FinancialUser financialUser)
         {
             financialUserCrudFactory.Update(financialUser);

@@ -7,8 +7,7 @@
 
 
 	this.BindFields = function (data) {
-
-
+		window.location.href = "/student/vStudentAccount/" + data["StudentID"];
 	}
 
 	this.RetrieveAll = function () {

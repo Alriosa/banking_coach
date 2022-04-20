@@ -8,9 +8,11 @@ using Exceptions;
 
 namespace WebAPI.Controllers
 {
+    [RoutePrefix ("api/student")]
     public class StudentController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
+        [Route("")]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -20,14 +22,15 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
-        public IHttpActionResult Get(string id)
+        [Route("{id}")]
+        public IHttpActionResult Get(int id)
         {
             try
             {
                 var mng = new StudentManager();
                 var student = new Student
                 {
-                    IdentificationNumber = id
+                    StudentID = id
                 };
 
                 student = mng.RetrieveById(student);
@@ -42,6 +45,35 @@ namespace WebAPI.Controllers
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
+
+
+        [HttpGet]
+        [Route("getUser/{id}")]
+        public IHttpActionResult GetUser(string id)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                var student = new Student
+                {
+                    StudentLogin = id
+                };
+
+                student = mng.RetrieveByUserLogin(student);
+                apiResp = new ApiResponse
+                {
+                    Data = student
+                };
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+
+        [Route("")]
         public IHttpActionResult Post(Student student)
         {
             try
@@ -58,10 +90,10 @@ namespace WebAPI.Controllers
                         apiResp.Message = "Nombre de usuario ya existe";
                         apiResp.Data = "error";
                         break;
-                    /*case "2":
+                      case "2":
                         apiResp.Message = "Email ya existe";
                         apiResp.Data = "error";
-                        break;*/
+                        break;
                     default:
                         student.UserActiveStatus = "1";
                         mng.Create(student);
@@ -73,11 +105,13 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
+                bex.AppMessage.Message = "Hubo un error al registrar al usaurio";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
 
 
+        [Route("")]
         public IHttpActionResult Put(Student student)
         {
             try
@@ -98,6 +132,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [Route("")]
         public IHttpActionResult Delete(Student student)
         {
             try

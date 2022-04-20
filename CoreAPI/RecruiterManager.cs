@@ -32,6 +32,7 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 // ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al insertar datos", ex);
             }
         }
 
@@ -53,7 +54,29 @@ namespace CoreAPI
             }
             catch (Exception ex)
             {
-                ExceptionManager.GetInstance().Process(ex);
+                // ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+
+            return c;
+        }
+
+
+        public Recruiter RetrieveByUserLogin(Recruiter recruiter)
+        {
+            Recruiter c = null;
+            try
+            {
+                c = crudRecruiter.RetrieveByUserLogin<Recruiter>(recruiter);
+               /* if (c == null)
+                {
+                    throw new BussinessException(4);
+                }*/
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
             }
 
             return c;
@@ -78,6 +101,7 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 //ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
             }
             return repeated;
         }

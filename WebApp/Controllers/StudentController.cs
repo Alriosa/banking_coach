@@ -26,7 +26,19 @@ namespace WebApp.Controllers
             return View();
 
         }
+        public ActionResult vStudentAccount(string id)
+        {
+            if (id != null)
+            {
+                ViewBag.IdStudent = id;
+            }
+            else
+            {
+                ViewBag.IdStudent = "null";
+            }
 
+            return View();
+        }
 
     }
 }

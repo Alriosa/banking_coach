@@ -14,6 +14,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_RECRUITER_LOGIN = "Recruiter_Login";
         private const string DB_COL_RECRUITER_PASSWORD = "Recruiter_Password";
         private const string DB_COL_FINANTIAL_ASSOCIATION = "Finantial_Association";
+        private const string DB_COL_FINANTIAL_ASSOCIATION_NAME = "Finantial_Association_Name";
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_RECRUITER_STATUS = "User_Active_Status";
         private const string DB_COL_USER_EXIST = "User_Login";
@@ -29,7 +30,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
             operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, recruiter.UserType);
+            operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
         }
@@ -37,10 +38,20 @@ namespace DataAccess.Mapper
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_RECRUITER_USER" };
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_RECRUITER_USER_BY_ID" };
 
             var recruiter = (Recruiter)entity;
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
+
+            return operation;
+        }
+
+        public SqlOperation GetRetriveUserLoginStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_RECRUITER_USER" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
 
             return operation;
         }
@@ -105,6 +116,7 @@ namespace DataAccess.Mapper
                 RecruiterLogin = GetStringValue(row, DB_COL_RECRUITER_LOGIN),
                 RecruiterPassword = GetStringValue(row, DB_COL_RECRUITER_PASSWORD),
                 FinantialAssociation = GetIntValue(row, DB_COL_FINANTIAL_ASSOCIATION),
+                FinantialAssociationName = GetStringValue(row, DB_COL_FINANTIAL_ASSOCIATION_NAME),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS)
             };

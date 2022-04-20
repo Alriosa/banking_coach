@@ -1,11 +1,15 @@
 ﻿function vFinancialList() {
 
-	this.tblFinancialId = 'tblFinancial';
+	this.tblFinancialId = 'tblFinancial1';
 	this.ctrlActions = new ControlActions();
 	this.service = 'financial';
-	this.columns = "FinancialLogin,UserActiveStatus";
+	this.columns = "FinancialLogin,UserActiveStatuss";
 
 
+	this.BindFields = function (data) {
+
+
+	}
 
 	this.RetrieveAll = function () {
 		this.ctrlActions.FillTable(this.service, this.tblFinancialId, false);
@@ -14,6 +18,8 @@
 	this.ReloadTable = function () {
 		this.ctrlActions.FillTable(this.service, this.tblFinancialId, true);
 	}
+
+
 }
 
 

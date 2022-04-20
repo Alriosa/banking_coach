@@ -70,5 +70,10 @@ namespace DataAccess.Crud
             var userLog = (UserLog)entity;
             dao.ExecuteProcedure(mapper.GetDeleteStatement(userLog));
         }
+
+        public override T RetrieveByUserLogin<T>(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

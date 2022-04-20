@@ -3,7 +3,7 @@
 	this.tblRecruiterId = 'tblRecruiter';
 	this.ctrlActions = new ControlActions();
 	this.service = 'recruiter';
-	this.columns = "RecruiterLogin,FinantialAssociation,UserActiveStatus";
+	this.columns = "RecruiterLogin,FinantialAssociationName,UserActiveStatus";
 
 
 

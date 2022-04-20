@@ -41,22 +41,42 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveUserLoginStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_ADMIN_USER" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+
+            return operation;
+        }
+
         public SqlOperation GetRetriveAllStatement()
         {
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_ADMIN_USER" };
             return operation;
         }
 
+      
+
         public SqlOperation GetUpdateStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_ADMIN_USER" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
+
+            return operation;
+        }
+
+        public SqlOperation GetUpdateStatusStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_ADMIN_USER_STATUS" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
-            operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
             operation.AddVarcharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, sysAdmin.UserType);
 
             return operation;
         }
@@ -100,8 +120,8 @@ namespace DataAccess.Mapper
                 SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
                 AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
                 AdminPassword = GetStringValue(row, DB_COL_ADMIN_PASSWORD),
-                UserType = GetStringValue(row, DB_COL_ADMIN_STATUS),
-                UserActiveStatus= GetStringValue(row, DB_COL_USER_TYPE)
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                UserActiveStatus= GetStringValue(row, DB_COL_ADMIN_STATUS)
             };
 
             return sysAdmin;

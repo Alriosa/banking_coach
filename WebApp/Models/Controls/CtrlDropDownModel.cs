@@ -16,7 +16,7 @@ namespace WebApp.Models.Controls
         public string ListId { get; set; }
         public string ColumnDataName { get; set; }
 
-        private string URL_API_LISTs = "http://localhost:57056/api/List/";
+        private string URL_API_LISTs = "http://localhost:57056/api/list/";
 
         public string ListOptions
         {
@@ -27,7 +27,7 @@ namespace WebApp.Models.Controls
 
                 foreach(var option in lst)
                 {
-                    htmlOptions += "<option value='" + option.Value + "'>" + option.Description + "</option>";
+                    htmlOptions += "<option data-parent=" + option.PCode+" value='" + option.Code + "'>" + option.Value + "</option>";
                 }
                 return htmlOptions;
             }
@@ -41,6 +41,7 @@ namespace WebApp.Models.Controls
         private List<OptionList> GetOptionsFromAPI()
         {
             var client = new WebClient();
+            client.Encoding = System.Text.Encoding.UTF8;
             var response = client.DownloadString(URL_API_LISTs + ListId);
             var options = JsonConvert.DeserializeObject<List<OptionList>>(response); 
             return options;

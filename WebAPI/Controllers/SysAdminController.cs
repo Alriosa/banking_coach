@@ -10,10 +10,12 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [RoutePrefix("api/sysadmin")]
     public class SysAdminController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
-        
+
+        [Route("")]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -23,6 +25,7 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
+        [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
             try
@@ -45,7 +48,33 @@ namespace WebAPI.Controllers
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
-        
+
+        [HttpGet]
+        [Route("getUser/{id}")]
+        public IHttpActionResult GetUser(string id)
+        {
+            try
+            {
+                var mng = new SysAdminManager();
+                var sysAdmin = new SysAdmin
+                {
+                    AdminLogin = id
+                };
+
+                sysAdmin = mng.RetrieveByUserLogin(sysAdmin);
+                apiResp = new ApiResponse
+                {
+                    Data = sysAdmin
+                };
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [Route("")]
         public IHttpActionResult Post(SysAdmin sysAdmin)
         {
             try
@@ -77,6 +106,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [Route("")]
         public IHttpActionResult Put(SysAdmin sysAdmin)
         {
             try
@@ -97,6 +127,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [Route("")]
         public IHttpActionResult Delete(SysAdmin sysAdmin)
         {
             try

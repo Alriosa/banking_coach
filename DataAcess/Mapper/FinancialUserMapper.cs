@@ -41,6 +41,16 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveUserLoginStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_FINANCIAL_USER" };
+
+            var financialUser = (FinancialUser)entity;
+            operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
+
+            return operation;
+        }
+
         public SqlOperation GetRetriveAllStatement()
         {
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_FINANCIAL_USER" };
@@ -52,11 +62,8 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_FINANCIAL_USER_STATUS" };
 
             var financialUser = (FinancialUser)entity;
-            operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
             operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
             operation.AddVarcharParam(DB_COL_FINANCIAL_PASSWORD, financialUser.FinancialPassword);
-            operation.AddVarcharParam(DB_COL_FINANCIAL_STATUS, financialUser.UserActiveStatus);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, financialUser.UserType);
 
             return operation;
         }
@@ -100,8 +107,8 @@ namespace DataAccess.Mapper
                 FinancialUserID = GetIntValue(row, DB_COL_FINANCIAL_USER_ID),
                 FinancialLogin = GetStringValue(row, DB_COL_FINANCIAL_USER),
                 FinancialPassword = GetStringValue(row, DB_COL_FINANCIAL_PASSWORD),
-                UserType = GetStringValue(row, DB_COL_FINANCIAL_STATUS),
-                UserActiveStatus = GetStringValue(row, DB_COL_USER_TYPE)
+                UserActiveStatus = GetStringValue(row, DB_COL_FINANCIAL_STATUS),
+                UserType = GetStringValue(row, DB_COL_USER_TYPE)
             };
 
             return financialUser;

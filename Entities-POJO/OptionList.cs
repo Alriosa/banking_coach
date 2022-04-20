@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entities_POJO
 {
-    public class OptionList
+    public class OptionList : BaseEntity
     {
         public string ListId { get; set; }
+        public string PCode { get; set; }
+        public string Code { get; set; }
         public string Value { get; set; }
-        public string Description { get; set; }
     }
 }

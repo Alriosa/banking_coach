@@ -27,26 +27,37 @@
 
                             <h1 class="form-title">REGISTRA A LA ENTIDAD FINANCIERA</h1>
                         </div>
-                        <form id="frmFinancialCreate " class="form frmFinancialCreate">
-                            <div class="col-sm-12 text-center">
-                                <div class="form-row ">
-                                    <div class="col-lg-12">
-                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", placeHolder: "Nombre de Usuario", columnDataName: "FinancialLogin")
-                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", placeHolder: "*********", columnDataName: "FinancialPassword")
-                                        @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", placeHolder: "*********", columnDataName: "")
-                                       
+                        <form id="frmFinancialCreate" class="form frmFinancialCreate">
+                            <div class="row align-content-sm-center">
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtLogin", type: "text", required: true, placeHolder: "Nombre de Usuario", columnDataName: "FinancialLogin")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtPassword", type: "password", required: true, placeHolder: "Nueva Contraseña", columnDataName: "FinancialPassword")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", required: true, placeHolder: "Confirmar Contraseña", columnDataName: "")
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-row" style="margin: 0px auto;">
-                                <div style="margin: 0px auto 10px;">
-                                    @Html.CtrlButton(viewName: "vFinancialRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-row" style="margin: 0px auto;">
+                                        <div style="margin: 0px auto 10px;">
+                                            @Html.CtrlButton(viewName: "vFinancialRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+</div>

@@ -39,14 +39,15 @@ namespace WebApp.Helpers
         }
 
 
-        public static HtmlString CtrlInputSecond(this HtmlHelper html, string id, string type, string placeHolder = "", string columnDataName = "")
+        public static HtmlString CtrlInputSecond(this HtmlHelper html, string id, string type, bool required, string placeHolder = "", string columnDataName = "")
         {
             var ctrl = new CtrlInputSecondModel
             {
                 Id = id,
                 Type = type,
                 PlaceHolder = placeHolder,
-                ColumnDataName = columnDataName
+                ColumnDataName = columnDataName,
+                Required = required
             };
 
             return new HtmlString(ctrl.GetHtml());
@@ -67,13 +68,28 @@ namespace WebApp.Helpers
             return new HtmlString(ctrl.GetHtml());
         }
 
-        public static HtmlString CtrlDropDown(this HtmlHelper html, string id, string label, string listId)
+        public static HtmlString CtrlDropDown(this HtmlHelper html, string id, string label, string listId, string columnDataName)
         {
             var ctrl = new CtrlDropDownModel
             {
                 Id = id,
                 Label = label,
-                ListId = listId
+                ListId = listId,
+                ColumnDataName = columnDataName
+            };
+
+            return new HtmlString(ctrl.GetHtml());
+        }
+
+        public static HtmlString CtrlDropDownSecond(this HtmlHelper html, string id, string title, string label, string name, string columnDataName)
+        {
+            var ctrl = new CtrlDropDownSecondModel
+            {
+                Id = id,
+                Title = title,
+                Label = label,
+                Name = name,
+                ColumnDataName = columnDataName
             };
 
             return new HtmlString(ctrl.GetHtml());

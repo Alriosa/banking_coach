@@ -31,10 +31,30 @@ namespace CoreAPI
             }
             catch (Exception ex)
             {
-               // ExceptionManager.GetInstance().Process(ex);
+                // ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al insertar datos", ex);
             }
         }
 
+        public SysAdmin RetrieveByUserLogin(SysAdmin sysAdmin)
+        {
+            SysAdmin c = null;
+            try
+            {
+                c = crudSysAdmin.RetrieveByUserLogin<SysAdmin>(sysAdmin);
+                /* if (c == null)
+                 {
+                     throw new BussinessException(4);
+                 }*/
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+
+            return c;
+        }
         public List<SysAdmin> RetrieveAll()
         {
             return crudSysAdmin.RetrieveAll<SysAdmin>();
@@ -54,6 +74,7 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 //ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
             }
 
             return c;
@@ -80,6 +101,7 @@ namespace CoreAPI
             catch (Exception ex)
             {
                 //ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
             }
             return repeated;
         }

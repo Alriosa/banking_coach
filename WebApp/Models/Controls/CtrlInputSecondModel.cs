@@ -10,7 +10,7 @@ namespace WebApp.Models.Controls
         public string Type { get; set; }
         public string PlaceHolder { get; set; }
         public string ColumnDataName { get; set; }
-
+        public bool Required { get; set; }
         public CtrlInputSecondModel()
         {
             ViewName = "";

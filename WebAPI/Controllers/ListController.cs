@@ -22,19 +22,19 @@ namespace WebAPI.Controllers
         public IHttpActionResult Get(string id)
         {
             try
-            { 
+            {
                 var mng = new ListManager();
                 var option = new OptionList
                 {
-                    ListId="LST_GENERO"
+                    ListId = id
                 };
 
-                var lstOptions = mng.RetrieveById(option);        
+                var lstOptions = mng.RetrieveById(option);
                 return Ok(lstOptions);
             }
             catch (BussinessException bex)
             {
-                return InternalServerError(new Exception(bex.ExceptionId + "-" + bex.AppMessage.Message));
+                return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
 

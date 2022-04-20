@@ -1,2 +1,12 @@
 
 *.cache
+
+.vs/
+
+CoreAPI/bin/
+
+CoreAPI/obj/
+
+*.dll
+
+*.pdb

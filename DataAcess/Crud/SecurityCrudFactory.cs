@@ -51,6 +51,11 @@ namespace DataAcess.Crud
             throw new NotImplementedException();
         }
 
+        public override T RetrieveByUserLogin<T>(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void Update(BaseEntity entity)
         {
             throw new NotImplementedException();
