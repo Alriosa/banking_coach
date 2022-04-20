@@ -1,3 +1,12 @@
+D:\Alriosa Code\banking_coach\DataAcess\bin\Debug\DataAcess.dll
+D:\Alriosa Code\banking_coach\DataAcess\bin\Debug\DataAcess.pdb
+D:\Alriosa Code\banking_coach\DataAcess\bin\Debug\Entities-POJO.dll
+D:\Alriosa Code\banking_coach\DataAcess\bin\Debug\Entities-POJO.pdb
+D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CopyComplete
+D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAcess.dll
+D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAcess.pdb
 F:\Otros proyectos\banking_coach\DataAcess\bin\Debug\DataAcess.dll
 F:\Otros proyectos\banking_coach\DataAcess\bin\Debug\DataAcess.pdb
 F:\Otros proyectos\banking_coach\DataAcess\bin\Debug\Entities-POJO.dll
@@ -16,12 +25,3 @@ C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CopyComplete
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAcess.dll
 C:\Users\Usuario\Desktop\Github projects\New folder (2)\banking_coach\DataAcess\obj\Debug\DataAcess.pdb
-D:\Alriosa Code\banking_coach\DataAcess\bin\Debug\DataAcess.dll
-D:\Alriosa Code\banking_coach\DataAcess\bin\Debug\DataAcess.pdb
-D:\Alriosa Code\banking_coach\DataAcess\bin\Debug\Entities-POJO.dll
-D:\Alriosa Code\banking_coach\DataAcess\bin\Debug\Entities-POJO.pdb
-D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
-D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
-D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAccess.csproj.CopyComplete
-D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAcess.dll
-D:\Alriosa Code\banking_coach\DataAcess\obj\Debug\DataAcess.pdb

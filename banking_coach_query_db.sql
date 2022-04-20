@@ -112,6 +112,22 @@ CREATE TABLE LST_DISTRICTS (
   PRIMARY KEY (Id)
 )
 
+CREATE TABLE TBL_VIEWS (
+	View_ID	INT IDENTITY(1,1) PRIMARY KEY NOT NULL, --PK
+	Controller_Name VARCHAR(50) NOT NULL, 
+	View_Name VARCHAR(50) NOT NULL,
+);
+
+
+CREATE TABLE TBL_PERMISSIONS (
+	Id_User_Type VARCHAR(1) NOT NULL, 
+	Id_View INT NOT NULL,
+	PRIMARY KEY NONCLUSTERED (Id_User_Type, Id_View),
+	CONSTRAINT FK_VIEW_PERMISSION FOREIGN KEY (Id_View) REFERENCES TBL_VIEWS (View_ID)
+);
+
+
+
 ----------------------------------------------------------------------------------------------------------------------
 ---INSERTS EMPTYS----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
@@ -148,6 +164,9 @@ INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Pas
 GO 
 
 SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
+
+
+
 
 INSERT INTO LST_PROVINCES (id, code, name_value) VALUES ('1', '1', 'San José');
 INSERT INTO LST_PROVINCES (id, code, name_value) VALUES ('2', '2', 'Alajuela');
@@ -717,6 +736,59 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('473',  '81', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('474',  '81', '04', 'RÍO JIMÉNEZ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('475',  '81', '05', 'DUACARÍ');
 
+
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'SysAdminRegistration')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminList')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminAccount')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminUpdate')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'FinancialRegistration')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialList')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialAccount')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialUpdate')
+INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterRegistration')
+INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterList')
+INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterAccount')
+INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterUpdate')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'StudentRegistration')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentList')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentAccount')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentUpdate')
+
+
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '1')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '2')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '3')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '4')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '5')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '6')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '7')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '8')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '9')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '10')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '11')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '12')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '13')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '14')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '15')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '16')
+
+INSERT INTO TBL_PERMISSIONS VALUES ('2', '15')
+INSERT INTO TBL_PERMISSIONS VALUES ('2', '16')
+
+INSERT INTO TBL_PERMISSIONS VALUES ('3', '11')
+INSERT INTO TBL_PERMISSIONS VALUES ('3', '12')
+INSERT INTO TBL_PERMISSIONS VALUES ('3', '14')
+INSERT INTO TBL_PERMISSIONS VALUES ('3', '15')
+
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '7')
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '8')
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '9')
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '10')
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '11')
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '12')
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '14')
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '15')
+
 ------------------------------------------------------------------------------------------------------------------------
 --- VIEWS ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
@@ -734,6 +806,10 @@ AS
 			SELECT Financial_User AS 'User_Login', Financial_Password AS 'User_Password', User_Type, User_Active_Status FROM dbo.TBL_FINANCIAL_USER
 		) AS TB_USER_LOGIN
 GO
+
+
+
+
 
 ----------------------------------------------------------------------------------------------------------------------
 ---STORAGE PROCEDURES----------------------------------------------------------------------------------------------------
@@ -1430,10 +1506,33 @@ GO
 
 
 
+/**
+-START 
+STORAGE PROCEDURES FOR PERMISSIONS
+**/
+
+CREATE PROCEDURE RET_VIEW_BY_USER
+	@SP_Id_User_Type VARCHAR(1) 
+AS
+	SELECT P.Id_User_Type, V.Controller_Name, V.View_Name
+	FROM TBL_PERMISSIONS AS P
+	JOIN 
+	TBL_VIEWS AS V ON P.Id_View = V.View_ID 
+	WHERE P.Id_User_Type = @SP_Id_User_Type
+
+GO
+
+/*
+	EXECUTE PROCEDURES
+*/
+
+
 EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'prueba_admin', 'prueba_admin', '1'
-
+GO
 EXEC [dbo].[SP_INSERT_TBL_FINANCIAL_USER] 'prueba_financiero', 'prueba_financiero', '1'
-
+GO
 EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'prueba_reclutador', 'prueba_reclutador', '1', 1
-
+GO
 EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1','1','2022-03-27','prueba', 'estudiante', 'prueba', 'estudiante', 'N', '123456789', '2002-03-27','M', '87878787', NULL, 'example@gmail.com', '1', 'Ejemplo Dirección', '1', 'prueba_estudiante', 'prueba_estudiante','1','01', '10'
+
+GO

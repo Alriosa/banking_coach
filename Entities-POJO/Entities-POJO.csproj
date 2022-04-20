@@ -47,12 +47,15 @@
     <Compile Include="FinancialUser.cs" />
     <Compile Include="ObjectDumper.cs" />
     <Compile Include="OptionList.cs" />
+    <Compile Include="Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recruiter.cs" />
     <Compile Include="Security.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="SysAdmin.cs" />
     <Compile Include="UserLog.cs" />
+    <Compile Include="ViewPermission.cs" />
+    <Compile Include="Views.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

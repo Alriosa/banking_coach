@@ -53,6 +53,11 @@ namespace DataAcess.Crud
             return lstValores;
         }
 
+        public override List<T> RetrieveAllById<T>(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<T> RetrieveAllByListId<T>(BaseEntity entity, string listId)
         {
             var lstValores = new List<T>();

@@ -49,6 +49,11 @@ namespace DataAccess.Crud
             return lstAppMessage;
         }
 
+        public override List<T> RetrieveAllById<T>(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public override T RetrieveByUserLogin<T>(BaseEntity entity)
         {
             throw new NotImplementedException();
