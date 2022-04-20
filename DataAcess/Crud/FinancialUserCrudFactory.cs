@@ -99,5 +99,10 @@ namespace DataAccess.Crud
 
             return default(T);
         }
+
+        public override List<T> RetrieveAllById<T>(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -24,15 +24,15 @@ namespace WebApp.Helpers
 
             return new HtmlString(ctrl.GetHtml());
         }
-        public static HtmlString CtrlInput(this HtmlHelper html, string id, string type, string label, string placeHolder = "", string columnDataName="")
+        public static HtmlString CtrlInput(this HtmlHelper html, string id, string type, string label, string placeHolder = "", string columnDataName = "")
         {
             var ctrl = new CtrlInputModel
             {
                 Id = id,
                 Type = type,
                 Label = label,
-                PlaceHolder=placeHolder,
-                ColumnDataName=columnDataName
+                PlaceHolder = placeHolder,
+                ColumnDataName = columnDataName
             };
 
             return new HtmlString(ctrl.GetHtml());
@@ -53,7 +53,7 @@ namespace WebApp.Helpers
             return new HtmlString(ctrl.GetHtml());
         }
 
-        public static HtmlString CtrlButton(this HtmlHelper html, string viewName, string id, string type, string label, string onClickFunction="", string buttonType="primary")
+        public static HtmlString CtrlButton(this HtmlHelper html, string viewName, string id, string type, string label, string onClickFunction = "", string buttonType = "primary")
         {
             var ctrl = new CtrlButtonModel
             {
@@ -104,6 +104,18 @@ namespace WebApp.Helpers
                 Label = label,
                 Class = classes,
                 ColumnDataName = columnDataName
+            };
+
+            return new HtmlString(ctrl.GetHtml());
+        }
+
+        public static HtmlString CtrlNavBarMenu(this HtmlHelper html, string id, string optionsName, string optionsActionName)
+        {
+            var ctrl = new CtrlNavBarMenuModel
+            {
+                Id = id,
+                Options = optionsName,
+                OptionsActionName = optionsActionName
             };
 
             return new HtmlString(ctrl.GetHtml());

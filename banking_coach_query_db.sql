@@ -167,15 +167,6 @@ SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
 
 
 
-EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'prueba_admin', 'prueba_admin', '1'
-GO
-EXEC [dbo].[SP_INSERT_TBL_FINANCIAL_USER] 'prueba_financiero', 'prueba_financiero', '1'
-GO
-EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'prueba_reclutador', 'prueba_reclutador', '1', 1
-GO
-EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1','1','2022-03-27','prueba', 'estudiante', 'prueba', 'estudiante', 'N', '123456789', '2002-03-27','M', '87878787', NULL, 'example@gmail.com', '1', 'Ejemplo Dirección', '1', 'prueba_estudiante', 'prueba_estudiante','1','01', '10'
-
-GO
 
 INSERT INTO LST_PROVINCES (id, code, name_value) VALUES ('1', '1', 'San José');
 INSERT INTO LST_PROVINCES (id, code, name_value) VALUES ('2', '2', 'Alajuela');
@@ -754,7 +745,7 @@ INSERT INTO TBL_VIEWS VALUES ('Financial', 'FinancialRegistration')
 INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialList')
 INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialAccount')
 INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialUpdate')
-INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'RecluiterRegistration')
+INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterRegistration')
 INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterList')
 INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterAccount')
 INSERT INTO TBL_VIEWS VALUES ('Recluiter', 'vRecluiterUpdate')
@@ -1521,12 +1512,27 @@ STORAGE PROCEDURES FOR PERMISSIONS
 **/
 
 CREATE PROCEDURE RET_VIEW_BY_USER
-	@P_User_Type VARCHAR(1) 
+	@SP_Id_User_Type VARCHAR(1) 
 AS
 	SELECT P.Id_User_Type, V.Controller_Name, V.View_Name
 	FROM TBL_PERMISSIONS AS P
 	JOIN 
 	TBL_VIEWS AS V ON P.Id_View = V.View_ID 
-	WHERE P.Id_User_Type = @P_User_Type
+	WHERE P.Id_User_Type = @SP_Id_User_Type
+
+GO
+
+/*
+	EXECUTE PROCEDURES
+*/
+
+
+EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'prueba_admin', 'prueba_admin', '1'
+GO
+EXEC [dbo].[SP_INSERT_TBL_FINANCIAL_USER] 'prueba_financiero', 'prueba_financiero', '1'
+GO
+EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'prueba_reclutador', 'prueba_reclutador', '1', 1
+GO
+EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1','1','2022-03-27','prueba', 'estudiante', 'prueba', 'estudiante', 'N', '123456789', '2002-03-27','M', '87878787', NULL, 'example@gmail.com', '1', 'Ejemplo Dirección', '1', 'prueba_estudiante', 'prueba_estudiante','1','01', '10'
 
 GO

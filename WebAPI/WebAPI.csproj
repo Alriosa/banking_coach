@@ -194,6 +194,7 @@
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
+    <Compile Include="Controllers\ViewPermissionController.cs" />
     <Compile Include="ExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

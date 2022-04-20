@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using DataAccess.Dao;
-using DataAccess.Mapper;
+﻿using DataAccess.Crud;
 using Entities_POJO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DataAccess.Crud
+namespace DataAcess.Crud
 {
-    public class AppMessagesCrudFactory : CrudFactory
+    public class PermissionCrudFactory : CrudFactory
     {
-        AppMessageMapper mapper;
-
-        public AppMessagesCrudFactory()
-        {
-            mapper = new AppMessageMapper();
-            dao = SqlDao.GetInstance();
-        }
-
         public override void Create(BaseEntity entity)
         {
             throw new NotImplementedException();
@@ -33,20 +27,7 @@ namespace DataAccess.Crud
 
         public override List<T> RetrieveAll<T>()
         {
-            var lstAppMessage = new List<T>();
-
-            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveAllStatement());
-            var dic = new Dictionary<string, object>();
-            if (lstResult.Count > 0)
-            {
-                var objs = mapper.BuildObjects(lstResult);
-                foreach (var c in objs)
-                {
-                    lstAppMessage.Add((T)Convert.ChangeType(c, typeof(T)));
-                }
-            }
-
-            return lstAppMessage;
+            throw new NotImplementedException();
         }
 
         public override List<T> RetrieveAllById<T>(BaseEntity entity)

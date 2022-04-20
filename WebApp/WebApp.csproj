@@ -158,6 +158,7 @@
     <Compile Include="Models\Controls\CtrlInputModel.cs" />
     <Compile Include="Models\Controls\CtrlDropDownModel.cs" />
     <Compile Include="Models\Controls\CtrlInputSecondModel.cs" />
+    <Compile Include="Models\Controls\CtrlNavBarMenuModel.cs" />
     <Compile Include="Models\Controls\CtrlTableModel.cs" />
     <Compile Include="Models\Helpers\ControlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,6 +183,7 @@
     <Content Include="Models\Controls\CtrlInputModel.html" />
     <Content Include="Models\Controls\CtrlButtonModel.html" />
     <Content Include="Models\Controls\CtrlInputSecondModel.html" />
+    <Content Include="Models\Controls\CtrlNavBarMenuModel.html" />
     <Content Include="Models\Controls\CtrlTableModel.html" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -10,13 +10,12 @@ using System.Threading.Tasks;
 
 namespace DataAcess.Crud
 {
-    public class ListCrudFactory : CrudFactory
+    public class ViewPermissionCrudFactory : CrudFactory
     {
-        ListMapper mapper;
-
-        public ListCrudFactory() : base()
+        ViewPermissionMapper mapper;
+        public ViewPermissionCrudFactory() : base()
         {
-            mapper = new ListMapper();
+            mapper = new ViewPermissionMapper();
             dao = SqlDao.GetInstance();
         }
 
@@ -32,48 +31,39 @@ namespace DataAcess.Crud
 
         public override T Retrieve<T>(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveStatement(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var objs = mapper.BuildObject(dic);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
+
+            return default(T);
         }
 
         public override List<T> RetrieveAll<T>()
         {
-            var lstValores = new List<T>();
-
-            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveAllProvincesStatement());
-            var dic = new Dictionary<string, object>();
-            if (lstResult.Count > 0)
-            {
-                var objs = mapper.BuildObjects(lstResult);
-                foreach (var c in objs)
-                {
-                    lstValores.Add((T)Convert.ChangeType(c, typeof(T)));
-                }
-            }
-
-            return lstValores;
+            throw new NotImplementedException();
         }
 
         public override List<T> RetrieveAllById<T>(BaseEntity entity)
         {
-            throw new NotImplementedException();
-        }
+            var lstViewPermissions = new List<T>();
 
-        public List<T> RetrieveAllByListId<T>(BaseEntity entity, string listId)
-        {
-            var lstValores = new List<T>();
-
-            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetrieveByListStatement(entity, listId));
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveStatement(entity));
             var dic = new Dictionary<string, object>();
             if (lstResult.Count > 0)
             {
                 var objs = mapper.BuildObjects(lstResult);
                 foreach (var c in objs)
                 {
-                    lstValores.Add((T)Convert.ChangeType(c, typeof(T)));
+                    lstViewPermissions.Add((T)Convert.ChangeType(c, typeof(T)));
                 }
             }
 
-            return lstValores;
+            return lstViewPermissions;
         }
 
         public override T RetrieveByUserLogin<T>(BaseEntity entity)
