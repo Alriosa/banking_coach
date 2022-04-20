@@ -947,14 +947,14 @@ AS
 GO
 
 --- UPDATE STUDENT
-CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
+alter PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Banking_Student VARCHAR(1),
-        @SP_User_Active_Status VARCHAR(1),
+        @SP_User_Active_Status VARCHAR(1)= null,
         @SP_Entry_DATE DATETIME,
         @SP_First_Name VARCHAR(200),
-        @SP_Second_Name VARCHAR(200),
+        @SP_Second_Name VARCHAR(200) = null,
         @SP_Last_Name VARCHAR(200),
-        @SP_Second_Last_Name VARCHAR(200) = null,
+        @SP_Second_Last_Name VARCHAR(200),
         @SP_Id_Type VARCHAR(1),
         @SP_Identification_Number VARCHAR(20),
         @SP_Birthdate DATETIME,
@@ -966,14 +966,13 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Work_Address VARCHAR(200),
         @SP_Laboral_Experience VARCHAR(1),
         @SP_Student_User VARCHAR(20),
-        @SP_Student_Password VARCHAR(50),
+        @SP_Student_Password VARCHAR(50) = null,
         @SP_Province VARCHAR(3),
         @SP_Canton VARCHAR(3),
         @SP_District VARCHAR(3)
 AS
         UPDATE [dbo].[TBL_STUDENT] SET
                 Banking_Student=@SP_Banking_Student,
-                User_Active_Status=@SP_User_Active_Status,
                 Entry_Date=@SP_Entry_Date,
                 First_Name=@SP_First_Name,
                 Second_Name=@SP_Second_Name,
@@ -989,7 +988,6 @@ AS
                 Laboral_Status=@SP_Laboral_Status,
                 Work_Address=@SP_Work_Address,
                 Laboral_Experience=@SP_Laboral_Experience,
-                Student_Password= HashBytes('MD5',@SP_Student_Password),
                 Province=@SP_Province,
                 Canton=@SP_Canton,
                 District=@SP_District

@@ -121,7 +121,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student Modified."
+                    Message = "Estudiante Modificado"
                 };
 
                 return Ok(apiResp);
@@ -142,7 +142,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Student deleted."
+                    Message = "Estudiante Eliminado"
                 };
 
                 return Ok(apiResp);

@@ -214,7 +214,7 @@ function getCookie(cname) {
 
 function formatDateString(s) {
 	var s = s.split(/\D/);
-	return s[2] + '-' + s[1] + '-' + s[0];
+	return s[0] + '-' + s[1] + '-' + s[2];
 }
 
 //Custom jquery actions
