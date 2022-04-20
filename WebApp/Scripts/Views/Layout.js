@@ -5,9 +5,11 @@
     if (user != null) {
         ShowBarLogin();
         HideBarVisit();
+        //redirection();
     } else {
         ShowBarVisit();
         HideBarLogin();
+        window.location.href = "/Home";
     }
 
 
@@ -41,3 +43,28 @@ function HideBarVisit() {
     $("#barVisit").removeClass("d-inline");
     $("#barVisit").addClass("d-none");
 }
+
+
+function redirection() {
+    var control = new ControlActions();
+
+    var user = JSON.parse(getCookie("user"));
+    var userLogin = getCookie("type");
+    switch (userLogin) {
+        case "1":
+                window.location.href = "/sysadmin/vSysAdminAccount/" + user["SysAdminUserID"] ;
+            break;
+        case "2":
+                window.location.href = "/student/vStudentAccount/" + user["StudentID"];
+            break;
+        case "3":
+                window.location.href = "/recruiter/vRecruiterAccount/" + user["RecruiterUserID"];
+            break;
+        case "4":
+                window.location.href = "/financial/vFinancialAccount/" + user["FinancialUserID"];
+            break;
+        default:
+            console.log("404");
+            break;
+    }
+};

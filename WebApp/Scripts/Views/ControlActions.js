@@ -212,6 +212,11 @@ function getCookie(cname) {
 	return "";
 }
 
+function formatDateString(s) {
+	var s = s.split(/\D/);
+	return s[2] + '-' + s[1] + '-' + s[0];
+}
+
 //Custom jquery actions
 $.put = function (url, data, callback) {
 	if ($.isFunction(data)) {

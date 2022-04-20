@@ -21,8 +21,17 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public ActionResult vStudentUpdate()
+        public ActionResult vStudentUpdate(string id)
         {
+            if (id != null)
+            {
+                ViewBag.IdStudent = id;
+            }
+            else
+            {
+                ViewBag.IdStudent = "null";
+            }
+
             return View();
 
         }
