@@ -3,7 +3,7 @@
         var table = $('#-#Id-').DataTable();
         $('#-#Id- tbody').on('click', 'tr', function () {
             var data = table.row(this).data();
-            sessionStorage.setItem('-#Id-_selected',data);
+            sessionStorage.setItem('-#Id-_selected', JSON.stringify(data));
             console.log(data);
 
             var view = new -#ViewName-();

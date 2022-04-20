@@ -1,4 +1,7 @@
 ﻿
+@using WebApp.Helpers;
+
+<script src="~/Scripts/Views/Student/vStudentUpdate.js"></script>
 @{
     ViewBag.Title = "vUpdateStudent";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,60 +12,224 @@
         <div class="row justify-content-between">
             <div class="col-lg-5 col-sm-11">
                 <div class=" text-box">
-                    <h2>Mi Cuenta</h2>
-                    <br />
-                    <h5>Nombre de usuario:</h5>
-                    <p id="P_UserName"></p>
-                    <br />
-                    <h5>Correo electrónico:</h5>
-                    <p id="P_Email"></p>
-                    <br />
-                    <h5>Primer Nombre:</h5>
-                    <p id="P_First_Name"></p>
-                    <br />
-                    <h5>Primer Apellido:</h5>
-                    <p id="P_Last_Name"></p>
-                    <br />
-                    <input type="text" id="txtIdStudent" class="d-none">
+                    <h1 class="home-title">BOLSA DE EMPLEO</h1>
+                    <p class="subtitle home-subtitle-1">
+                        En está sección, todos los estudiantes podrán subir sus hojas de vida,
+                        para ser evaluados por los reclutadores de entidades financieras
+                    </p>
+                    <p class="subtitle home-subtitle-2">Exclusiva para egresados de Banking Coach</p>
                 </div>
             </div>
             <div class="col-lg-6 col-sm-11">
-                <div class="d-flex justify-content-center">
+                <img class="img" src="~/Content/imgs/Empleo.jpg" alt="">
 
-                    <div class="custom-form custom-form-fields text-center col-lg-12">
-                        <div class="dashboard-heading d-flex justify-content-center">
-                            <h2>Cambiar <span>Contraseña</span></h2>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="text-center my-4">
+
+                            <h1 class="form-title">MODIFICA A UN ESTUDIANTE</h1>
                         </div>
-                        <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
-                        <form id="frmStudentUpdatePassword" method="get" action="">
-                            <div class="form-row ">
-                                <div class="col-lg-12">
-                                    @Html.CtrlInputSecond(id: "txtOldPassword", type: "password", required: true, placeHolder: "Contraseña actual", columnDataName: "OldPassword")
+                        <form id="frmStudentUpdate" class="form frmStudentUpdate">
+                            <div class="row align-content-sm-center">
+                                <div class="col-sm-12">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelBankingStudent">Estudiante del banco</label>
+                                                </div>
+                                                <select class="form-control" id="txtBankingStudent" name="BankingStudent" ColumnDataName="BankingStudent" required>
+                                                    <option value="1">Sí</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <label>Fecha de ingreso</label>
+                                            @Html.CtrlInputSecond(id: "txtEntryDate", type: "date", required: true, placeHolder: "Fecha de Registro", columnDataName: "EntryDate")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelIdType">Tipo de identificación</label>
+                                                </div>
+                                                <select class="form-control" id="txtIdType" name="IdType" ColumnDataName="IdType" required>
+                                                    <option value="N">Nacional</option>
+                                                    <option value="P">Pasaporte</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtIdentificationNumber", type: "text", required: true, placeHolder: "Número de identificación", columnDataName: "IdentificationNumber")
+                                            <input type="text" id="txtIdStudent" class="d-none">
+                                            <input type="text" id="txtStudentLogin" class="d-none">
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtFirstName", type: "text", required: true, placeHolder: "Primer Nombre", columnDataName: "FirstName")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtSecondName", type: "text", required: true, placeHolder: "Segundo Nombre", columnDataName: "SecondName")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtLastName", type: "text", required: true, placeHolder: "Primer Apellido", columnDataName: "LastName")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtSecondLastName", type: "text", required: true, placeHolder: "Segundo Apellido", columnDataName: "SecondLastName")
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <label>Fecha de Nacimiento</label>
+                                            @Html.CtrlInputSecond(id: "txtBirthdate", type: "date", required: true, placeHolder: "Fecha de Nacimiento", columnDataName: "Birthdate")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelGender">Género</label>
+                                                </div>
+                                                <select class="form-control" id="txtGender" name="Gender" ColumnDataName="Gender" required>
+                                                    <option value="F">Femenino</option>
+                                                    <option value="M">Masculino</option>
+                                                    <option value="O">Otro</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtPrimaryPhone", type: "text", required: true, placeHolder: "Número de Teléfono", columnDataName: "PrimaryPhone")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtSecondaryPhone", type: "text", required: true, placeHolder: "Número de Teléfono Secundario", columnDataName: "SecondaryPhone")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtEmail", type: "email", required: true, placeHolder: "Email", columnDataName: "Email")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelLaboralExperience">Experiencia Laboral</label>
+                                                </div>
+                                                <select class="form-control" id="txtLaboralExperience" name="LaboralExperience" ColumnDataName="LaboralExperience" required>
+                                                    <option value="1">Sí</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelLaboralStatus">Estado Laboral</label>
+                                                </div>
+                                                <select class="form-control" id="txtLaboralStatus" name="LaboralStatus" ColumnDataName="LaboralStatus" required>
+                                                    <option value="1">Sí</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtWorkAddress", type: "text", required: true, placeHolder: "Dirección del Trabajo", columnDataName: "WorkAddress")
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-row ">
-                                <div class="col-lg-12">
-                                    @Html.CtrlInputSecond(id: "txtNewPassword", type: "password", required: true,
-                           placeHolder: "Nueva contraseña", columnDataName: "Password")
-                                </div>
-                            </div>
-                            <div class="form-row ">
-                                <div class="col-lg-12">
-                                    @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "password", required: true,
-                          placeHolder: "Confirmar nueva contraseña", columnDataName: "")
-                                </div>
-                            </div>
-                            <div class="form-row ">
-                                <div class="col-lg-12">
-                                    @Html.CtrlButton(viewName: "vStudentAccount", id: "btnChangePassword", type: "button",
-                               label: "Modificar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                <div class="form-row" style="margin: 0px auto;">
+                                    <div style="margin: 0px auto 10px;">
+                                        @Html.CtrlButton(viewName: "vStudentUpdate", type: "button", id: "btnUpdate", label: "Modificar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                    </div>
                                 </div>
                             </div>
                         </form>
-                    </div><!-- end custom-form -->
-                </div><!-- end form-content -->
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="dashboard-heading d-flex justify-content-center">
+    <h2>Cambiar <span>Contraseña</span></h2>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="custom-form custom-form-fields text-center col-lg-6">
+        <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
+        <form id="frmStudentUpdatePassword" method="get" action="">
+            <div class="form-row ">
+                <div class="col-lg-12">
+                    @Html.CtrlInputSecond(id: "txtOldPassword", type: "password", required: true, placeHolder: "Contraseña actual", columnDataName: "OldPassword")
+                </div>
+            </div>
+            <div class="form-row ">
+                <div class="col-lg-12">
+                    @Html.CtrlInputSecond(id: "txtNewPassword", type: "password", required: true,
+           placeHolder: "Nueva contraseña", columnDataName: "Password")
+                </div>
+            </div>
+            <div class="form-row ">
+                <div class="col-lg-12">
+                    @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "password", required: true,
+          placeHolder: "Confirmar nueva contraseña", columnDataName: "")
+                </div>
+            </div>
+            <div class="form-row ">
+                <div class="col-lg-12">
+                    @Html.CtrlButton(viewName: "vStudentUpdate", id: "btnChangePassword", type: "button",
+               label: "Modificar", onClickFunction: "ValidateInputsPassword", buttonType: "orange")
+                </div>
+            </div>
+        </form>
+    </div><!-- end custom-form -->
+</div><!-- end form-content -->
+<script>
+
+    $(document).ready(function () {
+        var vstudentupdate = new vStudentUpdate();
+        document.getElementById("txtIdStudent").value = "@ViewBag.IdStudent";
+
+        vstudentupdate.GetData();
+
+    });
+</script>

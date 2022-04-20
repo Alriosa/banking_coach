@@ -188,6 +188,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\facebook_icon.png" />
+    <Content Include="resources\instagram_icon.png" />
+    <Content Include="resources\Logo.png" />
+    <Content Include="resources\twitter_icon.png" />
+    <Content Include="resources\wallpaper_designs.png" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
@@ -201,6 +206,7 @@
     <Content Include="Scripts\Views\Financial\vFinancialAccount.js" />
     <Content Include="Scripts\Views\Financial\vFinancialList.js" />
     <Content Include="Scripts\Views\Financial\vFinancialRegistration.js" />
+    <Content Include="Scripts\Views\Layout.js" />
     <Content Include="Scripts\Views\Login\vIndex.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterAccount.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterRegistration.js" />
@@ -208,6 +214,7 @@
     <Content Include="Scripts\Views\Student\vStudentAccount.js" />
     <Content Include="Scripts\Views\Student\vStudentList.js" />
     <Content Include="Scripts\Views\Student\vStudentRegistration.js" />
+    <Content Include="Scripts\Views\Student\vStudentUpdate.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminAccount.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminRegistration.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminList.js" />
