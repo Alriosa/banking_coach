@@ -68,7 +68,7 @@ namespace DataAccess.Crud
         public override void Delete(BaseEntity entity)
         {
             var sysAdmin = (SysAdmin)entity;
-            dao.ExecuteProcedure(mapper.GetDeleteStatement(sysAdmin));
+            dao.ExecuteProcedure(mapper.GetSoftDeleteStatement(sysAdmin));
         }
 
 
