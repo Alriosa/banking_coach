@@ -73,7 +73,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_FINANCIAL_USER" };
 
             var financialUser = (FinancialUser)entity;
-            operation.AddIntParam(DB_COL_FINANCIAL_USER_ID, financialUser.FinancialUserID);
+            operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
             return operation;
         }
 

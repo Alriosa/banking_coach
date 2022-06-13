@@ -67,12 +67,8 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_RECRUITER_USER_STATUS" };
 
             var recruiter = (Recruiter)entity;
-            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
-            operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
-            operation.AddVarcharParam(DB_COL_USER_TYPE, recruiter.UserType);
-            operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
         }
@@ -82,7 +78,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_RECRUITER_USER" };
 
             var recruiter = (Recruiter)entity;
-            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
+            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             return operation;
         }
         public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)

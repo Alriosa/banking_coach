@@ -86,9 +86,19 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_ADMIN_USER" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
+            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
             return operation;
         }
+
+        public SqlOperation GetSoftDeleteStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SOFT_DELETE_TBL_ADMIN_USER" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            return operation;
+        }
+
 
         public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)
         {
