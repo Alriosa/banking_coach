@@ -5,10 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<button id="profileEntity">Ver perfil de entitad financiera seleccionado</button>
+<button id="updateEntity">Actualizar entitad financiera  seleccionado</button>
+<button id="removeEntity">Eliminar entitad financiera seleccionada</button>
 
 <div style="margin-top: 20px;" id="financialList" class="d-inline">
-    @Html.CtrlTable(viewName: "vFinancialList", id: "tblFinancial1", title: "Entidades Financieras",
+    @Html.CtrlTable(viewName: "vFinancialList", id: "tblFinancial", title: "Entidades Financieras",
     columnsTitle: "Nombre de usuario,Estado", ColumnsDataName: "FinancialLogin,UserActiveStatus", onSelectFunction: "BindFields")
 </div>
 
- 

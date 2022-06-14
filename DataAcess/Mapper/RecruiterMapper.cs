@@ -89,7 +89,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_RECRUITER_USER" };
 
             var recruiter = (Recruiter)entity;
-            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
+            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             return operation;
         }
         public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)

@@ -217,6 +217,7 @@
     <Content Include="Scripts\Views\Student\vStudentList.js" />
     <Content Include="Scripts\Views\Student\vStudentRegistration.js" />
     <Content Include="Scripts\Views\Student\vStudentUpdate.js" />
+    <Content Include="Scripts\Views\SysAdmin\SysAdminUpdate.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminAccount.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminRegistration.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminList.js" />

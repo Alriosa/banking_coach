@@ -116,7 +116,8 @@ CREATE TABLE TBL_VIEWS (
 	View_ID	INT IDENTITY(1,1) PRIMARY KEY NOT NULL, --PK
 	Controller_Name VARCHAR(50) NOT NULL, 
 	View_Name VARCHAR(50) NOT NULL,
-	View_Description VARCHAR(50) NOT NULL
+	View_Description VARCHAR(50) NOT NULL,
+	Group_View VARCHAR(50) NOT NULL
 );
 
 
@@ -738,22 +739,22 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('474',  '81', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('475',  '81', '05', 'DUACARÍ');
 
 
-INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminRegistration', 'Registrar Administrador' )
-INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminList', 'Listar Administradores')
-INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminAccount', 'Mi Cuenta')
-INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminUpdate','Actualizar Administrador')
-INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialRegistration', 'Registrar Financiero')
-INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialList', 'Listar Financieros')
-INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialAccount', 'Mi Cuenta')
-INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialUpdate','Actualizar Financiero')
-INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterRegistration', 'Registrar Reclutador')
-INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterList', 'Listar Reclutadores')
-INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterAccount', 'Perfil Reclutador')
-INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterUpdate','Actualizar Reclutador')
-INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentRegistration', 'Registrar Estudiante')
-INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentList', 'Listar Estudiantes')
-INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentAccount', 'Perfil Estudiante')
-INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentUpdate','Actualizar Estudiante')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminRegistration', 'Registrar Administrador', 'Administradores' )
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminList', 'Listar Administradores', 'Administradores')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminAccount', 'Mi Cuenta', 'Administradores')
+INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminUpdate','Actualizar Administrador', 'Administradores')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialRegistration', 'Registrar Financiero', 'Entidades Financieras')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialList', 'Listar Financieros', 'Entidades Financieras')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialAccount', 'Mi Cuenta','Entidades Financieras')
+INSERT INTO TBL_VIEWS VALUES ('Financial', 'vFinancialUpdate','Actualizar Financiero','Entidades Financieras')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterRegistration', 'Registrar Reclutador','Reclutadores')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterList', 'Listar Reclutadores','Reclutadores')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterAccount', 'Perfil Reclutador','Reclutadores')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterUpdate','Actualizar Reclutador','Reclutadores')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentRegistration', 'Registrar Estudiante','Estudiantes')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentList', 'Listar Estudiantes','Estudiantes')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentAccount', 'Perfil Estudiante','Estudiantes')
+INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentUpdate','Actualizar Estudiante','Estudiantes')
 
 
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '1')
@@ -773,8 +774,8 @@ INSERT INTO TBL_PERMISSIONS VALUES ('3', '15')
 
 INSERT INTO TBL_PERMISSIONS VALUES ('4', '9')
 INSERT INTO TBL_PERMISSIONS VALUES ('4', '10')
+INSERT INTO TBL_PERMISSIONS VALUES ('4', '13')
 INSERT INTO TBL_PERMISSIONS VALUES ('4', '14')
-INSERT INTO TBL_PERMISSIONS VALUES ('4', '15')
 
 ------------------------------------------------------------------------------------------------------------------------
 --- VIEWS ----------------------------------------------------------------------------------------------------
@@ -1094,18 +1095,18 @@ GO
 
 ---DELETE ADMIN
 CREATE PROCEDURE [dbo].[SP_DELETE_TBL_ADMIN_USER]
-        @SP_Admin_Login VARCHAR(20)
+        @SP_Sys_Admin_User_ID INT
 AS	
-        DELETE FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Admin_Login = @SP_Admin_Login;
+        DELETE FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID = @SP_Sys_Admin_User_ID;
 GO
 
 --SOFT DELETE ADMIN
 CREATE PROCEDURE [dbo].[SP_SOFT_DELETE_TBL_ADMIN_USER]
-        @SP_Admin_Login VARCHAR(20)
+        @SP_Sys_Admin_User_ID INT
 AS	
 		UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
 				 User_Active_Status ='0'
-				 WHERE Admin_Login = @SP_Admin_Login; 
+				 WHERE Sys_Admin_User_ID = @SP_Sys_Admin_User_ID;
 GO
 
 /**
@@ -1228,9 +1229,9 @@ GO
 
 ---DELETE RECRUITER
 CREATE PROCEDURE [dbo].[SP_DELETE_TBL_RECRUITER_USER]
-        @SP_Recruiter_Login VARCHAR(20)
+        @SP_Recruiter_User_ID VARCHAR(20)
 AS
-        DELETE FROM [dbo].[TBL_RECRUITER_USER] WHERE Recruiter_Login = @SP_Recruiter_Login;
+        DELETE FROM [dbo].[TBL_RECRUITER_USER] WHERE Recruiter_User_ID = @SP_Recruiter_User_ID;
 GO
 
 /**
@@ -1323,12 +1324,22 @@ GO
 
 
 ---DELETE FINANCIAL
-CREATE PROCEDURE [dbo].[SP_DELETE_TBL_FINANCIAL_USER]
-        @SP_Financial_User VARCHAR(20)
+/*CREATE PROCEDURE [dbo].[SP_DELETE_TBL_FINANCIAL_USER]
+        @SP_Financial_User_ID INT
 AS
-        DELETE FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User = @SP_Financial_User;
+        DELETE FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User_ID = @SP_Financial_User_ID;
+GO*/
+
+---DELETE FINANCIAL
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_FINANCIAL_USER]
+        @SP_Financial_User_ID INT
+AS
+		DELETE FROM [dbo].[TBL_RECRUITER_USER]  WHERE Finantial_Association = @SP_Financial_User_ID;
+        DELETE FROM [dbo].[TBL_FINANCIAL_USER] WHERE Financial_User_ID = @SP_Financial_User_ID;
 GO
 
+
+																						
 /**
 -END
 STORAGE PROCEDURES FOR FINANCIAL USER
@@ -1559,7 +1570,7 @@ STORAGE PROCEDURES FOR PERMISSIONS
 CREATE PROCEDURE RET_VIEW_BY_USER
 	@SP_Id_User_Type VARCHAR(1) 
 AS
-	SELECT P.Id_User_Type, V.Controller_Name, V.View_Name, V.View_Description
+	SELECT P.Id_User_Type, V.Controller_Name, V.View_Name, V.View_Description, V.Group_View
 	FROM TBL_PERMISSIONS AS P
 	JOIN 
 	TBL_VIEWS AS V ON P.Id_View = V.View_ID 
@@ -1572,12 +1583,12 @@ GO
 */
 
 
-EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'prueba_admin', 'prueba_admin', '1'
+EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'admin', '12345678', '1'
 GO
-EXEC [dbo].[SP_INSERT_TBL_FINANCIAL_USER] 'prueba_financiero', 'prueba_financiero', '1'
+EXEC [dbo].[SP_INSERT_TBL_FINANCIAL_USER] 'financiero', '12345678', '1'
 GO
-EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'prueba_reclutador', 'prueba_reclutador', '1', 1
+EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'reclutador', '12345678', '1', 1
 GO
-EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1','1','2022-03-27','prueba', 'estudiante', 'prueba', 'estudiante', 'N', '123456789', '2002-03-27','M', '87878787', NULL, 'example@gmail.com', '1', 'Ejemplo Dirección', '1', 'prueba_estudiante', 'prueba_estudiante','1','01', '10'
+EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1','1','2022-03-27','prueba', 'estudiante', 'prueba', 'estudiante', 'N', '123456789', '2002-03-27','M', '87878787', NULL, 'example@gmail.com', '1', 'Ejemplo Dirección', '1', 'estudiante', '12345678','1','01', '10'
 
 GO

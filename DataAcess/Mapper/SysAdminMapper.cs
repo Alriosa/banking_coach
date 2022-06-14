@@ -97,7 +97,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_ADMIN_USER" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
             return operation;
         }
 
@@ -106,7 +106,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_SOFT_DELETE_TBL_ADMIN_USER" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
             return operation;
         }
 

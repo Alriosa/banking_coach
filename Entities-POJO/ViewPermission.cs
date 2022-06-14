@@ -13,15 +13,17 @@ namespace Entities_POJO
         public string ViewName { get; set; }
 
         public string ViewDescription { get; set; }
+        public string GroupView { get; set; }
 
         public ViewPermission()
         {
         }
-        public ViewPermission(string idUserType, string controllerName, string viewName)
+        public ViewPermission(string idUserType, string controllerName, string viewName, string groupView)
         {
             IdUserType = idUserType;
             ControllerName = controllerName;
             ViewName = viewName;
+            GroupView = groupView;
         }
     }
 }

@@ -7,7 +7,7 @@
 
 	this.BindFields = function (data) {
 		//window.location.href = "/student/vStudentUpdate/" + data["StudentID"];
-		localStorage.setItem('studentID', data["StudentID"]);
+		localStorage.setItem('selectedID', data["StudentID"]);
 	}
 
 	this.RetrieveAll = function () {
@@ -27,7 +27,8 @@
 $(document).ready(function () {
 	var studentList = new vStudentList();
 	studentList.RetrieveAll();
-	var studentID = localStorage.getItem('studentID');;
+	var studentID = localStorage.getItem('selectedID');
+}
 
 	var table = $('#tblStudent');
 
@@ -54,8 +55,8 @@ $(document).ready(function () {
 		window.location.href = "/student/vStudentUpdate/" + studentID;
 	});
 
-	$('#profileStudent').click(function () {
-		window.location.href = "/student/vStudentAccount/" + studentID;
+	$('#ProfileStudent').click(function () {
+		window.location.href = "/student/vStudentUpdate/" + studentID;
 	});
 });
 

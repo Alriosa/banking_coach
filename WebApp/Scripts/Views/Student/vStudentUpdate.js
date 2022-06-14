@@ -74,10 +74,7 @@
 
 this.RulesValidateCreate = function () {
 
-    $.validator.addMethod("notEqual", function (value, element, param) {
-        return this.optional(element) || value != param;
-    }),
-
+  
         $.validator.addMethod(
             "regex",
             function (value, element, regexp) {
@@ -172,6 +169,10 @@ this.RulesValidateCreate = function () {
         },
     });
 
+    $.validator.addMethod("new_password_not_same", function (value, element) {
+        return $('#txtOldPassword').val() != $('#txtNewPassword').val()
+    }, "* Debe elegir una contraseña diferente a la actual");
+
     $("#frmStudentUpdatePassword").validate({
         lang: 'es',
         errorClass: "is-invalid",
@@ -185,7 +186,6 @@ this.RulesValidateCreate = function () {
                 required: "Ingrese una contraseña",
                 minlength: "La contraseña debe de tener mínimo 6 caracteres",
                 maxlength: "La contraseña debe de tener máximo 20 caracteres",
-                notEqual: "Debe elegir una contraseña diferente a la actual"
             },
             txtConfirmNewPassword: {
                 required: "Ingrese una contraseña",
@@ -195,7 +195,8 @@ this.RulesValidateCreate = function () {
         rules: {
             
             txtOldPassword: { required: true, minlength: 6, maxlength: 20 },
-            txtNewPassword: { required: true, minlength: 6, maxlength: 20, notEqual: "#txtOldPassword" },
+            txtNewPassword: {
+                required: true, minlength: 6, maxlength: 20, new_password_not_same: true },
             txtConfirmNewPassword: { required: true, equalTo: "#txtNewPassword" },
         },
     });

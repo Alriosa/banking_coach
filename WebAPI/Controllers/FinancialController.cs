@@ -114,7 +114,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Financial Modified."
+                    Message = "Entidad Financiera actualizada."
                 };
 
                 return Ok(apiResp);
@@ -159,7 +159,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Financial deleted."
+                    Message = "Entidad Financiera eliminada."
                 };
 
                 return Ok(apiResp);

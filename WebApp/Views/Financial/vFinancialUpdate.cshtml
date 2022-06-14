@@ -16,6 +16,10 @@
     <div>
         <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
         <form id="frmFinancialUpdatePassword" class="form" method="get" action="">
+            <input type="text" id="txtIdFinancial" class="d-none">
+            <input type="text" id="txtFinancialLogin" class="d-none">
+
+
             <div class="form-row ">
                 <div class="col-lg-12">
                     @Html.CtrlInputSecond(id: "txtOldPassword", type: "password", required: true, placeHolder: "Contraseña actual", columnDataName: "OldPassword")
@@ -24,7 +28,7 @@
             <div class="form-row ">
                 <div class="col-lg-12">
                     @Html.CtrlInputSecond(id: "txtNewPassword", type: "password", required: true,
-           placeHolder: "Nueva contraseña", columnDataName: "Password")
+           placeHolder: "Nueva contraseña", columnDataName: "FinancialPassword")
                 </div>
             </div>
             <div class="form-row ">
@@ -36,7 +40,7 @@
             <div class="form-row ">
                 <div class="col-lg-12">
                     @Html.CtrlButton(viewName: "vFinancialUpdate", id: "btnChangePassword", type: "button",
-               label: "Modificar", onClickFunction: "ValidateInputs", buttonType: "orange")
+               label: "Modificar", onClickFunction: "ValidateInputPassword", buttonType: "orange")
                 </div>
             </div>
         </form>
