@@ -206,11 +206,13 @@
     <Content Include="Scripts\Views\Financial\vFinancialAccount.js" />
     <Content Include="Scripts\Views\Financial\vFinancialList.js" />
     <Content Include="Scripts\Views\Financial\vFinancialRegistration.js" />
+    <Content Include="Scripts\Views\Financial\vFinancialUpdate.js" />
     <Content Include="Scripts\Views\Layout.js" />
     <Content Include="Scripts\Views\Login\vIndex.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterAccount.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterRegistration.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterList.js" />
+    <Content Include="Scripts\Views\Recruiter\vRecruiterUpdate.js" />
     <Content Include="Scripts\Views\Student\vStudentAccount.js" />
     <Content Include="Scripts\Views\Student\vStudentList.js" />
     <Content Include="Scripts\Views\Student\vStudentRegistration.js" />
@@ -237,6 +239,9 @@
     <Content Include="Views\SysAdmin\vSysAdminAccount.cshtml" />
     <Content Include="Views\Student\vStudentAccount.cshtml" />
     <Content Include="Views\Recruiter\vRecruiterAccount.cshtml" />
+    <Content Include="Views\Home\vEnrollment.cshtml" />
+    <Content Include="Views\Home\vServices.cshtml" />
+    <Content Include="Views\Home\vNotices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

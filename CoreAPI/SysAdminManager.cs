@@ -85,6 +85,25 @@ namespace CoreAPI
             crudSysAdmin.Update(sysAdmin);
         }
 
+        public void UpdatePassword(SysAdmin sysAdmin)
+        {
+            SysAdmin s = null;
+
+
+            try
+            {
+                crudSysAdmin.UpdatePassword(sysAdmin);
+
+
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+
+        }
+
         public void Delete(SysAdmin sysAdmin)
         {
             crudSysAdmin.Delete(sysAdmin);

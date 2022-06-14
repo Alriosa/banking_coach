@@ -5,9 +5,9 @@
 	this.service = 'student';
 	this.columns = "IdentificationNumber,Email,BankingStudent,UserActiveStatus";
 
-
 	this.BindFields = function (data) {
-		window.location.href = "/student/vStudentUpdate/" + data["StudentID"];
+		//window.location.href = "/student/vStudentUpdate/" + data["StudentID"];
+		localStorage.setItem('studentID', data["StudentID"]);
 	}
 
 	this.RetrieveAll = function () {
@@ -17,9 +17,46 @@
 	this.ReloadTable = function () {
 		this.ctrlActions.FillTable(this.service, this.tblStudentId, true);
 	}
+
+
+
+
+	
 }
 
 $(document).ready(function () {
 	var studentList = new vStudentList();
 	studentList.RetrieveAll();
+	var studentID = localStorage.getItem('studentID');;
+
+	var table = $('#tblStudent');
+
+	$('#tblStudent tbody').on('click', 'tr', function () {
+		if ($(this).hasClass('selected')) {
+			$(this).removeClass('selected');
+		} else {
+			//table.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected');
+		}
+	});
+
+	$('#removeStudent').click(function (data) {
+		var studentData = {};
+		studentData["StudentID"] = studentID;
+		ctrlActions = new ControlActions();
+		ctrlActions.DeleteToAPI(studentList.service, studentData, function () {
+			var callback = new vStudentList();
+			callback.ReloadTable();
+		});
+	});
+
+	$('#updateStudent').click(function () {
+		window.location.href = "/student/vStudentUpdate/" + studentID;
+	});
+
+	$('#profileStudent').click(function () {
+		window.location.href = "/student/vStudentAccount/" + studentID;
+	});
 });
+
+

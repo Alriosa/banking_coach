@@ -980,6 +980,23 @@ AS
                 WHERE Student_User = @SP_Student_User;
 GO
 
+
+--- UPDATE STUDENT PASSWORD
+CREATE PROCEDURE [dbo].[SP_UPDATE_PASSWORD_TBL_STUDENT]
+        @SP_Student_User VARCHAR(20),
+        @SP_Student_Password VARCHAR(50)
+AS
+	BEGIN
+		
+		UPDATE [dbo].[TBL_STUDENT] SET
+			Student_Password = HashBytes('MD5',@SP_Student_Password)
+			WHERE Student_User = @SP_Student_User;
+		
+	END
+GO
+
+
+
 ---DELETE STUDENT
 CREATE PROCEDURE [dbo].[SP_DELETE_TBL_STUDENT]
         @SP_Student_ID INT
@@ -1059,6 +1076,20 @@ AS
         UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
                 Admin_Password= HashBytes('MD5', @SP_Admin_Password)
                 WHERE Admin_Login = @SP_Admin_Login;                
+GO
+
+--- UPDATE SYS_ADMIN_USER PASSWORD
+CREATE PROCEDURE [dbo].[SP_UPDATE_PASSWORD_TBL_SYS_ADMIN_USER]
+        @SP_Admin_Login VARCHAR(20),
+        @SP_Admin_Password VARCHAR(50)
+AS
+	BEGIN
+		
+		UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
+			Admin_Password = HashBytes('MD5',@SP_Admin_Password)
+			WHERE Admin_Login = @SP_Admin_Login;
+		
+	END
 GO
 
 ---DELETE ADMIN
@@ -1172,6 +1203,20 @@ GO
 
 */
 
+--- UPDATE RECRUITER PASSWORD
+CREATE PROCEDURE [dbo].[SP_UPDATE_PASSWORD_TBL_RECRUITER]
+        @SP_Recruiter_Login VARCHAR(20),
+        @SP_Recruiter_Password VARCHAR(50)
+AS
+	BEGIN
+		
+		UPDATE [dbo].[TBL_RECRUITER] SET
+			Recruiter_Password = HashBytes('MD5',@SP_Recruiter_Password)
+			WHERE Recruiter_Login = @SP_Recruiter_Login;
+		
+	END
+GO
+
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_PASSWORD]
         @SP_Recruiter_Login VARCHAR(20),
         @SP_Recruiter_Password VARCHAR(50)
@@ -1259,6 +1304,21 @@ AS
         UPDATE [dbo].[TBL_FINANCIAL_USER] SET
                 User_Active_Status=@SP_User_Active_Status
                 WHERE Financial_User = @SP_Financial_User;
+GO
+
+
+--- UPDATE FINANCIAL PASSWORD
+CREATE PROCEDURE [dbo].[SP_UPDATE_PASSWORD_TBL_FINANCIAL]
+        @SP_Financial_User VARCHAR(20),
+        @SP_Financial_Password VARCHAR(50)
+AS
+	BEGIN
+		
+		UPDATE [dbo].[TBL_FINANCIAL] SET
+			Financial_Password = HashBytes('MD5',@SP_Financial_Password)
+			WHERE Financial_User = @SP_Financial_User;
+		
+	END
 GO
 
 

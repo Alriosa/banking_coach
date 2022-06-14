@@ -83,6 +83,24 @@ namespace CoreAPI
             financialUserCrudFactory.Update(financialUser);
         }
 
+        public void UpdatePassword(FinancialUser financialUser)
+        {
+            FinancialUser s = null;
+
+
+            try
+            {
+                financialUserCrudFactory.UpdatePassword(financialUser);
+
+
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+        }
+
         public void Delete(FinancialUser financialUser)
         {
             financialUserCrudFactory.Delete(financialUser);

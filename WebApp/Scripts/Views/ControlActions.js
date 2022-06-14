@@ -1,4 +1,6 @@
-﻿
+﻿var editor;
+
+
 function ControlActions() {
 
 	this.URL_API = "http://localhost:57056/api/";
@@ -116,10 +118,11 @@ function ControlActions() {
 			})
 	};
 
-	this.DeleteToAPI = function (service, data) {
+	this.DeleteToAPI = function (service, data, callBackFunction) {
 		var jqxhr = $.delete(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
 			ctrlActions.ShowMessage('I', response.Message);
+			callBackFunction();
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;

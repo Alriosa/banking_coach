@@ -196,7 +196,7 @@
 <div class="d-flex justify-content-center">
     <div class="custom-form custom-form-fields text-center col-lg-6">
         <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
-        <form id="frmStudentUpdatePassword" method="get" action="">
+        <form id="frmStudentUpdatePassword" method="put" action="">
             <div class="form-row ">
                 <div class="col-lg-12">
                     @Html.CtrlInputSecond(id: "txtOldPassword", type: "password", required: true, placeHolder: "Contraseña actual", columnDataName: "OldPassword")
@@ -205,7 +205,7 @@
             <div class="form-row ">
                 <div class="col-lg-12">
                     @Html.CtrlInputSecond(id: "txtNewPassword", type: "password", required: true,
-           placeHolder: "Nueva contraseña", columnDataName: "Password")
+           placeHolder: "Nueva contraseña", columnDataName: "StudentPassword")
                 </div>
             </div>
             <div class="form-row ">

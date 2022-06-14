@@ -68,6 +68,17 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetUpdatePasswordStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_PASSWORD_TBL_FINANCIAL" };
+
+            var financialUser = (FinancialUser)entity;
+            operation.AddVarcharParam(DB_COL_FINANCIAL_USER, financialUser.FinancialLogin);
+            operation.AddVarcharParam(DB_COL_FINANCIAL_PASSWORD, financialUser.FinancialPassword);
+
+            return operation;
+        }
+
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_FINANCIAL_USER" };

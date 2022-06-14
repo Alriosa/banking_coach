@@ -63,6 +63,11 @@ namespace DataAccess.Crud
             var financialUserCrud = (FinancialUser)entity;
             dao.ExecuteProcedure(mapper.GetUpdateStatement(financialUserCrud));
         }
+        public void UpdatePassword(BaseEntity entity)
+        {
+            var financialUserCrud = (FinancialUser)entity;
+            dao.ExecuteProcedure(mapper.GetUpdatePasswordStatement(financialUserCrud));
+        }
 
         public override void Delete(BaseEntity entity)
         {

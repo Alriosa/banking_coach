@@ -1,33 +1,44 @@
-﻿function vRecruiterUpdate() {
+﻿function vFinancialUpdate() {
     this.ctrlActions = new ControlActions();
- 
+    var FinancialData = {};
+    FinancialData = JSON.parse(sessionStorage.getItem("userFinancial"));
+
+
+    this.GetData = function () {
+        var idFinancial = document.getElementById("txtIdFinancial").value;
+        if (idFinancial != 'null') {
+            this.ctrlActions.GetById("financial/" + idFinancial, this.FillData);
+        }
+    }
+
 
 
     this.Update = function () {
 
-        var recruiterData = {};
+        var financialData = {};
 
-        recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdatePassword');
-        recruiterData.RecruiterPassword = recruiterData["Password"];
-        this.ctrlActions.PutToAPI('recruiter', recruiterData, function () {
+        financialData = this.ctrlActions.GetDataForm('frmFinancialUpdatePassword');
+        financialData.FinancialPassword = financialData["Password"];
+        this.ctrlActions.PutToAPI('financial', financialData, function () {
             resetForm();
         });
     }
 
     this.ValidateInputs = function () {
-        if ($("#frmRecruiterUpdatePassword").valid()) {
+
+
+
+        if ($("#frmFinancialUpdatePassword").valid()) {
             this.Update();
             resetForm();
         }
     }
 }
 
-
-
 RulesValidateUpdate = function () {
 
 
-    $("#frmRecruiterUpdatePassword").validate({
+    $("#frmFinancialUpdatePassword").validate({
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
@@ -55,12 +66,3 @@ RulesValidateUpdate = function () {
     });
 
 }
-
-function resetForm() {
-    $("#frmRecruiterUpdatePassword")[0].reset();
-}
-
-
-$(document).ready(function () {
-    RulesValidateCreate();
-});

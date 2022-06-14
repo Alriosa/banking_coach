@@ -20,5 +20,23 @@ namespace WebApp.Controllers
             
             return View();
         }
+
+        public ActionResult vEnrollment()
+        {
+
+            return View();
+        }
+
+        public ActionResult vServices()
+        {
+
+            return View();
+        }
+
+        public ActionResult vNotices()
+        {
+
+            return View();
+        }
     }
 }

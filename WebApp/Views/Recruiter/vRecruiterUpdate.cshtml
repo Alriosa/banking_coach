@@ -1,10 +1,11 @@
 ﻿@using WebApp.Helpers;
-<script src="~/Scripts/Views/Recruiter/vRecruiterAccount.js"></script>
+
 @{
     ViewBag.Title = "vRecruiterUpdate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Actualizar Reclutador</h2>
 
 <div class="dashboard-heading d-flex justify-content-center">
     <h2>Cambiar <span>Contraseña</span></h2>
@@ -33,7 +34,7 @@
             </div>
             <div class="form-row ">
                 <div class="col-lg-12">
-                    @Html.CtrlButton(viewName: "vRecruiterUpdate", id: "btnChangePassword", type: "button",
+                    @Html.CtrlButton(viewName: "vRecruiterAccount", id: "btnChangePassword", type: "button",
                label: "Modificar", onClickFunction: "ValidateInputs", buttonType: "orange")
                 </div>
             </div>
@@ -45,11 +46,10 @@
 <script>
 
     $(document).ready(function () {
-        var vrecruiterAccount = new vRecruiterUpdate();
+        var vrecruiterUpdate = new vRecruiterUpdate();
         document.getElementById("txtIdRecruiter").value = "@ViewBag.IdRecruiter";
 
-        vrecruiterAccount.GetData();
+        vrecruiterUpdate.GetData();
 
     });
 </script>
-

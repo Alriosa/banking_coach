@@ -87,6 +87,24 @@ namespace CoreAPI
             crudRecruiter.Update(recruiter);
         }
 
+        public void UpdatePassword(Recruiter recruiter)
+        {
+            Recruiter s = null;
+
+
+            try
+            {
+                crudRecruiter.UpdatePassword(recruiter);
+
+
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+        }
+
         public void Delete(Recruiter recruiter)
         {
             crudRecruiter.Delete(recruiter);

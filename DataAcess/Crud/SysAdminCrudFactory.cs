@@ -64,6 +64,11 @@ namespace DataAccess.Crud
             var sysAdmin = (SysAdmin)entity;
             dao.ExecuteProcedure(mapper.GetUpdateStatement(sysAdmin));
         }
+        public void UpdatePassword(BaseEntity entity)
+        {
+            var sysAdmin = (SysAdmin)entity;
+            dao.ExecuteProcedure(mapper.GetUpdatePasswordStatement(sysAdmin));
+        }
 
         public override void Delete(BaseEntity entity)
         {

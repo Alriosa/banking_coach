@@ -37,6 +37,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_USER_EXIST = "User_Login";
 
 
+
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_STUDENT" };
@@ -135,6 +136,18 @@ namespace DataAccess.Mapper
 
             return operation;
         }
+
+        public SqlOperation GetUpdatePasswordStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_PASSWORD_TBL_STUDENT" };
+
+            var student = (Student)entity;
+            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.StudentLogin);
+            operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.StudentPassword);
+
+            return operation;
+        }
+
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {

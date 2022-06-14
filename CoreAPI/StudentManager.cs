@@ -86,6 +86,26 @@ namespace CoreAPI
             crudStudent.Update(student);
         }
 
+        public void UpdatePassword(Student student)
+        {
+            Student s = null;
+           
+
+            try
+            {
+               crudStudent.UpdatePassword(student);
+
+              
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+         
+        }
+
+
         public void Delete(Student student)
         {
             crudStudent.Delete(student);

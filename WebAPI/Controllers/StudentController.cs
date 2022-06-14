@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
-                bex.AppMessage.Message = "Hubo un error al registrar al usaurio";
+                bex.AppMessage.Message = "Hubo un error al registrar al usuario";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
@@ -128,6 +128,30 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
+                bex.AppMessage.Message = "Hubo un error al modificar al usuario";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPut]
+        [Route("changePassword")]
+        public IHttpActionResult ChangePassword(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                 mng.UpdatePassword(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Contraseña Modificada"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }

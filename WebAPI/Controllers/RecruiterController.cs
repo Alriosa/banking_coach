@@ -125,6 +125,29 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("changePassword")]
+        public IHttpActionResult ChangePassword(Recruiter recruiter)
+        {
+            try
+            {
+                var mng = new RecruiterManager();
+                mng.UpdatePassword(recruiter);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Contraseña Modificada"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
         [Route("")]
         public IHttpActionResult Delete(Recruiter recruiter)
         {

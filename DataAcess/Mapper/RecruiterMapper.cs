@@ -73,6 +73,17 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetUpdatePasswordStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_PASSWORD_TBL_RECRUITER" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
+            operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
+
+            return operation;
+        }
+
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_RECRUITER_USER" };

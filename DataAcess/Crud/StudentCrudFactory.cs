@@ -65,6 +65,12 @@ namespace DataAccess.Crud
             dao.ExecuteProcedure(mapper.GetUpdateStatement(student));
         }
 
+        public void UpdatePassword(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetUpdatePasswordStatement(student));
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var student = (Student)entity;
