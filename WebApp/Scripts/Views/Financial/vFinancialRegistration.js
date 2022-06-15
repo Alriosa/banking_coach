@@ -68,7 +68,6 @@ function resetForm() {
     $("#frmFinancialCreate")[0].reset();
 }
 
-
 $(document).ready(function () {
     RulesValidateCreate();
 });

@@ -30,13 +30,12 @@ $(document).ready(function () {
 	var studentID = localStorage.getItem('selectedID');
 }
 
-	var table = $('#tblStudent');
 
 	$('#tblStudent tbody').on('click', 'tr', function () {
 		if ($(this).hasClass('selected')) {
 			$(this).removeClass('selected');
 		} else {
-			//table.$('tr.selected').removeClass('selected');
+			$('#tblStudent tr.selected').removeClass('selected');
 			$(this).addClass('selected');
 		}
 	});

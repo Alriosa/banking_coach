@@ -85,17 +85,17 @@ function ControlActions() {
 		$('.alert').show();
 	};
 
-	this.PostToAPI = function (service, data) {
+	this.PostToAPI = function (service, data, callBackFunction) {
 		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
-
 			if (response.Data == "error") {
 				ctrlActions.ShowMessage('E', response.Message);
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
 			} else {
 				ctrlActions.ShowMessage('I', response.Message);
-            }
+			}
+			callBackFunction();
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;
