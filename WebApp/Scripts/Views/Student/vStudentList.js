@@ -17,18 +17,12 @@
 	this.ReloadTable = function () {
 		this.ctrlActions.FillTable(this.service, this.tblStudentId, true);
 	}
-
-
-
-
 	
 }
 
 $(document).ready(function () {
 	var studentList = new vStudentList();
 	studentList.RetrieveAll();
-	var studentID = localStorage.getItem('selectedID');
-}
 
 
 	$('#tblStudent tbody').on('click', 'tr', function () {
@@ -42,7 +36,7 @@ $(document).ready(function () {
 
 	$('#removeStudent').click(function (data) {
 		var studentData = {};
-		studentData["StudentID"] = studentID;
+		studentData["StudentID"] = localStorage.getItem('selectedID');
 		ctrlActions = new ControlActions();
 		ctrlActions.DeleteToAPI(studentList.service, studentData, function () {
 			var callback = new vStudentList();
@@ -51,11 +45,11 @@ $(document).ready(function () {
 	});
 
 	$('#updateStudent').click(function () {
-		window.location.href = "/student/vStudentUpdate/" + studentID;
+		window.location.href = "/student/vStudentUpdate/" + localStorage.getItem('selectedID');
 	});
 
-	$('#ProfileStudent').click(function () {
-		window.location.href = "/student/vStudentUpdate/" + studentID;
+	$('#profileStudent').click(function () {
+		window.location.href = "/student/vStudentAccount/" + localStorage.getItem('selectedID');
 	});
 });
 

@@ -1,31 +1,36 @@
 ﻿function vRecruiterUpdate() {
     this.ctrlActions = new ControlActions();
  
-
-
-    this.Update = function () {
-
-        var recruiterData = {};
-
-        recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdatePassword');
-        recruiterData.RecruiterPassword = recruiterData["Password"];
-        this.ctrlActions.PutToAPI('recruiter', recruiterData, function () {
-            resetForm();
-        });
+    this.GetData = function () {
+        var idRecruiter = document.getElementById("txtIdRecruiter").value;
+        if (idRecruiter != 'null') {
+            this.ctrlActions.GetById("recruiter/" + idRecruiter, this.FillData);
+        }
     }
 
-    this.ValidateInputs = function () {
+    this.FillData = function (data) {
+        document.querySelector('#txtRecruiterLogin').value = data['RecruiterLogin'];
+
+    }
+    
+    this.UpdatePassword = function () {
+        var recruiterData = {};
+        recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdatePassword');
+        recruiterData["RecruiterlLogin"] = document.getElementById("txtRecruiterlLogin").value;
+        this.ctrlActions.PutToAPI(this.service + "/changePassword", recruiterData,
+            resetForm()
+        );
+    }
+
+    this.ValidateInputPassword = function () {
         if ($("#frmRecruiterUpdatePassword").valid()) {
-            this.Update();
+            this.UpdatePassword();
             resetForm();
         }
     }
 }
 
-
-
 RulesValidateUpdate = function () {
-
 
     $("#frmRecruiterUpdatePassword").validate({
         lang: 'es',
@@ -49,7 +54,7 @@ RulesValidateUpdate = function () {
         },
         rules: {
             txtOldPassword: { required: true, minlength: 6, maxlength: 20 },
-            txtNewPassword: { required: true, minlength: 6, maxlength: 20 },
+            txtNewPassword: { required: true, minlength: 6, maxlength: 20, new_password_not_same: true },
             txtConfirmNewPassword: { required: true, equalTo: "#txtNewPassword" },
         }
     });

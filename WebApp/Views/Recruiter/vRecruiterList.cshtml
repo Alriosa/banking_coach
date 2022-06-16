@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<button id="profileRecruiter">Ver perfil de reclutador seleccionado</button>
+<button id="updateRecruiter">Actualizar reclutador seleccionado</button>
+<button id="removeRecruiter">Eliminar reclutador seleccionado</button>
+
+
 <div style="margin-top: 20px;" id="recruiterList" class="d-inline">
     @Html.CtrlTable(viewName: "vRecruiterList", id: "tblRecruiter", title: "Reclutadores",
     columnsTitle: "Nombre de usuario, Entidad Asociada,Estado", ColumnsDataName: "RecruiterLogin,FinantialAssociationName,UserActiveStatus", onSelectFunction: "BindFields")

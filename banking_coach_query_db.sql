@@ -862,62 +862,95 @@ GO
 ---SELECT ALL
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_STUDENT]
 AS
-
-
-        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
-		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
-		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+       SELECT S.Student_ID, S.Banking_Student, S.Entry_Date, S.First_Name, S.Second_Name, S.Last_Name, S.Second_Last_Name, 
+		S.Id_Type, S.Identification_Number, S.Birthdate, S.Gender, S.Primary_Phone, S.Secondary_Phone, S.Email, S.Laboral_Status, 
+		S.Work_Address, S.Laboral_Experience, S.Student_User, S.Student_Password, S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo'
-		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Student_ID != 0;
+		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', S.User_Type FROM [dbo].[TBL_STUDENT] AS S
+		INNER JOIN 
+		LST_PROVINCES AS LP ON S.Province = LP.Code
+		INNER JOIN 
+		LST_CANTONS AS LC ON S.Canton = LC.Code
+		INNER JOIN 
+		LST_DISTRICTS AS LD ON S.District = LD.Code
+		WHERE S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
 ---BY IDENTIFICATION NUMBER
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_IDENTIFICATION]
         @SP_Identification_Number VARCHAR(20)
 AS
-        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
-		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
-		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+        SELECT S.Student_ID, S.Banking_Student, S.Entry_Date, S.First_Name, S.Second_Name, S.Last_Name, S.Second_Last_Name, 
+		S.Id_Type, S.Identification_Number, S.Birthdate, S.Gender, S.Primary_Phone, S.Secondary_Phone, S.Email, S.Laboral_Status, 
+		S.Work_Address, S.Laboral_Experience, S.Student_User, S.Student_Password, S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo'
-		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Identification_Number = @SP_Identification_Number AND Student_ID != 0;;
+		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] AS S
+		INNER JOIN 
+		LST_PROVINCES AS LP ON S.Province = LP.Code
+		INNER JOIN 
+		LST_CANTONS AS LC ON S.Canton = LC.Code
+		INNER JOIN 
+		LST_DISTRICTS AS LD ON S.District = LD.Code
+		WHERE S.Identification_Number = @SP_Identification_Number AND S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
 ---BY EMAIL
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_EMAIL]
         @SP_Student_Email VARCHAR(200)
 AS
-        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
-		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
-		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+        SELECT S.Student_ID, S.Banking_Student, S.Entry_Date, S.First_Name, S.Second_Name, S.Last_Name, S.Second_Last_Name, 
+		S.Id_Type, S.Identification_Number, S.Birthdate, S.Gender, S.Primary_Phone, S.Secondary_Phone, S.Email, S.Laboral_Status, 
+		S.Work_Address, S.Laboral_Experience, S.Student_User, S.Student_Password, S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo'
-		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Email = @SP_Student_Email AND Student_ID != 0;
+		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] AS S
+		INNER JOIN 
+		LST_PROVINCES AS LP ON S.Province = LP.Code
+		INNER JOIN 
+		LST_CANTONS AS LC ON S.Canton = LC.Code
+		INNER JOIN 
+		LST_DISTRICTS AS LD ON S.District = LD.Code 
+		WHERE S.Email = @SP_Student_Email AND S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
 ---BY USER
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_USER]
         @SP_Student_User VARCHAR(20)
 AS
-        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
-		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
-		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+        SELECT S.Student_ID, S.Banking_Student, S.Entry_Date, S.First_Name, S.Second_Name, S.Last_Name, S.Second_Last_Name, 
+		S.Id_Type, S.Identification_Number, S.Birthdate, S.Gender, S.Primary_Phone, S.Secondary_Phone, S.Email, S.Laboral_Status, 
+		S.Work_Address, S.Laboral_Experience, S.Student_User, S.Student_Password, S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
-		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Student_User = @SP_Student_User AND Student_ID != 0;
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] AS S
+		INNER JOIN 
+		LST_PROVINCES AS LP ON S.Province = LP.Code
+		INNER JOIN 
+		LST_CANTONS AS LC ON S.Canton = LC.Code
+		INNER JOIN 
+		LST_DISTRICTS AS LD ON S.District = LD.Code
+		WHERE S.Student_User = @SP_Student_User AND S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
 ---BY ID
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_ID]
-        @SP_Student_ID VARCHAR(20)
+        @SP_Student_ID INT
 AS
-        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
-		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
-		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+        SELECT S.Student_ID, S.Banking_Student, S.Entry_Date, S.First_Name, S.Second_Name, S.Last_Name, S.Second_Last_Name, 
+		S.Id_Type, S.Identification_Number, S.Birthdate, S.Gender, S.Primary_Phone, S.Secondary_Phone, S.Email, S.Laboral_Status, 
+		S.Work_Address, S.Laboral_Experience, S.Student_User, S.Student_Password, S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
-		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE Student_ID = @SP_Student_ID AND Student_ID != 0;
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] AS S
+		INNER JOIN 
+		LST_PROVINCES AS LP ON S.Province = LP.Code
+		INNER JOIN 
+		LST_CANTONS AS LC ON S.Canton = LC.Code
+		INNER JOIN 
+		LST_DISTRICTS AS LD ON S.District = LD.Code
+		WHERE S.Student_ID = @SP_Student_ID AND S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
 ---BY FIRSTNAME AND LASTNAME
@@ -925,12 +958,19 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_FIRST_NAME_AND_LAST_NAME]
         @SP_First_Name VARCHAR(200),
         @SP_Last_Name VARCHAR(200)
 AS
-        SELECT Student_ID,Banking_Student, Entry_Date, First_Name, Second_Name, Last_Name, Second_Last_Name, 
-		Id_Type, Identification_Number, Birthdate, Gender, Primary_Phone, Secondary_Phone, Email, Laboral_Status, 
-		Work_Address, Laboral_Experience, Student_User, Student_Password, Province, Canton, District, CASE  
+        SELECT S.Student_ID, S.Banking_Student, S.Entry_Date, S.First_Name, S.Second_Name, S.Last_Name, S.Second_Last_Name, 
+		S.Id_Type, S.Identification_Number, S.Birthdate, S.Gender, S.Primary_Phone, S.Secondary_Phone, S.Email, S.Laboral_Status, 
+		S.Work_Address, S.Laboral_Experience, S.Student_User, S.Student_Password, S.Province, S.Canton, S.District,LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo'
-		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] WHERE First_Name = @SP_First_Name AND Last_Name = @SP_Last_Name AND Student_ID != 0;
+		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_STUDENT] AS S
+		INNER JOIN 
+		LST_PROVINCES AS LP ON S.Province = LP.Code
+		INNER JOIN 
+		LST_CANTONS AS LC ON S.Canton = LC.Code
+		INNER JOIN 
+		LST_DISTRICTS AS LD ON S.District = LD.Code
+		WHERE S.First_Name = @SP_First_Name AND S.Last_Name = @SP_Last_Name AND Student_ID != 0  AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
 --- UPDATE STUDENT
@@ -1138,7 +1178,7 @@ GO
 
 --- SELECT BY ID
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_USER_BY_ID]
-        @SP_Recruiter_User_ID VARCHAR(20)
+        @SP_Recruiter_User_ID INT
 AS
        SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Finantial_Association, F.Financial_User AS 'Finantial_Association_Name', CASE  
 		WHEN R.User_Active_Status= '1' THEN 'Activo'
@@ -1218,18 +1258,11 @@ AS
 	END
 GO
 
-CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_PASSWORD]
-        @SP_Recruiter_Login VARCHAR(20),
-        @SP_Recruiter_Password VARCHAR(50)
-AS
-        UPDATE [dbo].[TBL_RECRUITER_USER] SET
-                Recruiter_Password=HashBytes('MD5',@SP_Recruiter_Password)
-                WHERE Recruiter_Login = @SP_Recruiter_Login;
-GO
+
 
 ---DELETE RECRUITER
 CREATE PROCEDURE [dbo].[SP_DELETE_TBL_RECRUITER_USER]
-        @SP_Recruiter_User_ID VARCHAR(20)
+        @SP_Recruiter_User_ID INT
 AS
         DELETE FROM [dbo].[TBL_RECRUITER_USER] WHERE Recruiter_User_ID = @SP_Recruiter_User_ID;
 GO

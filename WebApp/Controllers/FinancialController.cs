@@ -17,8 +17,17 @@ namespace WebApp.Controllers
         {
             return View();
         }
-        public ActionResult vFinancialUpdate()
+        public ActionResult vFinancialUpdate(string id)
         {
+            if (id != null)
+            {
+                ViewBag.IdFinancial = id;
+            }
+            else
+            {
+                ViewBag.IdFinancial = "null";
+            }
+
             return View();
         }
 

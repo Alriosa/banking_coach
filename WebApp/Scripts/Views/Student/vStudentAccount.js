@@ -1,7 +1,10 @@
 ﻿function vStudentAccount() {
     this.ctrlActions = new ControlActions();
     var StudentProfileData = {};
-    StudentProfileData = JSON.parse(sessionStorage.getItem("user"));
+    StudentProfileData = getCookie('user');
+    if (StudentProfileData != null) {
+        StudentProfileData = localStorage.getItem('selectedID');
+    }
 
     this.GetData = function () {
         var idStudent = document.getElementById("txtIdStudent").value;
@@ -20,80 +23,60 @@
             document.querySelector('#P_Second_Name').append(data['SecondName']);
             document.querySelector('#P_Last_Name').append(data['LastName']);
             document.querySelector('#P_Second_Last_Name').append(data['SecondLastName']);
-            document.querySelector('#P_Id_Type').append(data['IdType']);
+            switch (data['IdType']) {
+                case "N":
+                    document.querySelector('#P_Id_Type').append("Nacional");
+
+                    break
+                case "P":
+                    document.querySelector('#P_Id_Type').append("Pasaporte");
+
+                    break;
+            }
+
             document.querySelector('#P_Identification_Number').append(data['IdentificationNumber']);
             document.querySelector('#P_Birthdate').append(data['Birthdate']);
-            document.querySelector('#P_Gender').append(data['Gender']);
+
+            switch (data['Gender'] ) {
+                case "M":
+                    document.querySelector('#P_Gender').append("Masculino");
+
+                    break
+                case "F":
+                    document.querySelector('#P_Gender').append("Femenino");
+
+                    break;
+            }
             document.querySelector('#P_Primary_Phone').append(data['PrimaryPhone']);
             document.querySelector('#P_Secondary_Phone').append(data['SecondaryPhone']);
-            /*document.querySelector('#P_Last_Name').append(data['LaboralExperience']);
-            document.querySelector('#P_LaboralStatus').append(data['LaboralStatus']);
-            document.querySelector('#P_Province').append(data['Province']);
-            document.querySelector('#P_Canton').append(data['Canton']);
-            document.querySelector('#P_District').append(data['District']);
-            document.querySelector('#P_BankingStudent').append(data['BankingStudent']);*/
+
+            if (data['LaboralExperience'] == "1") {
+                document.querySelector('#P_Laboral_Experience').append("Sí");
+            } else {
+                document.querySelector('#P_Laboral_Experience').append("No");
+            }
+
+            if (data['LaboralStatus'] == "1") {
+                document.querySelector('#P_LaboralStatus').append("Sí");
+            } else {
+                document.querySelector('#P_LaboralStatus').append("No");
+            }
+            document.querySelector('#P_Province').append(data['NProvince']);
+            document.querySelector('#P_Canton').append(data['NCanton']);
+            document.querySelector('#P_District').append(data['NDistrict']);
+
+            if (data['BankingStudent'] == "1") {
+                document.querySelector('#P_BankingStudent').append("Sí");
+            } else {
+                document.querySelector('#P_BankingStudent').append("No");
+            }
+
         }
     }
 
 
-    this.Update = function () {
-
-        var studentData = {};
-
-        studentData = this.ctrlActions.GetDataForm('frmStudentUpdatePassword');
-        studentData.StudentPassword = studentData["Password"];
-        this.ctrlActions.PutToAPI('student', studentData, function () {
-            resetForm();
-        });
-    }
-
-    this.ValidateInputs = function () {
-        if ($("#frmStudentUpdatePassword").valid()) {
-            this.Update();
-            resetForm();
-        }
-    }
+    
 }
 
 
 
-RulesValidateCreate = function () {
-
-
-    $("#frmStudentUpdatePassword").validate({
-        lang: 'es',
-        errorClass: "is-invalid",
-        messages: {
-            txtOldPassword: {
-                required: "Ingrese la contraseña actual",
-                minlength: "El nombre de usuario debe contener mínimo 6 caracteres",
-                maxlength: "El nombre de usuario debe contener máximo 20 caracteres",
-            },
-            txtPassword: {
-                required: "Ingrese una nueva contraseña",
-                minlength: "La contraseña debe de tener mínimo 6 caracteres",
-                maxlength: "La contraseña debe de tener máximo 20 caracteres",
-            },
-
-            txtConfirmPassword: {
-                required: "Ingrese nuevamente la nueva contraseña",
-                equalTo: "No coinciden las contraseñas"
-            },
-        },
-        rules: {
-            txtOldPassword: { required: true, minlength: 6, maxlength: 20 },
-            txtNewPassword: { required: true, minlength: 6, maxlength: 20 },
-            txtConfirmNewPassword: { required: true, equalTo: "#txtNewPassword" },
-        }
-    });
-
-}
-
-function resetForm() {
-    $("#frmStudentUpdatePassword")[0].reset();
-}
-
-
-$(document).ready(function () {
-    RulesValidateCreate();
-});

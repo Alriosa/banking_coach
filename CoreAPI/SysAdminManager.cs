@@ -66,10 +66,10 @@ namespace CoreAPI
             try
             {
                 c = crudSysAdmin.Retrieve<SysAdmin>(sysAdmin);
-                if (c == null)
+                /*if (c == null)
                 {
                     throw new BussinessException(4);
-                }
+                }*/
             }
             catch (Exception ex)
             {

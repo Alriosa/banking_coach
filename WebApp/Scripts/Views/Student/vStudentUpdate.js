@@ -169,9 +169,6 @@ this.RulesValidateCreate = function () {
         },
     });
 
-    $.validator.addMethod("new_password_not_same", function (value, element) {
-        return $('#txtOldPassword').val() != $('#txtNewPassword').val()
-    }, "* Debe elegir una contraseña diferente a la actual");
 
     $("#frmStudentUpdatePassword").validate({
         lang: 'es',
@@ -193,7 +190,6 @@ this.RulesValidateCreate = function () {
             },
         },
         rules: {
-            
             txtOldPassword: { required: true, minlength: 6, maxlength: 20 },
             txtNewPassword: {
                 required: true, minlength: 6, maxlength: 20, new_password_not_same: true },

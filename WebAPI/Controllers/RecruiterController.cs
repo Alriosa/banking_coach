@@ -114,7 +114,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Recruiter Modified."
+                    Message = "Reclutador actualizado."
                 };
 
                 return Ok(apiResp);
@@ -158,7 +158,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Recruiter deleted."
+                    Message = "Reclutador eliminado."
                 };
 
                 return Ok(apiResp);

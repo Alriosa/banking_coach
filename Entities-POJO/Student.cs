@@ -21,8 +21,11 @@ namespace Entities_POJO
         public DateTime Birthdate { get; set; }
         public string Gender { get; set; }
         public string Province { get; set; }
+        public string NProvince { get; set; }
         public string Canton { get; set; }
+        public string NCanton { get; set; }
         public string District { get; set; }
+        public string NDistrict { get; set; }
         public string UserType { get; set; }
         public string StudentLogin { get; set; }
         public string StudentPassword { get; set; }
@@ -38,7 +41,7 @@ namespace Entities_POJO
         {
             
         }
-        public Student(int studentId, string bankingStudent, string userActiveStatus, DateTime entryDate, string firstName, string secondName, string lastName, string secondLastName, string idType, string identificationNumber, DateTime birthdate, string gender, string canton, string district, string userType, string studentLogin, string studentPassword, string laboralStatus, string workAddress, string email, string laboralExperience, string primaryPhone, string secondaryPhone, string province)
+        public Student(int studentId, string bankingStudent, string userActiveStatus, DateTime entryDate, string firstName, string secondName, string lastName, string secondLastName, string idType, string identificationNumber, DateTime birthdate, string gender, string canton, string district, string userType, string studentLogin, string studentPassword, string laboralStatus, string workAddress, string email, string laboralExperience, string primaryPhone, string secondaryPhone, string province, string nProvince, string nCanton, string nDistrict)
         {
             StudentID = studentId;
             BankingStudent = bankingStudent;
@@ -64,6 +67,9 @@ namespace Entities_POJO
             LaboralExperience = laboralExperience;
             PrimaryPhone = primaryPhone;
             SecondaryPhone = secondaryPhone;
+            NProvince = nProvince;
+            NCanton = nCanton;
+            NDistrict = nDistrict;
         }
 
        

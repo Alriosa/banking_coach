@@ -53,7 +53,6 @@ function ControlActions() {
 	};
 
 	this.BindFields = function (formId, data) {
-		console.log(data);
 		$('#' + formId +' *').filter(':input').each(function (input) {
 			var columnDataName = $(this).attr("ColumnDataName");
 			this.value = data[columnDataName];
@@ -247,3 +246,9 @@ $.delete = function (url, data, callback) {
 		contentType: 'application/json'
 	});
 }
+
+
+
+$.validator.addMethod("new_password_not_same", function (value, element) {
+	return $('#txtOldPassword').val() != $('#txtNewPassword').val()
+}, "* Debe elegir una contraseña diferente a la actual");

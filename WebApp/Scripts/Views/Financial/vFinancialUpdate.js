@@ -1,7 +1,10 @@
 ﻿function vFinancialUpdate() {
     this.ctrlActions = new ControlActions();
     var FinancialData = {};
-    FinancialData = JSON.parse(sessionStorage.getItem("userFinancial"));
+    FinancialData = getCookie('user');;
+    if (FinancialData != null) {
+        FinancialData = localStorage.getItem('selectedID');
+    }
 
 
     this.GetData = function () {
@@ -11,7 +14,9 @@
         }
     }
 
-
+    this.FillData = function (data) {
+        document.querySelector('#txtFinancialLogin').value = data['FinancialLogin'];
+    }
 
     this.Update = function () {
 
@@ -52,9 +57,7 @@
 
 RulesValidateUpdate = function () {
 
-    $.validator.addMethod("new_password_not_same", function (value, element) {
-        return $('#txtOldPassword').val() != $('#txtNewPassword').val()
-    }, "* Debe elegir una contraseña diferente a la actual");
+ 
 
     $("#frmFinancialUpdatePassword").validate({
         lang: 'es',
@@ -89,4 +92,5 @@ RulesValidateUpdate = function () {
 $(document).ready(function () {
 
     RulesValidateUpdate();
+
 });

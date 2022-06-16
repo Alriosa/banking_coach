@@ -35,6 +35,9 @@ namespace DataAccess.Mapper
         private const string DB_COL_DISTRICT = "District";
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_USER_EXIST = "User_Login";
+        private const string DB_COL_N_PROVINCE = "N_Province";
+        private const string DB_COL_N_CANTON = "N_Canton";
+        private const string DB_COL_N_DISTRICT = "N_District";
 
 
 
@@ -134,6 +137,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_CANTON, student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT, student.District);
 
+
             return operation;
         }
 
@@ -208,8 +212,6 @@ namespace DataAccess.Mapper
                 IdentificationNumber = GetStringValue(row,DB_COL_IDENTIFICATION_NUMBER),
                 Birthdate = GetDateValue(row,DB_COL_BIRTHDATE),
                 Gender = GetStringValue(row,DB_COL_GENDER),
-                Canton = GetStringValue(row,DB_COL_CANTON),
-                District = GetStringValue(row,DB_COL_DISTRICT),
                 UserType = GetStringValue(row,DB_COL_USER_TYPE),
                 StudentLogin = GetStringValue(row,DB_COL_STUDENT_LOGIN),
                 StudentPassword = GetStringValue(row,DB_COL_STUDENT_PASSWORD),
@@ -219,7 +221,12 @@ namespace DataAccess.Mapper
                 LaboralExperience = GetStringValue(row,DB_COL_LABORAL_EXPERIENCE),
                 PrimaryPhone = GetStringValue(row,DB_COL_PRIMARY_PHONE),
                 SecondaryPhone = GetStringValue(row, DB_COL_SECOND_PHONE),
-                Province = GetStringValue(row,DB_COL_PROVINCE)
+                Province = GetStringValue(row,DB_COL_PROVINCE),
+                Canton = GetStringValue(row, DB_COL_CANTON),
+                District = GetStringValue(row, DB_COL_DISTRICT),
+                NProvince = GetStringValue(row, DB_COL_N_PROVINCE),
+                NCanton = GetStringValue(row, DB_COL_N_CANTON),
+                NDistrict = GetStringValue(row, DB_COL_N_DISTRICT),
             };
 
             return student;

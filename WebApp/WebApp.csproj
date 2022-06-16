@@ -243,6 +243,7 @@
     <Content Include="Views\Home\vEnrollment.cshtml" />
     <Content Include="Views\Home\vServices.cshtml" />
     <Content Include="Views\Home\vNotices.cshtml" />
+    <Content Include="Views\Home\MyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

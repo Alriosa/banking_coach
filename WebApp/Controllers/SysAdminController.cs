@@ -17,8 +17,17 @@ namespace WebApp.Controllers
         {
             return View();
         }
-        public ActionResult vSysAdminUpdate()
+        public ActionResult vSysAdminUpdate(string id)
         {
+            if (id != null)
+            {
+                ViewBag.IdSysAdmin = id;
+            }
+            else
+            {
+                ViewBag.IdSysAdmin = "null";
+            }
+
             return View();
         }
         public ActionResult vSysAdminAccount(string id)

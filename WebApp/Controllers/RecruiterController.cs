@@ -17,8 +17,17 @@ namespace WebApp.Controllers
         {
             return View();
         }
-        public ActionResult vRecruiterUpdate()
+        public ActionResult vRecruiterUpdate(string id)
         {
+            if (id != null)
+            {
+                ViewBag.IdRecruiter = id;
+            }
+            else
+            {
+                ViewBag.IdRecruiter = "null";
+            }
+
             return View();
         }
 
