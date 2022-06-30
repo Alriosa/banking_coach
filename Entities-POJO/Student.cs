@@ -58,7 +58,15 @@ namespace Entities_POJO
             
         }
 
-        public Student(int studentID, string bankingStudent, string userActiveStatus, string completeName, string idType, string identificationNumber, DateTime birthdate, int age, string email, string phoneNumber, string province, string nProvince, string canton, string nCanton, string district, string nDistrict, string laboralStatus, string workstation, string experience, string laboralExperience, string studentStatus, string institutionAcademicType, string institutionAcademicName, string academicPreparation, string universityLevel, string universityDegree, string excelLevel, string jobAvailability, string transportAvailability, string vehicle, List<string> driverLicense, List<string> coursesBankingCoach, List<string> teachersBankingCoach, string language, DateTime courseDateFinish, string courseDay, string courseSchedule, string coursePlace, string bankingCoachCertificate, string curriculum, string agreeJobExchange, string userType, string studentLogin, string studentPassword, string userLogin)
+        public Student(int studentID, string bankingStudent, string userActiveStatus, string completeName, string idType, string identificationNumber, DateTime birthdate, int age, 
+            string email, string phoneNumber, 
+            string province, string nProvince, string canton,
+            string nCanton, string district, string nDistrict,
+            string laboralStatus, string workstation, string experience, 
+            string laboralExperience, string educationStatus, 
+            string institutionAcademicType, string institutionAcademicName, string academicPreparation, string universityLevel, 
+            string universityDegree, string excelLevel, string jobAvailability, string transportAvailability, string vehicle, string driverLicenses, string coursesBankingCoach, string teachersBankingCoach, string language, DateTime courseDateFinish, string courseDay, string courseSchedule, string coursePlace, string bankingCoachCertificate, string curriculum, string agreeJobExchange, string userType, string studentLogin, 
+            string studentPassword, string userLogin)
         {
             StudentID = studentID;
             BankingStudent = bankingStudent;
@@ -80,7 +88,7 @@ namespace Entities_POJO
             Workstation = workstation;
             Experience = experience;
             LaboralExperience = laboralExperience;
-            StudentStatus = studentStatus;
+            EducationStatus = educationStatus;
             InstitutionAcademicType = institutionAcademicType;
             InstitutionAcademicName = institutionAcademicName;
             AcademicPreparation = academicPreparation;
@@ -90,7 +98,7 @@ namespace Entities_POJO
             JobAvailability = jobAvailability;
             TransportAvailability = transportAvailability;
             Vehicle = vehicle;
-            DriverLicense = driverLicense;
+            DriverLicenses = driverLicenses;
             CoursesBankingCoach = coursesBankingCoach;
             TeachersBankingCoach = teachersBankingCoach;
             Language = language;
