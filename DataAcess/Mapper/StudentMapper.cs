@@ -271,7 +271,7 @@ namespace DataAccess.Mapper
                 NDistrict = GetStringValue(row, DB_COL_N_DISTRICT),
                 LaboralStatus = GetStringValue(row,DB_COL_LABORAL_STATUS),
                 Workstation = GetStringValue(row, DB_COL_WORKSTATION),
-                Experience = GetStringValue(row, DB_COL_WORKSTATION),
+                Experience = GetStringValue(row, DB_COL_EXPERIENCE),
                 LaboralExperience = GetStringValue(row, DB_COL_LABORAL_EXPERIENCE),
                 EducationStatus = GetStringValue(row, DB_COL_EDUCATION_STATUS),
                 InstitutionAcademicType = GetStringValue(row, DB_COL_INSTITUTION_ACADEMIC_TYPE),
