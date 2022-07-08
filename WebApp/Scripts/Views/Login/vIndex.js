@@ -17,7 +17,7 @@
                     break;
                 case "2":
                     control.LoginByUser("student/getUser/" + userLogin, function (data) {
-                        setTimeout(function redirection() { window.location.href = "/Home" }, 3000);
+                        setTimeout(function redirection() { window.location.href = "/Student/VStudentAccount/" + data['StudentID'] }, 3000);
                     });
                     break;
                 case "3":

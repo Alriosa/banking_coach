@@ -1,8 +1,8 @@
 ﻿
 .bg-gray {
     background-color: #252424;
-    background:url(imgs/background.png);
-    background-size:contain;
+    background: url(imgs/background.png);
+    background-size: contain;
 }
 
 
@@ -18,7 +18,7 @@
     position: absolute;
     left: 0;
     position: fixed;
-    z-index:-22;
+    z-index: -22;
 }
 
 .home .text-box {
@@ -27,7 +27,6 @@
 
 .home-title {
     font-size: 6em;
-    color: #ffffff;
     text-align: center;
 }
 
@@ -37,12 +36,10 @@
 
 .home-subtitle-1 {
     font-size: 1.3em;
-    color: #ffffff;
 }
 
 .home-subtitle-2 {
     font-size: 1.5em;
-    color: #fa8d00;
 }
 
 .form {
@@ -55,19 +52,17 @@ input {
 }
 
 .form-row .input-secondary {
-    color: #fff !important;
     width: 100%;
     border-radius: 1px;
     font-size: 16px;
-    background-color: rgba(255, 255, 255, 0.329);
+   /* background-color: rgba(255, 255, 255, 0.329);*/
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 14px 20px;
-    margin: 0px auto;
+
 }
 
 .form-row input::placeholder {
-    color: #fff;
     opacity: 1;
 }
 
@@ -76,7 +71,6 @@ input {
 }
 
     .form-row .rememberme label {
-        color: #fff;
         display: flex !important;
         align-content: space-around;
     }
@@ -86,7 +80,7 @@ input {
     height: 16px;
 }
 
-.btn-orange {
+/*.btn-orange {
     width: 200px;
     border: none;
     border-radius: 8px;
@@ -96,7 +90,7 @@ input {
     font-size: 1.4em;
     font-weight: 600;
     padding: 12px 20px;
-}
+}*/
 
 .form-group {
     margin-bottom: 0.2rem;
@@ -121,7 +115,6 @@ input {
 
 .card {
     background-color: #ffffff2e;
-    color: #fff;
 }
 
 
@@ -129,7 +122,7 @@ input {
 
 .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
-    color: #fff;
+    /*color: #fff;*/
 }
 
 
@@ -156,5 +149,59 @@ table.dataTable.hover tbody tr:hover .sorting_1, table.dataTable.display tbody t
 }
 
 table.dataTable.stripe tbody tr.odd {
-    background-color: #878787   ;
+    background-color: #878787;
+}
+
+
+.btn-dark {
+    padding: 3px 50px;
+    border-radius: 100px;
+    background-color:#000;
+}
+
+.btn-orange {
+    color: #fff;
+    background-color: #fda935;
+    border-color: #fda935;
+    padding: 1px 50px;
+    border-radius: 100px;
+    height: 2rem;
+}
+
+    .btn-orange:focus {
+        box-shadow: none;
+        background-color: #000;
+    }
+
+    .btn-orange:hover {
+        background-color: #000;
+        color: #fff;
+    }
+
+
+.progress {
+    height: 2rem;
+    border-radius: 20px;
+    background-color: #fda935;
+}
+
+.progress-bar {
+    background-color: #f6f3ee;
+    color: #000;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.box {
+    background: rgba(0, 0, 0, 0.63);
+    border-radius: 50px;
+    padding: 5px 22px;
+    width: 100%;
+    margin: 10px 16px
+}
+
+.box-container {
+    background: rgba(255, 255, 255, 0.66);
+    border-radius: 50px;
+    padding: 10px 30px;
 }

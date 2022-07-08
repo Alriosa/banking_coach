@@ -7,6 +7,8 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
@@ -16,13 +18,14 @@
     <script src="~/Scripts/Views/Login/vIndex.js"></script>
     <script src="~/Scripts/Views/Layout.js"></script>
     <script src="~/Scripts/Views/ControlActions.js"></script>
+
 </head>
-<body class="bg-gray">
+<body >
     
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <img class="bg-top" src="~/Content/imgs/background-top.png" />
+             <!--   <img class="bg-top" src="~/Content/imgs/background-top.png" />-->
                 @Html.CtrlNavBarMenu(id: "navbar", optionsName: "Administradores,Financieros,Reclutadores,Estudiantes", optionsActionName: "SysAdmin,Financial,Recruiter,Students")
             </div>
         </div>
@@ -90,7 +93,7 @@
 
 
 
-            <div class="container body-content">
+            <div class="container-fluid body-content">
                 <div class="alert alert-success alert-dismissable" style="display: none" id="alert_container">
                     <button type="button" class="close" onclick="$('.alert').hide()">&times;</button>
                     <span id="alert_message"></span>

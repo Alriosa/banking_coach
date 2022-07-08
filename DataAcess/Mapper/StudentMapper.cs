@@ -28,7 +28,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_N_CANTON = "N_Canton";
         private const string DB_COL_N_DISTRICT = "N_District";
         private const string DB_COL_LABORAL_STATUS = "Laboral_Status";
-        private const string DB_COL_WORKSTATION = "WorkStation";
+        private const string DB_COL_WORKSTATION = "Workstation";
         private const string DB_COL_EXPERIENCE = "Experience";
         private const string DB_COL_LABORAL_EXPERIENCE = "Laboral_Experience";
         private const string DB_COL_EDUCATION_STATUS = "Education_Status";
@@ -44,7 +44,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_DRIVER_LICENSES = "Driver_Licenses";
         private const string DB_COL_COURSES_BANKING_COACH = "Courses_Banking_Coach";
         private const string DB_COL_TEACHERS_BANKING_COACH = "Teachers_Banking_Coach";
-        private const string DB_COL_LANGUAGE = "Language";
+        private const string DB_COL_LANGUAGE = "Languages";
         private const string DB_COL_COURSE_DATE_FINISH = "Course_Date_Finish";
         private const string DB_COL_COURSE_DAY = "Course_Day";
         private const string DB_COL_COURSE_SCHEDULE = "Course_Schedule";
@@ -297,7 +297,7 @@ namespace DataAccess.Mapper
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 StudentLogin = GetStringValue(row, DB_COL_STUDENT_LOGIN),
                 StudentPassword = GetStringValue(row, DB_COL_STUDENT_PASSWORD),
-                UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
+                //UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
             };
 
             return student;
