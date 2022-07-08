@@ -833,7 +833,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT]
         @SP_Banking_Student VARCHAR(1),
         @SP_User_Active_Status VARCHAR(1),
         @SP_Complete_Name VARCHAR(200),
-        @SP_Id_Type VARCHAR(1),
+        @SP_Id_Type VARCHAR(10),
         @SP_Identification_Number VARCHAR(20),
         @SP_Birthdate DATETIME,
 		@SP_Age INT,
@@ -916,7 +916,7 @@ GO
 ---SELECT ALL
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_STUDENT]
 AS
-       SELECT S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+       SELECT S.Student_ID, S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password  FROM [dbo].[TBL_STUDENT] AS S
@@ -933,7 +933,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_IDENTIFICATION]
         @SP_Identification_Number VARCHAR(20)
 AS
-       SELECT S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+       SELECT S.Student_ID, S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password  FROM [dbo].[TBL_STUDENT] AS S
@@ -950,7 +950,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_EMAIL]
         @SP_Student_Email VARCHAR(200)
 AS
-       SELECT S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+       SELECT S.Student_ID, S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password  FROM [dbo].[TBL_STUDENT] AS S
@@ -967,7 +967,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_USER]
         @SP_Student_User VARCHAR(20)
 AS
-        SELECT S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+        SELECT S.Student_ID, S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password  FROM [dbo].[TBL_STUDENT] AS S
@@ -984,7 +984,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_ID]
         @SP_Student_ID INT
 AS
-       SELECT S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+       SELECT S.Student_ID, S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password  FROM [dbo].[TBL_STUDENT] AS S
@@ -1001,7 +1001,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_FIRST_NAME_AND_LAST_NAME]
         @SP_Complete_Name VARCHAR(200)
 AS
-       SELECT S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+       SELECT S.Student_ID, S.Banking_Student, S.Complete_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Phone_Number,S.Laboral_Status, S.Workstation, S.Experience, S.Laboral_Experience, S.Education_Status, S.Institution_Academic_Type, S.Institution_Academic_Name, S.Academic_Preparation, S.University_Level, S.University_Degree, S.Excel_Level, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses, S.Courses_Banking_Coach, S.Teachers_Banking_Coach, S.Languages, S.Course_Date_Finish, S.Course_Day, S.Course_Schedule, S.Course_Place, S.Banking_Coach_Certificate, S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password FROM [dbo].[TBL_STUDENT] AS S
@@ -1019,7 +1019,7 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Banking_Student VARCHAR(1),
         @SP_User_Active_Status VARCHAR(1),
         @SP_Complete_Name VARCHAR(200),
-        @SP_Id_Type VARCHAR(1),
+        @SP_Id_Type VARCHAR(10),
         @SP_Identification_Number VARCHAR(20),
         @SP_Birthdate DATETIME,
 		@SP_Age INT,
@@ -1703,27 +1703,28 @@ GO
 
 EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1','1',
            'Estudiante'
-           ,'N', '123456789' 
+           ,'Nacional', '123456789' 
            ,'2002-03-27'
            ,20
            ,'example@gmail.com'
            ,'87878787'
            ,'1','01', '10'
            ,'Sí'
-           ,'Comida Rápidas'
+           ,'Comidas Rápidas'
            ,'Servicio al cliente'
            ,'Atención del servicio de mesas'
            ,'Sí'
-           ,'Universidad'
+           ,'Universitario'
            ,'UCR'
-           ,'Bachiillerato Universitario'
-           ,'En curso'
+           ,'Bachillerato Universitario'
+           ,'En Curso'
            ,'Contabilidad'
            ,'Básico'
            ,'Inmediata'
            ,'Sí'
            ,'Sí'
-           ,'A1,B1'
+           /*,'A1,B1'*/
+		   ,'B1'
            ,'Gestor de Servicios Bancarios,Gestor de Cobros'
            ,'Shary Catellón,Esteban Mata'
            ,'Español'
