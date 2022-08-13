@@ -61,7 +61,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 my-2">
                                         <div class="title d-flex justify-content-between w-100">
-                                            <i class="fa fas-paint">ii</i>
+                                            <i class="fa-solid fa-hand-point-right"></i>
                                             <p>Informacion personal </p>
                                             <button type="button" class="btn btn-orange"
                                                     id="editInformation">
@@ -218,18 +218,29 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row my-4 mx-auto">
+                                                <div style="margin: 0px auto 10px;">
+                                                    @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChanges", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 my-1">
                                         <div class="title d-flex justify-content-between">
-                                            <i class="fa fas-paint">ii</i>
+                                            <i class="fa-solid fa-hand-point-right"></i>
                                             <p>Experiencia Laboral </p>
-                                            <button type="button" class="btn btn-orange"
+                                            <!--<button type="button" class="btn btn-orange"
                                                     id="editLaboral">
                                                 Editar
-                                            </button>
+                                            </button>-->
+                                            <a href="#laboral">
+                                                <button type="button" class="btn btn-orange"
+                                                        id="goLaboral" style="width: 144px;">
+                                                    Ver
+                                                </button>
+                                            </a>
                                         </div>
                                         <div class="content my-4" id="contentLaboral" style="display:none;">
                                             <div class="d-flex flex-column">
@@ -317,12 +328,18 @@
                                 <div class="row">
                                     <div class="col-lg-12 my-2">
                                         <div class="title d-flex justify-content-between">
-                                            <i class="fa fas-paint">ii</i>
+                                            <i class="fa-solid fa-hand-point-right"></i>
                                             <p>Informacion Academica</p>
-                                            <button type="button" class="btn btn-orange"
+                                            <!--<button type="button" class="btn btn-orange"
                                                     id="editAcademic">
                                                 Editar
-                                            </button>
+                                            </button>-->
+                                            <a href="#academic">
+                                                <button type="button" class="btn btn-orange"
+                                                        id="goAcademic" style="width: 144px;">
+                                                    Ver
+                                                </button>
+                                            </a>
                                         </div>
                                         <div class="content" id="contentAcademic" style="display:none;">
                                             <div class="d-flex flex-column">
@@ -354,7 +371,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="form-row ">
                                                     <div class="col-lg-12">
                                                         <div class="input-group mb-3">
@@ -423,15 +440,26 @@
 
 
                                         </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 my-2">
+                                                <div class="title d-flex justify-content-between">
+                                                    <i class="fa-solid fa-hand-point-right"></i>
+                                                    <p>Cambiar Contraseña</p>
+                                                    <a href="#">
+                                                        <button type="button" class="btn btn-orange"
+                                                                id="changePassword" style="width: 144px;">
+                                                            Editar
+                                                        </button>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
 
                                     </div>
 
                                 </div>
-                                <div class="row my-4 mx-auto">
-                                    <div style="margin: 0px auto 10px;">
-                                        @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChanges", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
-                                    </div>
-                                </div>
+                                
                             </div>
 
                         </form>
@@ -472,17 +500,393 @@
                                     <div class="col-lg-6">
                                         <p><strong>Labora Actualmente: </strong><span id="P_LaboralStatus"></span></p>
                                         <p><strong>Lugar de Trabajo </strong><span id="P_Workstation"></span></p>
-                                       
+
                                     </div>
                                     <div class="col-lg-6">
                                         <p><strong>Puesto: </strong><span id="P_Experience"></span></p>
                                         <p><strong>Funciones: </strong><span id="P_LaboralExperience"></span></p>
                                     </div>
-                                </div> 
+                                </div>
                                 <div>
                                     <div class="col-lg-12">
                                         <p><strong>Disponibilidad para empezar a trabajar: </strong><span id="P_JobAvailability"></span></p>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center">
+        <div class="col-lg-11">
+            <div class="card py-4 px-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <h3> Mi perfil profesional</h3>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <p>Este es un poco del perfil profesional</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5 justify-content-center">
+        <div class="col-lg-11">
+            <div id="laboral" class="card py-4 px-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3> Experiencia Laboral</h3>
+                        </div>
+                        <div class="col-lg-4" style="text-align: right;">
+                            <button class="btn ">AGREGAR +</button>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row flex-rows">
+                        <div class="col-lg-12">
+                            <div class="my-3">
+                                <div class=" d-flex flex-column">
+                                    <div class="card-laboral">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-1"
+                                                     style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                                    <i class="fa-solid fa-suitcase"></i>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul class="unstyled">
+                                                        <li style="list-style-type: none;">
+                                                            <strong>Banco Central de Costa Rica</strong>
+                                                            <span> Septiembre 2019</span>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Servicio de Atencion al cliente
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Funciones:
+                                                            <ul>
+                                                                <li>Cajero</li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Editar
+                                                    </button>
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="card-laboral">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-1"
+                                                     style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                                    <i class="fa-solid fa-suitcase"></i>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul class="unstyled">
+                                                        <li style="list-style-type: none;">
+                                                            <strong>Banco Central de Costa Rica</strong>
+                                                            <span> Septiembre 2019</span>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Servicio de Atencion al cliente
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Funciones:
+                                                            <ul>
+                                                                <li>Cajero</li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Editar
+                                                    </button>
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center">
+        <div class="col-lg-11">
+            <div id="academic" class="card py-4 px-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3> Formación Académica</h3>
+                        </div>
+                        <div class="col-lg-4" style="text-align: right;">
+                            <button class="btn ">AGREGAR +</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row flex-rows">
+                        <div class="col-lg-12">
+                            <div class="my-3">
+                                <div class=" d-flex flex-column">
+                                    <div class="card-laboral">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-1"
+                                                     style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                                    <i class="fa-solid fa-graduation-cap"></i>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul class="unstyled">
+                                                        <li style="list-style-type: none;">
+                                                            <strong>Universidad de Costa Rica</strong>
+                                                            <span> Septiembre 2019</span>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Administración de Empresas <span>(En curso)</span>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Contenidos:
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Editar
+                                                    </button>
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="card-laboral">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-1"
+                                                     style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                                    <i class="fa-solid fa-graduation-cap"></i>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul class="unstyled">
+                                                        <li style="list-style-type: none;">
+                                                            <strong>Universidad de Costa Rica</strong>
+                                                            <span> Septiembre 2019</span>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Administración de Empresas <span>(En curso)</span>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Contenidos:
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Editar
+                                                    </button>
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center">
+        <div class="col-lg-11">
+            <div id="academic_extra" class="card py-4 px-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3> Educación Extracurricular</h3>
+                        </div>
+                        <div class="col-lg-4" style="text-align: right;">
+                            <button class="btn ">AGREGAR +</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row flex-rows">
+                        <div class="col-lg-12">
+                            <div class="my-3">
+                                <div class=" d-flex flex-column">
+                                    <div class="card-laboral">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-1"
+                                                     style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                                    <i class="fa-solid fa-graduation-cap"></i>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul class="unstyled">
+                                                        <li style="list-style-type: none;">
+                                                            <strong>Instituto Boston</strong>
+                                                            <span> Septiembre 2020</span>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Curso: Servicio al cliente
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Contenidos:
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Editar
+                                                    </button>
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="card-laboral">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-1"
+                                                     style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                                    <i class="fa-solid fa-graduation-cap"></i>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <ul class="unstyled">
+                                                        <li style="list-style-type: none;">
+                                                            <strong>Instituto Boston</strong>
+                                                            <span> Septiembre 2020</span>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Curso: Servicio al cliente
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Contenidos:
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Editar
+                                                    </button>
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center">
+        <div class="col-lg-11">
+            <div id="references" class="card py-4 px-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3>Referencias</h3>
+                        </div>
+                        <div class="col-lg-4" style="text-align: right;">
+                            <button class="btn ">AGREGAR +</button>
+                        </div>
+                        <hr>
+                    </div>
+                    <hr>
+                    <div class="row flex-rows">
+                        <div class="col-lg-12">
+                            <div class="my-3">
+                                <div class=" d-flex flex-column">
+                                    <div class="card-laboral">
+                                        <div class="container">
+                                            <div class="row">
+
+                                                <div class="col-lg-10">
+                                                    <ul class="unstyled">
+                                                        <li style="list-style-type: none;">
+                                                            <strong>Karla Rojas Bermudez</strong>
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            Gerencia, Banco de Costa Rica
+                                                        </li>
+                                                        <li style="list-style-type: none;">
+                                                            8767-8637
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Editar
+                                                    </button>
+                                                    <button class="btn btn-orange my-2"
+                                                            style="width: 170px;">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
