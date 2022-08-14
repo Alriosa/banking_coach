@@ -17,5 +17,22 @@ namespace Entities_POJO
         public string Certificate { get; set; }
         public DateTime EntryDate { get; set; }
         public int StudentID { get; set; }
+
+        public ExtraCourse()
+        {
+        }
+
+        public ExtraCourse(int academicID, string institution, string courseName, DateTime start_Date, DateTime end_Date, string status, string certificate, DateTime entryDate, int studentID)
+        {
+            AcademicID = academicID;
+            Institution = institution;
+            CourseName = courseName;
+            Start_Date = start_Date;
+            End_Date = end_Date;
+            Status = status;
+            Certificate = certificate;
+            EntryDate = entryDate;
+            StudentID = studentID;
+        }
     }
 }
