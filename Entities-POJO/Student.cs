@@ -35,6 +35,9 @@ namespace Entities_POJO
         public string StudentLogin { get; set; }
         public string StudentPassword { get; set; }
         public string UserLogin { get; set; }
+        public string JobAvailability { get; set; }
+        public string TransportAvailability { get; set; }
+        public string Vehicle { get; set; }
         public string DriverLicenses { get; set; }
         public Student()
         {

@@ -13,8 +13,8 @@ namespace Entities_POJO
         public string Workstation { get; set; }
         public string Company { get; set; }
         public string Responsabilites { get; set; }
-        public DateTime Start_Date { get; set; }
-        public DateTime End_Date { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public DateTime EntryDate { get; set; }
         public int StudentID { get; set; }
 
@@ -22,15 +22,15 @@ namespace Entities_POJO
         {
         }
 
-        public Laboral(int laboralID, string workPosition, string workstation, string company, string responsabilites, DateTime start_Date, DateTime end_Date, DateTime entryDate, int studentID)
+        public Laboral(int laboralID, string workPosition, string workstation, string company, string responsabilites, DateTime startDate, DateTime endDate, DateTime entryDate, int studentID)
         {
             LaboralID = laboralID;
             WorkPosition = workPosition;
             Workstation = workstation;
             Company = company;
             Responsabilites = responsabilites;
-            Start_Date = start_Date;
-            End_Date = end_Date;
+            StartDate = startDate;
+            EndDate = endDate;
             EntryDate = entryDate;
             StudentID = studentID;
         }
