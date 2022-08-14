@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 
 namespace Entities_POJO
 {
-    public class Languages: BaseEntity
+    public class Language: BaseEntity
     {
         public int LanguageID { get; set; }
-        public string Language { get; set; }
+        public string LanguageName { get; set; }
         public string Level { get; set; }
+        public DateTime EntryDate { get; set; }
         public int StudentID { get; set; }
 
-        public Languages()
+        public Language()
         {
         }
 
-        public Languages(int languageID, string language, string level, int studentID)
+        public Language(int languageID, string language, string level, DateTime entryDate, int studentID)
         {
             LanguageID = languageID;
-            Language = language;
+            LanguageName = language;
             Level = level;
+            EntryDate = entryDate;
             StudentID = studentID;
         }
     }
