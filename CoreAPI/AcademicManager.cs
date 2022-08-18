@@ -60,6 +60,10 @@ namespace CoreAPI
             }
             return c;
         }
+        public List<Academic> RetrieveByStudent(Academic academic)
+        {
+            return crudAcademic.RetrieveAllById<Academic>(academic);
+        }
 
         public void Update(Academic academic)
         {

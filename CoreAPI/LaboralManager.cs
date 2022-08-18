@@ -62,6 +62,11 @@ namespace CoreAPI
             return c;
         }
 
+        public List<Laboral> RetrieveByStudent(Laboral laboral)
+        {
+            return crudLaboral.RetrieveAllById<Laboral>(laboral);
+        }
+
         public void Update(Laboral laboral)
         {
             crudLaboral.Update(laboral);
