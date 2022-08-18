@@ -232,7 +232,24 @@
 
         $("#btnSaveChanges").attr("disabled", "disabled");
 
+       
+        // When the user clicks on the button, scroll to the top of the document
+        var btn = $('#btnToTop');
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+        });
+
+        btn.on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, '300');
+        });
 
 
 
     })
+

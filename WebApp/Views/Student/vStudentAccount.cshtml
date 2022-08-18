@@ -6,6 +6,7 @@
             ViewBag.Title = "vStudentAccount";
             Layout = "~/Views/Shared/_Layout.cshtml";
         }
+        <a id="btnToTop"></a>
 
         <div class="container-fluid">
             <div class="row">
@@ -66,11 +67,11 @@
                                                     <i class="fa-solid fa-hand-point-right"></i>
                                                     <p>Informacion personal </p>
 
-                                                    <button class="btn" type="button" data-toggle="modal"
+                                                    <button class="btn btn-orange" type="button" data-toggle="modal"
                                                             data-target="#modalEditInfo">
                                                         Editar
                                                     </button>
-                                                   
+
                                                 </div>
                                                 <div>
                                                     <div class="modal fade" id="modalEditInfo" tabindex="-1" aria-labelledby="modalEditInfoLabel" aria-hidden="true" role="dialog">
@@ -295,9 +296,9 @@
                                                     <i class="fa-solid fa-hand-point-right"></i>
                                                     <p>Experiencia Laboral </p>
                                                     <!--<button type="button" class="btn btn-orange"
-                                id="editLaboral">
-                            Editar
-                        </button>-->
+                                                        id="editLaboral">
+                                                    Editar
+                                                </button>-->
                                                     <a href="#laboral">
                                                         <button type="button" class="btn btn-orange"
                                                                 id="goLaboral" style="width: 144px;">
@@ -395,9 +396,9 @@
                                                         <i class="fa-solid fa-hand-point-right"></i>
                                                         <p>Informacion Academica</p>
                                                         <!--<button type="button" class="btn btn-orange"
-                                    id="editAcademic">
-                                Editar
-                            </button>-->
+                                                            id="editAcademic">
+                                                        Editar
+                                                    </button>-->
                                                         <a href="#academic">
                                                             <button type="button" class="btn btn-orange"
                                                                     id="goAcademic" style="width: 144px;">
@@ -504,26 +505,76 @@
 
 
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-12 my-2">
-                                                            <div class="title d-flex justify-content-between">
-                                                                <i class="fa-solid fa-hand-point-right"></i>
-                                                                <p>Cambiar Contraseña</p>
-                                                                <a href="#">
-                                                                    <button type="button" class="btn btn-orange"
-                                                                            id="changePassword" style="width: 144px;">
-                                                                        Editar
-                                                                    </button>
-                                                                </a>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
 
                                                 </div>
                                             </div>
 
                                         </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 my-2">
+                                                <div class="title d-flex justify-content-between">
+                                                    <i class="fa-solid fa-hand-point-right"></i>
+                                                    <p>Cambiar Contraseña</p>
+                                                    <div class="col-lg-4" style="text-align: right;">
+                                                        <button class="btn btn-orange" type="button" data-toggle="modal"
+                                                                data-target="#editPassword">
+                                                            Editar
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="editPassword" tabindex="-1" aria-labelledby="editPasswordLabel" aria-hidden="true" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editPasswordLabel">Agregar Referencia</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div>
+                                                        <div class="modal-body">
+                                                            <form id="frmEditPassword" role="form" method="POST" action="">
+                                                                <div class="container">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 my-2">
+                                                                            <input type="hidden" name="_token" value="">
+
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    @Html.CtrlInputSecond(id: "txtOldPassword", type: "text", required: true, placeHolder: "Contraseña Actual", columnDataName: "OldPassword")
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    @Html.CtrlInputSecond(id: "txtNewPassword", type: "text", required: true, placeHolder: "Nueva Contraseña", columnDataName: "NewPassword")
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "text", required: true, placeHolder: "Confirmar Nueva Contraseña", columnDataName: "ConfirmNewPassword")
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                                        @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterReference", label: "Modificar Contraseña", onClickFunction: "CreateReference", buttonType: "orange")
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
 
                                     </div>
 
@@ -648,7 +699,7 @@
                                                                     <label class="control-label">Cargo</label>
                                                                     <div>
                                                                         <input type="text" class="form-control input-lg" name="txtCompany" id="txtCompany" ColumnDataName="Company" />
-                                                                        @Html.CtrlInputSecond(id: "txtPrimaryPhone", type: "text", required: true, placeHolder: "Número de Teléfono", columnDataName: "PrimaryPhone")
+                                                                        @Html.CtrlInputSecond(id: "txtPrimaryPhone", type: "text", required: true, placeHolder: "Cargo", columnDataName: "Workstation")
 
                                                                     </div>
                                                                 </div>
@@ -668,7 +719,7 @@
                                                                     <label for="fecha" class="control-label">Fecha Ingreso</label>
 
                                                                     <div lang="es-us">
-                                                                        <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" value="2000-08" lang="es-us">
+                                                                        <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
 
                                                                     </div>
                                                                 </div>
@@ -676,7 +727,7 @@
                                                                     <label for="fecha" class="control-label">Fecha Salida (Opcional si sigue laborando)</label>
 
                                                                     <div lang="es-us">
-                                                                        <input type="month" class="form-control input-lg" name="endDate" id="txtEndDate" ColumnDataName="EndDate" min="1990-01" max="" value="2022-08" lang="es-us">
+                                                                        <input type="month" class="form-control input-lg" name="endDate" id="txtEndDate" ColumnDataName="EndDate" min="1990-01" value="2022-08" lang="es-us">
 
                                                                     </div>
                                                                 </div>
@@ -795,9 +846,129 @@
                                     <h3> Formación Académica</h3>
                                 </div>
                                 <div class="col-lg-4" style="text-align: right;">
-                                    <button class="btn ">AGREGAR +</button>
+                                    <button class="btn" type="button" data-toggle="modal"
+                                            data-target="#addAcademic">
+                                        AGREGAR +
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="modal fade" id="addAcademic" tabindex="-1" aria-labelledby="addAcademicLabel" aria-hidden="true" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addAcademicLabel">Agregar Preparación Académica</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <div class="modal-body">
+                                                <form id="frmAddAcademic" role="form" method="POST" action="">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 my-2">
+                                                                <input type="hidden" name="_token" value="">
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="form-group input-group flex-column ">
+                                                                                <label for="txtDegreeType">Nivel de estudio </label>
+                                                                                <select style="height:54px;" class="form-control w-100" id="txtDegreeType" name="txtDegreeType" ColumnDataName="DegreeType" required>
+                                                                                    <option value="Secundaria">Secundaria</option>
+                                                                                    <option value="Universitario">Universitario</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="form-group input-group flex-column ">
+                                                                                <label for="txtUniversityPreparation">Nivel de estudio </label>
+                                                                                <select style="height:54px;" class="form-control w-100" id="txtUniversityPreparation"
+                                                                                        name="txtUniversityPreparation" ColumnDataName="UniversityPreparation" required>
+                                                                                    <option value="Bachillerato">Bachillerato</option>
+                                                                                    <option value="Licenciatura">Licenciatura</option>
+                                                                                    <option value="Maestría">Maestría</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtInstitution", type: "text", required: true, placeHolder: "Institución", columnDataName: "Institution")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtCareer", type: "text", required: true, placeHolder: "Carrera", columnDataName: "Career")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="form-group input-group flex-column ">
+                                                                                <label for="txtStatus">Estado de la Carrera</label>
+                                                                                <select style="height:54px;" class="form-control w-100" id="txtStatus"
+                                                                                        name="txtStatus" ColumnDataName="Status" required>
+                                                                                    <option value="En Curso">En Curso</option>
+                                                                                    <option value="Suspendido">Suspendido</option>
+                                                                                    <option value="Finalizado">Finalizado</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group" lang="es-us">
+                                                                    <label for="fecha" class="control-label">Fecha Ingreso</label>
+
+                                                                    <div lang="es-us">
+                                                                        <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group" lang="es-us">
+                                                                    <label for="fecha" class="control-label">Fecha Graduación (Únicamente si está finalizado)</label>
+
+                                                                    <div lang="es-us">
+                                                                        <input type="month" class="form-control input-lg" name="endDate" id="txtEndDate" ColumnDataName="EndDate" min="1990-01" value="2022-08" lang="es-us">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="form-group input-group flex-column ">
+                                                                                <label for="txtStatus">Certificado</label>
+                                                                                <input type="file" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLaboral", label: "Registrar", onClickFunction: "CreateLaboral", buttonType: "orange")
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+
                             <hr>
                             <div class="row flex-rows">
                                 <div class="col-lg-12">
@@ -894,9 +1065,100 @@
                                     <h3> Educación Extracurricular</h3>
                                 </div>
                                 <div class="col-lg-4" style="text-align: right;">
-                                    <button class="btn ">AGREGAR +</button>
+                                    <button class="btn" type="button" data-toggle="modal"
+                                            data-target="#addExtraCourse">
+                                        AGREGAR +
+                                    </button>
                                 </div>
                             </div>
+
+                            <div class="modal fade" id="addExtraCourse" tabindex="-1" aria-labelledby="addExtraCourseLabel" aria-hidden="true" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addExtraCourseLabel">Agregar Educación Extracurricular</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <div class="modal-body">
+                                                <form id="frmAddExtraCourse" role="form" method="POST" action="">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 my-2">
+                                                                <input type="hidden" name="_token" value="">
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtInstitution", type: "text", required: true, placeHolder: "Institución", columnDataName: "Institution")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtCourseName", type: "text", required: true, placeHolder: "Nombre del Curso", columnDataName: "CourseName")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="form-group input-group flex-column ">
+                                                                                <label for="txtStatus">Estado del Curso</label>
+                                                                                <select style="height:54px;" class="form-control w-100" id="txtStatus"
+                                                                                        name="txtStatus" ColumnDataName="Status" required>
+                                                                                    <option value="En Curso">En Curso</option>
+                                                                                    <option value="Suspendido">Suspendido</option>
+                                                                                    <option value="Finalizado">Finalizado</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group" lang="es-us">
+                                                                    <label for="fecha" class="control-label">Fecha Ingreso</label>
+
+                                                                    <div lang="es-us">
+                                                                        <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group" lang="es-us">
+                                                                    <label for="fecha" class="control-label">Fecha Graduación (Únicamente si está finalizado)</label>
+
+                                                                    <div lang="es-us">
+                                                                        <input type="month" class="form-control input-lg" name="endDate" id="txtEndDate" ColumnDataName="EndDate" min="1990-01" value="2022-08" lang="es-us">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="form-group input-group flex-column ">
+                                                                                <label for="txtStatus">Certificado</label>
+                                                                                <input type="file" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLaboral", label: "Registrar", onClickFunction: "CreateLaboral", buttonType: "orange")
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <hr>
                             <div class="row flex-rows">
                                 <div class="col-lg-12">
@@ -909,31 +1171,31 @@
                                                              style="text-align: center; font-size: 2em; color:#5e5e5e;">
                                                             <i class="fa-solid fa-graduation-cap"></i>
                                                         </div>
-                                                        <div class="col-lg-9">
-                                                            <ul class="unstyled">
-                                                                <li style="list-style-type: none;">
-                                                                    <strong>Instituto Boston</strong>
-                                                                    <span> Septiembre 2020</span>
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    Curso: Servicio al cliente
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    Contenidos:
+                                                        <!-- <div class="col-lg-9">
+                                                        <ul class="unstyled">
+                                                            <li style="list-style-type: none;">
+                                                                <strong>Instituto Boston</strong>
+                                                                <span> Septiembre 2020</span>
+                                                            </li>
+                                                            <li style="list-style-type: none;">
+                                                                Curso: Servicio al cliente
+                                                            </li>
+                                                            <li style="list-style-type: none;">
+                                                                Contenidos:
 
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Editar
-                                                            </button>
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Eliminar
-                                                            </button>
-                                                        </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <button class="btn btn-orange my-2"
+                                                                style="width: 170px;">
+                                                            Editar
+                                                        </button>
+                                                        <button class="btn btn-orange my-2"
+                                                                style="width: 170px;">
+                                                            Eliminar
+                                                        </button>
+                                                    </div>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -991,10 +1253,70 @@
                                     <h3>Referencias</h3>
                                 </div>
                                 <div class="col-lg-4" style="text-align: right;">
-                                    <button class="btn ">AGREGAR +</button>
+                                    <button class="btn" type="button" data-toggle="modal"
+                                            data-target="#addReference">
+                                        AGREGAR +
+                                    </button>
                                 </div>
                                 <hr>
                             </div>
+
+                            <div class="modal fade" id="addReference" tabindex="-1" aria-labelledby="addReferenceLabel" aria-hidden="true" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addReferenceLabel">Agregar Referencia</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <div class="modal-body">
+                                                <form id="frmAddReference" role="form" method="POST" action="">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 my-2">
+                                                                <input type="hidden" name="_token" value="">
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtReferrerName", type: "text", required: true, placeHolder: "Nombre Completo del Referente", columnDataName: "ReferrerName")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtWorkstation", type: "text", required: true, placeHolder: "Puesto de trabajo", columnDataName: "Workstation")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtCompany", type: "text", required: true, placeHolder: "Nombre de la Compañía", columnDataName: "Company")
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtPhone", type: "text", required: true, placeHolder: "Número de Teléfono", columnDataName: "Phone")
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterReference", label: "Registrar", onClickFunction: "CreateReference", buttonType: "orange")
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <hr>
                             <div class="row flex-rows">
                                 <div class="col-lg-12">
@@ -1044,92 +1366,93 @@
 
 
         <!--
-        <div class="home">
-            <div class="container">
-                <h2 class="text-center">Perfil Estudiante</h2>
-                <div class="row justify-content-between">
-                    <h3>Informacion Personal</h3>
-                </div>
-                <br />
-                <div class="row justify-content-between">
-                    <div class="col-lg-6 col-sm-11">
-                        <div class=" text-box">
-                            <h5>Nombre de usuario:</h5>
-                            <p id="P_UserName"></p>
-                            <br />
-                            <h5>Correo electrónico:</h5>
-                            <p id="P_Email"></p>
-                            <br />
-                            <h5>Primer Nombre:</h5>
-                            <p id="P_First_Name"></p>
-                            <br />
+    <div class="home">
+        <div class="container">
+            <h2 class="text-center">Perfil Estudiante</h2>
+            <div class="row justify-content-between">
+                <h3>Informacion Personal</h3>
+            </div>
+            <br />
+            <div class="row justify-content-between">
+                <div class="col-lg-6 col-sm-11">
+                    <div class=" text-box">
+                        <h5>Nombre de usuario:</h5>
+                        <p id="P_UserName"></p>
+                        <br />
+                        <h5>Correo electrónico:</h5>
+                        <p id="P_Email"></p>
+                        <br />
+                        <h5>Primer Nombre:</h5>
+                        <p id="P_First_Name"></p>
+                        <br />
 
-                            <h5>Segundo Nombre:</h5>
-                            <p id="P_Second_Name"></p>
-                            <br />
-                            <h5>Primer Apellido:</h5>
-                            <p id="P_Last_Name"></p>
-                            <br />
-                            <h5>Segundo Apellido:</h5>
-                            <p id="P_Second_Last_Name"></p>
-                            <br />
-                            <input type="text" id="txtIdStudent" class="d-none">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-11">
-                        <div class="text-box">
-                            <h5>Tipo de Identificiación:</h5>
-                            <p id="P_Id_Type"></p>
-                            <br />
-                            <h5>Número de identificación:</h5>
-                            <p id="P_Identification_Number"></p>
-                            <br />
-                            <h5>Fecha de Nacimiento:</h5>
-                            <p id="P_Birthdate"></p>
-                            <br />
-                            <h5>Género:</h5>
-                            <p id="P_Gender"></p>
-                            <br />
-                            <h5>Télefono Principal:</h5>
-                            <p id="P_Primary_Phone"></p>
-                            <br />
-                            <h5>Teléfono Secundario:</h5>
-                            <p id="P_Secondary_Phone"></p>
-                            <br />
-                        </div>
+                        <h5>Segundo Nombre:</h5>
+                        <p id="P_Second_Name"></p>
+                        <br />
+                        <h5>Primer Apellido:</h5>
+                        <p id="P_Last_Name"></p>
+                        <br />
+                        <h5>Segundo Apellido:</h5>
+                        <p id="P_Second_Last_Name"></p>
+                        <br />
+                        <input type="text" id="txtIdStudent" class="d-none">
                     </div>
                 </div>
-                <div class="row justify-content-between">
-                    <h3>Informacion Laboral</h3>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-lg-6 col-sm-11">
-                        <div class=" text-box">
-                            <h5>Experiencia Laboral:</h5>
-                            <p id="P_Laboral_Experience"></p>
-                            <br />
-                            <h5>Estado Laboral:</h5>
-                            <p id="P_LaboralStatus"></p>
-                            <br />
-                            <h5>Provincia:</h5>
-                            <p id="P_Province"></p>
-                            <br />
-
-                            <h5>Canton:</h5>
-                            <p id="P_Canton"></p>
-                            <br />
-                            <h5>Distrito:</h5>
-                            <p id="P_District"></p>
-                            <br />
-                            <h5>Es estudiante de Banking Coach:</h5>
-                            <p id="P_BankingStudent"></p>
-                            <br />
-                            <input type="text" id="txtIdStudent" class="d-none">
-                        </div>
+                <div class="col-lg-6 col-sm-11">
+                    <div class="text-box">
+                        <h5>Tipo de Identificiación:</h5>
+                        <p id="P_Id_Type"></p>
+                        <br />
+                        <h5>Número de identificación:</h5>
+                        <p id="P_Identification_Number"></p>
+                        <br />
+                        <h5>Fecha de Nacimiento:</h5>
+                        <p id="P_Birthdate"></p>
+                        <br />
+                        <h5>Género:</h5>
+                        <p id="P_Gender"></p>
+                        <br />
+                        <h5>Télefono Principal:</h5>
+                        <p id="P_Primary_Phone"></p>
+                        <br />
+                        <h5>Teléfono Secundario:</h5>
+                        <p id="P_Secondary_Phone"></p>
+                        <br />
                     </div>
                 </div>
             </div>
-        </div>-->
+            <div class="row justify-content-between">
+                <h3>Informacion Laboral</h3>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-lg-6 col-sm-11">
+                    <div class=" text-box">
+                        <h5>Experiencia Laboral:</h5>
+                        <p id="P_Laboral_Experience"></p>
+                        <br />
+                        <h5>Estado Laboral:</h5>
+                        <p id="P_LaboralStatus"></p>
+                        <br />
+                        <h5>Provincia:</h5>
+                        <p id="P_Province"></p>
+                        <br />
+
+                        <h5>Canton:</h5>
+                        <p id="P_Canton"></p>
+                        <br />
+                        <h5>Distrito:</h5>
+                        <p id="P_District"></p>
+                        <br />
+                        <h5>Es estudiante de Banking Coach:</h5>
+                        <p id="P_BankingStudent"></p>
+                        <br />
+                        <input type="text" id="txtIdStudent" class="d-none">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
         <script>
 
     $(document).ready(function () {
