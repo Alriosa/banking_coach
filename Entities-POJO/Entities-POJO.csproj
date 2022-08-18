@@ -41,15 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Academic.cs" />
     <Compile Include="ApplicationMessage.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="ExtraCourse.cs" />
     <Compile Include="FinancialUser.cs" />
+    <Compile Include="Laboral.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="ObjectDumper.cs" />
     <Compile Include="OptionList.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Recruiter.cs" />
+    <Compile Include="Reference.cs" />
     <Compile Include="Security.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="SysAdmin.cs" />

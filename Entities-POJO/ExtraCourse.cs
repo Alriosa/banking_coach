@@ -8,11 +8,11 @@ namespace Entities_POJO
 {
     public class ExtraCourse : BaseEntity
     {
-        public int AcademicID { get; set; }
+        public int CourseID { get; set; }
         public string Institution { get; set; }
         public string CourseName { get; set; }
-        public DateTime Start_Date { get; set; }
-        public DateTime End_Date { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string Status { get; set; }
         public string Certificate { get; set; }
         public DateTime EntryDate { get; set; }
@@ -22,13 +22,13 @@ namespace Entities_POJO
         {
         }
 
-        public ExtraCourse(int academicID, string institution, string courseName, DateTime start_Date, DateTime end_Date, string status, string certificate, DateTime entryDate, int studentID)
+        public ExtraCourse(int courseID, string institution, string courseName, DateTime startDate, DateTime endDate, string status, string certificate, DateTime entryDate, int studentID)
         {
-            AcademicID = academicID;
+            CourseID = courseID;
             Institution = institution;
             CourseName = courseName;
-            Start_Date = start_Date;
-            End_Date = end_Date;
+            StartDate = startDate;
+            EndDate = endDate;
             Status = status;
             Certificate = certificate;
             EntryDate = entryDate;

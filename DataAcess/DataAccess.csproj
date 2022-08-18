@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crud\AcademicCrudFactory.cs" />
     <Compile Include="Crud\AppMessagesCrudFactory.cs" />
     <Compile Include="Crud\CustomerCrudFactory.cs" />
     <Compile Include="Crud\CrudFactory.cs" />
@@ -54,12 +55,15 @@
     <Compile Include="Crud\PermissionCrudFactory.cs" />
     <Compile Include="Crud\ViewPermissionCrudFactory.cs" />
     <Compile Include="Crud\ViewCrudFactory.cs" />
+    <Compile Include="Mapper\AcademicMapper.cs" />
     <Compile Include="Mapper\AppMessageMapper.cs" />
+    <Compile Include="Mapper\LanguageMapper.cs" />
     <Compile Include="Mapper\CustomerMapper.cs" />
     <Compile Include="Mapper\EntityMapper.cs" />
     <Compile Include="Mapper\FinancialUserMapper.cs" />
     <Compile Include="Mapper\IObjectMapper.cs" />
     <Compile Include="Mapper\ISqlStaments.cs" />
+    <Compile Include="Mapper\LaboralMapper.cs" />
     <Compile Include="Mapper\ListMapper.cs" />
     <Compile Include="Mapper\RecruiterMapper.cs" />
     <Compile Include="Mapper\SecurityMapper.cs" />

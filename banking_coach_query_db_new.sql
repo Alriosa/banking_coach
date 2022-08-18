@@ -12,10 +12,10 @@ USE BANKING_COACH_DB_V2;
 CREATE TABLE TBL_STUDENT(
 Student_ID INT IDENTITY(1,1) NOT NULL, --PK
 Banking_Student VARCHAR(10) NOT NULL DEFAULT '1',
-User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
-First_Name VARCHAR(30) NOT NULL,
-First_Last_Name VARCHAR(30) NOT NULL,
-Second_Last_Name VARCHAR(30) NULL,
+User_Active_Status VARCHAR(10) NOT NULL DEFAULT '1', /*True or False*/
+First_Name VARCHAR(50) NOT NULL,
+First_Last_Name VARCHAR(50) NOT NULL,
+Second_Last_Name VARCHAR(50) NULL,
 Id_Type VARCHAR(10) NOT NULL,
 Identification_Number VARCHAR(20) NOT NULL UNIQUE, ---MUST BE UNIQUE ---
 Birthdate DATETIME NOT NULL,

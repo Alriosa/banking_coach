@@ -36,10 +36,7 @@ namespace DataAcess.Mapper
             operation.AddDateTimeParam(DB_COL_ENTRY_DATE, laboral.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, laboral.StudentID);
             return operation;
-
         }
-
-
 
         public SqlOperation GetRetriveAllStatement()
         {

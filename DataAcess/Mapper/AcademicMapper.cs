@@ -61,7 +61,7 @@ namespace DataAcess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_ACADEMIC_BY_STUDENT" };
 
             var academic = (Academic)entity;
-            operation.AddIntParam(DB_COL_ACADEMIC_ID, academic.AcademicID);
+            operation.AddIntParam(DB_COL_STUDENT_ID, academic.StudentID);
 
             return operation;
         }
