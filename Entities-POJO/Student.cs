@@ -39,12 +39,12 @@ namespace Entities_POJO
         public string TransportAvailability { get; set; }
         public string Vehicle { get; set; }
         public string DriverLicenses { get; set; }
+        public DateTime EntryDate { get; set; }
         public Student()
         {
             
         }
-
-        public Student(int studentID, string bankingStudent, string userActiveStatus, string firstName, string firstLastName, string secondLastName, string idType, string identificationNumber, DateTime birthdate, int age, string email, string firstPhoneNumber, string secondPhoneNumber, string province, string nProvince, string canton, string nCanton, string district, string nDistrict, string laboralStatus, string educationStatus, string curriculum, string agreeJobExchange, string userType, string studentLogin, string studentPassword, string userLogin, string driverLicenses)
+        public Student(int studentID, string bankingStudent, string userActiveStatus, string firstName, string firstLastName, string secondLastName, string idType, string identificationNumber, DateTime birthdate, int age, string email, string firstPhoneNumber, string secondPhoneNumber, string province, string nProvince, string canton, string nCanton, string district, string nDistrict, string laboralStatus, string educationStatus, string curriculum, string agreeJobExchange, string userType, string studentLogin, string studentPassword, string userLogin, string jobAvailability, string transportAvailability, string vehicle, string driverLicenses, DateTime entryDate)
         {
             StudentID = studentID;
             BankingStudent = bankingStudent;
@@ -73,7 +73,11 @@ namespace Entities_POJO
             StudentLogin = studentLogin;
             StudentPassword = studentPassword;
             UserLogin = userLogin;
+            JobAvailability = jobAvailability;
+            TransportAvailability = transportAvailability;
+            Vehicle = vehicle;
             DriverLicenses = driverLicenses;
+            EntryDate = entryDate;
         }
     }
     

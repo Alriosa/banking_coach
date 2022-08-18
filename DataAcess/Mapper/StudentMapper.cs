@@ -76,6 +76,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_AGREE_JOB_EXCHANGE,student.AgreeJobExchange);
             operation.AddVarcharParam(DB_COL_STUDENT_LOGIN,student.StudentLogin);
             operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD,student.StudentPassword);
+            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, student.EntryDate);
   
 
             return operation;
@@ -148,8 +149,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_AGREE_JOB_EXCHANGE, student.AgreeJobExchange);
             operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.StudentLogin);
             operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.StudentPassword);
-
-
+            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, student.EntryDate);
 
             return operation;
         }
@@ -243,6 +243,7 @@ namespace DataAccess.Mapper
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 StudentLogin = GetStringValue(row, DB_COL_STUDENT_LOGIN),
                 StudentPassword = GetStringValue(row, DB_COL_STUDENT_PASSWORD),
+                EntryDate = GetDateValue(row, DB_COL_ENTRY_DATE),
                 //UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
             };
 
