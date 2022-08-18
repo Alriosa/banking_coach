@@ -27,9 +27,10 @@
             document.querySelector('#P_WelcomeName').append(data['FirstName'] + ' ' + data['FirstLastName']);
 
             document.querySelector('#P_LaboralStatus').append(data['LaboralStatus']);
-            document.querySelector('#P_Workstation').append(data['Workstation']);
+            /*document.querySelector('#P_Workstation').append(data['Workstation']);
             document.querySelector('#P_Experience').append(data['Experience']);
-            document.querySelector('#P_LaboralExperience').append(data['LaboralExperience']);
+            document.querySelector('#P_DriverLicenses').append(data['DriverLicenses']);
+            document.querySelector('#P_LaboralExperience').append(data['LaboralExperience']);*/
             document.querySelector('#P_JobAvailability').append(data['JobAvailability']);
             document.querySelector('#P_Id_Type').append(data['IdType']);
 
@@ -39,7 +40,6 @@
             document.querySelector('#P_PhoneNumber').append(data['FirstPhoneNumber']);
             document.querySelector('#P_SecondPhoneNumber').append(data['SecondPhoneNumber']);
             //document.querySelector('#P_Language').append(data['Language']);
-            document.querySelector('#P_DriverLicenses').append(data['DriverLicenses']);
             document.querySelector('#P_Vehicle').append(data['Vehicle']);
 
 
@@ -100,9 +100,9 @@
         var studentLogin = document.getElementById("txtStudentLogin").value;
         studentData = this.ctrlActions.GetDataForm('frmEditInfoBasic');
         if (studentData["JobAvailability"] == "Sí") {
-            studentData["LaboralStatus"] = "SÍ";
-        } else {
             studentData["LaboralStatus"] = "No";
+        } else {
+            studentData["LaboralStatus"] = "Sí";
         }
         studentData["StudentLogin"] = studentLogin;
         studentData["StudentID"] = id;

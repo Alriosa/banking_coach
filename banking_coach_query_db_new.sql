@@ -1045,7 +1045,7 @@ GO
 
 --- UPDATE STUDENT
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
-        @SP_User_Active_Status VARCHAR(1),
+        @SP_Student_ID INT,
         @SP_First_Name VARCHAR(200),
         @SP_First_Last_Name VARCHAR(200),
         @SP_Second_Last_Name VARCHAR(200),
@@ -1055,20 +1055,16 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
 		@SP_Age INT,
         @SP_Email VARCHAR(200),
         @SP_Primary_Phone_Number VARCHAR(200),
-        @SP_Second_Phone_Numer VARCHAR(200),
+        @SP_Second_Phone_Number VARCHAR(200),
         @SP_Laboral_Status VARCHAR(10),
         @SP_Job_Availability VARCHAR(200),
         @SP_Transport_Availability VARCHAR(10),
         @SP_Vehicle VARCHAR(10),
-        @SP_Driver_Licenses VARCHAR(200),
-        @SP_Student_User VARCHAR(20),
-        @SP_Student_Password VARCHAR(50),
         @SP_Province VARCHAR(200),
         @SP_Canton VARCHAR(200),
         @SP_District VARCHAR(200)
 AS
         UPDATE [dbo].[TBL_STUDENT] SET
-				User_Active_Status = @SP_User_Active_Status,
                 First_Name=@SP_First_Name,
                 First_Last_Name=@SP_First_Last_Name,
                 Second_Last_Name=@SP_Second_Last_Name,
@@ -1077,7 +1073,7 @@ AS
                 Birthdate=@SP_Birthdate,
                 Age=@SP_Age,
                 Primary_Phone_Number=@SP_Primary_Phone_Number,
-				Second_Phone_Number = @SP_Second_Phone_Numer,
+				Second_Phone_Number = @SP_Second_Phone_Number,
                 Email=@SP_Email,
 				Province=@SP_Province,
                 Canton=@SP_Canton,
@@ -1085,11 +1081,8 @@ AS
                 Laboral_Status=@SP_Laboral_Status,
                 Job_Availability=@SP_Job_Availability,
                 Transport_Availability=@SP_Transport_Availability,
-                Vehicle=@SP_Vehicle,
-                Driver_Licenses=@SP_Driver_Licenses,
-				Student_User=@SP_Student_User,
-				Student_Password=@SP_Student_Password
-                WHERE Student_User = @SP_Student_User;
+                Vehicle=@SP_Vehicle
+                WHERE Student_ID = @SP_Student_ID;
 GO
 
 
