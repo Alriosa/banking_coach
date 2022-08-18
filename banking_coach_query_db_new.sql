@@ -25,12 +25,12 @@ Second_Phone_Number VARCHAR(20) NOT NULL, ---MUST BE UNIQUE ---
 Province VARCHAR(3) NOT NULL,
 Canton VARCHAR(3) NOT NULL,
 District VARCHAR(3) NOT NULL,
-Laboral_Status VARCHAR(10) NOT NULL, /*True or False*/
-Job_Availability VARCHAR(10) NOT NULL,
+Laboral_Status VARCHAR(10) NULL, /*True or False*/
+Job_Availability VARCHAR(10) NULL,
 Transport_Availability VARCHAR(200) NOT NULL,
 Vehicle VARCHAR(10) NOT NULL,
-Driver_Licenses VARCHAR(200) NOT NULL,
-Curriculum VARCHAR(200) NOT NULL,
+Driver_Licenses VARCHAR(200) NULL,
+Curriculum VARCHAR(200) NULL,
 Agree_Job_Exchange VARCHAR(200) NOT NULL,
 Student_User VARCHAR(20) NOT NULL,---MUST BE UNIQUE ---
 Student_Password VARCHAR(50) NOT NULL,
@@ -1061,8 +1061,6 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Transport_Availability VARCHAR(10),
         @SP_Vehicle VARCHAR(10),
         @SP_Driver_Licenses VARCHAR(200),
-        @SP_Curriculum VARCHAR(200),
-        @SP_Agree_Job_Exchange VARCHAR(200),
         @SP_Student_User VARCHAR(20),
         @SP_Student_Password VARCHAR(50),
         @SP_Province VARCHAR(200),
@@ -1089,8 +1087,6 @@ AS
                 Transport_Availability=@SP_Transport_Availability,
                 Vehicle=@SP_Vehicle,
                 Driver_Licenses=@SP_Driver_Licenses,
-				Curriculum=@SP_Curriculum,
-				Agree_Job_Exchange=@SP_Agree_Job_Exchange,
 				Student_User=@SP_Student_User,
 				Student_Password=@SP_Student_Password
                 WHERE Student_User = @SP_Student_User;

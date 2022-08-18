@@ -72,7 +72,6 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_AGREE_JOB_EXCHANGE,student.AgreeJobExchange);
             operation.AddVarcharParam(DB_COL_STUDENT_LOGIN,student.StudentLogin);
             operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD,student.StudentPassword);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, student.EntryDate);
   
 
             return operation;
@@ -120,7 +119,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_STUDENT" };
 
             var student = (Student)entity;
-            operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS, student.UserActiveStatus);
+            operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
             operation.AddVarcharParam(DB_COL_FIRST_NAME, student.FirstName);
             operation.AddVarcharParam(DB_COL_FIRST_LAST_NAME, student.FirstLastName);
             operation.AddVarcharParam(DB_COL_SECOND_LAST_NAME, student.SecondLastName);
@@ -139,11 +138,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_TRANSPORT_AVAILABILITY, student.TransportAvailability);
             operation.AddVarcharParam(DB_COL_VEHICLE, student.Vehicle);
             operation.AddVarcharParam(DB_COL_DRIVER_LICENSES, student.DriverLicenses);
-            operation.AddVarcharParam(DB_COL_CURRICULUM, student.Curriculum);
-            operation.AddVarcharParam(DB_COL_AGREE_JOB_EXCHANGE, student.AgreeJobExchange);
-            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.StudentLogin);
-            operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.StudentPassword);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, student.EntryDate);
+
 
             return operation;
         }

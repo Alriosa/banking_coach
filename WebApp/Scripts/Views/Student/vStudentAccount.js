@@ -98,11 +98,23 @@
         var studentData = {};
         var id = document.getElementById("txtIdStudent").value;
         var studentLogin = document.getElementById("txtStudentLogin").value;
-        studentData = this.ctrlActions.GetDataForm('formEditStudent');
+        studentData = this.ctrlActions.GetDataForm('frmEditInfoBasic');
+        if (studentData["JobAvailability"] == "Sí") {
+            studentData["LaboralStatus"] = "SÍ";
+        } else {
+            studentData["LaboralStatus"] = "No";
+        }
         studentData["StudentLogin"] = studentLogin;
         studentData["StudentID"] = id;
         this.ctrlActions.PutToAPI('student/', studentData,
-            //setTimeout(function redirection() { window.location.href = '/Student/vStudentList/' }, 3000)
+            function () {
+                $('#modalEditInfo').modal('hide');
+
+                setTimeout(function () {
+                    window.location.reload();
+                }, 3000)
+            }
+
         );
     }
 

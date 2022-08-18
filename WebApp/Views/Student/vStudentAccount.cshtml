@@ -89,7 +89,8 @@
                                                                                 <div class="col-lg-12 my-2">
                                                                                     <div class="d-flex flex-column">
                                                                                         <input type="text" id="txtIdStudent" class="d-none" ColumnDataName="StudentID">
-                                                                                    </div>                           <input type="text" id="txtStudentLogin" class="d-none">
+                                                                                        <input type="text" id="txtStudentLogin" class="d-none">
+                                                                                    </div>
                                                                                     <div class="form-row ">
                                                                                         <div class="col-lg-12">
                                                                                             @Html.CtrlInputSecond(id: "txtFirstName", type: "text", required: true, placeHolder: "Primer Nombre", columnDataName: "FirstName")
@@ -178,6 +179,22 @@
                                                                                             <div>
                                                                                                 <div class="input-group mb-3">
                                                                                                     <div class="form-group input-group flex-column ">
+                                                                                                        <label for="txtJobAvailability">Disponibilidad laboral</label>
+                                                                                                        <select style="height:54px;" class="form-control w-100 " id="txtJobAvailability"
+                                                                                                                name="txtJobAvailability" ColumnDataName="JobAvailability" required>
+                                                                                                            <option value="Sí">Inmediata</option>
+                                                                                                            <option value="No">No</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div>
+                                                                                                <div class="input-group mb-3">
+                                                                                                    <div class="form-group input-group flex-column ">
                                                                                                         <label for="txtTransportAvailability">Disponibilidad de traslado a nivel nacional</label>
                                                                                                         <select style="height:54px;" class="form-control w-100 " id="txtTransportAvailability"
                                                                                                                 name="txtTransportAvailability" ColumnDataName="TransportAvailability" required>
@@ -190,6 +207,22 @@
                                                                                         </div>
                                                                                     </div>
 
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div>
+                                                                                                <div class="input-group mb-3">
+                                                                                                    <div class="form-group input-group flex-column ">
+                                                                                                        <label for="txtVehicle">¿Posee vehículo?</label>
+                                                                                                        <select style="height:54px;" class="form-control w-100 " id="txtVehicle"
+                                                                                                                name="txtVehicle" ColumnDataName="Vehicle" required>
+                                                                                                            <option value="Sí">Sí</option>
+                                                                                                            <option value="No">No</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                     <div class="form-row ">
                                                                                         <div class="col-lg-12">
                                                                                             <div>
@@ -240,7 +273,7 @@
                                                                                     </div>
                                                                                     <div class="row my-4 mx-auto">
                                                                                         <div style="margin: 0px auto 10px;">
-                                                                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChanges", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
+                                                                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChangesInfo", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

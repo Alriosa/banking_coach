@@ -104,10 +104,18 @@ function ControlActions() {
 			})
 	};
 
-	this.PutToAPI = function (service, data) {
+	this.PutToAPI = function (service, data, callBackFunction) {
 		var jqxhr = $.put(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
 			ctrlActions.ShowMessage('I', response.Message);
+			if (response.Data == "error") {
+				ctrlActions.ShowMessage('E', response.Message);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			} else {
+				ctrlActions.ShowMessage('I', response.Message);
+			}
+			callBackFunction();
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;
