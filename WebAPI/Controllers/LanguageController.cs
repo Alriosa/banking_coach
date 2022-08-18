@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
                 var mng = new LanguageManager();
                 var language = new Language
                 {
-                    CourseID = id
+                    LanguageID = id
                 };
 
                 language = mng.RetrieveById(language);

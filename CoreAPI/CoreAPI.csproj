@@ -43,7 +43,10 @@
   <ItemGroup>
     <Compile Include="BaseManager.cs" />
     <Compile Include="AcademicManager.cs" />
+    <Compile Include="ExtraCourseManager.cs" />
     <Compile Include="LaboralManager.cs" />
+    <Compile Include="LanguageManager.cs" />
+    <Compile Include="ReferenceManager.cs" />
     <Compile Include="ViewPermissionManager.cs" />
     <Compile Include="FinancialUserManager.cs" />
     <Compile Include="ListManager.cs" />

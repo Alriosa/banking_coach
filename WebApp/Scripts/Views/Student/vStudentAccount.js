@@ -19,35 +19,37 @@
             servicioData = {};
             this.ctrlActionsInto = new ControlActions();
             const [date] = formatDate(new Date(data["Birthdate"])).split(' ');
-          
-            this.ctrlActionsInto.BindFields('formEditStudent', data);
+
+            this.ctrlActionsInto.BindFields('frmEditInfoBasic', data);
             const dateInput = document.getElementById('txtBirthdate');
             dateInput.value = date;
-
-            document.querySelector('#P_WelcomeName').append(data['CompleteName']);
+            let name = data['FirstName'] + ' ' + data['FirstLastName'] + ' ' + data['SecondLastName'];
+            document.querySelector('#P_WelcomeName').append(data['FirstName'] + ' ' + data['FirstLastName']);
 
             document.querySelector('#P_LaboralStatus').append(data['LaboralStatus']);
             document.querySelector('#P_Workstation').append(data['Workstation']);
             document.querySelector('#P_Experience').append(data['Experience']);
             document.querySelector('#P_LaboralExperience').append(data['LaboralExperience']);
             document.querySelector('#P_JobAvailability').append(data['JobAvailability']);
+            document.querySelector('#P_Id_Type').append(data['IdType']);
 
-            document.querySelector('#P_CompleteName').append(data['CompleteName']);
+            document.querySelector('#P_CompleteName').append(name);
             document.querySelector('#P_IdentificationNumber').append(data['IdentificationNumber']);
             document.querySelector('#P_Email').append(data['Email']);
-            document.querySelector('#P_PhoneNumber').append(data['PhoneNumber']);
-            document.querySelector('#P_Language').append(data['Language']);
+            document.querySelector('#P_PhoneNumber').append(data['FirstPhoneNumber']);
+            document.querySelector('#P_SecondPhoneNumber').append(data['SecondPhoneNumber']);
+            //document.querySelector('#P_Language').append(data['Language']);
             document.querySelector('#P_DriverLicenses').append(data['DriverLicenses']);
             document.querySelector('#P_Vehicle').append(data['Vehicle']);
 
-            
 
-          /*  document.querySelector('#P_Id_Type').append(data['IdType']);
-            document.querySelector('#P_Identification_Number').append(data['IdentificationNumber']);
-            document.querySelector('#P_Last_Name').append(data['LastName']);
-            document.querySelector('#P_Email').append(data['Email']);
-            document.querySelector('#P_Phone_Number').append(data['PhoneNumber']);
-            */
+
+            /*  document.querySelector('#P_Id_Type').append(data['IdType']);
+              document.querySelector('#P_Identification_Number').append(data['IdentificationNumber']);
+              document.querySelector('#P_Last_Name').append(data['LastName']);
+              document.querySelector('#P_Email').append(data['Email']);
+              document.querySelector('#P_Phone_Number').append(data['PhoneNumber']);
+              */
             /*document.querySelector('#P_Second_Last_Name').append(data['SecondLastName']);
             switch (data['IdType']) {
                 case "N":
@@ -104,92 +106,121 @@
         );
     }
 
-    
-}
-
-function padTo2Digits(num) {
-    return num.toString().padStart(2, '0');
-}
-
-function formatDate(date) {
-    return ([
-        date.getFullYear(),
-        padTo2Digits(date.getMonth() + 1),
-        padTo2Digits(date.getDate()),
-    ].join('-')
-  );
-}
-
-$(document).ready(function () {
 
 
-    $(function () {
-        var showCanton = function (selectedProvince) {
-            $('#txtCanton option').hide();
-            //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
-            //$('#txtCanton').find(`option`).hide(); // hide all
+    this.CreateLaboral = function () {
 
-            $('#txtCanton').find(`option[data-parent=${selectedProvince}]`).show();
+        var laboralData = {};
+        laboralData = this.ctrlActions.GetDataForm('frmAddLaboral');
 
-            //set default value
-            var defaultCanton = "Seleccione una provincia";
-            //  $('#txtCanton').val(defaultCanton);
-            $("#txtCanton").val($("#txtCanton option:first").val());
 
-        };
-
-        var showDistrict = function (selectedCanton) {
-            $('#txtDistrict option').hide();
-            //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
-            $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
-            //set default value
-            var defaultDistrito = "Seleccione un cantón";
-            //$('#txtDistrict').val(defaultDistrito);
-            $("#txtDistrict").val($("#txtDistrict option:first").val());
-
-        };
-
-        //set default provincia
-        var province = $('#txtProvince').val();
-        showCanton(province);
-        $('#txtProvince').change(function () {
-            showCanton($(this).val());
-        });
-
-        //set default canton
-        var canton = $('#txtCanton').val();
-        showDistrict(canton);
-        $('#txtCanton').change(function () {
-            showDistrict($(this).val());
-        });
-
-        $('#txtDistrict').change(function () {
+        if (laboralData["EndDate"] == null) {
+            laboralData["EndDate"] = null;
+        }
+        console.log(laboralData)
+        /*this.ctrlActions.PostToAPI('laboral', laboralData, function () {
+            resetForm();
+            //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
 
         });
-    });
+    }*/
+
+        this.ValidateInputs = function () {
+            if ($("#frmAddLaboral").valid()) {
+                this.Create();
+
+            }
+        }
+
+    }
+}
+    function padTo2Digits(num) {
+        return num.toString().padStart(2, '0');
+    }
+
+    function formatDate(date) {
+        return ([
+            date.getFullYear(),
+            padTo2Digits(date.getMonth() + 1),
+            padTo2Digits(date.getDate()),
+        ].join('-')
+        );
+    }
+
+    $(document).ready(function () {
 
 
-    $("#editInformation").on("click", function () {
-        $('#contentInformation').toggle();
-        $('#contentLaboral').hide();
-        $('#contentAcademic').hide();
-    });
+        $(function () {
+            var showCanton = function (selectedProvince) {
+                $('#txtCanton option').hide();
+                //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
+                //$('#txtCanton').find(`option`).hide(); // hide all
 
-    $("#editLaboral").on("click", function () {
-        $('#contentLaboral').toggle();
-        $('#contentAcademic').hide();
-        $('#contentInformation').hide();
-    });
+                $('#txtCanton').find(`option[data-parent=${selectedProvince}]`).show();
 
-    $("#editAcademic").on("click", function () {
-        $('#contentAcademic').toggle();
-        $('#contentLaboral').hide();
-        $('#contentInformation').hide();
-    });
+                //set default value
+                var defaultCanton = "Seleccione una provincia";
+                //  $('#txtCanton').val(defaultCanton);
+                $("#txtCanton").val($("#txtCanton option:first").val());
 
-    $("#btnSaveChanges").attr("disabled", "disabled");
+            };
 
-    
+            var showDistrict = function (selectedCanton) {
+                $('#txtDistrict option').hide();
+                //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
+                $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
+                //set default value
+                var defaultDistrito = "Seleccione un cantón";
+                //$('#txtDistrict').val(defaultDistrito);
+                $("#txtDistrict").val($("#txtDistrict option:first").val());
+
+            };
+
+            //set default provincia
+            var province = $('#txtProvince').val();
+            showCanton(province);
+            $('#txtProvince').change(function () {
+                showCanton($(this).val());
+            });
+
+            //set default canton
+            var canton = $('#txtCanton').val();
+            showDistrict(canton);
+            $('#txtCanton').change(function () {
+                showDistrict($(this).val());
+            });
+
+            $('#txtDistrict').change(function () {
+
+            });
 
 
-})
+
+
+        });
+
+
+        $("#editInformation").on("click", function () {
+            $('#contentInformation').toggle();
+            $('#contentLaboral').hide();
+            $('#contentAcademic').hide();
+        });
+
+        $("#editLaboral").on("click", function () {
+            $('#contentLaboral').toggle();
+            $('#contentAcademic').hide();
+            $('#contentInformation').hide();
+        });
+
+        $("#editAcademic").on("click", function () {
+            $('#contentAcademic').toggle();
+            $('#contentLaboral').hide();
+            $('#contentInformation').hide();
+        });
+
+        $("#btnSaveChanges").attr("disabled", "disabled");
+
+
+
+
+    })

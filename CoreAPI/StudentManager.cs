@@ -49,7 +49,7 @@ namespace CoreAPI
                 c = crudStudent.Retrieve<Student>(student);
                 if (c == null)
                 {
-                    throw new BussinessException(4);
+                //    throw new BussinessException(4);
                 }
             }
             catch (Exception ex)

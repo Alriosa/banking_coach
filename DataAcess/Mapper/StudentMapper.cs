@@ -11,7 +11,6 @@ namespace DataAccess.Mapper
     public class StudentMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
         private const string DB_COL_STUDENT_ID = "Student_ID";
-        private const string DB_COL_BANKING_STUDENT = "Banking_Student";
         private const string DB_COL_USER_ACTIVE_STATUS = "User_Active_Status";
         private const string DB_COL_ENTRY_DATE = "Entry_Date";
         private const string DB_COL_FIRST_NAME = "First_Name";
@@ -22,7 +21,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_BIRTHDATE = "Birthdate";
         private const string DB_COL_AGE = "Age";
         private const string DB_COL_EMAIL = "Email";
-        private const string DB_COL_FIRST_PHONE_NUMBER = "Phone_Number";
+        private const string DB_COL_FIRST_PHONE_NUMBER = "Primary_Phone_Number";
         private const string DB_COL_SECOND_PHONE_NUMBER = "Second_Phone_Number";
         private const string DB_COL_PROVINCE = "Province";
         private const string DB_COL_CANTON = "Canton";
@@ -31,7 +30,6 @@ namespace DataAccess.Mapper
         private const string DB_COL_N_CANTON = "N_Canton";
         private const string DB_COL_N_DISTRICT = "N_District";
         private const string DB_COL_LABORAL_STATUS = "Laboral_Status";
-        private const string DB_COL_EDUCATION_STATUS = "Education_Status";
         private const string DB_COL_JOB_AVAILABILTY = "Job_Availability";
         private const string DB_COL_TRANSPORT_AVAILABILITY = "Transport_Availability";
         private const string DB_COL_VEHICLE = "Vehicle";
@@ -51,7 +49,6 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_STUDENT" };
 
             var student = (Student)entity;
-            operation.AddVarcharParam(DB_COL_BANKING_STUDENT,student.BankingStudent);
             operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS,student.UserActiveStatus);
             operation.AddVarcharParam(DB_COL_FIRST_NAME, student.FirstName);
             operation.AddVarcharParam(DB_COL_FIRST_LAST_NAME, student.FirstLastName);
@@ -67,7 +64,6 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_CANTON, student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT, student.District);
             operation.AddVarcharParam(DB_COL_LABORAL_STATUS,student.LaboralStatus);
-            operation.AddVarcharParam(DB_COL_EDUCATION_STATUS,student.EducationStatus);
             operation.AddVarcharParam(DB_COL_JOB_AVAILABILTY,student.JobAvailability);
             operation.AddVarcharParam(DB_COL_TRANSPORT_AVAILABILITY,student.TransportAvailability);
             operation.AddVarcharParam(DB_COL_VEHICLE,student.Vehicle);
@@ -124,7 +120,6 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_STUDENT" };
 
             var student = (Student)entity;
-            operation.AddVarcharParam(DB_COL_BANKING_STUDENT, student.BankingStudent);
             operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS, student.UserActiveStatus);
             operation.AddVarcharParam(DB_COL_FIRST_NAME, student.FirstName);
             operation.AddVarcharParam(DB_COL_FIRST_LAST_NAME, student.FirstLastName);
@@ -140,7 +135,6 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_CANTON, student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT, student.District);
             operation.AddVarcharParam(DB_COL_LABORAL_STATUS, student.LaboralStatus);
-            operation.AddVarcharParam(DB_COL_EDUCATION_STATUS, student.EducationStatus);
             operation.AddVarcharParam(DB_COL_JOB_AVAILABILTY, student.JobAvailability);
             operation.AddVarcharParam(DB_COL_TRANSPORT_AVAILABILITY, student.TransportAvailability);
             operation.AddVarcharParam(DB_COL_VEHICLE, student.Vehicle);
@@ -214,7 +208,6 @@ namespace DataAccess.Mapper
             var student = new Student
             {
                 StudentID = GetIntValue(row, DB_COL_STUDENT_ID),
-                BankingStudent = GetStringValue(row, DB_COL_BANKING_STUDENT),
                 UserActiveStatus = GetStringValue(row, DB_COL_USER_ACTIVE_STATUS),
                 FirstName = GetStringValue(row, DB_COL_FIRST_NAME),
                 FirstLastName = GetStringValue(row, DB_COL_FIRST_LAST_NAME),
@@ -233,7 +226,6 @@ namespace DataAccess.Mapper
                 NCanton = GetStringValue(row, DB_COL_N_CANTON),
                 NDistrict = GetStringValue(row, DB_COL_N_DISTRICT),
                 LaboralStatus = GetStringValue(row,DB_COL_LABORAL_STATUS),
-                EducationStatus = GetStringValue(row, DB_COL_EDUCATION_STATUS),
                 JobAvailability = GetStringValue(row, DB_COL_JOB_AVAILABILTY),
                 TransportAvailability = GetStringValue(row, DB_COL_TRANSPORT_AVAILABILITY),
                 Vehicle = GetStringValue(row, DB_COL_VEHICLE),
