@@ -43,11 +43,15 @@
   <ItemGroup>
     <Compile Include="Crud\AcademicCrudFactory.cs" />
     <Compile Include="Crud\AppMessagesCrudFactory.cs" />
+    <Compile Include="Crud\LaboralCrudFactory.cs" />
     <Compile Include="Crud\CustomerCrudFactory.cs" />
     <Compile Include="Crud\CrudFactory.cs" />
+    <Compile Include="Crud\ExtraCourseCrudFactory.cs" />
     <Compile Include="Crud\FinancialUserCrudFactory.cs" />
+    <Compile Include="Crud\LanguageCrudFactory.cs" />
     <Compile Include="Crud\ListCrudFactory.cs" />
     <Compile Include="Crud\RecruiterCrudFactory.cs" />
+    <Compile Include="Crud\ReferenceCrudFactory.cs" />
     <Compile Include="Crud\SecurityCrudFactory.cs" />
     <Compile Include="Crud\StudentCrudFactory.cs" />
     <Compile Include="Crud\SysAdminCrudFactory.cs" />
@@ -57,6 +61,7 @@
     <Compile Include="Crud\ViewCrudFactory.cs" />
     <Compile Include="Mapper\AcademicMapper.cs" />
     <Compile Include="Mapper\AppMessageMapper.cs" />
+    <Compile Include="Mapper\ExtraCourseMapper.cs" />
     <Compile Include="Mapper\LanguageMapper.cs" />
     <Compile Include="Mapper\CustomerMapper.cs" />
     <Compile Include="Mapper\EntityMapper.cs" />
@@ -66,6 +71,7 @@
     <Compile Include="Mapper\LaboralMapper.cs" />
     <Compile Include="Mapper\ListMapper.cs" />
     <Compile Include="Mapper\RecruiterMapper.cs" />
+    <Compile Include="Mapper\ReferenceMapper.cs" />
     <Compile Include="Mapper\SecurityMapper.cs" />
     <Compile Include="Mapper\StudentMapper.cs" />
     <Compile Include="Mapper\SysAdminMapper.cs" />

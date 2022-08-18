@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.Crud
 {
-    class ReferenceCrudFactory : CrudFactory
+    public class ReferenceCrudFactory : CrudFactory
     {
         ReferenceMapper mapper;
 
