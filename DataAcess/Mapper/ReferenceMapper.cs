@@ -79,7 +79,7 @@ namespace DataAcess.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_REFERENCE_BY_ID" };
+            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_REFERENCE" };
 
             var reference = (Reference)entity;
             operation.AddIntParam(DB_COL_REFERENCE_ID, reference.ReferenceID);

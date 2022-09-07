@@ -46,6 +46,7 @@ CREATE TABLE TBL_LANGUAGES  (
 Language_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 Language VARCHAR(20) NOT NULL,
 Level VARCHAR(20) NOT NULL,
+Entry_Date DATETIME NOT NULL,
 Student_ID INT NOT NULL,
 CONSTRAINT FK_Student__Language_ID FOREIGN KEY (Student_ID) REFERENCES TBL_STUDENT(Student_ID)
 );
@@ -55,11 +56,11 @@ Academic_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 Institution VARCHAR(100) NOT NULL,
 Degree_Type VARCHAR(100) NOT NULL,  --SECUNDARIA O UNIVERSITARIA --
 University_Preparation VARCHAR(100) NOT NULL,
-Start_Date DATETIME NOT NULL,
-End_Date DATETIME , 
 Career VARCHAR(100) NOT NULL,
 Status VARCHAR(20) NOT NULL, -- en curso, suspendido, finalizado --
 Certificate VARCHAR(100) NULL, -- url del documento --
+Start_Date DATETIME NOT NULL,
+End_Date DATETIME , 
 Entry_Date DATETIME NOT NULL,
 Student_ID INT NOT NULL,
 CONSTRAINT FK_Student_Academic_ID FOREIGN KEY (Student_ID) REFERENCES TBL_STUDENT(Student_ID)
@@ -69,11 +70,11 @@ CREATE TABLE TBL_EXTRA_COURSES  (
 Course_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 Institution VARCHAR(100) NOT NULL,
 Course_Name VARCHAR(100) NOT NULL,  --SECUNDARIA O UNIVERSITARIA --
+Certificate VARCHAR(100) NULL, -- url del documento --
+Status VARCHAR(20) NOT NULL, -- en curso, finalizado --
 Start_Date DATETIME NOT NULL,
 End_Date DATETIME , 
-Status VARCHAR(20) NOT NULL, -- en curso, finalizado --
 Entry_Date DATETIME NOT NULL,
-Certificate VARCHAR(100) NULL, -- url del documento --
 Student_ID INT NOT NULL,
 CONSTRAINT FK_Student_Extra_Course_ID FOREIGN KEY (Student_ID) REFERENCES TBL_STUDENT(Student_ID)
 );
@@ -1677,6 +1678,416 @@ AS
 	WHERE P.Id_User_Type = @SP_Id_User_Type
 
 GO
+
+
+
+/**
+-START 
+STORAGE PROCEDURES FOR LANGUAGES
+**/ 
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_LANGUAGE_STUDENT]
+        @SP_Language VARCHAR(50),
+        @SP_Level VARCHAR(50),
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        INSERT INTO [dbo].[TBL_LANGUAGES]
+        VALUES
+                (@SP_Language,
+                @SP_Level,
+                @SP_Entry_Date,
+				@SP_Student_ID
+				);
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_LANGUAGE_STUDENT]
+        @SP_Language_ID INT,
+        @SP_Language VARCHAR(50),
+        @SP_Level VARCHAR(50),
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        UPDATE [dbo].[TBL_LANGUAGES] SET
+				Language = @SP_Language,
+                Level = @SP_Level, 
+                Entry_Date = @SP_Entry_Date, 
+                Student_ID = @SP_Student_ID
+				WHERE Language_ID = @SP_Language_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_LANGUAGE]
+        @SP_Language_ID INT
+AS
+        DELETE FROM [dbo].[TBL_LANGUAGES] WHERE Language_ID = @SP_Language_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_LANGUAGES]
+AS
+
+        SELECT * FROM [dbo].[TBL_LANGUAGES];
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_LANGUAGE_BY_ID]
+        @SP_Language_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_LANGUAGES] WHERE Language_ID = @SP_Language_ID;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_LANGUAGE_BY_STUDENT]
+        @SP_Student_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_LANGUAGES] WHERE Student_ID = @SP_Student_ID;
+GO
+
+/**
+-END 
+STORAGE PROCEDURES FOR LANGUAGES
+**/
+
+
+/**
+-START 
+STORAGE PROCEDURES FOR ACADEMIC
+**/ 
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_ACADEMIC_STUDENT]
+        @SP_Institution VARCHAR(100),
+        @SP_Degree_Type VARCHAR(50),
+        @SP_University_Preparation VARCHAR(100),
+        @SP_Career VARCHAR(50),
+        @SP_Status VARCHAR(15),
+        @SP_Certificate TEXT,
+        @SP_Start_Date DATETIME,
+        @SP_End_Date DATETIME,
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        INSERT INTO [dbo].[TBL_ACADEMIC]
+        VALUES
+                (@SP_Institution,
+                @SP_Degree_Type,
+                @SP_University_Preparation,
+                @SP_Career,
+                @SP_Status,
+                @SP_Certificate,
+                @SP_Start_Date,
+                @SP_End_Date,
+                @SP_Entry_Date,
+				@SP_Student_ID
+				);
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ACADEMIC_STUDENT]
+       @SP_Academic_ID INT,
+       @SP_Institution VARCHAR(100),
+        @SP_Degree_Type VARCHAR(50),
+        @SP_University_Preparation VARCHAR(100),
+        @SP_Career VARCHAR(50),
+        @SP_Status VARCHAR(15),
+        @SP_Certificate TEXT,
+        @SP_Start_Date DATETIME,
+        @SP_End_Date DATETIME,
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        UPDATE [dbo].[TBL_ACADEMIC] SET
+				Institution = @SP_Institution,
+                Degree_Type = @SP_Degree_Type, 
+                University_Preparation = @SP_University_Preparation, 
+                Career = @SP_Career, 
+                Status = @SP_Status, 
+                Certificate = @SP_Certificate, 
+                Start_Date = @SP_Start_Date, 
+                End_Date = @SP_End_Date, 
+                Entry_Date = @SP_Entry_Date, 
+                Student_ID = @SP_Student_ID
+				WHERE Academic_ID = @SP_Academic_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_ACADEMIC]
+        @SP_Academic_ID INT
+AS
+        DELETE FROM [dbo].[TBL_ACADEMIC] WHERE Academic_ID = @SP_Academic_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_ACADEMIC]
+AS
+
+        SELECT * FROM [dbo].[TBL_ACADEMIC];
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ACADEMIC_BY_ID]
+        @SP_Academic_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_ACADEMIC] WHERE Academic_ID = @SP_Academic_ID;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ACADEMIC_BY_STUDENT]
+        @SP_Student_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_ACADEMIC] WHERE Student_ID = @SP_Student_ID;
+GO
+
+/**
+-END 
+STORAGE PROCEDURES FOR ACADEMIC
+**/
+
+
+/**
+-START 
+STORAGE PROCEDURES FOR EXTRA COURSE
+**/ 
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_COURSE_STUDENT]
+        @SP_Institution VARCHAR(100),
+        @SP_Course_Name VARCHAR(50),
+        @SP_Certificate TEXT,
+        @SP_Status VARCHAR(15),
+        @SP_Start_Date DATETIME,
+        @SP_End_Date DATETIME,
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        INSERT INTO [dbo].[TBL_EXTRA_COURSES]
+        VALUES
+                (@SP_Institution,
+                @SP_Course_Name,
+                @SP_Certificate,
+                @SP_Status,
+                @SP_Start_Date,
+                @SP_End_Date,
+                @SP_Entry_Date,
+				@SP_Student_ID
+				);
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_COURSE_STUDENT]
+       @SP_Course_ID INT,
+       @SP_Institution VARCHAR(100),
+        @SP_Degree_Type VARCHAR(50),
+        @SP_University_Preparation VARCHAR(100),
+        @SP_Career VARCHAR(50),
+        @SP_Status VARCHAR(15),
+        @SP_Certificate TEXT,
+        @SP_Start_Date DATETIME,
+        @SP_End_Date DATETIME,
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        UPDATE [dbo].[TBL_EXTRA_COURSES] SET
+				Institution = @SP_Institution,
+                Course_Name = @SP_Degree_Type, 
+                Certificate = @SP_Certificate, 
+                Status = @SP_Status, 
+                Start_Date = @SP_Start_Date, 
+                End_Date = @SP_End_Date, 
+                Entry_Date = @SP_Entry_Date, 
+                Student_ID = @SP_Student_ID
+				WHERE Course_ID = @SP_Course_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_COURSE]
+        @SP_Course_ID INT
+AS
+        DELETE FROM [dbo].[TBL_EXTRA_COURSES] WHERE  Course_ID = @SP_Course_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_COURSE]
+AS
+
+        SELECT * FROM [dbo].[TBL_EXTRA_COURSES];
+GO
+
+CREATE PROCEDURE [dbo].[SSP_SELECT_TBL_COURSE_BY_ID]
+        @SP_Course_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_EXTRA_COURSES] WHERE Course_ID = @SP_Course_ID;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_COURSE_BY_STUDENT"]
+        @SP_Student_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_EXTRA_COURSES] WHERE Student_ID = @SP_Student_ID;
+GO
+
+/**
+-END 
+STORAGE PROCEDURES FOR EXTRA COURSE
+**/
+
+/**
+-START 
+STORAGE PROCEDURES FOR LABORAL
+**/ 
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_LABORAL_STUDENT]
+        @SP_Work_Position VARCHAR(100),
+        @SP_Worstation VARCHAR(200),
+        @SP_Company VARCHAR(80),
+        @SP_Responsabilites VARCHAR(200),
+        @SP_Start_Date DATETIME,
+        @SP_End_Date DATETIME,
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        INSERT INTO [dbo].[TBL_LABORAL]
+        VALUES
+                (@SP_Work_Position,
+                @SP_Worstation,
+                @SP_Company,
+                @SP_Responsabilites,
+                @SP_Start_Date,
+                @SP_End_Date,
+                @SP_Entry_Date,
+				@SP_Student_ID
+				);
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_LABORAL_STUDENT]
+       @SP_Laboral_ID INT,
+         @SP_Work_Position VARCHAR(100),
+        @SP_Worstation VARCHAR(200),
+        @SP_Company VARCHAR(80),
+        @SP_Responsabilites VARCHAR(200),
+        @SP_Start_Date DATETIME,
+        @SP_End_Date DATETIME,
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        UPDATE [dbo].[TBL_LABORAL] SET
+				Work_Position = @SP_Work_Position,
+                Worstation = @SP_Worstation, 
+                Company = @SP_Company, 
+                Responsabilites = @SP_Responsabilites, 
+                Start_Date = @SP_Start_Date, 
+                End_Date = @SP_End_Date, 
+                Entry_Date = @SP_Entry_Date, 
+                Student_ID = @SP_Student_ID
+				WHERE Laboral_ID = @SP_Laboral_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_LABORAL]
+        @SP_Laboral_ID INT
+AS
+        DELETE FROM [dbo].[TBL_LABORAL] WHERE Laboral_ID = @SP_Laboral_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_LABORAL]
+AS
+
+        SELECT * FROM [dbo].[TBL_LABORAL];
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_LABORAL_BY_ID]
+        @SP_Laboral_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_LABORAL] WHERE Laboral_ID = @SP_Laboral_ID;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_LABORAL_BY_STUDENT]
+        @SP_Student_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_LABORAL] WHERE Student_ID = @SP_Student_ID;
+GO
+
+/**
+-END 
+STORAGE PROCEDURES FOR LABORAL
+**/
+
+/**
+-START 
+STORAGE PROCEDURES FOR REFERENCE
+**/ 
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_REFERENCE]
+        @SP_Referrer_Name VARCHAR(100),
+        @SP_Worstation VARCHAR(200),
+        @SP_Company VARCHAR(80),
+        @SP_Phone VARCHAR(15),
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        INSERT INTO [dbo].[TBL_REFERENCES]
+        VALUES
+                (@SP_Referrer_Name,
+                @SP_Worstation,
+                @SP_Company,
+                @SP_Phone,
+                @SP_Entry_Date,
+				@SP_Student_ID
+				);
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_REFERENCE]
+       @SP_Reference_ID INT,
+        @SP_Referrer_Name  VARCHAR(100),
+        @SP_Worstation VARCHAR(200),
+        @SP_Company VARCHAR(80),
+        @SP_Phone VARCHAR(15),
+        @SP_Entry_Date DATETIME,
+        @SP_Student_ID INT
+AS
+        UPDATE [dbo].[TBL_REFERENCES] SET
+				Referrer_Name = @SP_Referrer_Name,
+                Worstation = @SP_Worstation, 
+                Company = @SP_Company, 
+                Phone = @SP_Phone, 
+                Entry_Date = @SP_Entry_Date, 
+                Student_ID = @SP_Student_ID
+				WHERE Reference_ID = @SP_Reference_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_DELETE_TBL_REFERENCE]
+        @SP_Reference_ID INT
+AS
+        DELETE FROM [dbo].[TBL_REFERENCES] WHERE Reference_ID = @SP_Reference_ID;
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_REFERENCE]
+AS
+
+        SELECT * FROM [dbo].[TBL_REFERENCES];
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_REFERENCE_BY_ID]
+        @SP_Reference_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_REFERENCES] WHERE Reference_ID = @SP_Reference_ID;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_REFERENCE_BY_STUDENT]
+        @SP_Student_ID INT
+AS
+
+        SELECT * FROM [dbo].[TBL_REFERENCES] WHERE Student_ID = @SP_Student_ID;
+GO
+
+/**
+-END 
+STORAGE PROCEDURES FOR LABORAL
+**/
 
 /*
 	EXECUTE PROCEDURES

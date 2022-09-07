@@ -18,7 +18,7 @@ namespace DataAcess.Mapper
         private const string DB_COL_STUDENT_ID = "Student_ID";
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_LABORAL_STUDENT" };
+            var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_LANGUAGE_STUDENT" };
 
             var language = (Language)entity;
 
@@ -72,7 +72,7 @@ namespace DataAcess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_LANGUAGE" };
 
             var language = (Language)entity;
-            operation.AddIntParam(DB_COL_STUDENT_ID, language.StudentID);
+            operation.AddIntParam(DB_COL_LANGUAGE_ID, language.LanguageID);
 
             return operation;
         }

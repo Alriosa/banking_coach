@@ -137,7 +137,6 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_JOB_AVAILABILTY, student.JobAvailability);
             operation.AddVarcharParam(DB_COL_TRANSPORT_AVAILABILITY, student.TransportAvailability);
             operation.AddVarcharParam(DB_COL_VEHICLE, student.Vehicle);
-            operation.AddVarcharParam(DB_COL_DRIVER_LICENSES, student.DriverLicenses);
 
 
             return operation;

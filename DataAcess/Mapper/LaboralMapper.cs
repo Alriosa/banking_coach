@@ -85,7 +85,7 @@ namespace DataAcess.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_LABORAL_BY_ID" };
+            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_LABORAL" };
 
             var laboral = (Laboral)entity;
             operation.AddIntParam(DB_COL_LABORAL_ID, laboral.LaboralID);
