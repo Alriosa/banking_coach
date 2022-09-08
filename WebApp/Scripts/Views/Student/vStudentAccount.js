@@ -11,6 +11,7 @@
 
         if (idStudent != 'null') {
             this.ctrlActions.GetById("student/" + idStudent, this.FillData);
+            this.ctrlActions.GetById("laboral/student/" + idStudent, this.GetLaboral);
         }
     }
 
@@ -98,7 +99,7 @@
         var studentData = {};
         var id = document.getElementById("txtIdStudent").value;
         var studentLogin = document.getElementById("txtStudentLogin").value;
-        studentData = this.ctrlActions.GetDataForm('frmEditInfoBasic');
+        studentData = this.ctrlActions.Get('frmEditInfoBasic');
         if (studentData["JobAvailability"] == "Sí") {
             studentData["LaboralStatus"] = "No";
         } else {
@@ -129,127 +130,284 @@
         if (laboralData["EndDate"] == null) {
             laboralData["EndDate"] = null;
         }
+        laboralData["StudentID"] = document.getElementById("txtIdStudent").value;
         console.log(laboralData)
-        /*this.ctrlActions.PostToAPI('laboral', laboralData, function () {
-            resetForm();
+        this.ctrlActions.PostToAPI('laboral', laboralData, function () {
+            resetFormLaboral();
             //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
 
         });
-    }*/
+    }
 
-        this.ValidateInputs = function () {
-            if ($("#frmAddLaboral").valid()) {
-                this.Create();
+    this.ValidateInputsLaboral = function () {
+        if ($("#frmAddLaboral").valid()) {
+            this.CreateLaboral();
+
+        }
+    }
+
+    this.GetLaboral = function (data) {
+
+        console.log(data);
+
+        let start = '';
+        let end = '';
+
+        let text2 = '';
+
+        for (let i in data) {
+
+            start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
+            let endIsNull = new Date(data[i].EndDate);
+            if (endIsNull.getFullYear() == 1900) {
+                end = "Actualidad";
+            } else {
+                end = new Date(data[i].EndDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
 
             }
-        }
+            console.log(start);
+            let responsabilities = data[i].Responsabilites.split(',');
+            text2 += `<div class="card-laboral>"
+                           <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-1"
+                                        style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                        <i class="fa-solid fa-suitcase"></i>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <ul class="unstyled">
+                                            <li style="list-style-type: none;">
+                                                <strong>${data[i].Company}</strong>
+                                                <span> ${start} - ${end}</span>
+                                            </li>
+                                            <li style="list-style-type: none;">
+                                                ${data[i].Workstation}
+                                            </li>
+                                            <li style="list-style-type: none;">
+                                                Responsabilidades:
+                                
+                                                <ul>`;
+                                        for (let j in responsabilities) {
+                                            text2 += `<li>${responsabilities[j]}</li>`
+                                        }
 
+                                        text2 += `</ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button class="btn btn-orange my-2"
+                                            style="width: 170px;">
+                                            Editar
+                                        </button>
+                                        <button class="btn btn-orange my-2"
+                                            style="width: 170px;">
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>\n
+                        <hr style="width:100%;text-align:left;margin-left:0" />\n`;
+
+
+        }
+        document.getElementById("listLaboral").innerHTML = text2;
+
+    }
+
+
+    this.CreateAcademic = function () {
+    }
+
+    this.CreateExtraCourse = function () {
     }
 }
-    function padTo2Digits(num) {
-        return num.toString().padStart(2, '0');
-    }
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+}
 
-    function formatDate(date) {
-        return ([
-            date.getFullYear(),
-            padTo2Digits(date.getMonth() + 1),
-            padTo2Digits(date.getDate()),
-        ].join('-')
-        );
-    }
-
-    $(document).ready(function () {
+function resetFormLaboral() {
+    $("#frmAddLaboral")[0].reset();
+}
 
 
-        $(function () {
-            var showCanton = function (selectedProvince) {
-                $('#txtCanton option').hide();
-                //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
-                //$('#txtCanton').find(`option`).hide(); // hide all
-
-                $('#txtCanton').find(`option[data-parent=${selectedProvince}]`).show();
-
-                //set default value
-                var defaultCanton = "Seleccione una provincia";
-                //  $('#txtCanton').val(defaultCanton);
-                $("#txtCanton").val($("#txtCanton option:first").val());
-
-            };
-
-            var showDistrict = function (selectedCanton) {
-                $('#txtDistrict option').hide();
-                //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
-                $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
-                //set default value
-                var defaultDistrito = "Seleccione un cantón";
-                //$('#txtDistrict').val(defaultDistrito);
-                $("#txtDistrict").val($("#txtDistrict option:first").val());
-
-            };
-
-            //set default provincia
-            var province = $('#txtProvince').val();
-            showCanton(province);
-            $('#txtProvince').change(function () {
-                showCanton($(this).val());
-            });
-
-            //set default canton
-            var canton = $('#txtCanton').val();
-            showDistrict(canton);
-            $('#txtCanton').change(function () {
-                showDistrict($(this).val());
-            });
-
-            $('#txtDistrict').change(function () {
-
-            });
+function formatDate(date) {
+    return ([
+        date.getFullYear(),
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+    ].join('-')
+    );
+}
 
 
 
+
+
+this.RulesValidateCreate = function () {
+
+
+    $.validator.addMethod(
+        "regex",
+        function (value, element, regexp) {
+            if (regexp.constructor != RegExp)
+                regexp = new RegExp(regexp);
+            else if (regexp.global)
+                regexp.lastIndex = 0;
+            return this.optional(element) || regexp.test(value);
+        },
+        "Revisa los campos."
+    );
+
+    /*$("#frmStudentUpdate").validate({
+        lang: 'es',
+        errorClass: "is-invalid",
+        messages: {
+            txtEntryDate: {
+                required: "Debe ingresar una fecha de ingreso",
+                regex: "No se permiten números ni caracteres especiales",
+            },
+            txtStudentLogin: {
+                required: "Ingrese un nombre de usuario",
+                minlength: "El nombre de usuario debe contener mínimo 6 caracteres",
+                maxlength: "El nombre de usuario debe contener máximo 20 caracteres",
+                regex: "Solo se permiten minusculas, numeros y el _",
+            },
+        },
+        rules: {
+            txtEntryDate: { required: true },
+            txtStudentLogin: { required: true, regex: /^[a-z0-9_]+$/, minlength: 6, maxlength: 20 },
+            
+        },
+    });*/
+
+
+    $("#frmAddLaboral").validate({
+        lang: 'es',
+        errorClass: "is-invalid",
+        messages: {
+            txtWorkPosition: {
+                required: "Ingrese un puesto",
+            },
+            txtWorkstation: {
+                required: "Ingrese los cargos",
+            },
+            txCompany: {
+                required: "Ingrese la compañía",
+            },
+            txtResponsabilites: {
+                required: "Ingrese las responsabilidades",
+            },
+            txtStartDate: {
+                required: "Ingrese una fecha",
+            },
+
+        },
+        rules: {
+            txtWorkPosition: { required: true },
+            txtWorkstation: {
+                required: true
+            },
+            txCompany: { required: true },
+            txtResponsabilites: { required: true },
+            txtStartDate: { required: true },
+        },
+    });
+}
+
+
+$(document).ready(function () {
+
+
+    $(function () {
+        var showCanton = function (selectedProvince) {
+            $('#txtCanton option').hide();
+            //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
+            //$('#txtCanton').find(`option`).hide(); // hide all
+
+            $('#txtCanton').find(`option[data-parent=${selectedProvince}]`).show();
+
+            //set default value
+            var defaultCanton = "Seleccione una provincia";
+            //  $('#txtCanton').val(defaultCanton);
+            $("#txtCanton").val($("#txtCanton option:first").val());
+
+        };
+
+        var showDistrict = function (selectedCanton) {
+            $('#txtDistrict option').hide();
+            //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
+            $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
+            //set default value
+            var defaultDistrito = "Seleccione un cantón";
+            //$('#txtDistrict').val(defaultDistrito);
+            $("#txtDistrict").val($("#txtDistrict option:first").val());
+
+        };
+
+        //set default provincia
+        var province = $('#txtProvince').val();
+        showCanton(province);
+        $('#txtProvince').change(function () {
+            showCanton($(this).val());
+        });
+
+        //set default canton
+        var canton = $('#txtCanton').val();
+        showDistrict(canton);
+        $('#txtCanton').change(function () {
+            showDistrict($(this).val());
+        });
+
+        $('#txtDistrict').change(function () {
 
         });
 
 
-        $("#editInformation").on("click", function () {
-            $('#contentInformation').toggle();
-            $('#contentLaboral').hide();
-            $('#contentAcademic').hide();
-        });
+        RulesValidateCreate();
 
-        $("#editLaboral").on("click", function () {
-            $('#contentLaboral').toggle();
-            $('#contentAcademic').hide();
-            $('#contentInformation').hide();
-        });
-
-        $("#editAcademic").on("click", function () {
-            $('#contentAcademic').toggle();
-            $('#contentLaboral').hide();
-            $('#contentInformation').hide();
-        });
-
-        $("#btnSaveChanges").attr("disabled", "disabled");
-
-       
-        // When the user clicks on the button, scroll to the top of the document
-        var btn = $('#btnToTop');
-
-        $(window).scroll(function () {
-            if ($(window).scrollTop() > 300) {
-                btn.addClass('show');
-            } else {
-                btn.removeClass('show');
-            }
-        });
-
-        btn.on('click', function (e) {
-            e.preventDefault();
-            $('html, body').animate({ scrollTop: 0 }, '300');
-        });
+    });
 
 
+    $("#editInformation").on("click", function () {
+        $('#contentInformation').toggle();
+        $('#contentLaboral').hide();
+        $('#contentAcademic').hide();
+    });
 
-    })
+    $("#editLaboral").on("click", function () {
+        $('#contentLaboral').toggle();
+        $('#contentAcademic').hide();
+        $('#contentInformation').hide();
+    });
+
+    $("#editAcademic").on("click", function () {
+        $('#contentAcademic').toggle();
+        $('#contentLaboral').hide();
+        $('#contentInformation').hide();
+    });
+
+    $("#btnSaveChanges").attr("disabled", "disabled");
+
+
+    // When the user clicks on the button, scroll to the top of the document
+    var btn = $('#btnToTop');
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 300) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    btn.on('click', function (e) {
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: 0 }, '300');
+    });
+
+
+
+})
 

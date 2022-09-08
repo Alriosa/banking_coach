@@ -33,7 +33,6 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_RESPONSABILITIES, laboral.Responsabilites);
             operation.AddDateTimeParam(DB_COL_START_DATE, laboral.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, laboral.EndDate);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, laboral.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, laboral.StudentID);
             return operation;
         }

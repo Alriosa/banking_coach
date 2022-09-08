@@ -200,9 +200,7 @@ this.RulesValidateCreate = function () {
 
 
 
-function resetForm() {
-    $("#frmStudentUpdate")[0].reset();
-}
+
 
 
 $(document).ready(function () {

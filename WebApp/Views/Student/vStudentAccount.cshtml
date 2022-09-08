@@ -58,308 +58,407 @@
                             </div>
                         </div>
                         <div class="row my-5">
-                                <div class="col-lg-10">
-                                    <div>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-lg-12 my-2">
-                                                    <div class="title d-flex justify-content-between w-100">
-                                                        <i class="fa-solid fa-hand-point-right"></i>
-                                                        <p>Informacion personal </p>
+                            <div class="col-lg-10">
+                                <div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12 my-2">
+                                                <div class="title d-flex justify-content-between w-100">
+                                                    <i class="fa-solid fa-hand-point-right"></i>
+                                                    <p>Informacion personal </p>
 
-                                                        <button class="btn btn-orange" type="button" data-toggle="modal"
-                                                                data-target="#modalEditInfo">
-                                                            Editar
-                                                        </button>
+                                                    <button class="btn btn-orange" type="button" data-toggle="modal"
+                                                            data-target="#modalEditInfo">
+                                                        Editar
+                                                    </button>
 
-                                                    </div>
-                                                    <div>
-                                                        <div class="modal fade" id="modalEditInfo" tabindex="-1" aria-labelledby="modalEditInfoLabel" aria-hidden="true" role="dialog">
-                                                            <div class="modal-dialog  modal-lg" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="modalEditInfoLabel">Editar información</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form id="frmEditInfoBasic" role="form" method="POST" action="">
-                                                                            <div class="container">
-                                                                                <div class="row">
-                                                                                    <div class="col-lg-12 my-2">
-                                                                                        <div class="d-flex flex-column">
-                                                                                            <input type="text" id="txtIdStudent" class="d-none" ColumnDataName="StudentID">
-                                                                                            <input type="text" id="txtStudentLogin" class="d-none">
+                                                </div>
+                                                <div>
+                                                    <div class="modal fade" id="modalEditInfo" tabindex="-1" aria-labelledby="modalEditInfoLabel" aria-hidden="true" role="dialog">
+                                                        <div class="modal-dialog  modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="modalEditInfoLabel">Editar información</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form id="frmEditInfoBasic" role="form" method="POST" action="">
+                                                                        <div class="container">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12 my-2">
+                                                                                    <div class="d-flex flex-column">
+                                                                                        <input type="text" id="txtIdStudent" class="d-none" ColumnDataName="StudentID">
+                                                                                        <input type="text" id="txtStudentLogin" class="d-none">
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlInputSecond(id: "txtFirstName", type: "text", required: true, placeHolder: "Primer Nombre", columnDataName: "FirstName")
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlInputSecond(id: "txtFirstName", type: "text", required: true, placeHolder: "Primer Nombre", columnDataName: "FirstName")
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlInputSecond(id: "txtLastName", type: "text", required: true, placeHolder: "Primer Apellido", columnDataName: "FirstLastName")
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlInputSecond(id: "txtSecondLastName", type: "text", required: true, placeHolder: "Segundo Apellido", columnDataName: "SecondLastName")
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                <div class="form-group input-group flex-column ">
+                                                                                                    <label>Tipo de documento:</label>
+                                                                                                    <select style="height:54px;" class="form-control w-100" id="txtIdType" name="IdType" ColumnDataName="IdType" required>
+                                                                                                        <option value="Nacional">Nacional</option>
+                                                                                                        <option value="Residencia">Residencia</option>
+                                                                                                        <option value="Pasaporte">Pasaporte</option>
+                                                                                                    </select>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlInputSecond(id: "txtLastName", type: "text", required: true, placeHolder: "Primer Apellido", columnDataName: "FirstLastName")
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                @Html.CtrlInputSecond(id: "txtIdentificationNumber", type: "text", required: true, placeHolder: "Número de identificación", columnDataName: "IdentificationNumber")
+                                                                                                <span>**sin guiones</span>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlInputSecond(id: "txtSecondLastName", type: "text", required: true, placeHolder: "Segundo Apellido", columnDataName: "SecondLastName")
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                @Html.CtrlInputSecond(id: "txtBirthdate", type: "date", required: true, placeHolder: "Fecha de Nacimiento", columnDataName: "Birthdate")
+
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                <div class="form-group input-group flex-column">
+                                                                                                    <label for="txtAge">Edad</label>
+                                                                                                    <input type="number" class="form-control input-secondary" id="txtAge" placeholder="Edad" ColumnDataName="Age" disabled>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                <div class="form-group input-group flex-column">
+                                                                                                    @Html.CtrlInputSecond(id: "txtEmail", type: "email", required: true, placeHolder: "Correo electrónico", columnDataName: "Email")
+
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                <div class="form-group input-group flex-column">
+                                                                                                    @Html.CtrlInputSecond(id: "txtPhoneNumber", type: "text", required: true, placeHolder: "Número de teléfono", columnDataName: "FirstPhoneNumber")
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                <div class="form-group input-group flex-column">
+                                                                                                    @Html.CtrlInputSecond(id: "txtSecondPhoneNumber", type: "text", required: true, placeHolder: "Número de teléfono Secundarios", columnDataName: "SecondPhoneNumber")
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div>
                                                                                                 <div class="input-group mb-3">
                                                                                                     <div class="form-group input-group flex-column ">
-                                                                                                        <label>Tipo de documento:</label>
-                                                                                                        <select style="height:54px;" class="form-control w-100" id="txtIdType" name="IdType" ColumnDataName="IdType" required>
-                                                                                                            <option value="Nacional">Nacional</option>
-                                                                                                            <option value="Residencia">Residencia</option>
-                                                                                                            <option value="Pasaporte">Pasaporte</option>
+                                                                                                        <label for="txtJobAvailability">Disponibilidad laboral</label>
+                                                                                                        <select style="height:54px;" class="form-control w-100 " id="txtJobAvailability"
+                                                                                                                name="txtJobAvailability" ColumnDataName="JobAvailability" required>
+                                                                                                            <option value="Sí">Inmediata</option>
+                                                                                                            <option value="No">No</option>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div>
                                                                                                 <div class="input-group mb-3">
-                                                                                                    @Html.CtrlInputSecond(id: "txtIdentificationNumber", type: "text", required: true, placeHolder: "Número de identificación", columnDataName: "IdentificationNumber")
-                                                                                                    <span>**sin guiones</span>
+                                                                                                    <div class="form-group input-group flex-column ">
+                                                                                                        <label for="txtTransportAvailability">Disponibilidad de traslado a nivel nacional</label>
+                                                                                                        <select style="height:54px;" class="form-control w-100 " id="txtTransportAvailability"
+                                                                                                                name="txtTransportAvailability" ColumnDataName="TransportAvailability" required>
+                                                                                                            <option value="Sí">Sí</option>
+                                                                                                            <option value="No">No</option>
+                                                                                                        </select>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                <div class="input-group mb-3">
-                                                                                                    @Html.CtrlInputSecond(id: "txtBirthdate", type: "date", required: true, placeHolder: "Fecha de Nacimiento", columnDataName: "Birthdate")
+                                                                                    </div>
 
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div>
                                                                                                 <div class="input-group mb-3">
-                                                                                                    <div class="form-group input-group flex-column">
-                                                                                                        <label for="txtAge">Edad</label>
-                                                                                                        <input type="number" class="form-control input-secondary" id="txtAge" placeholder="Edad" ColumnDataName="Age" disabled>
+                                                                                                    <div class="form-group input-group flex-column ">
+                                                                                                        <label for="txtVehicle">¿Posee vehículo?</label>
+                                                                                                        <select style="height:54px;" class="form-control w-100 " id="txtVehicle"
+                                                                                                                name="txtVehicle" ColumnDataName="Vehicle" required>
+                                                                                                            <option value="Sí">Sí</option>
+                                                                                                            <option value="No">No</option>
+                                                                                                        </select>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
+                                                                                    </div>
+                                                                                    <!--<div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div>
                                                                                                 <div class="input-group mb-3">
-                                                                                                    <div class="form-group input-group flex-column">
-                                                                                                        @Html.CtrlInputSecond(id: "txtEmail", type: "email", required: true, placeHolder: "Correo electrónico", columnDataName: "Email")
+                                                                                                    <div class="form-group input-group flex-column ">
+                                                                                                        <label for="txtDriveLicense">Licencia de conducir</label>
+                                                                                                        <select style="height:54px;" class="form-control w-100 " id="txtDriveLicense"
+                                                                                                                name="txtDriveLicense" ColumnDataName="DriverLicenses" multiple required>
+                                                                                                            <option value="A1">A1</option>
+                                                                                                            <option value="B1">B1</option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>-->
 
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                <div class="input-group mb-3">
-                                                                                                    <div class="form-group input-group flex-column">
-                                                                                                        @Html.CtrlInputSecond(id: "txtPhoneNumber", type: "text", required: true, placeHolder: "Número de teléfono", columnDataName: "FirstPhoneNumber")
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                <div class="input-group mb-3">
-                                                                                                    <div class="form-group input-group flex-column">
-                                                                                                        @Html.CtrlInputSecond(id: "txtSecondPhoneNumber", type: "text", required: true, placeHolder: "Número de teléfono Secundarios", columnDataName: "SecondPhoneNumber")
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                <div>
-                                                                                                    <div class="input-group mb-3">
-                                                                                                        <div class="form-group input-group flex-column ">
-                                                                                                            <label for="txtJobAvailability">Disponibilidad laboral</label>
-                                                                                                            <select style="height:54px;" class="form-control w-100 " id="txtJobAvailability"
-                                                                                                                    name="txtJobAvailability" ColumnDataName="JobAvailability" required>
-                                                                                                                <option value="Sí">Inmediata</option>
-                                                                                                                <option value="No">No</option>
-                                                                                                            </select>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                <div>
-                                                                                                    <div class="input-group mb-3">
-                                                                                                        <div class="form-group input-group flex-column ">
-                                                                                                            <label for="txtTransportAvailability">Disponibilidad de traslado a nivel nacional</label>
-                                                                                                            <select style="height:54px;" class="form-control w-100 " id="txtTransportAvailability"
-                                                                                                                    name="txtTransportAvailability" ColumnDataName="TransportAvailability" required>
-                                                                                                                <option value="Sí">Sí</option>
-                                                                                                                <option value="No">No</option>
-                                                                                                            </select>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                <div>
-                                                                                                    <div class="input-group mb-3">
-                                                                                                        <div class="form-group input-group flex-column ">
-                                                                                                            <label for="txtVehicle">¿Posee vehículo?</label>
-                                                                                                            <select style="height:54px;" class="form-control w-100 " id="txtVehicle"
-                                                                                                                    name="txtVehicle" ColumnDataName="Vehicle" required>
-                                                                                                                <option value="Sí">Sí</option>
-                                                                                                                <option value="No">No</option>
-                                                                                                            </select>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <!--<div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                <div>
-                                                                                                    <div class="input-group mb-3">
-                                                                                                        <div class="form-group input-group flex-column ">
-                                                                                                            <label for="txtDriveLicense">Licencia de conducir</label>
-                                                                                                            <select style="height:54px;" class="form-control w-100 " id="txtDriveLicense"
-                                                                                                                    name="txtDriveLicense" ColumnDataName="DriverLicenses" multiple required>
-                                                                                                                <option value="A1">A1</option>
-                                                                                                                <option value="B1">B1</option>
-                                                                                                            </select>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>-->
-
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="row my-4 mx-auto">
-                                                                                            <div style="margin: 0px auto 10px;">
-                                                                                                @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChangesInfo", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
-                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="row my-4 mx-auto">
+                                                                                        <div style="margin: 0px auto 10px;">
+                                                                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChangesInfo", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </form>
-
-                                                                    </div>
+                                                                        </div>
+                                                                    </form>
 
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                              <div class="row">
-                                                <div class="col-lg-12 my-2">
-                                                    <div class="title d-flex justify-content-between">
-                                                        <i class="fa-solid fa-hand-point-right"></i>
-                                                        <p>Cambiar Contraseña</p>
-                                                        <div >
-                                                            <button class="btn btn-orange" type="button" data-toggle="modal"
-                                                                    data-target="#editPassword">
-                                                                Editar
-                                                            </button>
-                                                        </div>
-                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 my-2">
+                                                <div class="title d-flex justify-content-between">
+                                                    <i class="fa-solid fa-hand-point-right"></i>
+                                                    <p>Cambiar Contraseña</p>
                                                     <div>
-                                                        <div class="modal fade" id="editPassword" tabindex="-1" aria-labelledby="editPasswordLabel" aria-hidden="true" role="dialog">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="editPasswordLabel">Cambiar Contraseña</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div>
-                                                                        <div class="modal-body">
-                                                                            <form id="frmEditPassword" role="form" method="POST" action="">
-                                                                                <div class="container">
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12 my-2">
-                                                                                            <input type="hidden" name="_token" value="">
+                                                        <button class="btn btn-orange" type="button" data-toggle="modal"
+                                                                data-target="#editPassword">
+                                                            Editar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="modal fade" id="editPassword" tabindex="-1" aria-labelledby="editPasswordLabel" aria-hidden="true" role="dialog">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="editPasswordLabel">Cambiar Contraseña</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="modal-body">
+                                                                        <form id="frmEditPassword" role="form" method="POST" action="">
+                                                                            <div class="container">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-12 my-2">
+                                                                                        <input type="hidden" name="_token" value="">
 
-                                                                                            <div class="form-group">
-                                                                                                <div>
-                                                                                                    @Html.CtrlInputSecond(id: "txtOldPassword", type: "text", required: true, placeHolder: "Contraseña Actual", columnDataName: "OldPassword")
-                                                                                                </div>
+                                                                                        <div class="form-group">
+                                                                                            <div>
+                                                                                                @Html.CtrlInputSecond(id: "txtOldPassword", type: "text", required: true, placeHolder: "Contraseña Actual", columnDataName: "OldPassword")
                                                                                             </div>
-                                                                                            <div class="form-group">
-                                                                                                <div>
-                                                                                                    @Html.CtrlInputSecond(id: "txtNewPassword", type: "text", required: true, placeHolder: "Nueva Contraseña", columnDataName: "NewPassword")
-                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div>
+                                                                                                @Html.CtrlInputSecond(id: "txtNewPassword", type: "text", required: true, placeHolder: "Nueva Contraseña", columnDataName: "NewPassword")
                                                                                             </div>
-                                                                                            <div class="form-group">
-                                                                                                <div>
-                                                                                                    @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "text", required: true, placeHolder: "Confirmar Nueva Contraseña", columnDataName: "ConfirmNewPassword")
-                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div>
+                                                                                                @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "text", required: true, placeHolder: "Confirmar Nueva Contraseña", columnDataName: "ConfirmNewPassword")
                                                                                             </div>
-
                                                                                         </div>
 
                                                                                     </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
-                                                                        @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterReference", label: "Modificar Contraseña", onClickFunction: "CreateReference", buttonType: "orange")
 
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                                                    @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterReference", label: "Modificar Contraseña", onClickFunction: "CreateReference", buttonType: "orange")
 
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 my-1">
+                                                <div class="title d-flex justify-content-between">
+                                                    <i class="fa-solid fa-hand-point-right"></i>
+                                                    <p>Experiencia Laboral </p>
+                                                    <a href="#laboral">
+                                                        <button type="button" class="btn btn-orange"
+                                                                id="goLaboral" style="width: 144px;">
+                                                            Ver
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                                <div class="content my-4" id="contentLaboral" style="display:none;">
+                                                    <div class="d-flex flex-column">
+
+                                                        <div class="form-row ">
+                                                            <div class="col-lg-12">
+                                                                <div class="input-group mb-3">
+                                                                    <div class="form-group input-group flex-column ">
+                                                                        <label for="txtLaboralStatus">¿Labora actualmente?</label>
+                                                                        <select style="height:54px;" class="form-control w-100" id="txtLaboralStatus" name="txtLaboralStatus" ColumnDataName="LaboralStatus" required>
+                                                                            <option value="Sí">Sí</option>
+                                                                            <option value="No">No</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row ">
+                                                            <div class="col-lg-12">
+                                                                <div class="input-group mb-3">
+                                                                    <div class="form-group input-group flex-column ">
+                                                                        <label for="txtWorkstation">¿Lugar de trabajo?</label>
+                                                                        <select style="height:54px;" class="form-control w-100" id="txtWorkstation" name="txtWorkstation" ColumnDataName="Workstation" required>
+                                                                            <option value="Comidas Rápidas">Comidas Rápidas (Mac Donalds, KFC. etc)</option>
+                                                                            <option value="Supermercados">
+                                                                                Supermercados(Wallmart, Palí, etc)
+                                                                            </option>
+                                                                            <option value="Tienda">Tienda</option>
+                                                                            <option value="Contabilidad">
+                                                                                Contabilidad
+                                                                            </option>
+                                                                            <option value="sin trabajo">
+                                                                                No estoy trabajando actualmente.
+                                                                            </option>
+                                                                            <option value="Otro">
+                                                                                No aplico en ninguna de las opciones anteriores
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row ">
+                                                            <div class="col-lg-12">
+                                                                <div class="input-group mb-3">
+                                                                    <div class="form-group input-group flex-column ">
+                                                                        <label for="txtExperience">Experiencia en:</label>
+                                                                        <select style="height:54px;" class="form-control w-100" id="txtExperience" name="txtExperience" ColumnDataName="Experience" required>
+                                                                            <option value="Manejo de Efectivo-Cajeros">Manejo de Efectivo- Cajero</option>
+                                                                            <option value="Servicio al cliente">Servicio al cliente</option>
+                                                                            <option value="Ventas">Ventas</option>
+                                                                            <option value="Operativo">Operativo</option>
+                                                                            <option value="Call center">Call center</option>
+                                                                            <option value="Cobros">Cobros</option>
+                                                                            <option value="Otro">Otro</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row ">
+                                                            <div class="col-lg-12">
+                                                                <div class="input-group mb-3">
+                                                                    @Html.CtrlInputSecond(id: "txtLaboralExperience", type: "text", required: true, placeHolder: "Experiencia Laboral", columnDataName: "LaboralExperience")
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row ">
+                                                            <div class="col-lg-12">
+                                                                <div class="input-group mb-3">
+                                                                    <div class="form-group input-group flex-column ">
+                                                                        <label for="txtJobAvailability">Disponibilidad para empezar a trabajar</label>
+                                                                        <select style="height:54px;" class="form-control w-100" id="txtJobAvailability" name="txtJobAvailability" ColumnDataName="JobAvailability" required>
+                                                                            <option value="Inmediata">Inmediata</option>
+                                                                            <option value="Preaviso">Preaviso</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div>
                                             <div class="row">
-                                                <div class="col-lg-12 my-1">
+                                                <div class="col-lg-12 my-2">
                                                     <div class="title d-flex justify-content-between">
                                                         <i class="fa-solid fa-hand-point-right"></i>
-                                                        <p>Experiencia Laboral </p>
-                                                        <a href="#laboral">
+                                                        <p>Informacion Academica</p>
+                                                        <!--<button type="button" class="btn btn-orange"
+                                                                id="editAcademic">
+                                                            Editar
+                                                        </button>-->
+                                                        <a href="#academic">
                                                             <button type="button" class="btn btn-orange"
-                                                                    id="goLaboral" style="width: 144px;">
+                                                                    id="goAcademic" style="width: 144px;">
                                                                 Ver
                                                             </button>
                                                         </a>
                                                     </div>
-                                                    <div class="content my-4" id="contentLaboral" style="display:none;">
+                                                    <div class="content" id="contentAcademic" style="display:none;">
                                                         <div class="d-flex flex-column">
-
                                                             <div class="form-row ">
                                                                 <div class="col-lg-12">
                                                                     <div class="input-group mb-3">
                                                                         <div class="form-group input-group flex-column ">
-                                                                            <label for="txtLaboralStatus">¿Labora actualmente?</label>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtLaboralStatus" name="txtLaboralStatus" ColumnDataName="LaboralStatus" required>
+                                                                            <label for="txtEducationStatus"> ¿Estudia Actualmente? </label>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtEducationStatus" name="txtEducationStatus" ColumnDataName="EducationStatus" required>
                                                                                 <option value="Sí">Sí</option>
                                                                                 <option value="No">No</option>
                                                                             </select>
@@ -371,24 +470,22 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="input-group mb-3">
                                                                         <div class="form-group input-group flex-column ">
-                                                                            <label for="txtWorkstation">¿Lugar de trabajo?</label>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtWorkstation" name="txtWorkstation" ColumnDataName="Workstation" required>
-                                                                                <option value="Comidas Rápidas">Comidas Rápidas (Mac Donalds, KFC. etc)</option>
-                                                                                <option value="Supermercados">
-                                                                                    Supermercados(Wallmart, Palí, etc)
-                                                                                </option>
-                                                                                <option value="Tienda">Tienda</option>
-                                                                                <option value="Contabilidad">
-                                                                                    Contabilidad
-                                                                                </option>
-                                                                                <option value="sin trabajo">
-                                                                                    No estoy trabajando actualmente.
-                                                                                </option>
-                                                                                <option value="Otro">
-                                                                                    No aplico en ninguna de las opciones anteriores
-                                                                                </option>
+                                                                            <label for="txtInstitutionAcademicType"> Tipo de Institución: </label>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtInstitutionAcademicType" name="txtInstitutionAcademicType" ColumnDataName="InstitutionAcademicType" required>
+                                                                                <option value="Instituto">Instituto</option>
+                                                                                <option value="Universitario">Universitario</option>
+                                                                                <option value="Para Universitario">Para Universitario</option>
+                                                                                <option value="No estoy estudiando">No estoy estudiando</option>
                                                                             </select>
                                                                         </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-row ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="input-group mb-3">
+                                                                        @Html.CtrlInputSecond(id: "txtInstitutionAcademicName", type: "text", required: true, placeHolder: "Nombre del lugar de Estudio", columnDataName: "InstitutionAcademicName")
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -396,14 +493,15 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="input-group mb-3">
                                                                         <div class="form-group input-group flex-column ">
-                                                                            <label for="txtExperience">Experiencia en:</label>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtExperience" name="txtExperience" ColumnDataName="Experience" required>
-                                                                                <option value="Manejo de Efectivo-Cajeros">Manejo de Efectivo- Cajero</option>
-                                                                                <option value="Servicio al cliente">Servicio al cliente</option>
-                                                                                <option value="Ventas">Ventas</option>
-                                                                                <option value="Operativo">Operativo</option>
-                                                                                <option value="Call center">Call center</option>
-                                                                                <option value="Cobros">Cobros</option>
+                                                                            <label for="txtAcademicPreparation"> Preparación Académica: </label>
+                                                                            <span>Seleccionar la opción del grado máximo académico que posea</span>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtAcademicPreparation" name="txtAcademicPreparation" ColumnDataName="AcademicPreparation" required>
+                                                                                <option value="Bachillerato de colegio">Bachillerato de colegio</option>
+                                                                                <option value="Cursos técnicos/Bachillerato de colegio">Cursos técnicos/Bachillerato de colegio</option>
+                                                                                <option value="Bachillerato Universitario">Bachillerato Universitario</option>
+                                                                                <option value="Licenciatura">Licenciatura</option>
+                                                                                <option value="Maestría">Maestría</option>
+                                                                                <option value="Sin Bachillerato">Sin Bachillerato</option>
                                                                                 <option value="Otro">Otro</option>
                                                                             </select>
                                                                         </div>
@@ -413,7 +511,23 @@
                                                             <div class="form-row ">
                                                                 <div class="col-lg-12">
                                                                     <div class="input-group mb-3">
-                                                                        @Html.CtrlInputSecond(id: "txtLaboralExperience", type: "text", required: true, placeHolder: "Experiencia Laboral", columnDataName: "LaboralExperience")
+                                                                        <div class="form-group input-group flex-column ">
+                                                                            <label for="txtUniversityLevel"> Nivel Universitario </label>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtUniversityLevel" name="txtUniversityLevel" ColumnDataName="UniversityLevel" required>
+                                                                                <option value="Culminado">Culminado</option>
+                                                                                <option value="En Curso">En Curso</option>
+                                                                                <option value="Suspendido">Suspendido</option>
+                                                                                <option value="No aplica">No aplica</option>
+                                                                                <option value="Otro">Otro</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-row ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="input-group mb-3">
+                                                                        @Html.CtrlInputSecond(id: "txtUniversityDegree", type: "text", required: true, placeHolder: "Tipo de Carrera", columnDataName: "UniversityDegree")
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -421,162 +535,48 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="input-group mb-3">
                                                                         <div class="form-group input-group flex-column ">
-                                                                            <label for="txtJobAvailability">Disponibilidad para empezar a trabajar</label>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtJobAvailability" name="txtJobAvailability" ColumnDataName="JobAvailability" required>
-                                                                                <option value="Inmediata">Inmediata</option>
-                                                                                <option value="Preaviso">Preaviso</option>
+                                                                            <label for="txtExcelLevel"> Nivel Excel </label>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtUniversityLevel" name="txtExcelLevel" ColumnDataName="ExcelLevel" required>
+                                                                                <option value="Básico">Básico</option>
+                                                                                <option value="Intermedio">Intermedio</option>
+                                                                                <option value="Avanzado">Avanzado</option>
+                                                                                <option value="Otro">Otro</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 my-2">
+                                                    <div class="title d-flex justify-content-between">
+                                                        <i class="fa-solid fa-hand-point-right"></i>
+                                                        <p>Referencias</p>
+                                                        <!--<button type="button" class="btn btn-orange"
+                                                                id="editAcademic">
+                                                            Editar
+                                                        </button>-->
+                                                        <a href="#references">
+                                                            <button type="button" class="btn btn-orange"
+                                                                    id="goReferences" style="width: 144px;">
+                                                                Ver
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-lg-12 my-2">
-                                                        <div class="title d-flex justify-content-between">
-                                                            <i class="fa-solid fa-hand-point-right"></i>
-                                                            <p>Informacion Academica</p>
-                                                            <!--<button type="button" class="btn btn-orange"
-                        id="editAcademic">
-                    Editar
-                </button>-->
-                                                            <a href="#academic">
-                                                                <button type="button" class="btn btn-orange"
-                                                                        id="goAcademic" style="width: 144px;">
-                                                                    Ver
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                        <div class="content" id="contentAcademic" style="display:none;">
-                                                            <div class="d-flex flex-column">
-                                                                <div class="form-row ">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="input-group mb-3">
-                                                                            <div class="form-group input-group flex-column ">
-                                                                                <label for="txtEducationStatus"> ¿Estudia Actualmente? </label>
-                                                                                <select style="height:54px;" class="form-control w-100" id="txtEducationStatus" name="txtEducationStatus" ColumnDataName="EducationStatus" required>
-                                                                                    <option value="Sí">Sí</option>
-                                                                                    <option value="No">No</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row ">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="input-group mb-3">
-                                                                            <div class="form-group input-group flex-column ">
-                                                                                <label for="txtInstitutionAcademicType"> Tipo de Institución: </label>
-                                                                                <select style="height:54px;" class="form-control w-100" id="txtInstitutionAcademicType" name="txtInstitutionAcademicType" ColumnDataName="InstitutionAcademicType" required>
-                                                                                    <option value="Instituto">Instituto</option>
-                                                                                    <option value="Universitario">Universitario</option>
-                                                                                    <option value="Para Universitario">Para Universitario</option>
-                                                                                    <option value="No estoy estudiando">No estoy estudiando</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-row ">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="input-group mb-3">
-                                                                            @Html.CtrlInputSecond(id: "txtInstitutionAcademicName", type: "text", required: true, placeHolder: "Nombre del lugar de Estudio", columnDataName: "InstitutionAcademicName")
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row ">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="input-group mb-3">
-                                                                            <div class="form-group input-group flex-column ">
-                                                                                <label for="txtAcademicPreparation"> Preparación Académica: </label>
-                                                                                <span>Seleccionar la opción del grado máximo académico que posea</span>
-                                                                                <select style="height:54px;" class="form-control w-100" id="txtAcademicPreparation" name="txtAcademicPreparation" ColumnDataName="AcademicPreparation" required>
-                                                                                    <option value="Bachillerato de colegio">Bachillerato de colegio</option>
-                                                                                    <option value="Cursos técnicos/Bachillerato de colegio">Cursos técnicos/Bachillerato de colegio</option>
-                                                                                    <option value="Bachillerato Universitario">Bachillerato Universitario</option>
-                                                                                    <option value="Licenciatura">Licenciatura</option>
-                                                                                    <option value="Maestría">Maestría</option>
-                                                                                    <option value="Sin Bachillerato">Sin Bachillerato</option>
-                                                                                    <option value="Otro">Otro</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row ">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="input-group mb-3">
-                                                                            <div class="form-group input-group flex-column ">
-                                                                                <label for="txtUniversityLevel"> Nivel Universitario </label>
-                                                                                <select style="height:54px;" class="form-control w-100" id="txtUniversityLevel" name="txtUniversityLevel" ColumnDataName="UniversityLevel" required>
-                                                                                    <option value="Culminado">Culminado</option>
-                                                                                    <option value="En Curso">En Curso</option>
-                                                                                    <option value="Suspendido">Suspendido</option>
-                                                                                    <option value="No aplica">No aplica</option>
-                                                                                    <option value="Otro">Otro</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row ">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="input-group mb-3">
-                                                                            @Html.CtrlInputSecond(id: "txtUniversityDegree", type: "text", required: true, placeHolder: "Tipo de Carrera", columnDataName: "UniversityDegree")
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-row ">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="input-group mb-3">
-                                                                            <div class="form-group input-group flex-column ">
-                                                                                <label for="txtExcelLevel"> Nivel Excel </label>
-                                                                                <select style="height:54px;" class="form-control w-100" id="txtUniversityLevel" name="txtExcelLevel" ColumnDataName="ExcelLevel" required>
-                                                                                    <option value="Básico">Básico</option>
-                                                                                    <option value="Intermedio">Intermedio</option>
-                                                                                    <option value="Avanzado">Avanzado</option>
-                                                                                    <option value="Otro">Otro</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12 my-2">
-                                                        <div class="title d-flex justify-content-between">
-                                                            <i class="fa-solid fa-hand-point-right"></i>
-                                                            <p>Referencias</p>
-                                                            <!--<button type="button" class="btn btn-orange"
-                        id="editAcademic">
-                    Editar
-                </button>-->
-                                                            <a href="#references">
-                                                                <button type="button" class="btn btn-orange"
-                                                                        id="goReferences" style="width: 144px;">
-                                                                    Ver
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
+
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -593,7 +593,7 @@
                                                 <p><strong>Tipo de documento: </strong><span id="P_Id_Type"></span></p>
                                                 <p><strong>Número de identificación: </strong><span id="P_IdentificationNumber"></span></p>
                                                 <p><strong>Correo Electronico: </strong><span id="P_Email"></span></p>
-                                               
+
                                             </div>
                                             <div class="col-lg-4">
                                                 <p><strong>Telefono </strong><span id="P_PhoneNumber"></span></p>
@@ -620,15 +620,15 @@
                                                     -->
                                             </div>
                                             <!--<div class="col-lg-6">
-                                                <p><strong>Puesto: </strong><span id="P_Experience"></span></p>
-                                                <p><strong>Funciones: </strong><span id="P_LaboralExperience"></span></p>
+                                                    <p><strong>Puesto: </strong><span id="P_Experience"></span></p>
+                                                    <p><strong>Funciones: </strong><span id="P_LaboralExperience"></span></p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <div class="col-lg-12">
-                                                <p><strong>Disponibilidad para empezar a trabajar: </strong><span id="P_JobAvailability"></span></p>
-                                                
-                                            </div>-->
+                                            <div>
+                                                <div class="col-lg-12">
+                                                    <p><strong>Disponibilidad para empezar a trabajar: </strong><span id="P_JobAvailability"></span></p>
+
+                                                </div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -684,15 +684,14 @@
                                         </div>
                                         <div>
                                             <div class="modal-body">
-                                                <form id="frmAddLaboral" role="form" method="POST" action="">
+                                                <form id="frmAddLaboral">
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-lg-12 my-2">
-                                                                <input type="hidden" name="_token" value="">
+                                                                <!--<input type="hidden" name="_token" value="">-->
                                                                 <div class="form-group">
                                                                     <div>
-                                                                        <input type="text" class="form-control input-lg" name="txtCompany" id="txtCompany" ColumnDataName="Company" />
-                                                                        @Html.CtrlInputSecond(id: "txtWorkPosition", type: "text", required: true, placeHolder: "Número de Teléfono", columnDataName: "WorkPosition")
+                                                                        @Html.CtrlInputSecond(id: "txtWorkPosition", type: "text", required: true, placeHolder: "Puesto", columnDataName: "WorkPosition")
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -734,7 +733,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
-                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLaboral", label: "Registrar", onClickFunction: "CreateLaboral", buttonType: "orange")
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLaboral", label: "Registrar", onClickFunction: "ValidateInputsLaboral", buttonType: "orange")
 
                                         </div>
                                     </div>
@@ -746,83 +745,8 @@
                             <div class="row flex-rows">
                                 <div class="col-lg-12">
                                     <div class="my-3">
-                                        <div class=" d-flex flex-column">
-                                            <div class="card-laboral">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-lg-1"
-                                                             style="text-align: center; font-size: 2em; color:#5e5e5e;">
-                                                            <i class="fa-solid fa-suitcase"></i>
-                                                        </div>
-                                                        <!--<div class="col-lg-9">
-                                                            <ul class="unstyled">
-                                                                <li style="list-style-type: none;">
-                                                                    <strong>Banco Central de Costa Rica</strong>
-                                                                    <span> Septiembre 2019</span>
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    Servicio de Atencion al cliente
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    Responsabilidades:
-                                                                    <ul>
-                                                                        <li>Cajero</li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Editar
-                                                            </button>
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Eliminar
-                                                            </button>
-                                                        </div>-->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr />
-
-                                            <div class="card-laboral">
-                                                <div class="container">
-                                                    <!--<div class="row">
-                                                        <div class="col-lg-1"
-                                                             style="text-align: center; font-size: 2em; color:#5e5e5e;">
-                                                            <i class="fa-solid fa-suitcase"></i>
-                                                        </div>
-                                                        <div class="col-lg-9">
-                                                            <ul class="unstyled">
-                                                                <li style="list-style-type: none;">
-                                                                    <strong>Banco Central de Costa Rica</strong>
-                                                                    <span> Septiembre 2019</span>
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    Servicio de Atencion al cliente
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    Funciones:
-                                                                    <ul>
-                                                                        <li>Cajero</li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Editar
-                                                            </button>
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Eliminar
-                                                            </button>
-                                                        </div>
-                                                    </div>-->
-                                                </div>
-                                            </div>
+                                        <div class=" d-flex flex-column" id="listLaboral">
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -955,7 +879,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
-                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLaboral", label: "Registrar", onClickFunction: "CreateLaboral", buttonType: "orange")
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLaboral", label: "Registrar", onClickFunction: "CreateAcademic", buttonType: "orange")
 
                                         </div>
                                     </div>
@@ -975,192 +899,193 @@
                                                              style="text-align: center; font-size: 2em; color:#5e5e5e;">
                                                             <i class="fa-solid fa-graduation-cap"></i>
                                                         </div>
-                                                            <!--<div class="col-lg-9">
-                                                        <ul class="unstyled">
-                                                            <li style="list-style-type: none;">
-                                                                <strong>Universidad de Costa Rica</strong>
-                                                                <span> Septiembre 2019</span>
-                                                            </li>
-                                                            <li style="list-style-type: none;">
-                                                                Administración de Empresas <span>(En curso)</span>
-                                                            </li>
-                                                            <li style="list-style-type: none;">
-                                                                Contenidos:
+                                                        <!--<div class="col-lg-9">
+                                                            <ul class="unstyled">
+                                                                <li style="list-style-type: none;">
+                                                                    <strong>Universidad de Costa Rica</strong>
+                                                                    <span> Septiembre 2019</span>
+                                                                </li>
+                                                                <li style="list-style-type: none;">
+                                                                    Administración de Empresas <span>(En curso)</span>
+                                                                </li>
+                                                                <li style="list-style-type: none;">
+                                                                    Contenidos:
 
-                                                            </li>
-                                                        </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <button class="btn btn-orange my-2"
+                                                                    style="width: 170px;">
+                                                                Editar
+                                                            </button>
+                                                            <button class="btn btn-orange my-2"
+                                                                    style="width: 170px;">
+                                                                Eliminar
+                                                            </button>
+                                                        </div>-->
                                                     </div>
-                                                    <div class="col-lg-2">
-                                                        <button class="btn btn-orange my-2"
-                                                                style="width: 170px;">
-                                                            Editar
-                                                        </button>
-                                                        <button class="btn btn-orange my-2"
-                                                                style="width: 170px;">
-                                                            Eliminar
-                                                        </button>
-                                                    </div>-->
+                                                    <hr>
+
+                                                </div>
                                             </div>
-                                            <hr>
+                                            <hr />
 
                                         </div>
                                     </div>
-                                    <hr />
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row my-5 justify-content-center">
-        <div class="col-lg-11">
-            <div id="academic_extra" class="card py-4 px-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <h3> Educación Extracurricular</h3>
-                        </div>
-                        <div class="col-lg-4" style="text-align: right;">
-                            <button class="btn" type="button" data-toggle="modal"
-                                    data-target="#addExtraCourse">
-                                AGREGAR +
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="modal fade" id="addExtraCourse" tabindex="-1" aria-labelledby="addExtraCourseLabel" aria-hidden="true" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addExtraCourseLabel">Agregar Educación Extracurricular</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                                        <span aria-hidden="true">&times;</span>
+            <div class="row my-5 justify-content-center">
+                <div class="col-lg-11">
+                    <div id="academic_extra" class="card py-4 px-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <h3> Educación Extracurricular</h3>
+                                </div>
+                                <div class="col-lg-4" style="text-align: right;">
+                                    <button class="btn" type="button" data-toggle="modal"
+                                            data-target="#addExtraCourse">
+                                        AGREGAR +
                                     </button>
                                 </div>
-                                <div>
-                                    <div class="modal-body">
-                                        <form id="frmAddExtraCourse" role="form" method="POST" action="">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-lg-12 my-2">
-                                                        <input type="hidden" name="_token" value="">
+                            </div>
 
-                                                        <div class="form-group">
-                                                            <div>
-                                                                @Html.CtrlInputSecond(id: "txtInstitution", type: "text", required: true, placeHolder: "Institución", columnDataName: "Institution")
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div>
-                                                                @Html.CtrlInputSecond(id: "txtCourseName", type: "text", required: true, placeHolder: "Nombre del Curso", columnDataName: "CourseName")
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="form-group input-group flex-column ">
-                                                                        <label for="txtStatus">Estado del Curso</label>
-                                                                        <select style="height:54px;" class="form-control w-100" id="txtStatus"
-                                                                                name="txtStatus" ColumnDataName="Status" required>
-                                                                            <option value="En Curso">En Curso</option>
-                                                                            <option value="Suspendido">Suspendido</option>
-                                                                            <option value="Finalizado">Finalizado</option>
-                                                                        </select>
+                            <div class="modal fade" id="addExtraCourse" tabindex="-1" aria-labelledby="addExtraCourseLabel" aria-hidden="true" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addExtraCourseLabel">Agregar Educación Extracurricular</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <div class="modal-body">
+                                                <form id="frmAddExtraCourse" role="form" method="POST" action="">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 my-2">
+                                                                <input type="hidden" name="_token" value="">
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtInstitution", type: "text", required: true, placeHolder: "Institución", columnDataName: "Institution")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtCourseName", type: "text", required: true, placeHolder: "Nombre del Curso", columnDataName: "CourseName")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="form-group input-group flex-column ">
+                                                                                <label for="txtStatus">Estado del Curso</label>
+                                                                                <select style="height:54px;" class="form-control w-100" id="txtStatus"
+                                                                                        name="txtStatus" ColumnDataName="Status" required>
+                                                                                    <option value="En Curso">En Curso</option>
+                                                                                    <option value="Suspendido">Suspendido</option>
+                                                                                    <option value="Finalizado">Finalizado</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group" lang="es-us">
+                                                                    <label for="fecha" class="control-label">Fecha Ingreso</label>
+
+                                                                    <div lang="es-us">
+                                                                        <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group" lang="es-us">
+                                                                    <label for="fecha" class="control-label">Fecha Graduación (Únicamente si está finalizado)</label>
+
+                                                                    <div lang="es-us">
+                                                                        <input type="month" class="form-control input-lg" name="endDate" id="txtEndDate" ColumnDataName="EndDate" min="1990-01" value="2022-08" lang="es-us">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="form-group input-group flex-column ">
+                                                                                <label for="txtStatus">Certificado</label>
+                                                                                <input type="file" />
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-
-                                                        <div class="form-group" lang="es-us">
-                                                            <label for="fecha" class="control-label">Fecha Ingreso</label>
-
-                                                            <div lang="es-us">
-                                                                <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group" lang="es-us">
-                                                            <label for="fecha" class="control-label">Fecha Graduación (Únicamente si está finalizado)</label>
-
-                                                            <div lang="es-us">
-                                                                <input type="month" class="form-control input-lg" name="endDate" id="txtEndDate" ColumnDataName="EndDate" min="1990-01" value="2022-08" lang="es-us">
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div>
-                                                                <div class="input-group mb-3">
-                                                                    <div class="form-group input-group flex-column ">
-                                                                        <label for="txtStatus">Certificado</label>
-                                                                        <input type="file" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
-
-                                                </div>
+                                                </form>
                                             </div>
-                                        </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLaboral", label: "Registrar", onClickFunction: "CreateExtraCourse", buttonType: "orange")
+
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
-                                    @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLaboral", label: "Registrar", onClickFunction: "CreateLaboral", buttonType: "orange")
 
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
+                            <hr>
+                            <div class="row flex-rows">
+                                <div class="col-lg-12">
+                                    <div class="my-3">
+                                        <div class="d-flex flex-column" id="listCourses">
+                                            <div class="card-laboral">
+                                                <div class="container">
 
-                    <hr>
-                    <div class="row flex-rows">
-                        <div class="col-lg-12">
-                            <div class="my-3">
-                                <div class=" d-flex flex-column">
-                                    <div class="card-laboral">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-lg-1"
-                                                     style="text-align: center; font-size: 2em; color:#5e5e5e;">
-                                                    <i class="fa-solid fa-graduation-cap"></i>
-                                                </div>
-                                                <!-- <div class="col-lg-9">
-                                                <ul class="unstyled">
-                                                    <li style="list-style-type: none;">
-                                                        <strong>Instituto Boston</strong>
-                                                        <span> Septiembre 2020</span>
-                                                    </li>
-                                                    <li style="list-style-type: none;">
-                                                        Curso: Servicio al cliente
-                                                    </li>
-                                                    <li style="list-style-type: none;">
-                                                        Contenidos:
+                                                    <!--<div class="row">
+                                                                        <div class="col-lg-1"
+                                                                 style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                                                <i class="fa-solid fa-graduation-cap"></i>
+                                                            </div>
+                                                             <div class="col-lg-9">
+                                                                <ul class="unstyled">
+                                                                    <li style="list-style-type: none;">
+                                                                        <strong>Instituto Boston</strong>
+                                                                        <span> Septiembre 2020</span>
+                                                                    </li>
+                                                                    <li style="list-style-type: none;">
+                                                                        Curso: Servicio al cliente
+                                                                    </li>
+                                                                    <li style="list-style-type: none;">
+                                                                        Contenidos:
 
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <button class="btn btn-orange my-2"
-                                                        style="width: 170px;">
-                                                    Editar
-                                                </button>
-                                                <button class="btn btn-orange my-2"
-                                                        style="width: 170px;">
-                                                    Eliminar
-                                                </button>
-                                            </div>-->
-                                                    </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <button class="btn btn-orange my-2"
+                                                                        style="width: 170px;">
+                                                                    Editar
+                                                                </button>
+                                                                <button class="btn btn-orange my-2"
+                                                                        style="width: 170px;">
+                                                                    Eliminar
+                                                                </button>
+                                                            </div>
+                                                    </div>-->
                                                 </div>
                                             </div>
                                             <hr />
 
-                                          
+
                                         </div>
                                     </div>
                                 </div>
@@ -1249,33 +1174,33 @@
                                         <div class=" d-flex flex-column">
                                             <div class="card-laboral">
                                                 <div class="container">
-                                                <!--<div class="row">
+                                                    <!--<div class="row">
 
-                                                        <div class="col-lg-10">
-                                                            <ul class="unstyled">
-                                                                <li style="list-style-type: none;">
-                                                                    <strong>Karla Rojas Bermudez</strong>
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    Gerencia, Banco de Costa Rica
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    8767-8637
+                                                            <div class="col-lg-10">
+                                                                <ul class="unstyled">
+                                                                    <li style="list-style-type: none;">
+                                                                        <strong>Karla Rojas Bermudez</strong>
+                                                                    </li>
+                                                                    <li style="list-style-type: none;">
+                                                                        Gerencia, Banco de Costa Rica
+                                                                    </li>
+                                                                    <li style="list-style-type: none;">
+                                                                        8767-8637
 
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Editar
-                                                            </button>
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Eliminar
-                                                            </button>
-                                                        </div>
-                                                    </div>-->
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <button class="btn btn-orange my-2"
+                                                                        style="width: 170px;">
+                                                                    Editar
+                                                                </button>
+                                                                <button class="btn btn-orange my-2"
+                                                                        style="width: 170px;">
+                                                                    Eliminar
+                                                                </button>
+                                                            </div>
+                                                        </div>-->
                                                 </div>
                                             </div>
 
@@ -1291,92 +1216,92 @@
 
 
         <!--
-    <div class="home">
-        <div class="container">
-            <h2 class="text-center">Perfil Estudiante</h2>
-            <div class="row justify-content-between">
-                <h3>Informacion Personal</h3>
-            </div>
-            <br />
-            <div class="row justify-content-between">
-                <div class="col-lg-6 col-sm-11">
-                    <div class=" text-box">
-                        <h5>Nombre de usuario:</h5>
-                        <p id="P_UserName"></p>
-                        <br />
-                        <h5>Correo electrónico:</h5>
-                        <p id="P_Email"></p>
-                        <br />
-                        <h5>Primer Nombre:</h5>
-                        <p id="P_First_Name"></p>
-                        <br />
+        <div class="home">
+            <div class="container">
+                <h2 class="text-center">Perfil Estudiante</h2>
+                <div class="row justify-content-between">
+                    <h3>Informacion Personal</h3>
+                </div>
+                <br />
+                <div class="row justify-content-between">
+                    <div class="col-lg-6 col-sm-11">
+                        <div class=" text-box">
+                            <h5>Nombre de usuario:</h5>
+                            <p id="P_UserName"></p>
+                            <br />
+                            <h5>Correo electrónico:</h5>
+                            <p id="P_Email"></p>
+                            <br />
+                            <h5>Primer Nombre:</h5>
+                            <p id="P_First_Name"></p>
+                            <br />
 
-                        <h5>Segundo Nombre:</h5>
-                        <p id="P_Second_Name"></p>
-                        <br />
-                        <h5>Primer Apellido:</h5>
-                        <p id="P_Last_Name"></p>
-                        <br />
-                        <h5>Segundo Apellido:</h5>
-                        <p id="P_Second_Last_Name"></p>
-                        <br />
-                        <input type="text" id="txtIdStudent" class="d-none">
+                            <h5>Segundo Nombre:</h5>
+                            <p id="P_Second_Name"></p>
+                            <br />
+                            <h5>Primer Apellido:</h5>
+                            <p id="P_Last_Name"></p>
+                            <br />
+                            <h5>Segundo Apellido:</h5>
+                            <p id="P_Second_Last_Name"></p>
+                            <br />
+                            <input type="text" id="txtIdStudent" class="d-none">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-11">
+                        <div class="text-box">
+                            <h5>Tipo de Identificiación:</h5>
+                            <p id="P_Id_Type"></p>
+                            <br />
+                            <h5>Número de identificación:</h5>
+                            <p id="P_Identification_Number"></p>
+                            <br />
+                            <h5>Fecha de Nacimiento:</h5>
+                            <p id="P_Birthdate"></p>
+                            <br />
+                            <h5>Género:</h5>
+                            <p id="P_Gender"></p>
+                            <br />
+                            <h5>Télefono Principal:</h5>
+                            <p id="P_Primary_Phone"></p>
+                            <br />
+                            <h5>Teléfono Secundario:</h5>
+                            <p id="P_Secondary_Phone"></p>
+                            <br />
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-11">
-                    <div class="text-box">
-                        <h5>Tipo de Identificiación:</h5>
-                        <p id="P_Id_Type"></p>
-                        <br />
-                        <h5>Número de identificación:</h5>
-                        <p id="P_Identification_Number"></p>
-                        <br />
-                        <h5>Fecha de Nacimiento:</h5>
-                        <p id="P_Birthdate"></p>
-                        <br />
-                        <h5>Género:</h5>
-                        <p id="P_Gender"></p>
-                        <br />
-                        <h5>Télefono Principal:</h5>
-                        <p id="P_Primary_Phone"></p>
-                        <br />
-                        <h5>Teléfono Secundario:</h5>
-                        <p id="P_Secondary_Phone"></p>
-                        <br />
-                    </div>
+                <div class="row justify-content-between">
+                    <h3>Informacion Laboral</h3>
                 </div>
-            </div>
-            <div class="row justify-content-between">
-                <h3>Informacion Laboral</h3>
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-lg-6 col-sm-11">
-                    <div class=" text-box">
-                        <h5>Experiencia Laboral:</h5>
-                        <p id="P_Laboral_Experience"></p>
-                        <br />
-                        <h5>Estado Laboral:</h5>
-                        <p id="P_LaboralStatus"></p>
-                        <br />
-                        <h5>Provincia:</h5>
-                        <p id="P_Province"></p>
-                        <br />
+                <div class="row justify-content-between">
+                    <div class="col-lg-6 col-sm-11">
+                        <div class=" text-box">
+                            <h5>Experiencia Laboral:</h5>
+                            <p id="P_Laboral_Experience"></p>
+                            <br />
+                            <h5>Estado Laboral:</h5>
+                            <p id="P_LaboralStatus"></p>
+                            <br />
+                            <h5>Provincia:</h5>
+                            <p id="P_Province"></p>
+                            <br />
 
-                        <h5>Canton:</h5>
-                        <p id="P_Canton"></p>
-                        <br />
-                        <h5>Distrito:</h5>
-                        <p id="P_District"></p>
-                        <br />
-                        <h5>Es estudiante de Banking Coach:</h5>
-                        <p id="P_BankingStudent"></p>
-                        <br />
-                        <input type="text" id="txtIdStudent" class="d-none">
+                            <h5>Canton:</h5>
+                            <p id="P_Canton"></p>
+                            <br />
+                            <h5>Distrito:</h5>
+                            <p id="P_District"></p>
+                            <br />
+                            <h5>Es estudiante de Banking Coach:</h5>
+                            <p id="P_BankingStudent"></p>
+                            <br />
+                            <input type="text" id="txtIdStudent" class="d-none">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>-->
+        </div>-->
 
         <script>
 

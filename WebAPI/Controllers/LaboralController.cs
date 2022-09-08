@@ -3,6 +3,7 @@ using Entities_POJO;
 using Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -82,8 +83,16 @@ namespace WebAPI.Controllers
 
                 var mng = new LaboralManager();
 
+                
+                //Check if datetime variable is having the MinValue or not
+                if (laboral.EndDate == DateTime.MinValue)
+                {
+                    //DateTime is null
+                    laboral.EndDate = (DateTime)SqlDateTime.Null; ;
+                }
 
                 mng.Create(laboral);
+                
                 apiResp.Message = "Experiencia Laboral creado";
 
                 return Ok(apiResp);

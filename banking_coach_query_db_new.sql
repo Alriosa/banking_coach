@@ -1940,8 +1940,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_LABORAL_STUDENT]
         @SP_Company VARCHAR(80),
         @SP_Responsabilites VARCHAR(200),
         @SP_Start_Date DATETIME,
-        @SP_End_Date DATETIME,
-        @SP_Entry_Date DATETIME,
+        @SP_End_Date DATETIME = NULL,
         @SP_Student_ID INT
 AS
         INSERT INTO [dbo].[TBL_LABORAL]
@@ -1952,7 +1951,7 @@ AS
                 @SP_Responsabilites,
                 @SP_Start_Date,
                 @SP_End_Date,
-                @SP_Entry_Date,
+                GETDATE(),
 				@SP_Student_ID
 				);
 GO
@@ -1966,7 +1965,6 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_LABORAL_STUDENT]
         @SP_Responsabilites VARCHAR(200),
         @SP_Start_Date DATETIME,
         @SP_End_Date DATETIME,
-        @SP_Entry_Date DATETIME,
         @SP_Student_ID INT
 AS
         UPDATE [dbo].[TBL_LABORAL] SET
@@ -1976,7 +1974,6 @@ AS
                 Responsabilites = @SP_Responsabilites, 
                 Start_Date = @SP_Start_Date, 
                 End_Date = @SP_End_Date, 
-                Entry_Date = @SP_Entry_Date, 
                 Student_ID = @SP_Student_ID
 				WHERE Laboral_ID = @SP_Laboral_ID;
 GO
