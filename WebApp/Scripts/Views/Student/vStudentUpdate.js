@@ -16,7 +16,6 @@
         document.querySelector('#txtBankingStudent').value = data['BankingStudent'];
         document.querySelector('#txtStudentLogin').value = data['StudentLogin'];
         document.querySelector('#txtEmail').value = data['Email'];
-        document.querySelector('#txtEntryDate').value = formatDateString(data['EntryDate']);
         document.querySelector('#txtIdentificationNumber').value =  data['IdentificationNumber'];
         document.querySelector('#txtFirstName').value = data['FirstName'];
         document.querySelector('#txtSecondName').value = data['SecondName'];

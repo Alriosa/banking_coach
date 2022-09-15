@@ -10,6 +10,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [RoutePrefix("api/reference")]
     public class ReferenceController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
@@ -113,6 +114,28 @@ namespace WebAPI.Controllers
             catch (BussinessException bex)
             {
                 bex.AppMessage.Message = "Hubo un error al modificar la referencia del estudiante";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [Route("")]
+        public IHttpActionResult Delete(Reference reference)
+        {
+            try
+            {
+                var mng = new ReferenceManager();
+                mng.Delete(reference);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Referencia Eliminada"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al eliminar la referencia del estudiante";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }

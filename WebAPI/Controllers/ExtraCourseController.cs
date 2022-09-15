@@ -3,6 +3,7 @@ using Entities_POJO;
 using Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,7 +82,12 @@ namespace WebAPI.Controllers
                 apiResp = new ApiResponse();
 
                 var mng = new ExtraCourseManager();
-
+                
+                if (extraCourse.EndDate == DateTime.MinValue)
+                {
+                    //DateTime is null
+                    extraCourse.EndDate = (DateTime)SqlDateTime.Null; ;
+                }
 
                 mng.Create(extraCourse);
                 apiResp.Message = "Curso Extracurricular creado";
@@ -102,6 +108,13 @@ namespace WebAPI.Controllers
             try
             {
                 var mng = new ExtraCourseManager();
+
+                if (extraCourse.EndDate == DateTime.MinValue)
+                {
+                    //DateTime is null
+                    extraCourse.EndDate = (DateTime)SqlDateTime.Null; ;
+                }
+
                 mng.Update(extraCourse);
 
                 apiResp = new ApiResponse
@@ -114,6 +127,28 @@ namespace WebAPI.Controllers
             catch (BussinessException bex)
             {
                 bex.AppMessage.Message = "Hubo un error al modificar al curso extracurricular";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [Route("")]
+        public IHttpActionResult Delete(ExtraCourse extraCourse)
+        {
+            try
+            {
+                var mng = new ExtraCourseManager();
+                mng.Delete(extraCourse);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Curso Extracurricular Eliminado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al eliminar al estudio extracurricular";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }

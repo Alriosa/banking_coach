@@ -224,6 +224,12 @@ function formatDateString(s) {
 	return s[0] + '-' + s[1] + '-' + s[2];
 }
 
+function formatDateStringMonths(s) {
+	var s = s.split(/\D/);
+	console.log(s[0] + '-' + s[1]);
+	return s[0] + '-' + s[1];
+}
+
 //Custom jquery actions
 $.put = function (url, data, callback) {
 	if ($.isFunction(data)) {

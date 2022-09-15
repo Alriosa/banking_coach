@@ -120,5 +120,20 @@ namespace WebApp.Helpers
 
             return new HtmlString(ctrl.GetHtml());
         }
+         public static HtmlString CtrlRadioButton(this HtmlHelper html, string id, string label, string name, string check, string onchange, string columnDataName = "")
+        {
+            var ctrl = new CtrlRadioButtonModel
+            {
+                Id = id,
+                Label = label,
+                Name = name,
+                Checked = check,
+                ChangeFunction = onchange,
+                ColumnDataName = columnDataName
+            };
+
+            return new HtmlString(ctrl.GetHtml());
+        }
+
     }
 }

@@ -36,7 +36,6 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_CERTIFICATE, academic.Certificate);
             operation.AddDateTimeParam(DB_COL_START_DATE, academic.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, academic.EndDate);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, academic.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, academic.StudentID);
             return operation;
         }
@@ -81,7 +80,6 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_CERTIFICATE, academic.Certificate);
             operation.AddDateTimeParam(DB_COL_START_DATE, academic.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, academic.EndDate);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, academic.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, academic.StudentID);
             return operation;
         }

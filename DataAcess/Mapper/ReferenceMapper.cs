@@ -30,7 +30,6 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_WORKSTATION, reference.Workstation);
             operation.AddVarcharParam(DB_COL_COMPANY, reference.Company);
             operation.AddVarcharParam(DB_COL_PHONE, reference.Phone);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, reference.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, reference.StudentID);
             return operation;
         }
@@ -72,7 +71,6 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_WORKSTATION, reference.Workstation);
             operation.AddVarcharParam(DB_COL_COMPANY, reference.Company);
             operation.AddVarcharParam(DB_COL_PHONE, reference.Phone);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, reference.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, reference.StudentID);
             return operation;
         }

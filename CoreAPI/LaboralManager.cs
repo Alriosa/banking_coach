@@ -49,10 +49,10 @@ namespace CoreAPI
             try
             {
                 c = crudLaboral.Retrieve<Laboral>(laboral);
-                if (c == null)
+               /* if (c == null)
                 {
                     throw new BussinessException(4);
-                }
+                }*/
             }
             catch (Exception ex)
             {

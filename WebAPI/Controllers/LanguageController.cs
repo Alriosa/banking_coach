@@ -116,5 +116,28 @@ namespace WebAPI.Controllers
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
+
+
+        [Route("")]
+        public IHttpActionResult Delete(Language language)
+        {
+            try
+            {
+                var mng = new LanguageManager();
+                mng.Delete(language);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Idioma Eliminado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al eliminar al idioma";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
     }
 }

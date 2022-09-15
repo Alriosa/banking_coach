@@ -3,6 +3,7 @@ using Entities_POJO;
 using Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -81,7 +82,11 @@ namespace WebAPI.Controllers
 
                 var mng = new AcademicManager();
 
-
+                if (academic.EndDate == DateTime.MinValue)
+                {
+                    //DateTime is null
+                    academic.EndDate = (DateTime)SqlDateTime.Null; ;
+                }
                 mng.Create(academic);
                 apiResp.Message = "Estudio académico creado";
 
@@ -101,6 +106,13 @@ namespace WebAPI.Controllers
             try
             {
                 var mng = new AcademicManager();
+
+                if (academic.EndDate == DateTime.MinValue)
+                {
+                    //DateTime is null
+                    academic.EndDate = (DateTime)SqlDateTime.Null; ;
+                }
+
                 mng.Update(academic);
 
                 apiResp = new ApiResponse
@@ -113,6 +125,28 @@ namespace WebAPI.Controllers
             catch (BussinessException bex)
             {
                 bex.AppMessage.Message = "Hubo un error al modificar al estudio académico";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [Route("")]
+        public IHttpActionResult Delete(Academic academic)
+        {
+            try
+            {
+                var mng = new AcademicManager();
+                mng.Delete(academic);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estudio académico Eliminado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al eliminar al estudio académico";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }

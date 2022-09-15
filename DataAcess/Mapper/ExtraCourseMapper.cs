@@ -33,7 +33,6 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_STATUS, extraCourse.Status);
             operation.AddDateTimeParam(DB_COL_START_DATE, extraCourse.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, extraCourse.EndDate);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, extraCourse.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, extraCourse.StudentID);
             return operation;
         }
@@ -78,7 +77,6 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_STATUS, extraCourse.Status);
             operation.AddDateTimeParam(DB_COL_START_DATE, extraCourse.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, extraCourse.EndDate);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, extraCourse.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, extraCourse.StudentID);
             return operation;
         }
@@ -98,6 +96,7 @@ namespace DataAcess.Mapper
             {
                 CourseID = GetIntValue(row, DB_COL_COURSE_ID),
                 Institution = GetStringValue(row, DB_COL_INSTITUTION),
+                CourseName = GetStringValue(row, DB_COL_COURSE_NAME),
                 Status = GetStringValue(row, DB_COL_STATUS),
                 Certificate = GetStringValue(row, DB_COL_CERTIFICATE),
                 StartDate = GetDateValue(row, DB_COL_START_DATE),

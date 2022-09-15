@@ -24,7 +24,6 @@ namespace DataAcess.Mapper
 
             operation.AddVarcharParam(DB_COL_LANGUAGE, language.LanguageName);
             operation.AddVarcharParam(DB_COL_LEVEL, language.Level);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, language.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, language.StudentID);
             return operation;
         }
@@ -62,7 +61,6 @@ namespace DataAcess.Mapper
             operation.AddIntParam(DB_COL_LANGUAGE_ID, language.LanguageID);
             operation.AddVarcharParam(DB_COL_LANGUAGE, language.LanguageName);
             operation.AddVarcharParam(DB_COL_LEVEL, language.Level);
-            operation.AddDateTimeParam(DB_COL_ENTRY_DATE, language.EntryDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, language.StudentID);
             return operation;
         }

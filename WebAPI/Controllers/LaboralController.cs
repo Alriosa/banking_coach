@@ -111,6 +111,13 @@ namespace WebAPI.Controllers
             try
             {
                 var mng = new LaboralManager();
+                //Check if datetime variable is having the MinValue or not
+                if (laboral.EndDate == DateTime.MinValue)
+                {
+                    //DateTime is null
+                    laboral.EndDate = (DateTime)SqlDateTime.Null; ;
+                }
+
                 mng.Update(laboral);
 
                 apiResp = new ApiResponse
@@ -123,6 +130,28 @@ namespace WebAPI.Controllers
             catch (BussinessException bex)
             {
                 bex.AppMessage.Message = "Hubo un error al modificar la experiencia laboral";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [Route("")]
+        public IHttpActionResult Delete(Laboral laboral)
+        {
+            try
+            {
+                var mng = new LaboralManager();
+                mng.Delete(laboral);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Experiencia Laboral Eliminada"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al eliminar la experiencia laboral";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }

@@ -55,12 +55,12 @@ CREATE TABLE TBL_ACADEMIC  (
 Academic_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 Institution VARCHAR(100) NOT NULL,
 Degree_Type VARCHAR(100) NOT NULL,  --SECUNDARIA O UNIVERSITARIA --
-University_Preparation VARCHAR(100) NOT NULL,
-Career VARCHAR(100) NOT NULL,
+University_Preparation VARCHAR(100) NULL,
+Career VARCHAR(100) NULL,
 Status VARCHAR(20) NOT NULL, -- en curso, suspendido, finalizado --
 Certificate VARCHAR(100) NULL, -- url del documento --
 Start_Date DATETIME NOT NULL,
-End_Date DATETIME , 
+End_Date DATETIME NULL, 
 Entry_Date DATETIME NOT NULL,
 Student_ID INT NOT NULL,
 CONSTRAINT FK_Student_Academic_ID FOREIGN KEY (Student_ID) REFERENCES TBL_STUDENT(Student_ID)
@@ -73,7 +73,7 @@ Course_Name VARCHAR(100) NOT NULL,  --SECUNDARIA O UNIVERSITARIA --
 Certificate VARCHAR(100) NULL, -- url del documento --
 Status VARCHAR(20) NOT NULL, -- en curso, finalizado --
 Start_Date DATETIME NOT NULL,
-End_Date DATETIME , 
+End_Date DATETIME NULL, 
 Entry_Date DATETIME NOT NULL,
 Student_ID INT NOT NULL,
 CONSTRAINT FK_Student_Extra_Course_ID FOREIGN KEY (Student_ID) REFERENCES TBL_STUDENT(Student_ID)
@@ -1758,13 +1758,12 @@ STORAGE PROCEDURES FOR ACADEMIC
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_ACADEMIC_STUDENT]
         @SP_Institution VARCHAR(100),
         @SP_Degree_Type VARCHAR(50),
-        @SP_University_Preparation VARCHAR(100),
-        @SP_Career VARCHAR(50),
+        @SP_University_Preparation VARCHAR(100) = NULL,
+        @SP_Career VARCHAR(50) = NULL,
         @SP_Status VARCHAR(15),
-        @SP_Certificate TEXT,
+        @SP_Certificate TEXT = NULL,
         @SP_Start_Date DATETIME,
-        @SP_End_Date DATETIME,
-        @SP_Entry_Date DATETIME,
+        @SP_End_Date DATETIME = NULL,
         @SP_Student_ID INT
 AS
         INSERT INTO [dbo].[TBL_ACADEMIC]
@@ -1777,7 +1776,7 @@ AS
                 @SP_Certificate,
                 @SP_Start_Date,
                 @SP_End_Date,
-                @SP_Entry_Date,
+                GETDATE(),
 				@SP_Student_ID
 				);
 GO
@@ -1787,13 +1786,12 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ACADEMIC_STUDENT]
        @SP_Academic_ID INT,
        @SP_Institution VARCHAR(100),
         @SP_Degree_Type VARCHAR(50),
-        @SP_University_Preparation VARCHAR(100),
-        @SP_Career VARCHAR(50),
+        @SP_University_Preparation VARCHAR(100)= NULL,
+        @SP_Career VARCHAR(50)= NULL,
         @SP_Status VARCHAR(15),
-        @SP_Certificate TEXT,
+        @SP_Certificate TEXT= NULL,
         @SP_Start_Date DATETIME,
-        @SP_End_Date DATETIME,
-        @SP_Entry_Date DATETIME,
+        @SP_End_Date DATETIME = NULL,
         @SP_Student_ID INT
 AS
         UPDATE [dbo].[TBL_ACADEMIC] SET
@@ -1805,7 +1803,6 @@ AS
                 Certificate = @SP_Certificate, 
                 Start_Date = @SP_Start_Date, 
                 End_Date = @SP_End_Date, 
-                Entry_Date = @SP_Entry_Date, 
                 Student_ID = @SP_Student_ID
 				WHERE Academic_ID = @SP_Academic_ID;
 GO
@@ -1851,11 +1848,10 @@ STORAGE PROCEDURES FOR EXTRA COURSE
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_COURSE_STUDENT]
         @SP_Institution VARCHAR(100),
         @SP_Course_Name VARCHAR(50),
-        @SP_Certificate TEXT,
+        @SP_Certificate TEXT = NULL,
         @SP_Status VARCHAR(15),
         @SP_Start_Date DATETIME,
-        @SP_End_Date DATETIME,
-        @SP_Entry_Date DATETIME,
+        @SP_End_Date DATETIME = NULL,
         @SP_Student_ID INT
 AS
         INSERT INTO [dbo].[TBL_EXTRA_COURSES]
@@ -1866,7 +1862,7 @@ AS
                 @SP_Status,
                 @SP_Start_Date,
                 @SP_End_Date,
-                @SP_Entry_Date,
+                GETDATE(),
 				@SP_Student_ID
 				);
 GO
@@ -1875,24 +1871,20 @@ GO
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_COURSE_STUDENT]
        @SP_Course_ID INT,
        @SP_Institution VARCHAR(100),
-        @SP_Degree_Type VARCHAR(50),
-        @SP_University_Preparation VARCHAR(100),
-        @SP_Career VARCHAR(50),
+        @SP_Course_Name VARCHAR(50),
         @SP_Status VARCHAR(15),
-        @SP_Certificate TEXT,
+        @SP_Certificate TEXT = NULL,
         @SP_Start_Date DATETIME,
-        @SP_End_Date DATETIME,
-        @SP_Entry_Date DATETIME,
+        @SP_End_Date DATETIME = NULL,
         @SP_Student_ID INT
 AS
         UPDATE [dbo].[TBL_EXTRA_COURSES] SET
 				Institution = @SP_Institution,
-                Course_Name = @SP_Degree_Type, 
+                Course_Name = @SP_Course_Name, 
                 Certificate = @SP_Certificate, 
                 Status = @SP_Status, 
                 Start_Date = @SP_Start_Date, 
                 End_Date = @SP_End_Date, 
-                Entry_Date = @SP_Entry_Date, 
                 Student_ID = @SP_Student_ID
 				WHERE Course_ID = @SP_Course_ID;
 GO
@@ -1909,7 +1901,7 @@ AS
         SELECT * FROM [dbo].[TBL_EXTRA_COURSES];
 GO
 
-CREATE PROCEDURE [dbo].[SSP_SELECT_TBL_COURSE_BY_ID]
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_COURSE_BY_ID]
         @SP_Course_ID INT
 AS
 
@@ -1917,7 +1909,7 @@ AS
 GO
 
 
-CREATE PROCEDURE [dbo].[SP_SELECT_TBL_COURSE_BY_STUDENT"]
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_COURSE_BY_STUDENT]
         @SP_Student_ID INT
 AS
 
@@ -2020,7 +2012,6 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_REFERENCE]
         @SP_Worstation VARCHAR(200),
         @SP_Company VARCHAR(80),
         @SP_Phone VARCHAR(15),
-        @SP_Entry_Date DATETIME,
         @SP_Student_ID INT
 AS
         INSERT INTO [dbo].[TBL_REFERENCES]
@@ -2029,7 +2020,7 @@ AS
                 @SP_Worstation,
                 @SP_Company,
                 @SP_Phone,
-                @SP_Entry_Date,
+                GETDATE(),
 				@SP_Student_ID
 				);
 GO
@@ -2041,7 +2032,6 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_REFERENCE]
         @SP_Worstation VARCHAR(200),
         @SP_Company VARCHAR(80),
         @SP_Phone VARCHAR(15),
-        @SP_Entry_Date DATETIME,
         @SP_Student_ID INT
 AS
         UPDATE [dbo].[TBL_REFERENCES] SET
@@ -2049,7 +2039,6 @@ AS
                 Worstation = @SP_Worstation, 
                 Company = @SP_Company, 
                 Phone = @SP_Phone, 
-                Entry_Date = @SP_Entry_Date, 
                 Student_ID = @SP_Student_ID
 				WHERE Reference_ID = @SP_Reference_ID;
 GO
