@@ -18,6 +18,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_SECOND_LAST_NAME = "Second_Last_Name";
         private const string DB_COL_ID_TYPE = "Id_Type";
         private const string DB_COL_IDENTIFICATION_NUMBER = "Identification_Number";
+        private const string DB_COL_COUNTRY= "Country";
         private const string DB_COL_BIRTHDATE = "Birthdate";
         private const string DB_COL_AGE = "Age";
         private const string DB_COL_EMAIL = "Email";
@@ -32,7 +33,8 @@ namespace DataAccess.Mapper
         private const string DB_COL_LABORAL_STATUS = "Laboral_Status";
         private const string DB_COL_JOB_AVAILABILTY = "Job_Availability";
         private const string DB_COL_TRANSPORT_AVAILABILITY = "Transport_Availability";
-        private const string DB_COL_VEHICLE = "Vehicle";
+        private const string DB_COL_VEHICLE = "Vehicle"; 
+        private const string DB_COL_TYPE_VEHICLE = "Type_Vehicle";
         private const string DB_COL_DRIVER_LICENSES = "Driver_Licenses";
         private const string DB_COL_CURRICULUM = "Curriculum";
         private const string DB_COL_AGREE_JOB_EXCHANGE = "Agree_Job_Exchange";
@@ -55,6 +57,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_SECOND_LAST_NAME, student.SecondLastName);
             operation.AddVarcharParam(DB_COL_ID_TYPE,student.IdType);
             operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, student.IdentificationNumber);
+            operation.AddVarcharParam(DB_COL_COUNTRY, student.Country);
             operation.AddDateTimeParam(DB_COL_BIRTHDATE,student.Birthdate);
             operation.AddIntParam(DB_COL_AGE,student.Age);
             operation.AddVarcharParam(DB_COL_FIRST_PHONE_NUMBER, student.FirstPhoneNumber);
@@ -67,6 +70,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_JOB_AVAILABILTY,student.JobAvailability);
             operation.AddVarcharParam(DB_COL_TRANSPORT_AVAILABILITY,student.TransportAvailability);
             operation.AddVarcharParam(DB_COL_VEHICLE,student.Vehicle);
+            operation.AddVarcharParam(DB_COL_TYPE_VEHICLE,student.Type_Vehicle);
             operation.AddVarcharParam(DB_COL_DRIVER_LICENSES,student.DriverLicenses);
             operation.AddVarcharParam(DB_COL_CURRICULUM,student.Curriculum);
             operation.AddVarcharParam(DB_COL_AGREE_JOB_EXCHANGE,student.AgreeJobExchange);
@@ -125,6 +129,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_SECOND_LAST_NAME, student.SecondLastName);
             operation.AddVarcharParam(DB_COL_ID_TYPE, student.IdType);
             operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, student.IdentificationNumber);
+            operation.AddVarcharParam(DB_COL_COUNTRY, student.Country);
             operation.AddDateTimeParam(DB_COL_BIRTHDATE, student.Birthdate);
             operation.AddIntParam(DB_COL_AGE, student.Age);
             operation.AddVarcharParam(DB_COL_FIRST_PHONE_NUMBER, student.FirstPhoneNumber);
@@ -134,9 +139,11 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_CANTON, student.Canton);
             operation.AddVarcharParam(DB_COL_DISTRICT, student.District);
             operation.AddVarcharParam(DB_COL_LABORAL_STATUS, student.LaboralStatus);
+            operation.AddVarcharParam(DB_COL_DRIVER_LICENSES, student.DriverLicenses);
             operation.AddVarcharParam(DB_COL_JOB_AVAILABILTY, student.JobAvailability);
             operation.AddVarcharParam(DB_COL_TRANSPORT_AVAILABILITY, student.TransportAvailability);
             operation.AddVarcharParam(DB_COL_VEHICLE, student.Vehicle);
+            operation.AddVarcharParam(DB_COL_TYPE_VEHICLE, student.Type_Vehicle);
 
 
             return operation;
@@ -207,7 +214,8 @@ namespace DataAccess.Mapper
                 FirstLastName = GetStringValue(row, DB_COL_FIRST_LAST_NAME),
                 SecondLastName = GetStringValue(row, DB_COL_SECOND_LAST_NAME),
                 IdType = GetStringValue(row,DB_COL_ID_TYPE),
-                IdentificationNumber = GetStringValue(row,DB_COL_IDENTIFICATION_NUMBER),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
+                Country = GetStringValue(row, DB_COL_COUNTRY),
                 Birthdate = GetDateValue(row,DB_COL_BIRTHDATE),
                 Age = GetIntValue(row,DB_COL_AGE),
                 Email = GetStringValue(row,DB_COL_EMAIL),
@@ -223,6 +231,7 @@ namespace DataAccess.Mapper
                 JobAvailability = GetStringValue(row, DB_COL_JOB_AVAILABILTY),
                 TransportAvailability = GetStringValue(row, DB_COL_TRANSPORT_AVAILABILITY),
                 Vehicle = GetStringValue(row, DB_COL_VEHICLE),
+                Type_Vehicle = GetStringValue(row, DB_COL_TYPE_VEHICLE),
                 DriverLicenses = GetStringValue(row, DB_COL_DRIVER_LICENSES),
                 Curriculum = GetStringValue(row, DB_COL_CURRICULUM),
                 AgreeJobExchange = GetStringValue(row, DB_COL_AGREE_JOB_EXCHANGE),

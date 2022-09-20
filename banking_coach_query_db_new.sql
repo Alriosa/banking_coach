@@ -15,20 +15,22 @@ User_Active_Status VARCHAR(10) NOT NULL DEFAULT '1', /*True or False*/
 First_Name VARCHAR(50) NOT NULL,
 First_Last_Name VARCHAR(50) NOT NULL,
 Second_Last_Name VARCHAR(50) NULL,
-Id_Type VARCHAR(10) NOT NULL,
+Id_Type VARCHAR(30) NOT NULL,
 Identification_Number VARCHAR(20) NOT NULL UNIQUE, ---MUST BE UNIQUE ---
+Country VARCHAR(40) NOT NULL,
 Birthdate DATETIME NOT NULL,
 Age INT NOT NULL,
 Email VARCHAR(200) NOT NULL UNIQUE,
 Primary_Phone_Number VARCHAR(20) NOT NULL, ---MUST BE UNIQUE ---
 Second_Phone_Number VARCHAR(20) NOT NULL, ---MUST BE UNIQUE ---
-Province VARCHAR(3) NOT NULL,
-Canton VARCHAR(3) NOT NULL,
-District VARCHAR(3) NOT NULL,
+Province VARCHAR(3)  NULL,
+Canton VARCHAR(3)  NULL,
+District VARCHAR(3)  NULL,
 Laboral_Status VARCHAR(10) NULL, /*True or False*/
 Job_Availability VARCHAR(10) NULL,
 Transport_Availability VARCHAR(200) NOT NULL,
 Vehicle VARCHAR(10) NOT NULL,
+Type_Vehicle VARCHAR(20)  NULL,
 Driver_Licenses VARCHAR(200) NULL,
 Curriculum VARCHAR(200) NULL,
 Agree_Job_Exchange VARCHAR(200) NOT NULL,
@@ -58,7 +60,8 @@ Degree_Type VARCHAR(100) NOT NULL,  --SECUNDARIA O UNIVERSITARIA --
 University_Preparation VARCHAR(100) NULL,
 Career VARCHAR(100) NULL,
 Status VARCHAR(20) NOT NULL, -- en curso, suspendido, finalizado --
-Certificate VARCHAR(100) NULL, -- url del documento --
+Certificate_Name VARCHAR(200) NULL, -- url del documento --
+Certificate_File VARCHAR(500) NULL, -- url del documento --
 Start_Date DATETIME NOT NULL,
 End_Date DATETIME NULL, 
 Entry_Date DATETIME NOT NULL,
@@ -96,8 +99,8 @@ CONSTRAINT FK_Student_Laboral_ID FOREIGN KEY (Student_ID) REFERENCES TBL_STUDENT
 CREATE TABLE TBL_REFERENCES  (
 Reference_ID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 Referrer_Name VARCHAR(100) NOT NULL,
-Worstation VARCHAR(100) NOT NULL,  --SECUNDARIA O UNIVERSITARIA --
-Company DATETIME NOT NULL,
+Worstation VARCHAR(100) NOT NULL,  
+Company VARCHAR(80) NOT NULL,
 Phone VARCHAR(20) NOT NULL, 
 Entry_Date DATETIME NOT NULL,
 Student_ID INT NOT NULL,
@@ -206,9 +209,9 @@ CREATE TABLE TBL_PERMISSIONS (
 SET IDENTITY_INSERT TBL_STUDENT ON
 
 INSERT INTO dbo.TBL_STUDENT
-           (Student_ID, User_Active_Status ,First_Name, First_Last_Name, Second_Last_Name, Id_Type ,Identification_Number ,Birthdate ,Age ,Email ,Primary_Phone_Number, Second_Phone_Number ,Province ,Canton ,District ,Laboral_Status, Job_Availability ,Transport_Availability,Vehicle ,Driver_Licenses, Curriculum ,Agree_Job_Exchange ,Student_User ,Student_Password, User_Type, Entry_Date)
+           (Student_ID, User_Active_Status ,First_Name, First_Last_Name, Second_Last_Name, Id_Type ,Identification_Number, Country ,Birthdate ,Age ,Email ,Primary_Phone_Number, Second_Phone_Number ,Province ,Canton ,District ,Laboral_Status, Job_Availability ,Transport_Availability,Vehicle , Type_Vehicle, Driver_Licenses, Curriculum ,Agree_Job_Exchange ,Student_User ,Student_Password, User_Type, Entry_Date)
      VALUES
-           (0, '0','DEFAULT','DEFAULT','DEFAULT','0' ,'0'  ,'2000-03-27',0 ,'' ,'' ,'' ,'1','01','01' , '' ,'' ,'' ,'','','','','S_DEFAULT','DEFAULT','2', GETDATE())
+           (0, '0','DEFAULT','DEFAULT','DEFAULT','0' ,'0' , '' ,'2000-03-27',0 ,'' ,'' ,'' ,'1','01','01' , '' ,'' ,'' ,'','','','','','S_DEFAULT','DEFAULT','2', GETDATE())
 GO
 
 
@@ -886,20 +889,22 @@ create PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT]
         @SP_First_Name VARCHAR(200),
         @SP_First_Last_Name VARCHAR(200),
         @SP_Second_Last_Name VARCHAR(200),
-        @SP_Id_Type VARCHAR(10),
+        @SP_Id_Type VARCHAR(30),
         @SP_Identification_Number VARCHAR(20),
         @SP_Birthdate DATETIME,
 		@SP_Age INT,
         @SP_Email VARCHAR(200),
         @SP_Primary_Phone_Number VARCHAR(200),
         @SP_Second_Phone_Numer VARCHAR(200),
-        @SP_Province VARCHAR(200),
-        @SP_Canton VARCHAR(200),
-        @SP_District VARCHAR(200),
+        @SP_Country VARCHAR(200),
+		@SP_Province VARCHAR(200) = NULL,
+        @SP_Canton VARCHAR(200) = NULL,
+        @SP_District VARCHAR(200) = NULL,
 		@SP_Laboral_Status VARCHAR(10),
         @SP_Job_Availability VARCHAR(200),
         @SP_Transport_Availability VARCHAR(10),
         @SP_Vehicle VARCHAR(10),
+		@SP_Type_Vehicle VARCHAR(20),
         @SP_Driver_Licenses VARCHAR(200),
         @SP_Curriculum VARCHAR(200),
         @SP_Agree_Job_Exchange VARCHAR(200),
@@ -907,13 +912,14 @@ create PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT]
         @SP_Student_Password VARCHAR(50)
 
 AS
-        INSERT INTO [dbo].[TBL_STUDENT] (User_Active_Status ,First_Name, First_Last_Name, Second_Last_Name, Id_Type ,Identification_Number ,Birthdate ,Age ,Email ,Primary_Phone_Number, Second_Phone_Number ,Province ,Canton ,District ,Laboral_Status, Job_Availability ,Transport_Availability,Vehicle ,Driver_Licenses, Curriculum ,Agree_Job_Exchange ,Student_User ,Student_Password, User_Type, Entry_Date) VALUES (
+        INSERT INTO [dbo].[TBL_STUDENT] (User_Active_Status ,First_Name, First_Last_Name, Second_Last_Name, Id_Type ,Identification_Number, Country, Birthdate ,Age ,Email ,Primary_Phone_Number, Second_Phone_Number ,Province ,Canton ,District ,Laboral_Status, Job_Availability ,Transport_Availability,Vehicle , Type_Vehicle, Driver_Licenses, Curriculum ,Agree_Job_Exchange ,Student_User ,Student_Password, User_Type, Entry_Date) VALUES (
                 @SP_User_Active_Status,
 				@SP_First_Name,
 				@SP_First_Last_Name,
 				@SP_Second_Last_Name,
 				@SP_Id_Type,
                 @SP_Identification_Number,
+				@SP_Country,
                 @SP_Birthdate,
 				@SP_Age,
                 @SP_Email,
@@ -926,6 +932,7 @@ AS
                 @SP_Job_Availability,
                 @SP_Transport_Availability,
                 @SP_Vehicle,
+				@SP_Type_Vehicle,
                 @SP_Driver_Licenses,
                 @SP_Curriculum,
                 @SP_Agree_Job_Exchange,
@@ -938,7 +945,7 @@ GO
 ---SELECT ALL
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_STUDENT]
 AS
-        SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses,
+        SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
@@ -956,7 +963,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_IDENTIFICATION]
         @SP_Identification_Number VARCHAR(20)
 AS
-        SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses,
+        SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number,  S.Country,S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
@@ -974,7 +981,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_EMAIL]
         @SP_Student_Email VARCHAR(200)
 AS
-        SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses,
+        SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
@@ -992,7 +999,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_USER]
         @SP_Student_User VARCHAR(20)
 AS
-       SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses,
+       SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
@@ -1010,7 +1017,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_ID]
         @SP_Student_ID INT
 AS
-        SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses,
+        SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number,  S.Country,S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
@@ -1030,7 +1037,7 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_FIRST_NAME_AND_LAST_NAME]
 		@SP_First_Last_Name VARCHAR(200)
 
 AS
-       SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Driver_Licenses,
+       SELECT S.Student_ID,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Birthdate, S.Age, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
@@ -1050,8 +1057,9 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_First_Name VARCHAR(200),
         @SP_First_Last_Name VARCHAR(200),
         @SP_Second_Last_Name VARCHAR(200),
-        @SP_Id_Type VARCHAR(10),
+        @SP_Id_Type VARCHAR(30),
         @SP_Identification_Number VARCHAR(20),
+        @SP_Country VARCHAR(50),
         @SP_Birthdate DATETIME,
 		@SP_Age INT,
         @SP_Email VARCHAR(200),
@@ -1060,10 +1068,12 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Laboral_Status VARCHAR(10),
         @SP_Job_Availability VARCHAR(200),
         @SP_Transport_Availability VARCHAR(10),
+        @SP_Driver_Licenses VARCHAR(200),
         @SP_Vehicle VARCHAR(10),
-        @SP_Province VARCHAR(200),
-        @SP_Canton VARCHAR(200),
-        @SP_District VARCHAR(200)
+		@SP_Type_Vehicle VARCHAR(20) = NULL,
+        @SP_Province VARCHAR(200) = NULL,
+        @SP_Canton VARCHAR(200) = NULL,
+        @SP_District VARCHAR(200) = NULL
 AS
         UPDATE [dbo].[TBL_STUDENT] SET
                 First_Name=@SP_First_Name,
@@ -1071,6 +1081,7 @@ AS
                 Second_Last_Name=@SP_Second_Last_Name,
                 Id_Type=@SP_Id_Type,
                 Identification_Number=@SP_Identification_Number,
+				Country=@SP_Country,
                 Birthdate=@SP_Birthdate,
                 Age=@SP_Age,
                 Primary_Phone_Number=@SP_Primary_Phone_Number,
@@ -1082,7 +1093,9 @@ AS
                 Laboral_Status=@SP_Laboral_Status,
                 Job_Availability=@SP_Job_Availability,
                 Transport_Availability=@SP_Transport_Availability,
-                Vehicle=@SP_Vehicle
+                Driver_Licenses=@SP_Driver_Licenses,
+                Vehicle=@SP_Vehicle,
+				Type_Vehicle = @SP_Type_Vehicle
                 WHERE Student_ID = @SP_Student_ID;
 GO
 
@@ -1689,14 +1702,13 @@ STORAGE PROCEDURES FOR LANGUAGES
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_LANGUAGE_STUDENT]
         @SP_Language VARCHAR(50),
         @SP_Level VARCHAR(50),
-        @SP_Entry_Date DATETIME,
         @SP_Student_ID INT
 AS
         INSERT INTO [dbo].[TBL_LANGUAGES]
         VALUES
                 (@SP_Language,
                 @SP_Level,
-                @SP_Entry_Date,
+                GETDATE(),
 				@SP_Student_ID
 				);
 GO
@@ -1706,13 +1718,11 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_LANGUAGE_STUDENT]
         @SP_Language_ID INT,
         @SP_Language VARCHAR(50),
         @SP_Level VARCHAR(50),
-        @SP_Entry_Date DATETIME,
         @SP_Student_ID INT
 AS
         UPDATE [dbo].[TBL_LANGUAGES] SET
 				Language = @SP_Language,
                 Level = @SP_Level, 
-                Entry_Date = @SP_Entry_Date, 
                 Student_ID = @SP_Student_ID
 				WHERE Language_ID = @SP_Language_ID;
 GO
@@ -1761,7 +1771,8 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_ACADEMIC_STUDENT]
         @SP_University_Preparation VARCHAR(100) = NULL,
         @SP_Career VARCHAR(50) = NULL,
         @SP_Status VARCHAR(15),
-        @SP_Certificate TEXT = NULL,
+        @SP_Certificate_Name VARCHAR(200) = NULL,
+        @SP_Certificate_File VARCHAR(500) = NULL,
         @SP_Start_Date DATETIME,
         @SP_End_Date DATETIME = NULL,
         @SP_Student_ID INT
@@ -1773,7 +1784,8 @@ AS
                 @SP_University_Preparation,
                 @SP_Career,
                 @SP_Status,
-                @SP_Certificate,
+                @SP_Certificate_Name,
+                @SP_Certificate_File,
                 @SP_Start_Date,
                 @SP_End_Date,
                 GETDATE(),
@@ -1789,7 +1801,8 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ACADEMIC_STUDENT]
         @SP_University_Preparation VARCHAR(100)= NULL,
         @SP_Career VARCHAR(50)= NULL,
         @SP_Status VARCHAR(15),
-        @SP_Certificate TEXT= NULL,
+        @SP_Certificate_Name VARCHAR(200) = NULL,
+        @SP_Certificate_File VARCHAR(500) = NULL,
         @SP_Start_Date DATETIME,
         @SP_End_Date DATETIME = NULL,
         @SP_Student_ID INT
@@ -1800,7 +1813,8 @@ AS
                 University_Preparation = @SP_University_Preparation, 
                 Career = @SP_Career, 
                 Status = @SP_Status, 
-                Certificate = @SP_Certificate, 
+                Certificate_Name = @SP_Certificate_Name, 
+                Certificate_File = @SP_Certificate_File, 
                 Start_Date = @SP_Start_Date, 
                 End_Date = @SP_End_Date, 
                 Student_ID = @SP_Student_ID
@@ -1847,8 +1861,8 @@ STORAGE PROCEDURES FOR EXTRA COURSE
 
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_COURSE_STUDENT]
         @SP_Institution VARCHAR(100),
-        @SP_Course_Name VARCHAR(50),
-        @SP_Certificate TEXT = NULL,
+        @SP_Course_Name VARCHAR(200),
+        @SP_Certificate VARCHAR(500)= NULL,
         @SP_Status VARCHAR(15),
         @SP_Start_Date DATETIME,
         @SP_End_Date DATETIME = NULL,
@@ -2094,12 +2108,13 @@ EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1',
            'Estudiante'
            ,'Estudiante'
            ,'Estudiante'
-           ,'Nacional', '123456789' 
+           ,'Nacional', '123456789'
            ,'2002-03-27'
            ,20
            ,'example@gmail.com'
            ,'87878787'
            ,'87878787'
+		   ,'CR'
            ,'1','01', '10'
            ,'Sí'
            ,'Sí'
@@ -2107,6 +2122,7 @@ EXEC [dbo].[SP_INSERT_TBL_STUDENT] '1',
            ,'No'
            ,'No'
            ,''
+		   ,''
            ,'Si'
            ,'estudiante'
            ,'12345678'

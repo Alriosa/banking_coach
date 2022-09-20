@@ -21,6 +21,7 @@ namespace Entities_POJO
         public string Email { get; set; }
         public string FirstPhoneNumber { get; set; }
         public string SecondPhoneNumber { get; set; }
+        public string Country { get; set; }
         public string Province { get; set; }
         public string NProvince { get; set; }
         public string Canton { get; set; }
@@ -38,13 +39,15 @@ namespace Entities_POJO
         public string JobAvailability { get; set; }
         public string TransportAvailability { get; set; }
         public string Vehicle { get; set; }
+        public string Type_Vehicle { get; set; }
         public string DriverLicenses { get; set; }
         public DateTime EntryDate { get; set; }
         public Student()
         {
             
         }
-        public Student(int studentID, string bankingStudent, string userActiveStatus, string firstName, string firstLastName, string secondLastName, string idType, string identificationNumber, DateTime birthdate, int age, string email, string firstPhoneNumber, string secondPhoneNumber, string province, string nProvince, string canton, string nCanton, string district, string nDistrict, string laboralStatus, string educationStatus, string curriculum, string agreeJobExchange, string userType, string studentLogin, string studentPassword, string userLogin, string jobAvailability, string transportAvailability, string vehicle, string driverLicenses, DateTime entryDate)
+
+        public Student(int studentID, string bankingStudent, string userActiveStatus, string firstName, string firstLastName, string secondLastName, string idType, string identificationNumber, DateTime birthdate, int age, string email, string firstPhoneNumber, string secondPhoneNumber, string country, string province, string nProvince, string canton, string nCanton, string district, string nDistrict, string laboralStatus, string educationStatus, string curriculum, string agreeJobExchange, string userType, string studentLogin, string studentPassword, string userLogin, string jobAvailability, string transportAvailability, string vehicle, string type_Vehicle, string driverLicenses, DateTime entryDate)
         {
             StudentID = studentID;
             BankingStudent = bankingStudent;
@@ -59,6 +62,7 @@ namespace Entities_POJO
             Email = email;
             FirstPhoneNumber = firstPhoneNumber;
             SecondPhoneNumber = secondPhoneNumber;
+            Country = country;
             Province = province;
             NProvince = nProvince;
             Canton = canton;
@@ -76,6 +80,7 @@ namespace Entities_POJO
             JobAvailability = jobAvailability;
             TransportAvailability = transportAvailability;
             Vehicle = vehicle;
+            Type_Vehicle = type_Vehicle;
             DriverLicenses = driverLicenses;
             EntryDate = entryDate;
         }

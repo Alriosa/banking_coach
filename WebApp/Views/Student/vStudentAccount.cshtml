@@ -48,11 +48,11 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-8">
-                                <p>Su curriculo está al:</p>
+                                <p>Progreso de su currículo:</p>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
-                                         aria-valuemin="0" aria-valuemax="100" style="width:20%">
-                                        20% Completo
+                                    <div class="progress-bar progress-bar-success" role="progressbar" id="infoProgress" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100" style="width:30%">
+
                                     </div>
                                 </div>
                             </div>
@@ -111,9 +111,40 @@
                                                                                         <div class="col-lg-12">
                                                                                             <div class="input-group mb-3">
                                                                                                 <div class="form-group input-group flex-column ">
+                                                                                                    <label>País</label>
+                                                                                                    <select style="height:54px;" class="form-control w-100" id="txtCountry" name="Country" ColumnDataName="Country" required>
+                                                                                                        <option value="CR">Costa Rica</option>
+                                                                                                        <option value="NC">Nicaragua</option>
+                                                                                                        <option value="VNZ">Venezuela</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="selectedCostaRica">
+                                                                                        <div class="form-row ">
+                                                                                            <div class="col-lg-12">
+                                                                                                @Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-row ">
+                                                                                            <div class="col-lg-12">
+                                                                                                @Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-row ">
+                                                                                            <div class="col-lg-12">
+                                                                                                @Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                <div class="form-group input-group flex-column ">
                                                                                                     <label>Tipo de documento:</label>
                                                                                                     <select style="height:54px;" class="form-control w-100" id="txtIdType" name="IdType" ColumnDataName="IdType" required>
-                                                                                                        <option value="Nacional">Nacional</option>
+                                                                                                        <option value="Cédula persona física">Cédula persona física</option>
                                                                                                         <option value="Residencia">Residencia</option>
                                                                                                         <option value="Pasaporte">Pasaporte</option>
                                                                                                     </select>
@@ -183,7 +214,7 @@
                                                                                                         <select style="height:54px;" class="form-control w-100 " id="txtJobAvailability"
                                                                                                                 name="txtJobAvailability" ColumnDataName="JobAvailability" required>
                                                                                                             <option value="Sí">Inmediata</option>
-                                                                                                            <option value="No">No</option>
+                                                                                                            <option value="No">Debo cumplir pre-aviso</option>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
@@ -206,7 +237,44 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div>
+                                                                                                <div class="input-group mb-3">
+                                                                                                    <div class="form-group input-group flex-column ">
+                                                                                                        <label for="txtDriveLicense">Licencia de conducir</label>
+                                                                                                        <div class="d-flex justify-content-around">
+                                                                                                            <div>
+                                                                                                                <label for="licenseA1"> <input type="checkbox" id="licenseA1" name="driverLicenses" value="A1" />A1</label>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <label for="licenseA2"> <input type="checkbox" id="licenseA2" name="driverLicenses" value="A2" />A2</label>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <label for="licenseA3">  <input type="checkbox" id="licenseA3" name="driverLicenses" value="A3" />A3</label>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <label for="licenseB1"><input type="checkbox" id="licenseB1" name="driverLicenses" value="B1" />B1</label>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <label for="licenseB2"> <input type="checkbox" id="licenseB2" name="driverLicenses" value="B2" />B2</label>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <label for="licenseB3"><input type="checkbox" id="licenseB3" name="driverLicenses" value="B3" />B3</label>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <label for="licenseC1"><input type="checkbox" id="licenseC1" name="driverLicenses" value="C1" />C1</label>
+                                                                                                            </div>
+                                                                                                            <div>
+                                                                                                                <labels for="licenseC2"><input type="checkbox" id="licenseC2" name="driverLicenses" value="C2" />C2</labels>
+                                                                                                            </div>
+                                                                                                        </div>
 
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                     <div class="form-row ">
                                                                                         <div class="col-lg-12">
                                                                                             <div>
@@ -223,38 +291,28 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <!--<div class="form-row ">
-                                                                                    <div class="col-lg-12">
-                                                                                        <div>
-                                                                                            <div class="input-group mb-3">
-                                                                                                <div class="form-group input-group flex-column ">
-                                                                                                    <label for="txtDriveLicense">Licencia de conducir</label>
-                                                                                                    <select style="height:54px;" class="form-control w-100 " id="txtDriveLicense"
-                                                                                                            name="txtDriveLicense" ColumnDataName="DriverLicenses" multiple required>
-                                                                                                        <option value="A1">A1</option>
-                                                                                                        <option value="B1">B1</option>
-                                                                                                    </select>
+
+                                                                                    <div class="selectedVehicle">
+                                                                                        <div class="form-row ">
+                                                                                            <div class="col-lg-12">
+                                                                                                <div class="input-group mb-3">
+                                                                                                    <div class="form-group input-group flex-column ">
+                                                                                                        <label for="txtTypeVehicle">¿Posee vehículo?</label>
+                                                                                                        <select style="height:54px;" class="form-control w-100 " id="txtTypeVehicle"
+                                                                                                                name="txtTypeVehicle" ColumnDataName="Type_Vehicle" required>
+                                                                                                            <option value="Motocicleta">Motocicleta</option>
+                                                                                                            <option value="Vehículo Particular">Vehículo particular</option>
+                                                                                                            <option value="Camioneta">Camioneta</option>
+                                                                                                            <option value="Buseta">Buseta</option>
+                                                                                                            <option value="Camión">Camión</option>
+                                                                                                        </select>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
+                                                                                        
                                                                                     </div>
-                                                                                </div>-->
 
-                                                                                    <div class="form-row ">
-                                                                                        <div class="col-lg-12">
-                                                                                            @Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-row ">
-                                                                                        <div class="col-lg-12">
-                                                                                            @Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-row ">
-                                                                                        <div class="col-lg-12">
-                                                                                            @Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
-                                                                                        </div>
-                                                                                    </div>
                                                                                     <div class="row my-4 mx-auto">
                                                                                         <div style="margin: 0px auto 10px;">
                                                                                             @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChangesInfo", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
@@ -356,10 +414,10 @@
                                                             <div class="col-lg-12">
                                                                 <div class="input-group mb-3">
                                                                     <div class="form-group input-group flex-column ">
-                                                                        <label for="txtJobAvailability">Disponibilidad para empezar a trabajar</label>
+                                                                        <label for="txtJobAvailability">Disponibilidad Laboral</label>
                                                                         <select style="height:54px;" class="form-control w-100" id="txtJobAvailability" name="txtJobAvailability" ColumnDataName="JobAvailability" required>
                                                                             <option value="Inmediata">Inmediata</option>
-                                                                            <option value="Preaviso">Preaviso</option>
+                                                                            <option value="Preaviso">Debo cumplir pre-aviso</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -374,116 +432,17 @@
                                                 <div class="col-lg-12 my-2">
                                                     <div class="title d-flex justify-content-between">
                                                         <i class="fa-solid fa-hand-point-right"></i>
-                                                        <p>Informacion Academica</p>
+                                                        <p>¨Preparación Académica</p>
                                                         <!--<button type="button" class="btn btn-orange"
-                                                            id="editAcademic">
-                                                        Editar
-                                                    </button>-->
+                                                        id="editAcademic">
+                                                    Editar
+                                                </button>-->
                                                         <a href="#academic">
                                                             <button type="button" class="btn btn-orange"
                                                                     id="goAcademic" style="width: 144px;">
                                                                 Ver
                                                             </button>
                                                         </a>
-                                                    </div>
-                                                    <div class="content" id="contentAcademic" style="display:none;">
-                                                        <div class="d-flex flex-column">
-                                                            <div class="form-row ">
-                                                                <div class="col-lg-12">
-                                                                    <div class="input-group mb-3">
-                                                                        <div class="form-group input-group flex-column ">
-                                                                            <label for="txtEducationStatus"> ¿Estudia Actualmente? </label>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtEducationStatus" name="txtEducationStatus" ColumnDataName="EducationStatus" required>
-                                                                                <option value="Sí">Sí</option>
-                                                                                <option value="No">No</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row ">
-                                                                <div class="col-lg-12">
-                                                                    <div class="input-group mb-3">
-                                                                        <div class="form-group input-group flex-column ">
-                                                                            <label for="txtInstitutionAcademicType"> Tipo de Institución: </label>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtInstitutionAcademicType" name="txtInstitutionAcademicType" ColumnDataName="InstitutionAcademicType" required>
-                                                                                <option value="Instituto">Instituto</option>
-                                                                                <option value="Universitario">Universitario</option>
-                                                                                <option value="Para Universitario">Para Universitario</option>
-                                                                                <option value="No estoy estudiando">No estoy estudiando</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-row ">
-                                                                <div class="col-lg-12">
-                                                                    <div class="input-group mb-3">
-                                                                        @Html.CtrlInputSecond(id: "txtInstitutionAcademicName", type: "text", required: true, placeHolder: "Nombre del lugar de Estudio", columnDataName: "InstitutionAcademicName")
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row ">
-                                                                <div class="col-lg-12">
-                                                                    <div class="input-group mb-3">
-                                                                        <div class="form-group input-group flex-column ">
-                                                                            <label for="txtAcademicPreparation"> Preparación Académica: </label>
-                                                                            <span>Seleccionar la opción del grado máximo académico que posea</span>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtAcademicPreparation" name="txtAcademicPreparation" ColumnDataName="AcademicPreparation" required>
-                                                                                <option value="Bachillerato de colegio">Bachillerato de colegio</option>
-                                                                                <option value="Cursos técnicos/Bachillerato de colegio">Cursos técnicos/Bachillerato de colegio</option>
-                                                                                <option value="Bachillerato Universitario">Bachillerato Universitario</option>
-                                                                                <option value="Licenciatura">Licenciatura</option>
-                                                                                <option value="Maestría">Maestría</option>
-                                                                                <option value="Sin Bachillerato">Sin Bachillerato</option>
-                                                                                <option value="Otro">Otro</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row ">
-                                                                <div class="col-lg-12">
-                                                                    <div class="input-group mb-3">
-                                                                        <div class="form-group input-group flex-column ">
-                                                                            <label for="txtUniversityLevel"> Nivel Universitario </label>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtUniversityLevel" name="txtUniversityLevel" ColumnDataName="UniversityLevel" required>
-                                                                                <option value="Culminado">Culminado</option>
-                                                                                <option value="En Curso">En Curso</option>
-                                                                                <option value="Suspendido">Suspendido</option>
-                                                                                <option value="No aplica">No aplica</option>
-                                                                                <option value="Otro">Otro</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row ">
-                                                                <div class="col-lg-12">
-                                                                    <div class="input-group mb-3">
-                                                                        @Html.CtrlInputSecond(id: "txtUniversityDegree", type: "text", required: true, placeHolder: "Tipo de Carrera", columnDataName: "UniversityDegree")
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row ">
-                                                                <div class="col-lg-12">
-                                                                    <div class="input-group mb-3">
-                                                                        <div class="form-group input-group flex-column ">
-                                                                            <label for="txtExcelLevel"> Nivel Excel </label>
-                                                                            <select style="height:54px;" class="form-control w-100" id="txtUniversityLevel" name="txtExcelLevel" ColumnDataName="ExcelLevel" required>
-                                                                                <option value="Básico">Básico</option>
-                                                                                <option value="Intermedio">Intermedio</option>
-                                                                                <option value="Avanzado">Avanzado</option>
-                                                                                <option value="Otro">Otro</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
                                                     </div>
 
                                                 </div>
@@ -493,11 +452,25 @@
                                                 <div class="col-lg-12 my-2">
                                                     <div class="title d-flex justify-content-between">
                                                         <i class="fa-solid fa-hand-point-right"></i>
+                                                        <p>Idiomas</p>
+                                                        <a href="#languages">
+                                                            <button type="button" class="btn btn-orange"
+                                                                    id="goLanguages" style="width: 144px;">
+                                                                Ver
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 my-2">
+                                                    <div class="title d-flex justify-content-between">
+                                                        <i class="fa-solid fa-hand-point-right"></i>
                                                         <p>Referencias</p>
                                                         <!--<button type="button" class="btn btn-orange"
-                                                            id="editAcademic">
-                                                        Editar
-                                                    </button>-->
+                                                        id="editAcademic">
+                                                    Editar
+                                                </button>-->
                                                         <a href="#references">
                                                             <button type="button" class="btn btn-orange"
                                                                     id="goReferences" style="width: 144px;">
@@ -525,16 +498,20 @@
                                         <div class="row flex-rows">
                                             <div class="col-lg-7">
                                                 <p><strong>Nombre Completo: </strong><span id="P_CompleteName"></span></p>
+                                                <p><strong>País Origen: </strong><span id="P_Country"></span></p>
                                                 <p><strong>Tipo de documento: </strong><span id="P_Id_Type"></span></p>
-                                                <p><strong>Número de identificación: </strong><span id="P_IdentificationNumber"></span></p>
+                                                <p><strong>Número de Identificación: </strong><span id="P_IdentificationNumber"></span></p>
                                                 <p><strong>Correo Electrónico: </strong><span id="P_Email"></span></p>
+                                                <p><strong>Edad: </strong><span id="P_Age"></span></p>
 
                                             </div>
                                             <div class="col-lg-4">
                                                 <p><strong>Teléfono Principal </strong><span id="P_PhoneNumber"></span></p>
                                                 <p><strong>Teléfono Secundario </strong><span id="P_SecondPhoneNumber"></span></p>
-                                                <!--<p><strong>Licencia: </strong><span id="P_DriverLicenses"></span></p>-->
+                                                <p><strong>Licencia(s): </strong><span id="P_DriverLicenses"></span></p>
                                                 <p><strong>¿Con Vehículo?: </strong><span id="P_Vehicle"></span></p>
+                                                <p id="P_Type_Vehicle"></p>
+
                                             </div>
                                         </div>
                                     </div>
@@ -552,18 +529,18 @@
                                                 <p><strong>Disponibilidad para trabajar: </strong><span id="P_JobAvailability"></span></p>
 
                                                 <!-- <p><strong>Lugar de Trabajo </strong><span id="P_Workstation"></span></p>
-                                                -->
+                                        -->
                                             </div>
                                             <!--<div class="col-lg-6">
-                                                <p><strong>Puesto: </strong><span id="P_Experience"></span></p>
-                                                <p><strong>Funciones: </strong><span id="P_LaboralExperience"></span></p>
-                                            </div>
+                                            <p><strong>Puesto: </strong><span id="P_Experience"></span></p>
+                                            <p><strong>Funciones: </strong><span id="P_LaboralExperience"></span></p>
                                         </div>
-                                        <div>
-                                            <div class="col-lg-12">
-                                                <p><strong>Disponibilidad para empezar a trabajar: </strong><span id="P_JobAvailability"></span></p>
+                                    </div>
+                                    <div>
+                                        <div class="col-lg-12">
+                                            <p><strong>Disponibilidad para empezar a trabajar: </strong><span id="P_JobAvailability"></span></p>
 
-                                            </div>-->
+                                        </div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -584,7 +561,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <p></p>
+                                    <p>He tenido experiencia en: <span id="profileContent"></span></p>
                                 </div>
                             </div>
                         </div>
@@ -852,8 +829,8 @@
                                                                         <div>
                                                                             <div class="input-group mb-3">
                                                                                 <div class="form-group input-group flex-column ">
-                                                                                    <label for="txtStatus">Certificado</label>
-                                                                                    <input type="file" />
+                                                                                    <label for="txtCertificateA">Certificado</label>
+                                                                                    <input id="txtCertificateA" type="file" ColumnDataName="Certificate_Name" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -974,7 +951,7 @@
                                                                             <div class="input-group mb-3">
                                                                                 <div class="form-group input-group flex-column ">
                                                                                     <label for="txtCertificate">Certificado</label>
-                                                                                    <input type="file" id="txtEditCertificate"/>
+                                                                                    <input type="file" id="txtEditCertificate" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1008,6 +985,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row my-5 justify-content-center">
                 <div class="col-lg-11">
                     <div id="academic_extra" class="card py-4 px-3">
@@ -1213,6 +1191,154 @@
             </div>
             <div class="row my-5 justify-content-center">
                 <div class="col-lg-11">
+                    <div id="languages" class="card py-4 px-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <h3>Idiomas</h3>
+                                </div>
+                                <div class="col-lg-4" style="text-align: right;">
+                                    <button class="btn" type="button" data-toggle="modal"
+                                            data-target="#addLanguage">
+                                        AGREGAR +
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="modal fade" id="addLanguage" tabindex="-1" aria-labelledby="addLanguageLabel" aria-hidden="true" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addAcademicLabel">Agregar Idioma</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <div class="modal-body">
+                                                <form id="frmAddLanguage" role="form" method="POST" action="">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 my-2">
+                                                                <div class="form-group">
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="form-group input-group flex-column ">
+                                                                            <label for="txtLanguage">Idioma</label>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtLanguage"
+                                                                                    name="txtLanguage" ColumnDataName="LanguageName" required>
+                                                                                <option value="Inglés">Inglés</option>
+                                                                                <option value="Francés">Francés</option>
+                                                                                <option value="Mandarín">Mandarín</option>
+                                                                                <option value="Coreano">Coreano</option>
+                                                                                <option value="Portugués">Portugués</option>
+                                                                                <option value="Alemán">Alemán</option>
+                                                                                <option value="Italiano">Italiano</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="form-group input-group flex-column ">
+                                                                            <label for="txtLevel">Nivel de idioma</label>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtLevel"
+                                                                                    name="txtLevel" ColumnDataName="Level" required>
+                                                                                <option value="Básico">Básico</option>
+                                                                                <option value="Intermedio">Intermedio</option>
+                                                                                <option value="Avanzado">Avanzado</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterLanguages", label: "Registrar", onClickFunction: "ValidateInputsAddLanguage", buttonType: "orange")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="editLanguage" tabindex="-1" aria-labelledby="editLanguageLabel" aria-hidden="true" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editLanguageLabel">Editar Idioma</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <div class="modal-body">
+                                                <form id="frmEditLanguage">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 my-2">
+                                                                <input type="hidden" name="language_token" id="language_token" value="">
+                                                                <div class="form-group">
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="form-group input-group flex-column ">
+                                                                            <label for="txtEditLanguage">Idioma</label>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtEditLanguage"
+                                                                                    name="txtEditLanguage" ColumnDataName="LanguageName" required>
+                                                                                <option value="Inglés">Inglés</option>
+                                                                                <option value="Francés">Francés</option>
+                                                                                <option value="Mandarín">Mandarín</option>
+                                                                                <option value="Coreano">Coreano</option>
+                                                                                <option value="Portugués">Portugués</option>
+                                                                                <option value="Alemán">Alemán</option>
+                                                                                <option value="Italiano">Italiano</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="form-group input-group flex-column ">
+                                                                            <label for="txtEditLevel">Nivel de idioma</label>
+                                                                            <select style="height:54px;" class="form-control w-100" id="txtEditLevel"
+                                                                                    name="txtEditLevel" ColumnDataName="Level" required>
+                                                                                <option value="Básico">Básico</option>
+                                                                                <option value="Intermedio">Intermedio</option>
+                                                                                <option value="Avanzado">Avanzado</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnEditLaboral", label: "Guardar Cambios", onClickFunction: "ValidateInputsEditLaboral", buttonType: "orange")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row flex-rows">
+                                <div class="col-lg-12">
+                                    <div class="my-3">
+                                        <div class=" d-flex flex-column" id="listLanguages">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-5 justify-content-center">
+                <div class="col-lg-11">
                     <div id="references" class="card py-4 px-3">
                         <div class="container">
                             <div class="row">
@@ -1243,7 +1369,6 @@
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-lg-12 my-2">
-                                                                <input type="hidden" name="_token" value="">
 
                                                                 <div class="form-group">
                                                                     <div>
@@ -1260,8 +1385,6 @@
                                                                         @Html.CtrlInputSecond(id: "txtCompany", type: "text", required: true, placeHolder: "Nombre de la Compañía", columnDataName: "Company")
                                                                     </div>
                                                                 </div>
-
-
                                                                 <div class="form-group">
                                                                     <div>
                                                                         @Html.CtrlInputSecond(id: "txtPhone", type: "text", required: true, placeHolder: "Número de Teléfono", columnDataName: "Phone")
@@ -1276,7 +1399,60 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
-                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterReference", label: "Registrar", onClickFunction: "CreateReference", buttonType: "orange")
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterReference", label: "Registrar", onClickFunction: "ValidateInputsAddReference", buttonType: "orange")
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal fade" id="editReference" tabindex="-1" aria-labelledby="editReferenceLabel" aria-hidden="true" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editReferenceLabel">Editar Referencia</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <div class="modal-body">
+                                                <form id="frmEditReference" role="form" method="POST" action="">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 my-2">
+                                                                <input type="hidden" name="reference_token" id="reference_token" value="">
+
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtEditReferrerName", type: "text", required: true, placeHolder: "Nombre Completo del Referente", columnDataName: "ReferrerName")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtEditWorkstationR", type: "text", required: true, placeHolder: "Puesto de trabajo", columnDataName: "Workstation")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtEditCompanyR", type: "text", required: true, placeHolder: "Nombre de la Compañía", columnDataName: "Company")
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        @Html.CtrlInputSecond(id: "txtEditPhone", type: "text", required: true, placeHolder: "Número de Teléfono", columnDataName: "Phone")
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
+                                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnEditReference", label: "Guardar cambios", onClickFunction: "ValidateInputsEditReference", buttonType: "orange")
 
                                         </div>
                                     </div>
@@ -1288,38 +1464,7 @@
                             <div class="row flex-rows">
                                 <div class="col-lg-12">
                                     <div class="my-3">
-                                        <div class=" d-flex flex-column">
-                                            <div class="card-laboral">
-                                                <div class="container">
-                                                    <!--<div class="row">
-
-                                                        <div class="col-lg-10">
-                                                            <ul class="unstyled">
-                                                                <li style="list-style-type: none;">
-                                                                    <strong>Karla Rojas Bermudez</strong>
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    Gerencia, Banco de Costa Rica
-                                                                </li>
-                                                                <li style="list-style-type: none;">
-                                                                    8767-8637
-
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-2">
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Editar
-                                                            </button>
-                                                            <button class="btn btn-orange my-2"
-                                                                    style="width: 170px;">
-                                                                Eliminar
-                                                            </button>
-                                                        </div>
-                                                    </div>-->
-                                                </div>
-                                            </div>
+                                        <div class=" d-flex flex-column" id="listReference">
 
                                         </div>
                                     </div>
@@ -1373,7 +1518,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
-                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterReference", label: "Modificar Contraseña", onClickFunction: "CreateReference", buttonType: "orange")
+                            @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnUpdatePassword", label: "Modificar Contraseña", onClickFunction: "UpdatePassword", buttonType: "orange")
 
                         </div>
                     </div>

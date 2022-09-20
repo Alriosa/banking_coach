@@ -17,7 +17,8 @@ namespace DataAcess.Mapper
         private const string DB_COL_UNIVERSTITY_PREPARATION = "University_Preparation";
         private const string DB_COL_CAREER = "Career";
         private const string DB_COL_STATUS = "Status";
-        private const string DB_COL_CERTIFICATE = "Certificate";
+        private const string DB_COL_CERTIFICATE_NAME = "Certificate_Name";
+        private const string DB_COL_CERTIFICATE_FILE = "Certificate_File";
         private const string DB_COL_START_DATE = "Start_Date";
         private const string DB_COL_END_DATE = "End_Date";
         private const string DB_COL_ENTRY_DATE = "Entry_Date";
@@ -33,7 +34,8 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_UNIVERSTITY_PREPARATION, academic.University_Preparation);
             operation.AddVarcharParam(DB_COL_CAREER, academic.Career);
             operation.AddVarcharParam(DB_COL_STATUS, academic.Status);
-            operation.AddVarcharParam(DB_COL_CERTIFICATE, academic.Certificate);
+            operation.AddVarcharParam(DB_COL_CERTIFICATE_NAME, academic.Certificate_Name);
+            operation.AddVarcharParam(DB_COL_CERTIFICATE_FILE, academic.Certificate_File);
             operation.AddDateTimeParam(DB_COL_START_DATE, academic.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, academic.EndDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, academic.StudentID);
@@ -77,7 +79,8 @@ namespace DataAcess.Mapper
             operation.AddVarcharParam(DB_COL_UNIVERSTITY_PREPARATION, academic.University_Preparation);
             operation.AddVarcharParam(DB_COL_CAREER, academic.Career);
             operation.AddVarcharParam(DB_COL_STATUS, academic.Status);
-            operation.AddVarcharParam(DB_COL_CERTIFICATE, academic.Certificate);
+            operation.AddVarcharParam(DB_COL_CERTIFICATE_NAME, academic.Certificate_Name);
+            operation.AddVarcharParam(DB_COL_CERTIFICATE_FILE, academic.Certificate_File);
             operation.AddDateTimeParam(DB_COL_START_DATE, academic.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, academic.EndDate);
             operation.AddIntParam(DB_COL_STUDENT_ID, academic.StudentID);
@@ -104,7 +107,8 @@ namespace DataAcess.Mapper
                 University_Preparation = GetStringValue(row, DB_COL_UNIVERSTITY_PREPARATION),
                 Career = GetStringValue(row, DB_COL_CAREER),
                 Status = GetStringValue(row, DB_COL_STATUS),
-                Certificate = GetStringValue(row, DB_COL_CERTIFICATE),
+                Certificate_Name = GetStringValue(row, DB_COL_CERTIFICATE_NAME),
+                Certificate_File = GetStringValue(row, DB_COL_CERTIFICATE_FILE),
                 StartDate = GetDateValue(row, DB_COL_START_DATE),
                 EndDate = GetDateValue(row, DB_COL_END_DATE),
                 EntryDate = GetDateValue(row, DB_COL_ENTRY_DATE),

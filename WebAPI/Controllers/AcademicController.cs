@@ -4,6 +4,8 @@ using Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -37,6 +39,8 @@ namespace WebAPI.Controllers
                 };
 
                 academic = mng.RetrieveById(academic);
+
+
                 apiResp = new ApiResponse
                 {
                     Data = academic
@@ -81,6 +85,23 @@ namespace WebAPI.Controllers
                 apiResp = new ApiResponse();
 
                 var mng = new AcademicManager();
+
+                Random rnd = new Random();
+
+                int rndx = rnd.Next(0, 1000);
+
+                string extension = Path.GetExtension(academic.Certificate_Name);
+                string fname = Path.GetFileName(academic.Certificate_Name);
+                academic.Certificate_Name = fname;
+
+                var folder = HttpContext.Current.Server.MapPath("~/Certificados/" + rndx);
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                    string filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Certificados/" + rndx), rndx + "_" + "_" + "_" + extension);
+                    academic.Certificate_File = filePath;
+                }
+
 
                 if (academic.EndDate == DateTime.MinValue)
                 {

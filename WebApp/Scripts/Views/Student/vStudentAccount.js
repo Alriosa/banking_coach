@@ -14,18 +14,37 @@
             this.ctrlActions.GetById("laboral/student/" + idStudent, this.GetLaboral);
             this.ctrlActions.GetById("academic/student/" + idStudent, this.GetAcademic);
             this.ctrlActions.GetById("extracourse/student/" + idStudent, this.GetCourse);
+            this.ctrlActions.GetById("reference/student/" + idStudent, this.GetReference);
+            this.ctrlActions.GetById("language/student/" + idStudent, this.GetLanguages);
         }
     }
 
-  
+
 
     this.FillData = function (data) {
+        let licences = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2"];
+        let cont = -1;
+       
         if (data != null) {
+            
             servicioData = {};
             this.ctrlActionsInto = new ControlActions();
             const [date] = formatDate(new Date(data["Birthdate"])).split(' ');
 
             this.ctrlActionsInto.BindFields('frmEditInfoBasic', data);
+
+            var array = data["DriverLicenses"].split(", ");
+            $("input[name=driverLicenses]").each(function () {
+                cont++;
+                $(this).val(licences[cont]);
+
+                if (array.includes(licences[cont])) {
+                    $(this).prop("checked", true)
+                }
+
+            })
+
+
             const dateInput = document.getElementById('txtBirthdate');
             dateInput.value = date;
             let name = data['FirstName'] + ' ' + data['FirstLastName'] + ' ' + data['SecondLastName'];
@@ -38,7 +57,7 @@
             document.querySelector('#P_LaboralExperience').append(data['LaboralExperience']);*/
             document.querySelector('#P_JobAvailability').append(data['JobAvailability']);
             document.querySelector('#P_Id_Type').append(data['IdType']);
-
+            document.querySelector('#P_DriverLicenses').append(data['DriverLicenses']);
             document.querySelector('#P_CompleteName').append(name);
             document.querySelector('#P_IdentificationNumber').append(data['IdentificationNumber']);
             document.querySelector('#P_Email').append(data['Email']);
@@ -46,6 +65,15 @@
             document.querySelector('#P_SecondPhoneNumber').append(data['SecondPhoneNumber']);
             //document.querySelector('#P_Language').append(data['Language']);
             document.querySelector('#P_Vehicle').append(data['Vehicle']);
+            if (data['Type_Vehicle'] != null){
+                document.querySelector('#P_Type_Vehicle').append( data['Type_Vehicle']);
+
+            }
+
+                
+
+            document.querySelector('#P_Country').append(data['Country']);
+            document.querySelector('#P_Age').append(data['Age']);
 
 
 
@@ -99,13 +127,13 @@
     }
 
 
-  
+
 
     this.Update = function () {
         var studentData = {};
         var id = document.getElementById("txtIdStudent").value;
         var studentLogin = document.getElementById("txtStudentLogin").value;
-        studentData = this.ctrlActions.Get('frmEditInfoBasic');
+        studentData = this.ctrlActions.GetDataForm('frmEditInfoBasic');
         if (studentData["JobAvailability"] == "Sí") {
             studentData["LaboralStatus"] = "No";
         } else {
@@ -113,13 +141,22 @@
         }
         studentData["StudentLogin"] = studentLogin;
         studentData["StudentID"] = id;
+
+        var array = [];
+
+        var checkboxes = document.querySelectorAll('input[name=driverLicenses]:checked');
+        for (var i = 0; i < checkboxes.length; i++) {
+            array.push(checkboxes[i].value);
+        }
+        studentData["DriverLicenses"] = array.join(', ');
+
         this.ctrlActions.PutToAPI('student/', studentData,
             function () {
-                $('#modalEditInfo').modal('hide');
+                /*$('#modalEditInfo').modal('hide');
 
                 setTimeout(function () {
                     window.location.reload();
-                }, 3000)
+                }, 3000)*/
             }
         );
     }
@@ -226,6 +263,73 @@
         });
     }
 
+    this.CreateReference = function () {
+        var referenceData = {};
+        referenceData = this.ctrlActions.GetDataForm('frmAddReference');
+        referenceData["StudentID"] = document.getElementById("txtIdStudent").value;
+
+        this.ctrlActions.PostToAPI('reference', referenceData, function () {
+            resetFormReference();
+            this.ctrlActions2 = new ControlActions();
+            this.student = new vStudentAccount();
+
+            //setTimeout(function redirection() { location.reload; }, 5000);
+            this.ctrlActions2.GetById("reference/student/" + referenceData["StudentID"], this.student.GetReference);
+            $('#addReference').modal('toggle');
+        });
+    }
+
+    this.UpdateReference = function () {
+        var referenceData = {};
+        referenceData = this.ctrlActions.GetDataForm('frmEditReference');
+        referenceData['ReferenceID'] = document.querySelector('#reference_token').value;
+        referenceData["StudentID"] = document.getElementById("txtIdStudent").value;
+
+        this.ctrlActions.PutToAPI('reference', referenceData, function () {
+            resetFormEditReference();
+            //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+            this.ctrlActions2 = new ControlActions();
+            this.student = new vStudentAccount();
+
+            this.ctrlActions2.GetById("reference/student/" + referenceData["StudentID"], this.student.GetReference);
+            $('#editReference').modal('toggle');
+        });
+    }
+
+    this.CreateLanguage = function () {
+        var languageData = {};
+        languageData = this.ctrlActions.GetDataForm('frmAddLanguage');
+        languageData["StudentID"] = document.getElementById("txtIdStudent").value;
+
+        this.ctrlActions.PostToAPI('language', languageData, function () {
+            resetFormLanguage();
+            this.ctrlActions2 = new ControlActions();
+            this.student = new vStudentAccount();
+
+            //setTimeout(function redirection() { location.reload; }, 5000);
+            this.ctrlActions2.GetById("language/student/" + languageData["StudentID"], this.student.GetLanguages);
+            $('#addLanguage').modal('toggle');
+        });
+    }
+
+    this.UpdateLanguage = function () {
+        var languageData = {};
+        languageData = this.ctrlActions.GetDataForm('frmEditLanguage');
+        languageData['LanguageID'] = document.querySelector('#language_token').value;
+        languageData["StudentID"] = document.getElementById("txtIdStudent").value;
+
+        this.ctrlActions.PutToAPI('language', languageData, function () {
+            resetFormEditReference();
+            //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+            this.ctrlActions2 = new ControlActions();
+            this.student = new vStudentAccount();
+
+            this.ctrlActions2.GetById("language/student/" + languageData["StudentID"], this.student.GetLanguages);
+            $('#editLanguage').modal('toggle');
+        });
+    }
+
+    
     this.ValidateInputsAddLaboral = function () {
         if ($("#frmAddLaboral").valid()) {
             this.CreateLaboral();
@@ -261,28 +365,57 @@
             this.UpdateExtraCourse();
         }
     }
+
+    this.ValidateInputsAddReference = function () {
+        if ($("#frmAddReference").valid()) {
+            this.CreateReference();
+        }
+    }
+
+    this.ValidateInputsEditReference = function () {
+        if ($("#frmEditReference").valid()) {
+            this.UpdateReference();
+        }
+    }
+
+    this.ValidateInputsAddLanguage = function () {
+        if ($("#frmAddLanguage").valid()) {
+            this.CreateLanguage();
+        }
+    }
+
+    this.ValidateInputsEditLanguage = function () {
+        if ($("#frmEditLanguage").valid()) {
+            this.UpdateLanguage();
+        }
+    }
+
     
     this.GetLaboral = function (data) {
-
-        console.log(data);
-
         let start = '';
         let end = '';
 
         let text2 = '';
+        $('#profileContent').empty();
+        if (data.length > 0) {
+            for (let i in data) {
 
-        for (let i in data) {
+                start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
+                let endIsNull = new Date(data[i].EndDate);
+                if (endIsNull.getFullYear() == 1900) {
+                    end = "Actualidad";
+                } else {
+                    end = new Date(data[i].EndDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
 
-            start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
-            let endIsNull = new Date(data[i].EndDate);
-            if (endIsNull.getFullYear() == 1900) {
-                end = "Actualidad";
-            } else {
-                end = new Date(data[i].EndDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
+                }
 
-            }
-            let responsabilities = data[i].Responsabilites.split(',');
-            text2 += `<div class="card-laboral">
+                $('#profileContent').append(data[i].Responsabilites);
+                if ((i + 1) < data.length) {
+                    $('#profileContent').append(', ');
+                }
+
+                let responsabilities = data[i].Responsabilites.split(',');
+                text2 += `<div class="card-laboral">
                            <div class="container">
                                 <div class="row">
                                     <div class="col-lg-1"
@@ -303,11 +436,11 @@
                                                 Responsabilidades:
                                 
                                                 <ul>`;
-                                        for (let j in responsabilities) {
-                                            text2 += `<li>${responsabilities[j]}</li>`
-                                        }
+                for (let j in responsabilities) {
+                    text2 += `<li>${responsabilities[j]}</li>`
+                }
 
-                                        text2 += `</ul>
+                text2 += `</ul>
                                             </li>
                                         </ul>
                                     </div>
@@ -328,86 +461,96 @@
                             </div>
                         </div>\n
                         <hr style="width:100%;text-align:left;margin-left:0" />\n`;
+            }
+            document.getElementById("listLaboral").innerHTML = text2;
+            $("#infoProgress").width($("#infoProgress").width() + 100);
+
+        } else {
+            document.getElementById("listLaboral").innerHTML = "Sin experiencia laboral";
+            $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
+            $('#profileContent').append("Sin datos");
+
         }
-        document.getElementById("listLaboral").innerHTML = text2;
 
     }
 
     this.GetAcademic = function (data) {
-
-
         let start = '';
         let end = '';
 
         let text2 = '';
+        if (data.length > 0) {
 
-        for (let i in data) {
+            for (let i in data) {
 
-            start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
-            let endIsNull = new Date(data[i].EndDate);
-            if (endIsNull.getFullYear() == 1900) {
-                end = "Actualidad";
-            } else {
-                end = new Date(data[i].EndDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
+                start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
+                let endIsNull = new Date(data[i].EndDate);
+                if (endIsNull.getFullYear() == 1900) {
+                    end = "Actualidad";
+                } else {
+                    end = new Date(data[i].EndDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
 
-            }
-            text2 += `<div class="card-academic">
-                           <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-1"
-                                        style="text-align: center; font-size: 2em; color:#5e5e5e;">
-                                        <i class="fa-solid fa-graduation-cap"></i>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <ul class="unstyled">
-                                            <li style="list-style-type: none;">
-                                                ${data[i].DegreeType}
-                                            </li>
-                                            <li style="list-style-type: none;">
-                                                <strong>${data[i].Institution}</strong>
-                                                <span> ${start} - ${end}</span>
-                                            </li>
+                }
+                text2 += `<div class="card-academic">
+                               <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-1"
+                                            style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                            <i class="fa-solid fa-graduation-cap"></i>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <ul class="unstyled">
+                                                <li style="list-style-type: none;">
+                                                    ${data[i].DegreeType}
+                                                </li>
+                                                <li style="list-style-type: none;">
+                                                    <strong>${data[i].Institution}</strong>
+                                                    <span> ${start} - ${end}</span>
+                                                </li>
                                             
-                                            <li style="list-style-type: none;">
-                                                ${data[i].Career}
-                                            </li>
-                                            <li style="list-style-type: none;">
-                                                ${data[i].Status}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <button class="btn btn-orange my-2" type="button" data-toggle="modal"
-                                            data-target="#editAcademic" style="width: 170px;"
-                                            onclick="GetDataAcademic(${data[i].AcademicID})">
-                                            Editar
-                                        </button>
-                                        <button class="btn btn-orange my-2"
-                                            style="width: 170px;"
-                                            onclick="DeleteAcademic(${data[i].AcademicID})"
-                                            >
-                                            Eliminar
+                                                <li style="list-style-type: none;">
+                                                    ${data[i].Career}
+                                                </li>
+                                                <li style="list-style-type: none;">
+                                                    ${data[i].Status}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-orange my-2" type="button" data-toggle="modal"
+                                                data-target="#editAcademic" style="width: 170px;"
+                                                onclick="GetDataAcademic(${data[i].AcademicID})">
+                                                Editar
+                                            </button>
+                                            <button class="btn btn-orange my-2"
+                                                style="width: 170px;"
+                                                onclick="DeleteAcademic(${data[i].AcademicID})"
+                                                >
+                                                Eliminar
                                             
-                                        </button> 
+                                            </button> 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>\n
-                        <hr style="width:100%;text-align:left;margin-left:0" />\n`;
-        }
-        document.getElementById("listAcademic").innerHTML = text2;
+                            </div>\n
+                            <hr style="width:100%;text-align:left;margin-left:0" />\n`;
+            }
+            document.getElementById("listAcademic").innerHTML = text2;
+            $("#infoProgress").width($("#infoProgress").width() + 100);
 
+        } else {
+            document.getElementById("listAcademic").innerHTML = "Sin experiencia académica";
+            $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
+
+        }
     }
 
 
     this.GetCourse = function (data) {
-
-
         let start = '';
         let end = '';
-
         let text2 = '';
-
+        if (data.length > 0) {
         for (let i in data) {
 
             start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
@@ -416,7 +559,6 @@
                 end = "Actualidad";
             } else {
                 end = new Date(data[i].EndDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
-
             }
             text2 += `<div class="card-course">
                            <div class="container">
@@ -459,12 +601,128 @@
                         </div>\n
                         <hr style="width:100%;text-align:left;margin-left:0" />\n`;
         }
-        document.getElementById("listCourse").innerHTML = text2;
+            document.getElementById("listCourse").innerHTML = text2;
+            $("#infoProgress").width($("#infoProgress").width() + 100);
+
+        } else {
+            document.getElementById("listCourse").innerHTML = "Sin educación extracurricular";
+            $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
+
+        }
+    }
+
+    this.GetReference = function (data) {
+        let text2 = '';
+        if (data.length > 0) {
+
+            for (let i in data) {
+
+                text2 += `<div class="card-reference">
+                               <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <ul class="unstyled" style="padding: 0;">
+                                                <li style="list-style-type: none;">
+                                                    ${data[i].ReferrerName}
+                                                </li>
+                                            
+                                                <li style="list-style-type: none;">
+                                                    ${data[i].Workstation}
+                                                </li>
+                                                <li style="list-style-type: none;">
+                                                    ${data[i].Company}
+                                                </li>
+                                                <li style="list-style-type: none;">
+                                                    ${data[i].Phone}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-orange my-2" type="button" data-toggle="modal"
+                                                data-target="#editReference" style="width: 170px;"
+                                                onclick="GetDataReference(${data[i].ReferenceID})">
+                                                Editar
+                                            </button>
+                                            <button class="btn btn-orange my-2"
+                                                style="width: 170px;"
+                                                onclick="DeleteReference(${data[i].ReferenceID})"
+                                                >
+                                                Eliminar
+                                            
+                                            </button> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>\n
+                            <hr style="width:100%;text-align:left;margin-left:0" />\n`;
+            }
+            document.getElementById("listReference").innerHTML = text2;
+            $("#infoProgress").width($("#infoProgress").width() + 100);
+
+        }
+        else {
+            document.getElementById("listReference").innerHTML = "Sin referencias";
+            $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
+
+        }
+        
+    }
+
+
+    this.GetLanguages = function (data) {
+        let text2 = '';
+        if (data.length > 0) {
+
+            for (let i in data) {
+
+                text2 += `<div class="card-language">
+                               <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <ul class="unstyled" style="padding: 0;">
+                                                <li style="list-style-type: none;">
+                                                    <strong>${data[i].LanguageName}</strong>
+                                                </li>
+                                            
+                                                <li style="list-style-type: none;">
+                                                    ${data[i].Level}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-orange my-2" type="button" data-toggle="modal"
+                                                data-target="#editLanguage" style="width: 170px;"
+                                                onclick="GetDataLanguage(${data[i].LanguageID})">
+                                                Editar
+                                            </button>
+                                            <button class="btn btn-orange my-2"
+                                                style="width: 170px;"
+                                                onclick="DeleteLanguage(${data[i].LanguageID})"
+                                                >
+                                                Eliminar
+                                            
+                                            </button> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>\n
+                            <hr style="width:100%;text-align:left;margin-left:0" />\n`;
+            }
+            document.getElementById("listLanguages").innerHTML = text2;
+            $("#infoProgress").width($("#infoProgress").width() + 100);
+
+        }
+        else {
+            document.getElementById("listLanguages").innerHTML = "Sin idiomas";
+            $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
+
+        }
 
     }
 
     
 }
+ 
 function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
 }
@@ -488,6 +746,20 @@ function resetFormCourse() {
 }
 function resetFormEditCourse() {
     $("#frmEditCourse")[0].reset();
+}
+
+function resetFormReference() {
+    $("#frmAddReference")[0].reset();
+}
+function resetFormEditReference() {
+    $("#frmEditReference")[0].reset();
+}
+
+function resetFormLanguage() {
+    $("#frmAddLanguage")[0].reset();
+}
+function resetFormEditLanguage() {
+    $("#frmEditLanguage")[0].reset();
 }
 
 
@@ -577,8 +849,6 @@ DeleteLaboral = function (idLaboral) {
     });
 }
 
-
-
 GetDataCourse = function (idCourse) {
     this.ctrlActions = new ControlActions();
     this.student = vStudentAccount();
@@ -615,7 +885,6 @@ DeleteCourse = function (idCourse) {
     });
 }
 
-
 GetDataReference = function (idReference) {
     this.ctrlActions = new ControlActions();
     this.student = vStudentAccount();
@@ -626,15 +895,10 @@ GetDataReference = function (idReference) {
 
 FillDataFormReference = function (data) {
     document.querySelector('#reference_token').value = data['ReferenceID'];
-    document.querySelector('#txtEditInstitutionCourse').value = data['Institution'];
-    document.querySelector('#txtEditCourseName').value = data['CourseName'];
-    $(`#txtEditStatusCourse option[value="${data['Status']}"]`).attr("selected", "selected");
-    document.querySelector('#txtEditStartDateCourse').value = formatDateStringMonths(data['StartDate']);
-    if (formatDateStringMonths(data['EndDate']) == "1900-01") {
-        document.querySelector('#txtEditEndDateCourse').value = "";
-    } else {
-        document.querySelector('#txtEditEndDateCourse').value = formatDateStringMonths(data['EndDate']);
-    }
+    document.querySelector('#txtEditReferrerName').value = data['ReferrerName'];
+    document.querySelector('#txtEditWorkstationR').value = data['Workstation'];
+    document.querySelector('#txtEditCompanyR').value = data['Company'];
+    document.querySelector('#txtEditPhone').value = data['Phone'];
 }
 
 DeleteReference = function (idReference) {
@@ -652,11 +916,38 @@ DeleteReference = function (idReference) {
     });
 }
 
+
+
+GetDataLanguage = function (idLanguage) {
+    this.ctrlActions = new ControlActions();
+    this.student = vStudentAccount();
+    if (idLanguage != 'null') {
+        this.ctrlActions.GetById("language/" + idLanguage, FillDataFormLanguage);
+    }
+}
+
+FillDataFormLanguage = function (data) {
+    document.querySelector('#language_token').value = data['LanguageID'];
+    document.querySelector('#txtEditLanguage').value = data['LanguageName'];
+    document.querySelector('#txtEditLevel').value = data['Level'];
+}
+
+DeleteLanguage = function (idLanguage) {
+    this.ctrlActions = new ControlActions();
+    let language = {};
+    language['LanguageID'] = idLanguage;
+    this.ctrlActions.DeleteToAPI('language', language, function () {
+        this.ctrlActions2 = new ControlActions();
+        this.student = new vStudentAccount();
+        this.ctrlActions2.GetById("language/student/" + $("#txtIdStudent").val(), this.student.GetLanguages);
+    });
+}
+
 function ChangeInputs(myRadio) {
     if (myRadio.value == "Secundaria") {
-        $("#selectedUniversity").hide();
+        $(".selectedUniversity").hide();
     } else if (myRadio.value == "Universitario" ) {
-        $("#selectedUniversity").show();
+        $(".selectedUniversity").show();
     }
 }
 
@@ -712,8 +1003,11 @@ this.RulesValidateCreate = function () {
 
 $(document).ready(function () {
 
-
+   
+    
     $(function () {
+       
+
         var showCanton = function (selectedProvince) {
             $('#txtCanton option').hide();
             //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
@@ -789,28 +1083,20 @@ $(document).ready(function () {
             }
         });
 
+        $('#txtCountry').change(function () {
+            if ($('#txtCountry').val() == "CR") {
+                $('.selectedCostaRica').show();
+            } else {
+                $('.selectedCostaRica').hide();
+            }
+        });
+        
+
         RulesValidateCreate();
 
     });
 
 
-    $("#editInformation").on("click", function () {
-        $('#contentInformation').toggle();
-        $('#contentLaboral').hide();
-        $('#contentAcademic').hide();
-    });
-
-    $("#editLaboral").on("click", function () {
-        $('#contentLaboral').toggle();
-        $('#contentAcademic').hide();
-        $('#contentInformation').hide();
-    });
-
-    $("#editAcademic").on("click", function () {
-        $('#contentAcademic').toggle();
-        $('#contentLaboral').hide();
-        $('#contentInformation').hide();
-    });
 
     $("#btnSaveChanges").attr("disabled", "disabled");
 
@@ -830,8 +1116,6 @@ $(document).ready(function () {
         e.preventDefault();
         $('html, body').animate({ scrollTop: 0 }, '300');
     });
-
-
 
 })
 

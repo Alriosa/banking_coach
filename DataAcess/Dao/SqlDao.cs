@@ -41,7 +41,6 @@ namespace DataAccess.Dao
                 {
                     command.Parameters.Add(param);
                 }
-
                 conn.Open();
                 command.ExecuteNonQuery();
             }
@@ -77,7 +76,6 @@ namespace DataAccess.Dao
                     }
                 }
             }
-
             return lstResult;
         }      
     }

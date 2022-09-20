@@ -80,3 +80,12 @@ textarea {
         margin: 30px;
     }
 }
+
+
+input[name="driverLicenses"] {
+    width:30px;
+}
+
+.form-control {
+    color: #000;
+}
