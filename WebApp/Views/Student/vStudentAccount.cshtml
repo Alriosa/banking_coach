@@ -35,12 +35,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <p>Ultima actualización</p>
-                            </div>
-
-                        </div>
+                       
                         <div class="row">
                             <div class="col-lg-12">
                                 <h2>Bienvenido <span id="P_WelcomeName"></span></h2>
@@ -332,101 +327,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-12 my-1">
-                                                <div class="title d-flex justify-content-between">
-                                                    <i class="fa-solid fa-hand-point-right"></i>
-                                                    <p>Experiencia Laboral </p>
-                                                    <a href="#laboral">
-                                                        <button type="button" class="btn btn-orange"
-                                                                id="goLaboral" style="width: 144px;">
-                                                            Ver
-                                                        </button>
-                                                    </a>
-                                                </div>
-                                                <div class="content my-4" id="contentLaboral" style="display:none;">
-                                                    <div class="d-flex flex-column">
-
-                                                        <div class="form-row ">
-                                                            <div class="col-lg-12">
-                                                                <div class="input-group mb-3">
-                                                                    <div class="form-group input-group flex-column ">
-                                                                        <label for="txtLaboralStatus">¿Labora actualmente?</label>
-                                                                        <select style="height:54px;" class="form-control w-100" id="txtLaboralStatus" name="txtLaboralStatus" ColumnDataName="LaboralStatus" required>
-                                                                            <option value="Sí">Sí</option>
-                                                                            <option value="No">No</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row ">
-                                                            <div class="col-lg-12">
-                                                                <div class="input-group mb-3">
-                                                                    <div class="form-group input-group flex-column ">
-                                                                        <label for="txtWorkstation">¿Lugar de trabajo?</label>
-                                                                        <select style="height:54px;" class="form-control w-100" id="txtWorkstation" name="txtWorkstation" ColumnDataName="Workstation" required>
-                                                                            <option value="Comidas Rápidas">Comidas Rápidas (Mac Donalds, KFC. etc)</option>
-                                                                            <option value="Supermercados">
-                                                                                Supermercados(Wallmart, Palí, etc)
-                                                                            </option>
-                                                                            <option value="Tienda">Tienda</option>
-                                                                            <option value="Contabilidad">
-                                                                                Contabilidad
-                                                                            </option>
-                                                                            <option value="sin trabajo">
-                                                                                No estoy trabajando actualmente.
-                                                                            </option>
-                                                                            <option value="Otro">
-                                                                                No aplico en ninguna de las opciones anteriores
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row ">
-                                                            <div class="col-lg-12">
-                                                                <div class="input-group mb-3">
-                                                                    <div class="form-group input-group flex-column ">
-                                                                        <label for="txtExperience">Experiencia en:</label>
-                                                                        <select style="height:54px;" class="form-control w-100" id="txtExperience" name="txtExperience" ColumnDataName="Experience" required>
-                                                                            <option value="Manejo de Efectivo-Cajeros">Manejo de Efectivo- Cajero</option>
-                                                                            <option value="Servicio al cliente">Servicio al cliente</option>
-                                                                            <option value="Ventas">Ventas</option>
-                                                                            <option value="Operativo">Operativo</option>
-                                                                            <option value="Call center">Call center</option>
-                                                                            <option value="Cobros">Cobros</option>
-                                                                            <option value="Otro">Otro</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row ">
-                                                            <div class="col-lg-12">
-                                                                <div class="input-group mb-3">
-                                                                    @Html.CtrlInputSecond(id: "txtLaboralExperience", type: "text", required: true, placeHolder: "Experiencia Laboral", columnDataName: "LaboralExperience")
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-row ">
-                                                            <div class="col-lg-12">
-                                                                <div class="input-group mb-3">
-                                                                    <div class="form-group input-group flex-column ">
-                                                                        <label for="txtJobAvailability">Disponibilidad Laboral</label>
-                                                                        <select style="height:54px;" class="form-control w-100" id="txtJobAvailability" name="txtJobAvailability" ColumnDataName="JobAvailability" required>
-                                                                            <option value="Inmediata">Inmediata</option>
-                                                                            <option value="Preaviso">Debo cumplir pre-aviso</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div>
                                             <div class="row">
                                                 <div class="col-lg-12 my-2">
@@ -512,35 +412,9 @@
                                                 <p><strong>¿Con Vehículo?: </strong><span id="P_Vehicle"></span></p>
                                                 <p id="P_Type_Vehicle"></p>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="box my-3">
-                                <div class="box-container d-flex flex-column">
-                                    <h3><strong>Mi Experiencia Laboral</strong></h3>
-                                    <div class="container">
-                                        <div class="row flex-rows">
-                                            <div class="col-lg-6">
                                                 <p><strong>Labora Actualmente: </strong><span id="P_LaboralStatus"></span></p>
                                                 <p><strong>Disponibilidad para trabajar: </strong><span id="P_JobAvailability"></span></p>
-
-                                                <!-- <p><strong>Lugar de Trabajo </strong><span id="P_Workstation"></span></p>
-                                        -->
                                             </div>
-                                            <!--<div class="col-lg-6">
-                                            <p><strong>Puesto: </strong><span id="P_Experience"></span></p>
-                                            <p><strong>Funciones: </strong><span id="P_LaboralExperience"></span></p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="col-lg-12">
-                                            <p><strong>Disponibilidad para empezar a trabajar: </strong><span id="P_JobAvailability"></span></p>
-
-                                        </div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -751,12 +625,10 @@
                                                                         <div class="input-group mb-3">
                                                                             <div class="form-group input-group flex-column ">
                                                                                 <label for="txtDegreeType">Nivel de estudio </label>
-
                                                                                 <div style="display: flex; flex-direction: row; align-items: center;">
                                                                                     @Html.CtrlRadioButton(id: "Secundaria", label: "Secundaria", name: "rdDegreeType", check: "checked", onchange: "ChangeInputs(this)", columnDataName: "DegreeType")
                                                                                     @Html.CtrlRadioButton(id: "Universitario", label: "Universitario", name: "rdDegreeType", check: "", onchange: "ChangeInputs(this)", columnDataName: "DegreeType")
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -806,11 +678,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
                                                                 <div class="form-group" lang="es-us">
                                                                     <label for="fecha" class="control-label">Fecha Ingreso</label>
-
                                                                     <div lang="es-us">
                                                                         <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
 
@@ -846,7 +715,6 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
                                             @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterAcademic", label: "Registrar", onClickFunction: "ValidateInputsAddAcademic", buttonType: "orange")
-
                                         </div>
                                     </div>
 

@@ -67,9 +67,12 @@
             document.querySelector('#P_Vehicle').append(data['Vehicle']);
             if (data['Type_Vehicle'] != null){
                 document.querySelector('#P_Type_Vehicle').append( data['Type_Vehicle']);
-
             }
-
+            if (data['Country'] == "CR") {
+                $('.selectedCostaRica').show();
+            } else {
+                $('.selectedCostaRica').hide();
+            }
                 
 
             document.querySelector('#P_Country').append(data['Country']);
@@ -999,12 +1002,21 @@ this.RulesValidateCreate = function () {
         },
     });
 }
-
+function getEdad(dateString) {
+    let hoy = new Date()
+    let fechaNacimiento = new Date(dateString)
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+    let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+    if (
+        diferenciaMeses < 0 ||
+        (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+    ) {
+        edad--
+    }
+    return edad;
+}
 
 $(document).ready(function () {
-
-   
-    
     $(function () {
        
 
@@ -1090,20 +1102,20 @@ $(document).ready(function () {
                 $('.selectedCostaRica').hide();
             }
         });
-        
+
+        $('#txtBirthdate').change(function () {
+            $('#txtAge').val(getEdad($('#txtBirthdate').val()));
+        });
+
 
         RulesValidateCreate();
 
     });
 
 
-
     $("#btnSaveChanges").attr("disabled", "disabled");
-
-
     // When the user clicks on the button, scroll to the top of the document
     var btn = $('#btnToTop');
-
     $(window).scroll(function () {
         if ($(window).scrollTop() > 300) {
             btn.addClass('show');
