@@ -1,6 +1,14 @@
-﻿function vStudentAccount() {
+﻿var laboralList = [];
+var academicList = [];
+var courseList = [];
+var languageList = [];
+var referenceList = [];
+
+function vStudentAccount() {
     this.ctrlActions = new ControlActions();
     var StudentProfileData = {};
+    
+
     StudentProfileData = getCookie('user');
     if (StudentProfileData != null) {
         StudentProfileData = localStorage.getItem('selectedID');
@@ -50,7 +58,7 @@
             let name = data['FirstName'] + ' ' + data['FirstLastName'] + ' ' + data['SecondLastName'];
             document.querySelector('#P_WelcomeName').append(data['FirstName'] + ' ' + data['FirstLastName']);
 
-            document.querySelector('#P_LaboralStatus').append(data['LaboralStatus']);
+           // document.querySelector('#P_LaboralStatus').append(data['LaboralStatus']);
             /*document.querySelector('#P_Workstation').append(data['Workstation']);
             document.querySelector('#P_Experience').append(data['Experience']);
             document.querySelector('#P_DriverLicenses').append(data['DriverLicenses']);
@@ -70,12 +78,16 @@
             }
             if (data['Country'] == "CR") {
                 $('.selectedCostaRica').show();
+                document.querySelector('#P_Location').append(data['NProvince'] + ", " + data['NCanton'] + ", " + data['NDistrict']);
+
             } else {
                 $('.selectedCostaRica').hide();
             }
                 
 
             document.querySelector('#P_Country').append(data['Country']);
+
+            document.querySelector('#P_Birthdate').append(formatDate(new Date(data['Birthdate'])));
             document.querySelector('#P_Age').append(data['Age']);
 
 
@@ -155,11 +167,11 @@
 
         this.ctrlActions.PutToAPI('student/', studentData,
             function () {
-                /*$('#modalEditInfo').modal('hide');
+                $('#modalEditInfo').modal('hide');
 
                 setTimeout(function () {
                     window.location.reload();
-                }, 3000)*/
+                }, 3000)
             }
         );
     }
@@ -400,7 +412,10 @@
 
         let text2 = '';
         $('#profileContent').empty();
+        laboralList = [];
         if (data.length > 0) {
+            laboralList = data;
+
             for (let i in data) {
 
                 start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
@@ -471,7 +486,7 @@
         } else {
             document.getElementById("listLaboral").innerHTML = "Sin experiencia laboral";
             $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
-            $('#profileContent').append("Sin datos");
+            $('#profileContent').append("Sin experiencia laboral"); 
 
         }
 
@@ -483,6 +498,7 @@
 
         let text2 = '';
         if (data.length > 0) {
+            academicList = data;
 
             for (let i in data) {
 
@@ -554,6 +570,8 @@
         let end = '';
         let text2 = '';
         if (data.length > 0) {
+            courseList = data;
+
         for (let i in data) {
 
             start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
@@ -617,6 +635,7 @@
     this.GetReference = function (data) {
         let text2 = '';
         if (data.length > 0) {
+            referenceList = data;
 
             for (let i in data) {
 
@@ -675,14 +694,20 @@
     this.GetLanguages = function (data) {
         let text2 = '';
         if (data.length > 0) {
-
+            languageList = data;
             for (let i in data) {
 
                 text2 += `<div class="card-language">
                                <div class="container">
                                     <div class="row">
-                                        <div class="col-lg-10">
+                                        <div class="col-lg-1"
+                                            style="text-align: center; font-size: 2em; color:#5e5e5e;">
+                                            <i class="fa-solid fa-earth-americas"></i>
+                                        </div>
+                                        <div class="col-lg-9">
+
                                             <ul class="unstyled" style="padding: 0;">
+
                                                 <li style="list-style-type: none;">
                                                     <strong>${data[i].LanguageName}</strong>
                                                 </li>
@@ -812,13 +837,18 @@ FillDataFormAcademic = function (data) {
     $(`input[name="rdDegreeType"][value="${data['DegreeType']}"]`).prop("checked", true);
     document.querySelector('#txtEditInstitution').value = data['Institution'];
     document.querySelector('#txtEditCareer').value = data['Career'];
-    $(`#txtEditStatus option[value="${data['Status']}"]`).attr("selected", "selected");
+    $(`#txtEditStatusAcademic option[value="${data['Status']}"]`).attr("selected", "selected");
+    if (data['Status'] == "Finalizado") {
+        $('.selectedFinishA').show();
+    } else {
+        $('.selectedFinishA').hide();
+    }
     document.querySelector('#txtEditStartDate').value = formatDateStringMonths(data['StartDate']);
     document.querySelector('#txtEditUniversityPreparation').value = data['UniversityPreparation'];
     if (formatDateStringMonths(data['EndDate']) == "1900-01") {
-        document.querySelector('#txtEditEndDate').value = "";
+        document.querySelector('#txtEditEndDateA').value = "";
     } else {
-        document.querySelector('#txtEditEndDate').value = formatDateStringMonths(data['EndDate']);
+        document.querySelector('#txtEditEndDateA').value = formatDateStringMonths(data['EndDate']);
     }
 }
 
@@ -865,6 +895,11 @@ FillDataFormCourse = function (data) {
     document.querySelector('#txtEditInstitutionCourse').value = data['Institution'];
     document.querySelector('#txtEditCourseName').value = data['CourseName'];
     $(`#txtEditStatusCourse option[value="${data['Status']}"]`).attr("selected", "selected");
+    if (data['Status'] == "Finalizado") {
+        $('.selectedFinishC').show();
+    } else {
+        $('.selectedFinishC').hide();
+    }
     document.querySelector('#txtEditStartDateCourse').value = formatDateStringMonths(data['StartDate']);
     if (formatDateStringMonths(data['EndDate']) == "1900-01") {
         document.querySelector('#txtEditEndDateCourse').value = "";
@@ -966,8 +1001,6 @@ this.RulesValidateCreate = function () {
         },
         "Revisa los campos."
     );
-
-    
 
 
     $("#frmAddLaboral").validate({
@@ -1129,5 +1162,171 @@ $(document).ready(function () {
         $('html, body').animate({ scrollTop: 0 }, '300');
     });
 
+    $("#downloadCV").click(function () {
+        DowlandCV();
+    });
+
 })
+
+
+function DowlandCV() {
+    var doc = new jspdf();
+    /*doc.text(20, 20, 'Hola mundo');
+    doc.text(20, 30, 'Vamos a generar un pdf desde el lado del cliente');
+
+    // Add new page
+    doc.addPage();
+    doc.text(20, 20, 'Visita programacion.net');
+
+    // Save the PDF
+    doc.save('documento.pdf');*/
+    doc.setFontSize(18);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('CURRICULUM VITAE', 70, 20, { align: 'center' });
+
+    doc.setFont("helvetica");
+
+    doc.setFontSize(16);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('Información personal', 80, 35, { align: 'center' });
+
+    var elementHTML = $('#my_info').html();
+    var specialElementHandlers = {
+        '#elementH': function (element, renderer) {
+            return true;
+        }
+        
+    };
+
+    doc.setFont("helvetica");
+
+    doc.fromHTML(elementHTML, 20, 50, {
+        'width': 170,
+        'elementHandlers': specialElementHandlers
+    });
+
+    doc.addPage();
+
+    doc.setFontSize(16);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('Mi Perfil Profesional', 80, 20, { align: 'center' });
+
+    var elementHTML = $('#profileContentContainer').html();
+    var specialElementHandlers = {
+        '#elementH': function (element, renderer) {
+            return true;
+        }
+        
+    };
+    doc.fromHTML(elementHTML, 20, 25, {
+        'width': 170,
+        'elementHandlers': specialElementHandlers
+    });
+
+
+    doc.setFontSize(16);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('Experiencia', 90, 50, { align: 'center' });
+    elementHTML = "";
+    var laboral = laboralList;
+    for (let i in laboral) {
+        doc.setFontSize(12);
+        doc.setFontType("normal");
+        doc.setTextColor(0, 0, 0);
+
+        let dateEnd = formatDateStringMonths(laboral[i].EndDate);
+
+        if (dateEnd == "1900-01") {
+            dateEnd = "Actualidad";
+        }
+
+        let text = formatDateStringMonths(laboral[i].StartDate) + " - " + dateEnd + "\n" + laboral[i].WorkPosition + " - " +
+            laboral[i].Workstation + " - " + laboral[i].Company + "\nResponsabilidades asignadas: " + laboral[i].Responsabilites
+        doc.text(20, 60 + (i * 20), text);
+    }
+
+    doc.setFontSize(16);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('Formación Educativa', 80, 120, { align: 'center' });
+
+    var academic = academicList;
+    for (let i in academic) {
+        doc.setFontSize(12);
+        doc.setFontType("normal");
+        doc.setTextColor(0, 0, 0);
+
+        let dateEnd = formatDateStringMonths(academic[i].EndDate);
+
+        if (dateEnd == "1900-01") {
+            dateEnd = "Actualidad";
+        }
+
+        let text = formatDateStringMonths(academic[i].StartDate) + " - " + dateEnd + "\n" + academic[i].Institution + " - " +
+            academic[i].DegreeType + " - " + academic[i].University_Preparation + "\n" + academic[i].Status
+        doc.text(20, 135 + (i * 20), text);
+    }
+
+    doc.setFontSize(16);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('Otros Cursos', 90, 190, { align: 'center' });
+
+    var course = courseList;
+    for (let i in course) {
+        doc.setFontSize(12);
+        doc.setFontType("normal");
+        doc.setTextColor(0, 0, 0);
+
+        let dateEnd = formatDateStringMonths(course[i].EndDate);
+
+        if (dateEnd == "1900-01") {
+            dateEnd = "Actualidad";
+        }
+
+        let text = formatDateStringMonths(course[i].StartDate) + " - " + dateEnd + "\n" + course[i].Institution + " - " +
+            course[i].CourseName + "\n" + academic[i].Status
+        doc.text(20, 200 + (i * 20), text);
+    }
+
+    doc.addPage();
+
+    doc.setFontSize(16);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('Idiomas', 94, 20, { align: 'center' });
+
+    var language = languageList;
+    for (let i in language) {
+        doc.setFontSize(12);
+        doc.setFontType("normal");
+        doc.setTextColor(0, 0, 0);
+
+        let text = language[i].LanguageName + "\n" + language[i].Level
+        doc.text(20, 30 + (i * 15), text);
+    }
+
+    doc.setFontSize(16);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('Referencias', 90, 70, { align: 'center' });
+
+    var reference = referenceList;
+    for (let i in reference) {
+        doc.setFontSize(12);
+        doc.setFontType("normal");
+        doc.setTextColor(0, 0, 0);
+
+        let text = reference[i].ReferrerName + ' - ' + reference[i].Phone + "\n" + reference[i].Company + ' - ' + reference[i].Workstation
+        doc.text(20, 90 + (i * 15), text);
+    }
+
+    // Save the PDF
+    doc.save('sample-document.pdf');
+
+}
 

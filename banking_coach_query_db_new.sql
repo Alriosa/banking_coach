@@ -27,7 +27,7 @@ Province VARCHAR(3)  NULL,
 Canton VARCHAR(3)  NULL,
 District VARCHAR(3)  NULL,
 Laboral_Status VARCHAR(10) NULL, /*True or False*/
-Job_Availability VARCHAR(10) NULL,
+Job_Availability VARCHAR(30) NULL,
 Transport_Availability VARCHAR(200) NOT NULL,
 Vehicle VARCHAR(10) NOT NULL,
 Type_Vehicle VARCHAR(20)  NULL,
@@ -1830,7 +1830,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_ACADEMIC]
 AS
 
-        SELECT * FROM [dbo].[TBL_ACADEMIC];
+        SELECT * FROM [dbo].[TBL_ACADEMIC] order by Start_Date DESC;
 GO
 
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ACADEMIC_BY_ID]
@@ -1845,7 +1845,7 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ACADEMIC_BY_STUDENT]
         @SP_Student_ID INT
 AS
 
-        SELECT * FROM [dbo].[TBL_ACADEMIC] WHERE Student_ID = @SP_Student_ID;
+        SELECT * FROM [dbo].[TBL_ACADEMIC] WHERE Student_ID = @SP_Student_ID  order by Start_Date DESC;
 GO
 
 /**
