@@ -56,7 +56,7 @@ function vStudentAccount() {
             const dateInput = document.getElementById('txtBirthdate');
             dateInput.value = date;
             let name = data['FirstName'] + ' ' + data['FirstLastName'] + ' ' + data['SecondLastName'];
-            document.querySelector('#P_WelcomeName').append(data['FirstName'] + ' ' + data['FirstLastName']);
+            //document.querySelector('#P_WelcomeName').append(data['FirstName'] + ' ' + data['FirstLastName']);
 
            // document.querySelector('#P_LaboralStatus').append(data['LaboralStatus']);
             /*document.querySelector('#P_Workstation').append(data['Workstation']);
@@ -74,7 +74,7 @@ function vStudentAccount() {
             //document.querySelector('#P_Language').append(data['Language']);
             document.querySelector('#P_Vehicle').append(data['Vehicle']);
             if (data['Type_Vehicle'] != null){
-                document.querySelector('#P_Type_Vehicle').append( data['Type_Vehicle']);
+                document.querySelector('#P_Type_Vehicle').append("Tipo: " + data['Type_Vehicle']);
             }
             if (data['Country'] == "CR") {
                 $('.selectedCostaRica').show();
@@ -156,7 +156,12 @@ function vStudentAccount() {
         }
         studentData["StudentLogin"] = studentLogin;
         studentData["StudentID"] = id;
-
+        
+        if (studentData["Country"] != "CR") {
+            studentData["Province"] = "";
+            studentData["Canton"] = "";
+            studentData["District"] = "";
+        }
         var array = [];
 
         var checkboxes = document.querySelectorAll('input[name=driverLicenses]:checked');
@@ -462,7 +467,7 @@ function vStudentAccount() {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-2 acciones">
                                         <button class="btn btn-orange my-2" type="button" data-toggle="modal"
                                             data-target="#editLaboral" style="width: 170px;"
                                             onclick="GetDataLaboral(${data[i].LaboralID})">
@@ -1326,7 +1331,213 @@ function DowlandCV() {
     }
 
     // Save the PDF
-    doc.save('sample-document.pdf');
+    //doc.save('sample-document.pdf');
+
+
+     container = document.createElement('div');
+
+    //clone is required because otherwise you alter the current page.
+    let titleInfo = document.createElement('h5');
+    titleInfo.textContent = "Información Personal";
+    titleInfo.style.textAlign = 'center';
+    let cloneInfo = document.getElementById("my_info").cloneNode(true);
+    let titleProfile = document.createElement('h5');
+    titleProfile.textContent = "Perfil Profesional";
+    titleProfile.style.textAlign = 'center';
+
+    let cloneProfile = document.getElementById("profileContentContainer").cloneNode(true);
+    let titleLaboral = document.createElement('h5');
+    titleLaboral.textContent = "Experiencia Laboral";
+    titleLaboral.style.textAlign = 'center';
+    let titleAcademic = document.createElement('h5');
+    titleAcademic.textContent = "Prepación Académica";
+    titleAcademic.style.textAlign = 'center';
+
+    let titleCourse = document.createElement('h5');
+    titleCourse.textContent = "Educación Extracurricular";
+    titleCourse.style.textAlign = 'center';
+
+    let titleLanguage = document.createElement('h5');
+    titleLanguage.textContent = "Idiomas";
+    titleLanguage.style.textAlign = 'center';
+
+
+    let titleReference = document.createElement('h5');
+    titleReference.textContent = "Referencias";
+    titleReference.style.textAlign = 'center';
+
+    containerLaboral = document.createElement('ul');
+    var laboral = laboralList;
+    for (let i in laboral) {
+        let dateEnd = formatDateStringMonths(laboral[i].EndDate);
+
+        if (dateEnd == "1900-01") {
+            dateEnd = "Actualidad";
+        }
+
+        p1 = document.createElement('p');
+        p1.append(formatDateStringMonths(laboral[i].StartDate) + " - " + dateEnd);
+        p2 = document.createElement('p');
+        p2.append(laboral[i].WorkPosition + " - " + laboral[i].Workstation + " - " + laboral[i].Company);
+        p3 = document.createElement('p');
+        p3.append("Responsabilidades asignadas: " + laboral[i].Responsabilites);
+        d1 = document.createElement('div');
+
+        d1.append(p1);
+        d1.append(p2);
+        d1.append(p3);
+
+        liLaboral = document.createElement('li');
+        liLaboral.append(d1);
+        containerLaboral.append(liLaboral);
+        containerLaboral.style.margin = "0 30px";
+
+    }
+
+    containerAcademic = document.createElement('ul');
+    var academic = academicList;
+    for (let i in academic) {
+        let dateEnd = formatDateStringMonths(academic[i].EndDate);
+
+        if (dateEnd == "1900-01") {
+            dateEnd = "Actualidad";
+        }
+        p1 = document.createElement('p');
+        p1.append(formatDateStringMonths(academic[i].StartDate) + " - " + dateEnd);
+        p2 = document.createElement('p');
+        p2.append(academic[i].Institution + " - " +  academic[i].DegreeType + " - " + academic[i].University_Preparation);
+        p3 = document.createElement('p');
+        p3.append(academic[i].Status);
+        d1 = document.createElement('div');
+
+        d1.append(p1);
+        d1.append(p2);
+        d1.append(p3);
+
+        liAcademic = document.createElement('li');
+        liAcademic.append(d1);
+        containerAcademic.append(liAcademic);
+        containerAcademic.style.margin = "0 30px";
+
+    }
+
+    containerCourse = document.createElement('ul');
+    var course = courseList;
+    for (let i in course) {
+        let dateEnd = formatDateStringMonths(course[i].EndDate);
+
+        if (dateEnd == "1900-01") {
+            dateEnd = "Actualidad";
+        }
+
+        p1 = document.createElement('p');
+        p1.append(formatDateStringMonths(course[i].StartDate) + " - " + dateEnd);
+        p2 = document.createElement('p');
+        p2.append(course[i].Institution + " - " +  course[i].CourseName);
+        p3 = document.createElement('p');
+        p3.append(course[i].Status);
+        d1 = document.createElement('div');
+
+        d1.append(p1);
+        d1.append(p2);
+        d1.append(p3);
+
+        liCourse = document.createElement('li');
+        liCourse.append(d1);
+        containerCourse.append(liCourse);
+        containerCourse.style.margin = "0 30px";
+
+    }
+
+
+    containerLanguage = document.createElement('ul');
+    var language = languageList;
+    for (let i in language) {
+
+        p1 = document.createElement('p');
+        p1.append(language[i].LanguageName);
+        p2 = document.createElement('p');
+        p2.append(language[i].Level);
+        d1 = document.createElement('div');
+
+        d1.append(p1);
+        d1.append(p2);
+
+        liLanguage = document.createElement('li');
+        liLanguage.append(d1);
+        containerLanguage.append(liLanguage);
+        containerLanguage.style.margin = "0 30px";
+    }
+
+
+    containerReference = document.createElement('ul');
+    var reference = referenceList;
+    for (let i in reference) {
+
+        p1 = document.createElement('p');
+        p1.append(reference[i].ReferrerName + ' - ' + reference[i].Phone);
+        p2 = document.createElement('p');
+        p2.append(reference[i].Company + ' - ' + reference[i].Workstation);
+        d1 = document.createElement('div');
+
+        d1.append(p1);
+        d1.append(p2);
+
+        liReference = document.createElement('li');
+        liReference.append(d1);
+        containerReference.append(liReference);
+        containerReference.style.margin = "0 30px";
+
+    }
+
+
+    //remove some css browser might set.
+    container.style.margin = '40px 25px';
+    container.style.padding = '25px';
+    container.style.display = "inline";
+    container.style.fontFamily = "arial";
+    container.style.fontSize = "12px";
+    container.style.lineHeight = "1.2";  //important for knowing break lines.
+
+    container.append(titleInfo);
+    container.append(cloneInfo);
+    container.append(titleProfile);
+    container.append(cloneProfile);
+
+    if (laboralList.length > 0) {
+        container.append(titleLaboral);
+        container.append(containerLaboral);
+    }
+
+    if (academicList.length > 0) {
+        container.append(titleAcademic);
+        container.append(containerAcademic);
+    }
+    if (courseList.length > 0) {
+        container.append(titleCourse);
+        container.append(containerCourse);
+    }
+
+    if (languageList.length > 0) {
+        container.append(titleLanguage);
+        container.append(containerLanguage);
+    }
+    if (referenceList.length > 0) {
+        container.append(titleReference);
+        container.append(containerReference);
+    }
+
+
+    var opt = {
+        margin: 2,
+        filename: 'myfile.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // New Promise-based usage:
+    html2pdf(container, opt);
 
 }
 

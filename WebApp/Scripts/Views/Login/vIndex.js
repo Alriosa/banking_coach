@@ -22,7 +22,7 @@
                     break;
                 case "3":
                     control.LoginByUser("recruiter/getUser/" + userLogin, function (data) {
-                        setTimeout(function redirection() { window.location.href = "/Home" }, 3000);
+                        setTimeout(function redirection() { window.location.href = "/Recruiter/vRecruiterAccount/" }, 3000);
                     });
                     break;
                 case "4":
