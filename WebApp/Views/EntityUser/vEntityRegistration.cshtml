@@ -1,0 +1,59 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/EntityUser/vEntityRegistration.js"></script>
+@{
+    ViewBag.Title = "vEntityRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="home">
+    <div class="container">
+        <div class="row text-center justify-content-between">
+            <div class="col-lg-5 col-sm-11">
+                <div class=" text-box page-title">
+                    <h1 >REGISTRA A LA ENTIDAD</h1>
+                    <p class="subtitle home-subtitle-1">
+                        En está sección, podrá registrar una entidad bancaria
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-11">
+                <img class="img" src="~/Content/imgs/entidad.jpg" alt="">
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="text-center my-4">
+                        </div>
+                        <form id="frmEntityCreate" class="form frmEntityCreate">
+                            <div class="row align-content-sm-center">
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtName", type: "text", required: true, placeHolder: "Nombre de la Entidad Bancaria", columnDataName: "Name")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtID", type: "text", required: true, placeHolder: "Cédula Jurídica", columnDataName: "ID")
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtQuantity", type: "number", required: true, placeHolder: "Cantidad  de usuarios", columnDataName: "Quantity")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-row" style="margin: 0px auto;">
+                                        <div style="margin: 0px auto 10px;">
+                                            @Html.CtrlButton(viewName: "vEntityRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

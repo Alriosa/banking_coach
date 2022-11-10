@@ -1,0 +1,72 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/EntityUser/vEntityUpdate.js"></script>
+@{
+    ViewBag.Title = "vEntityUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="container">
+        <div class="row text-center justify-content-between">
+            <div class="col-lg-5 col-sm-11">
+                <div class=" text-box page-title">
+                    <h1>ACTUALIZA LA ENTIDAD</h1>
+                    <p class="subtitle home-subtitle-1">
+                        En está sección, se podrá editar la información de una entidad bancaria
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-11">
+                <img class="img" src="~/Content/imgs/entidad.jpg" alt="">
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="text-center mt-4">
+
+                        </div>
+                        <form id="frmEntityUpdate" class="form frmEntityUpdate">
+                            <div class="row align-content-sm-center">
+                                <div class="col-sm-12 text-center">
+                                    <input type="text" id="txtIdEntity" class="d-none">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtName", type: "text", required: true, placeHolder: "Nombre de la Entidad Bancaria", columnDataName: "Name")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtId", type: "text", required: true, placeHolder: "Cédula Jurídica", columnDataName: "Id")
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtQuantity", type: "number", required: true, placeHolder: "Cantidad  de usuarios", columnDataName: "Quantity")
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-row" style="margin: 0px auto;">
+                                        <div style="margin: 0px auto 10px;">
+                                            @Html.CtrlButton(viewName: "vEntityUpdate", id: "btnUpdate", type: "button",
+                                                        label: "Modificar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end form-content -->
+<script>
+
+    $(document).ready(function () {
+        var ventityUpdate = new vEntityUpdate();
+        document.getElementById("txtIdEntity").value = "@ViewBag.IdEntity";
+
+        ventityUpdate.GetData();
+    });
+</script>

@@ -6,16 +6,21 @@
             ViewBag.Title = "vStudentAccount";
             Layout = "~/Views/Shared/_Layout.cshtml";
         }
+
+        <style>
+            #studentAccount .modal, #editPassword.modal {
+                color: #000;
+            }
+        </style>
+
         <a id="btnToTop"></a>
 
-        <div class="container-fluid">
+        <div id="studentAccount" class="container-fluid">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="container">
-
                         <div class="row">
                             <div class="navbar navbar-expand-lg d-flex flex-column">
-
                                 <div class="col-lg-12">
                                     <div class="collapse navbar-collapse">
                                         <ul class="navbar-nav">
@@ -26,19 +31,12 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div class="row">
-         <div class="col-lg-12">
-             <h2>Bienvenido <span id="P_WelcomeName"></span></h2>
-         </div>
-     </div>-->
                         <div class="row">
                             <div class="col-lg-8">
                                 <p>Progreso de su currículo:</p>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success" role="progressbar" id="infoProgress" aria-valuenow="30"
-                                         aria-valuemin="0" aria-valuemax="100" style="width:30%">
-
+                                         aria-valuemin="0" aria-valuemax="100" style="width:270px;">
                                     </div>
                                 </div>
                             </div>
@@ -52,12 +50,10 @@
                                                 <div class="title d-flex justify-content-between w-100">
                                                     <i class="fa-solid fa-hand-point-right"></i>
                                                     <p>Información personal </p>
-
                                                     <button class="btn btn-orange" type="button" data-toggle="modal"
                                                             data-target="#modalEditInfo">
                                                         Editar
                                                     </button>
-
                                                 </div>
                                                 <div>
                                                     <div class="modal fade" id="modalEditInfo" tabindex="-1" aria-labelledby="modalEditInfoLabel" aria-hidden="true" role="dialog">
@@ -80,6 +76,17 @@
                                                                                     </div>
                                                                                     <div class="form-row ">
                                                                                         <div class="col-lg-12">
+                                                                                            <div class="form-group w-100 mb-3">
+                                                                                                <label for="txtBankingStudent" id="labelBankingStudent">Estudiante del banco</label>
+                                                                                                <select class="form-control input-secondaryl" id="txtBankingStudent" name="BankingStudent" ColumnDataName="BankingStudent" required>
+                                                                                                    <option value="Sí">Sí</option>
+                                                                                                    <option value="No">No</option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
                                                                                             @Html.CtrlInputSecond(id: "txtFirstName", type: "text", required: true, placeHolder: "Primer Nombre", columnDataName: "FirstName")
                                                                                         </div>
                                                                                     </div>
@@ -96,32 +103,88 @@
                                                                                     <div class="form-row ">
                                                                                         <div class="col-lg-12">
                                                                                             <div class="input-group mb-3">
+                                                                                                @Html.CtrlInputSecond(id: "txtBirthdate", type: "date", required: true, placeHolder: "Fecha de Nacimiento", columnDataName: "Birthdate")
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                <div class="form-group input-group flex-column">
+                                                                                                    <label for="txtAge">Edad</label>
+                                                                                                    <input type="number" class="form-control input-secondary" id="txtAge" placeholder="Edad" ColumnDataName="Age" disabled>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
                                                                                                 <div class="form-group input-group flex-column ">
-                                                                                                    <label>País</label>
-                                                                                                    <select style="height:54px;" class="form-control w-100" id="txtCountry" name="Country" ColumnDataName="Country" required>
-                                                                                                        <option value="CR">Costa Rica</option>
-                                                                                                        <option value="NC">Nicaragua</option>
-                                                                                                        <option value="VNZ">Venezuela</option>
+                                                                                                    <label>Sexo</label>
+                                                                                                    <select class="form-control w-100" id="txtSex" name="Sex" ColumnDataName="Sex">
+                                                                                                        <option value="Masculino">Masculino</option>
+                                                                                                        <option value="Femenino">Femenino</option>
+                                                                                                        <option value="Otro">Otro</option>
                                                                                                     </select>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="selectedCostaRica">
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            <div class="input-group mb-3">
+                                                                                                <div class="form-group input-group flex-column ">
+                                                                                                    <label>País de Origen</label>
+                                                                                                    <select style="height:54px;" class="form-control w-100" id="txtCountry" name="Country" ColumnDataName="Country" required>
+                                                                                                        <option value="Bolivia">Bolivia</option>
+                                                                                                        <option value="Canadá">Canadá</option>
+                                                                                                        <option value="Chile">Chile</option>
+                                                                                                        <option value="China">China</option>
+                                                                                                        <option value="Colombia">Colombia</option>
+                                                                                                        <option value="Corea">Corea</option>
+                                                                                                        <option value="Corea del Norte">Corea del Norte</option>
+                                                                                                        <option value="Cuba">Cuba</option>
+                                                                                                        <option value="Costa Rica">Costa Rica</option>
+                                                                                                        <option value="Ecuador">Ecuador</option>
+                                                                                                        <option value="El Salvador">El Salvador</option>
+                                                                                                        <option value="España" selected>España</option>
+                                                                                                        <option value="Estados Unidos">Estados Unidos</option>
+                                                                                                        <option value="Guatemala">Guatemala</option>
+                                                                                                        <option value="Haití">Haití</option>
+                                                                                                        <option value="Honduras">Honduras</option>
+                                                                                                        <option value="India">India</option>
+                                                                                                        <option value="Italia">Italia</option>
+                                                                                                        <option value="Japón">Japón</option>
+                                                                                                        <option value="México">México</option>
+                                                                                                        <option value="Nicaragua">Nicaragua</option>
+                                                                                                        <option value="Panamá">Panamá</option>
+                                                                                                        <option value="Paraguay">Paraguay</option>
+                                                                                                        <option value="Perú">Perú</option>
+                                                                                                        <option value="Puerto Rico">Puerto Rico</option>
+                                                                                                        <option value="República Dominicana">República Dominicana</option>
+                                                                                                        <option value="Uruguay">Uruguay</option>
+                                                                                                        <option value="Venezuela">Venezuela</option>
+                                                                                                    </select>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
-                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <p><strong>Residencia en Costa Rica</strong></p>
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
                                                                                         </div>
-                                                                                        <div class="form-row ">
-                                                                                            <div class="col-lg-12">
-                                                                                                @Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
-                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-row ">
+                                                                                        <div class="col-lg-12">
+                                                                                            @Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-row ">
@@ -142,24 +205,6 @@
                                                                                         <div class="col-lg-12">
                                                                                             <div class="input-group mb-3">
                                                                                                 @Html.CtrlInputSecond(id: "txtIdentificationNumber", type: "text", required: true, placeHolder: "Número de identificación", columnDataName: "IdentificationNumber")
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-row ">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="input-group mb-3">
-                                                                                                @Html.CtrlInputSecond(id: "txtBirthdate", type: "date", required: true, placeHolder: "Fecha de Nacimiento", columnDataName: "Birthdate")
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-row ">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="input-group mb-3">
-                                                                                                <div class="form-group input-group flex-column">
-                                                                                                    <label for="txtAge">Edad</label>
-                                                                                                    <input type="number" class="form-control input-secondary" id="txtAge" placeholder="Edad" ColumnDataName="Age" disabled>
-                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -196,7 +241,7 @@
                                                                                             <div>
                                                                                                 <div class="input-group mb-3">
                                                                                                     <div class="form-group input-group flex-column ">
-                                                                                                        <label for="txtJobAvailability">Disponibilidad laboral</label>
+                                                                                                        <label for="txtJobAvailability">Estado de Disponibilidad</label>
                                                                                                         <select style="height:54px;" class="form-control w-100 " id="txtJobAvailability"
                                                                                                                 name="txtJobAvailability" ColumnDataName="JobAvailability" required>
                                                                                                             <option value="Inmediata">Inmediata</option>
@@ -255,7 +300,6 @@
                                                                                                                 <labels for="licenseC2"><input type="checkbox" id="licenseC2" name="driverLicenses" value="C2" />C2</labels>
                                                                                                             </div>
                                                                                                         </div>
-
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -277,7 +321,6 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-
                                                                                     <div class="selectedVehicle">
                                                                                         <div class="form-row ">
                                                                                             <div class="col-lg-12">
@@ -296,9 +339,7 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-
                                                                                     </div>
-
                                                                                     <div class="row my-4 mx-auto">
                                                                                         <div style="margin: 0px auto 10px;">
                                                                                             @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChangesInfo", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
@@ -317,17 +358,12 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div>
                                             <div class="row">
                                                 <div class="col-lg-12 my-2">
                                                     <div class="title d-flex justify-content-between">
                                                         <i class="fa-solid fa-hand-point-right"></i>
                                                         <p>Preparación Académica</p>
-                                                        <!--<button type="button" class="btn btn-orange"
-                                            id="editAcademic">
-                                        Editar
-                                    </button>-->
                                                         <a href="#academic">
                                                             <button type="button" class="btn btn-orange"
                                                                     id="goAcademic" style="width: 144px;">
@@ -335,9 +371,7 @@
                                                             </button>
                                                         </a>
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12 my-2">
@@ -358,10 +392,6 @@
                                                     <div class="title d-flex justify-content-between">
                                                         <i class="fa-solid fa-hand-point-right"></i>
                                                         <p>Referencias</p>
-                                                        <!--<button type="button" class="btn btn-orange"
-                                            id="editAcademic">
-                                        Editar
-                                    </button>-->
                                                         <a href="#references">
                                                             <button type="button" class="btn btn-orange"
                                                                     id="goReferences" style="width: 144px;">
@@ -372,7 +402,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -384,19 +413,19 @@
                         <div class="row">
                             <div class="box my-3">
                                 <div class="box-container d-flex flex-column">
-                                    <h3><strong>Mis datos personales</strong></h3>
+                                    <h3><strong>Datos personales</strong></h3>
                                     <div class="container pdf" id="my_info">
                                         <div class="row flex-rows">
                                             <div class="col-lg-7">
+                                                <p><strong>Estudiante de Banking Coach: </strong><span id="P_BankingStudent"></span></p>
                                                 <p><strong>Nombre Completo: </strong><span id="P_CompleteName"></span></p>
-                                                <p><strong>País Origen: </strong><span id="P_Country"></span></p>
-                                                <p><span id="P_Location"></span></p>
+                                                <p><strong>País de Origen: </strong><span id="P_Country"></span></p>
+                                                <p><strong>Residencia en Costa Rica: </strong><span id="P_Location"></span></p>
                                                 <p><strong>Tipo de documento: </strong><span id="P_Id_Type"></span></p>
                                                 <p><strong>Número de Identificación: </strong><span id="P_IdentificationNumber"></span></p>
                                                 <p><strong>Fecha de Nacimiento: </strong><span id="P_Birthdate"></span></p>
                                                 <p><strong>Edad: </strong><span id="P_Age"></span></p>
                                                 <p><strong>Correo Electrónico: </strong><span id="P_Email"></span></p>
-
                                             </div>
                                             <div class="col-lg-4">
                                                 <p><strong>Teléfono Principal </strong><span id="P_PhoneNumber"></span></p>
@@ -404,8 +433,7 @@
                                                 <p><strong>Licencia(s): </strong><span id="P_DriverLicenses"></span></p>
                                                 <p><strong>¿Con Vehículo?: </strong><span id="P_Vehicle"></span></p>
                                                 <p id="P_Type_Vehicle"></p>
-
-                                                <p><strong>Disponibilidad para trabajar: </strong><span id="P_JobAvailability"></span></p>
+                                                <p><strong>Estado de Disponibilidad: </strong><span id="P_JobAvailability"></span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -421,7 +449,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-10">
-                                    <h3> Mi perfil profesional</h3>
+                                    <h3> Perfil profesional</h3>
                                     <hr>
                                 </div>
                             </div>
@@ -434,7 +462,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row my-5 justify-content-center">
                 <div class="col-lg-11">
                     <div id="laboral" class="card py-4 px-3">
@@ -444,13 +471,12 @@
                                     <h3> Experiencia Laboral</h3>
                                 </div>
                                 <div class="col-lg-4" style="text-align: right;">
-                                    <button class="btn" type="button" data-toggle="modal"
+                                    <button class="btn btn-orange" type="button" data-toggle="modal"
                                             data-target="#addLaboral">
                                         AGREGAR +
                                     </button>
                                 </div>
                             </div>
-
                             <div class="modal fade" id="addLaboral" tabindex="-1" aria-labelledby="addLaboralLabel" aria-hidden="true" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -482,19 +508,15 @@
                                                                     <label for="fecha" class="control-label">Fecha Ingreso</label>
                                                                     <div lang="es-us">
                                                                         <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
-
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group" lang="es-us">
                                                                     <label for="fecha" class="control-label">Fecha Salida (Opcional si sigue laborando)</label>
-
                                                                     <div lang="es-us">
                                                                         <input type="month" class="form-control input-lg" name="endDate" id="txtEndDate" ColumnDataName="EndDate" min="1990-01" value="" lang="es-us">
-
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </form>
@@ -539,19 +561,16 @@
                                                                     <label for="fecha" class="control-label">Fecha Ingreso</label>
                                                                     <div lang="es-us">
                                                                         <input type="month" class="form-control input-lg" name="startDate" id="txtEditStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
-
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group" lang="es-us">
                                                                     <label for="fecha" class="control-label">Fecha Salida (Opcional si sigue laborando)</label>
-
                                                                     <div lang="es-us">
                                                                         <input type="month" class="form-control input-lg" name="endDate" id="txtEditEndDate" ColumnDataName="EndDate" min="1990-01" value="" lang="es-us">
 
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </form>
@@ -565,12 +584,10 @@
                                 </div>
                             </div>
                             <hr>
-
                             <div class="row flex-rows">
                                 <div class="col-lg-12">
                                     <div class="my-3">
                                         <div class=" d-flex flex-column" id="listLaboral">
-
                                         </div>
                                     </div>
                                 </div>
@@ -588,14 +605,12 @@
                                     <h3> Formación Académica</h3>
                                 </div>
                                 <div class="col-lg-4" style="text-align: right;">
-                                    <button class="btn" type="button" data-toggle="modal"
+                                    <button class="btn  btn-orange" type="button" data-toggle="modal"
                                             data-target="#addAcademic">
                                         AGREGAR +
                                     </button>
                                 </div>
-
                             </div>
-
                             <div class="modal fade" id="addAcademic" tabindex="-1" aria-labelledby="addAcademicLabel" aria-hidden="true" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -611,7 +626,6 @@
                                                     <div class="container">
                                                         <div class="row">
                                                             <div class="col-lg-12 my-2">
-
                                                                 <div class="form-group">
                                                                     <div>
                                                                         <div class="input-group mb-3">
@@ -625,13 +639,11 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                                 <div class="form-group">
                                                                     <div>
                                                                         @Html.CtrlInputSecond(id: "txtInstitution", type: "text", required: true, placeHolder: "Institución", columnDataName: "Institution")
                                                                     </div>
                                                                 </div>
-
                                                                 <div class="selectedUniversity" style="display: none;">
                                                                     <div class="form-group">
                                                                         <div>
@@ -674,16 +686,13 @@
                                                                     <label for="fecha" class="control-label">Fecha Ingreso</label>
                                                                     <div lang="es-us">
                                                                         <input type="month" class="form-control input-lg" name="startDate" id="txtStartDate" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
-
                                                                     </div>
                                                                 </div>
                                                                 <div class="selectedFinishA" style="display: none;">
                                                                     <div class="form-group" lang="es-us">
                                                                         <label for="fecha" class="control-label">Fecha de Finalización</label>
-
                                                                         <div lang="es-us">
                                                                             <input type="month" class="form-control input-lg" name="endDate" id="txtEndDate" ColumnDataName="EndDate" min="1990-01" value="" lang="es-us">
-
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -698,7 +707,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </form>
@@ -709,7 +717,6 @@
                                             @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterAcademic", label: "Registrar", onClickFunction: "ValidateInputsAddAcademic", buttonType: "orange")
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="modal fade" id="editAcademic" tabindex="-1" aria-labelledby="editAcademicLabel" aria-hidden="true" role="dialog">
@@ -733,12 +740,10 @@
                                                                         <div class="input-group mb-3">
                                                                             <div class="form-group input-group flex-column ">
                                                                                 <label for="txtEditDegreeType">Nivel de estudio </label>
-
                                                                                 <div style="display: flex; flex-direction: row; align-items: center;">
                                                                                     @Html.CtrlRadioButton(id: "Secundaria", label: "Secundaria", name: "rdDegreeType", check: "checked", onchange: "ChangeInputs(this)", columnDataName: "DegreeType")
                                                                                     @Html.CtrlRadioButton(id: "Universitario", label: "Universitario", name: "rdDegreeType", check: "", onchange: "ChangeInputs(this)", columnDataName: "DegreeType")
                                                                                 </div>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -748,7 +753,6 @@
                                                                         @Html.CtrlInputSecond(id: "txtEditInstitution", type: "text", required: true, placeHolder: "Institución", columnDataName: "Institution")
                                                                     </div>
                                                                 </div>
-
                                                                 <div class="selectedUniversity" style="display: none;">
                                                                     <div class="form-group">
                                                                         <div>
@@ -787,38 +791,33 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
                                                                 <div class="form-group" lang="es-us">
                                                                     <label for="fecha" class="control-label">Fecha Ingreso</label>
 
                                                                     <div lang="es-us">
                                                                         <input type="month" class="form-control input-lg" name="startDate" id="txtEditStartDateA" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
-
                                                                     </div>
                                                                 </div>
                                                                 <div class="selectedFinishA" style="display: none;">
                                                                     <div class="form-group" lang="es-us">
                                                                         <label for="fecha" class="control-label">Fecha de Finalización</label>
-
                                                                         <div lang="es-us">
                                                                             <input type="month" class="form-control input-lg" name="endDate" id="txtEditEndDateA" ColumnDataName="EndDate" min="1990-01" value="" lang="es-us">
-
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div>
                                                                             <div class="input-group mb-3">
                                                                                 <div class="form-group input-group flex-column ">
-                                                                                    <label for="txtCertificate">Certificado</label>
-                                                                                    <input type="file" id="txtEditCertificate" />
+                                                                                    <label for="txtCertificateA">Certificado</label>
+                                                                                    <input id="txtCertificateA" type="file" ColumnDataName="Certificate_Name" />
                                                                                 </div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </form>
@@ -845,7 +844,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row my-5 justify-content-center">
                 <div class="col-lg-11">
                     <div id="academic_extra" class="card py-4 px-3">
@@ -855,13 +853,12 @@
                                     <h3> Educación Extracurricular</h3>
                                 </div>
                                 <div class="col-lg-4" style="text-align: right;">
-                                    <button class="btn" type="button" data-toggle="modal"
+                                    <button class="btn btn-orange" type="button" data-toggle="modal"
                                             data-target="#addCourse">
                                         AGREGAR +
                                     </button>
                                 </div>
                             </div>
-
                             <div class="modal fade" id="addCourse" tabindex="-1" aria-labelledby="addCourseLabel" aria-hidden="true" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -926,8 +923,8 @@
                                                                         <div>
                                                                             <div class="input-group mb-3">
                                                                                 <div class="form-group input-group flex-column ">
-                                                                                    <label for="txtCertificateCourse">Certificado</label>
-                                                                                    <input type="file" />
+                                                                                    <label for="txtCertificateC">Certificado</label>
+                                                                                    <input id="txtCertificateC" type="file" ColumnDataName="Certificate_Name" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -989,14 +986,10 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
                                                                 <div class="form-group" lang="es-us">
                                                                     <label for="fecha" class="control-label">Fecha Ingreso</label>
-
                                                                     <div lang="es-us">
                                                                         <input type="month" class="form-control input-lg" name="startDate" id="txtEditStartDateCourse" ColumnDataName="StartDate" min="1990-01" value="2000-08" lang="es-us">
-
                                                                     </div>
                                                                 </div>
                                                                 <div class="selectedFinishC" style="display: none;">
@@ -1005,7 +998,6 @@
 
                                                                         <div lang="es-us">
                                                                             <input type="month" class="form-control input-lg" name="endDate" id="txtEditEndDateCourse" ColumnDataName="EndDate" min="1990-01" value="" lang="es-us">
-
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -1020,7 +1012,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </form>
@@ -1038,9 +1029,6 @@
                                 <div class="col-lg-12">
                                     <div class="my-3">
                                         <div class="d-flex flex-column" id="listCourse">
-
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -1058,14 +1046,12 @@
                                     <h3>Idiomas</h3>
                                 </div>
                                 <div class="col-lg-4" style="text-align: right;">
-                                    <button class="btn" type="button" data-toggle="modal"
+                                    <button class="btn btn-orange" type="button" data-toggle="modal"
                                             data-target="#addLanguage">
                                         AGREGAR +
                                     </button>
                                 </div>
-
                             </div>
-
                             <div class="modal fade" id="addLanguage" tabindex="-1" aria-labelledby="addLanguageLabel" aria-hidden="true" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -1188,7 +1174,6 @@
                                 <div class="col-lg-12">
                                     <div class="my-3">
                                         <div class=" d-flex flex-column" id="listLanguages">
-
                                         </div>
                                     </div>
                                 </div>
@@ -1206,14 +1191,13 @@
                                     <h3>Referencias</h3>
                                 </div>
                                 <div class="col-lg-4" style="text-align: right;">
-                                    <button class="btn" type="button" data-toggle="modal"
+                                    <button class="btn btn-orange" type="button" data-toggle="modal"
                                             data-target="#addReference">
                                         AGREGAR +
                                     </button>
                                 </div>
                                 <hr>
                             </div>
-
                             <div class="modal fade" id="addReference" tabindex="-1" aria-labelledby="addReferenceLabel" aria-hidden="true" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -1260,10 +1244,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
                                             @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnRegisterReference", label: "Registrar", onClickFunction: "ValidateInputsAddReference", buttonType: "orange")
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="modal fade" id="editReference" tabindex="-1" aria-labelledby="editReferenceLabel" aria-hidden="true" role="dialog">
@@ -1304,7 +1286,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </form>
@@ -1313,13 +1294,10 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar </button>
                                             @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnEditReference", label: "Guardar cambios", onClickFunction: "ValidateInputsEditReference", buttonType: "orange")
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
                             <hr>
                             <div class="row flex-rows">
                                 <div class="col-lg-12">

@@ -3,11 +3,11 @@
     this.ctrlActions = new ControlActions();
 
 
-    this.FillFinancial = function () {
-        this.ctrlActions.GetById('financial', function (financials) {
+    this.FillEntity = function () {
+        this.ctrlActions.GetById('entity', function (financials) {
             $(financials).each(function (index, value) {
                if (value.UserActiveStatus == "Activo") {
-                    $('#selectFinancial').append("<option value=" + value.FinancialUserID + "> " + value.FinancialLogin + "</option> ");
+                    $('#selectEntity').append("<option value=" + value.EntityUserID + "> " + value.Name + "</option> ");
                 }
             });
         })
@@ -17,7 +17,7 @@
         var recruiterData = {};
 
         recruiterData = this.ctrlActions.GetDataForm('frmRecruiterCreate');
-        recruiterData.FinantialAssociation = $('#selectFinancial').val();
+        recruiterData.EntityAssociation = $('#selectEntity').val();
 
         this.ctrlActions.PostToAPI('recruiter', recruiterData, function () {
             resetForm();
@@ -49,7 +49,7 @@ RulesValidateCreate = function () {
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
-            financial: {
+            entityUser: {
                 required: "Seleccione una entidad financiera"
             },
             txtLogin: {
@@ -70,7 +70,7 @@ RulesValidateCreate = function () {
             },
         },
         rules: {
-            financial: { required: true },
+            entityUser: { required: true },
             txtLogin: { required: true, regex: /^[a-z0-9_]+$/, minlength: 6, maxlength: 20  },
             txtPassword: { required: true, minlength: 6, maxlength: 20 },
             txtConfirmPassword: { required: true, equalTo: "#txtPassword" },
@@ -86,5 +86,5 @@ $(document).ready(function () {
     RulesValidateCreate();
 
     var vrecruiter = new vRecruiterRegistration();
-    vrecruiter.FillFinancial();
+    vrecruiter.FillEntity();
 });

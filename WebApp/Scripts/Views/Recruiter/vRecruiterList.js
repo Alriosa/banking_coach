@@ -3,7 +3,7 @@
 	this.tblRecruiterId = 'tblRecruiter';
 	this.ctrlActions = new ControlActions();
 	this.service = 'recruiter';
-	this.columns = "RecruiterLogin,FinantialAssociationName,UserActiveStatus";
+	this.columns = "RecruiterLogin,Name,Email,EntityAssociationName,UserActiveStatus";
 
 	this.BindFields = function (data) {
 		localStorage.setItem('selectedID', data["RecruiterUserID"]);

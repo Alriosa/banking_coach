@@ -11,6 +11,7 @@ namespace DataAccess.Mapper
     public class StudentMapper : EntityMapper, ISqlStaments, IObjectMapper
     {
         private const string DB_COL_STUDENT_ID = "Student_ID";
+        private const string DB_COL_USER_BANKING_STUDENT = "Banking_Student";
         private const string DB_COL_USER_ACTIVE_STATUS = "User_Active_Status";
         private const string DB_COL_ENTRY_DATE = "Entry_Date";
         private const string DB_COL_FIRST_NAME = "First_Name";
@@ -21,6 +22,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_COUNTRY= "Country";
         private const string DB_COL_BIRTHDATE = "Birthdate";
         private const string DB_COL_AGE = "Age";
+        private const string DB_COL_SEX = "Sex";
         private const string DB_COL_EMAIL = "Email";
         private const string DB_COL_FIRST_PHONE_NUMBER = "Primary_Phone_Number";
         private const string DB_COL_SECOND_PHONE_NUMBER = "Second_Phone_Number";
@@ -51,6 +53,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_STUDENT" };
 
             var student = (Student)entity;
+            operation.AddVarcharParam(DB_COL_USER_BANKING_STUDENT, student.BankingStudent);
             operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS,student.UserActiveStatus);
             operation.AddVarcharParam(DB_COL_FIRST_NAME, student.FirstName);
             operation.AddVarcharParam(DB_COL_FIRST_LAST_NAME, student.FirstLastName);
@@ -60,6 +63,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_COUNTRY, student.Country);
             operation.AddDateTimeParam(DB_COL_BIRTHDATE,student.Birthdate);
             operation.AddIntParam(DB_COL_AGE,student.Age);
+            operation.AddVarcharParam(DB_COL_SEX, student.Sex);
             operation.AddVarcharParam(DB_COL_FIRST_PHONE_NUMBER, student.FirstPhoneNumber);
             operation.AddVarcharParam(DB_COL_SECOND_PHONE_NUMBER, student.SecondPhoneNumber);
             operation.AddVarcharParam(DB_COL_EMAIL,student.Email);
@@ -124,6 +128,7 @@ namespace DataAccess.Mapper
 
             var student = (Student)entity;
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
+            operation.AddVarcharParam(DB_COL_USER_BANKING_STUDENT, student.BankingStudent);
             operation.AddVarcharParam(DB_COL_FIRST_NAME, student.FirstName);
             operation.AddVarcharParam(DB_COL_FIRST_LAST_NAME, student.FirstLastName);
             operation.AddVarcharParam(DB_COL_SECOND_LAST_NAME, student.SecondLastName);
@@ -132,6 +137,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_COUNTRY, student.Country);
             operation.AddDateTimeParam(DB_COL_BIRTHDATE, student.Birthdate);
             operation.AddIntParam(DB_COL_AGE, student.Age);
+            operation.AddVarcharParam(DB_COL_SEX, student.Sex);
             operation.AddVarcharParam(DB_COL_FIRST_PHONE_NUMBER, student.FirstPhoneNumber);
             operation.AddVarcharParam(DB_COL_SECOND_PHONE_NUMBER, student.SecondPhoneNumber);
             operation.AddVarcharParam(DB_COL_EMAIL, student.Email);
@@ -209,6 +215,7 @@ namespace DataAccess.Mapper
             var student = new Student
             {
                 StudentID = GetIntValue(row, DB_COL_STUDENT_ID),
+                BankingStudent = GetStringValue(row, DB_COL_USER_BANKING_STUDENT),
                 UserActiveStatus = GetStringValue(row, DB_COL_USER_ACTIVE_STATUS),
                 FirstName = GetStringValue(row, DB_COL_FIRST_NAME),
                 FirstLastName = GetStringValue(row, DB_COL_FIRST_LAST_NAME),
@@ -218,6 +225,7 @@ namespace DataAccess.Mapper
                 Country = GetStringValue(row, DB_COL_COUNTRY),
                 Birthdate = GetDateValue(row,DB_COL_BIRTHDATE),
                 Age = GetIntValue(row,DB_COL_AGE),
+                Sex = GetStringValue(row, DB_COL_SEX),
                 Email = GetStringValue(row,DB_COL_EMAIL),
                 FirstPhoneNumber = GetStringValue(row, DB_COL_FIRST_PHONE_NUMBER),
                 SecondPhoneNumber = GetStringValue(row, DB_COL_SECOND_PHONE_NUMBER),

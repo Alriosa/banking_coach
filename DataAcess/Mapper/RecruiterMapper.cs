@@ -13,8 +13,10 @@ namespace DataAccess.Mapper
         private const string DB_COL_RECRUITER_USER_ID = "Recruiter_User_ID";
         private const string DB_COL_RECRUITER_LOGIN = "Recruiter_Login";
         private const string DB_COL_RECRUITER_PASSWORD = "Recruiter_Password";
-        private const string DB_COL_FINANTIAL_ASSOCIATION = "Finantial_Association";
-        private const string DB_COL_FINANTIAL_ASSOCIATION_NAME = "Finantial_Association_Name";
+        private const string DB_COL_RECRUITER_NAME = "Name";
+        private const string DB_COL_RECRUITER_EMAIL = "Email";
+        private const string DB_COL_ENTITY_ASSOCIATION = "Entity_Association";
+        private const string DB_COL_ENTITY_ASSOCIATION_NAME = "Entity_Association_Name";
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_RECRUITER_STATUS = "User_Active_Status";
         private const string DB_COL_USER_EXIST = "User_Login";
@@ -29,7 +31,9 @@ namespace DataAccess.Mapper
             var recruiter = (Recruiter)entity;
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
-            operation.AddIntParam(DB_COL_FINANTIAL_ASSOCIATION, recruiter.FinantialAssociation);
+            operation.AddVarcharParam(DB_COL_RECRUITER_NAME, recruiter.Name);
+            operation.AddVarcharParam(DB_COL_RECRUITER_EMAIL, recruiter.Email); 
+            operation.AddIntParam(DB_COL_ENTITY_ASSOCIATION, recruiter.EntityAssociation);
             operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
             return operation;
@@ -64,11 +68,12 @@ namespace DataAccess.Mapper
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_RECRUITER_USER_STATUS" };
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_RECRUITER_USER" };
 
             var recruiter = (Recruiter)entity;
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
-            operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
+            operation.AddVarcharParam(DB_COL_RECRUITER_NAME, recruiter.Name);
+            operation.AddVarcharParam(DB_COL_RECRUITER_EMAIL, recruiter.Email);
 
             return operation;
         }
@@ -78,7 +83,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_PASSWORD_TBL_RECRUITER" };
 
             var recruiter = (Recruiter)entity;
-            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
+            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
 
             return operation;
@@ -122,8 +127,10 @@ namespace DataAccess.Mapper
                 RecruiterUserID = GetIntValue(row, DB_COL_RECRUITER_USER_ID),
                 RecruiterLogin = GetStringValue(row, DB_COL_RECRUITER_LOGIN),
                 RecruiterPassword = GetStringValue(row, DB_COL_RECRUITER_PASSWORD),
-                FinantialAssociation = GetIntValue(row, DB_COL_FINANTIAL_ASSOCIATION),
-                FinantialAssociationName = GetStringValue(row, DB_COL_FINANTIAL_ASSOCIATION_NAME),
+                Name = GetStringValue(row, DB_COL_RECRUITER_NAME),
+                Email = GetStringValue(row, DB_COL_RECRUITER_EMAIL),
+                EntityAssociation = GetIntValue(row, DB_COL_ENTITY_ASSOCIATION),
+                EntityAssociationName = GetStringValue(row, DB_COL_ENTITY_ASSOCIATION_NAME),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS)
             };

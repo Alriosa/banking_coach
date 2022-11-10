@@ -116,7 +116,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "SysAdmin Modified."
+                    Message = "Administrador Modificado"
                 };
 
                 return Ok(apiResp);
@@ -160,7 +160,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "SysAdmin deleted."
+                    Message = "Administrador Eliminado"
                 };
 
                 return Ok(apiResp);

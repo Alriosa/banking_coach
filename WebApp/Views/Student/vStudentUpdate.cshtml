@@ -6,7 +6,9 @@
     ViewBag.Title = "vUpdateStudent";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    
+</style>
 <div class="home">
     <div class="container">
         <div class="row justify-content-between">
@@ -98,17 +100,17 @@
                                             @Html.CtrlInputSecond(id: "txtBirthdate", type: "date", required: true, placeHolder: "Fecha de Nacimiento", columnDataName: "Birthdate")
                                         </div>
                                     </div>
-                                    <div class="form-row ">
+                                    <div class="form-row">
                                         <div class="col-lg-12">
                                             <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <label class="input-group-text" for="inputGroupSelect01" id="labelGender">Género</label>
+                                                <div class="form-group input-group flex-column ">
+                                                    <label>Sexo</label>
+                                                    <select class="form-control w-100" id="txtSex" name="Sex" ColumnDataName="Sex">
+                                                        <option value="Masculino">Masculino</option>
+                                                        <option value="Femenino">Femenino</option>
+                                                        <option value="Otro">Otro</option>
+                                                    </select>
                                                 </div>
-                                                <select class="form-control" id="txtGender" name="Gender" ColumnDataName="Gender" required>
-                                                    <option value="F">Femenino</option>
-                                                    <option value="M">Masculino</option>
-                                                    <option value="O">Otro</option>
-                                                </select>
                                             </div>
                                         </div>
                                     </div>

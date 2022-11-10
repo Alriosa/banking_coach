@@ -3,14 +3,14 @@ var academicList = [];
 var courseList = [];
 var languageList = [];
 var referenceList = [];
-
+var dataStudent;
 function vStudentAccount() {
     this.ctrlActions = new ControlActions();
     var StudentProfileData = {};
     
 
     StudentProfileData = getCookie('user');
-    if (StudentProfileData != null) {
+    if (StudentProfileData != null || getCookie('type') != 2) {
         StudentProfileData = localStorage.getItem('selectedID');
     }
 
@@ -27,14 +27,14 @@ function vStudentAccount() {
         }
     }
 
-
-
     this.FillData = function (data) {
         let licences = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2"];
         let cont = -1;
        
         if (data != null) {
-            
+            if (getCookie('type') != 2) {
+                dataStudent = data;
+            }
             servicioData = {};
             this.ctrlActionsInto = new ControlActions();
             const [date] = formatDate(new Date(data["Birthdate"])).split(' ');
@@ -49,20 +49,12 @@ function vStudentAccount() {
                 if (array.includes(licences[cont])) {
                     $(this).prop("checked", true)
                 }
-
             })
-
 
             const dateInput = document.getElementById('txtBirthdate');
             dateInput.value = date;
             let name = data['FirstName'] + ' ' + data['FirstLastName'] + ' ' + data['SecondLastName'];
-            //document.querySelector('#P_WelcomeName').append(data['FirstName'] + ' ' + data['FirstLastName']);
 
-           // document.querySelector('#P_LaboralStatus').append(data['LaboralStatus']);
-            /*document.querySelector('#P_Workstation').append(data['Workstation']);
-            document.querySelector('#P_Experience').append(data['Experience']);
-            document.querySelector('#P_DriverLicenses').append(data['DriverLicenses']);
-            document.querySelector('#P_LaboralExperience').append(data['LaboralExperience']);*/
             document.querySelector('#P_JobAvailability').append(data['JobAvailability']);
             document.querySelector('#P_Id_Type').append(data['IdType']);
             document.querySelector('#P_DriverLicenses').append(data['DriverLicenses']);
@@ -71,78 +63,32 @@ function vStudentAccount() {
             document.querySelector('#P_Email').append(data['Email']);
             document.querySelector('#P_PhoneNumber').append(data['FirstPhoneNumber']);
             document.querySelector('#P_SecondPhoneNumber').append(data['SecondPhoneNumber']);
-            //document.querySelector('#P_Language').append(data['Language']);
             document.querySelector('#P_Vehicle').append(data['Vehicle']);
-            if (data['Type_Vehicle'] != null){
+            if (data['Type_Vehicle'] != null && data['Type_Vehicle'] != ""){
                 document.querySelector('#P_Type_Vehicle').append("Tipo: " + data['Type_Vehicle']);
             }
-            if (data['Country'] == "CR") {
-                $('.selectedCostaRica').show();
-                document.querySelector('#P_Location').append(data['NProvince'] + ", " + data['NCanton'] + ", " + data['NDistrict']);
-
-            } else {
-                $('.selectedCostaRica').hide();
-            }
-                
+            document.querySelector('#P_Location').append(data['NProvince'] + ", " + data['NCanton'] + ", " + data['NDistrict']);
 
             document.querySelector('#P_Country').append(data['Country']);
 
             document.querySelector('#P_Birthdate').append(formatDate(new Date(data['Birthdate'])));
             document.querySelector('#P_Age').append(data['Age']);
 
-
-
-            /*  document.querySelector('#P_Id_Type').append(data['IdType']);
-              document.querySelector('#P_Identification_Number').append(data['IdentificationNumber']);
-              document.querySelector('#P_Last_Name').append(data['LastName']);
-              document.querySelector('#P_Email').append(data['Email']);
-              document.querySelector('#P_Phone_Number').append(data['PhoneNumber']);
-              */
-            /*document.querySelector('#P_Second_Last_Name').append(data['SecondLastName']);
-            switch (data['IdType']) {
-                case "N":
-                    document.querySelector('#P_Id_Type').append("Nacional");
-
-                    break
-                case "P":
-                    document.querySelector('#P_Id_Type').append("Pasaporte");
-
-                    break;
-            }
-
-            document.querySelector('#P_Identification_Number').append(data['IdentificationNumber']);
-            document.querySelector('#P_Birthdate').append(data['Birthdate']);
-
-            
-            document.querySelector('#P_Primary_Phone').append(data['PrimaryPhone']);
-            document.querySelector('#P_Secondary_Phone').append(data['SecondaryPhone']);
-
-            if (data['LaboralExperience'] == "1") {
-                document.querySelector('#P_Laboral_Experience').append("Sí");
+            if (data['Vehicle'] == "Sí") {
+                $('.selectedVehicle').show();
             } else {
-                document.querySelector('#P_Laboral_Experience').append("No");
+                $('.selectedVehicle').hide();
             }
 
-            if (data['LaboralStatus'] == "1") {
-                document.querySelector('#P_LaboralStatus').append("Sí");
-            } else {
-                document.querySelector('#P_LaboralStatus').append("No");
-            }
-            document.querySelector('#P_Province').append(data['NProvince']);
-            document.querySelector('#P_Canton').append(data['NCanton']);
-            document.querySelector('#P_District').append(data['NDistrict']);
-
+            document.querySelector('#P_BankingStudent').append(data['BankingStudent']);
+            /*
             if (data['BankingStudent'] == "1") {
                 document.querySelector('#P_BankingStudent').append("Sí");
             } else {
                 document.querySelector('#P_BankingStudent').append("No");
             }*/
-
         }
     }
-
-
-
 
     this.Update = function () {
         var studentData = {};
@@ -157,11 +103,10 @@ function vStudentAccount() {
         studentData["StudentLogin"] = studentLogin;
         studentData["StudentID"] = id;
         
-        if (studentData["Country"] != "CR") {
-            studentData["Province"] = "";
-            studentData["Canton"] = "";
-            studentData["District"] = "";
+        if (studentData["Vehicle"] == "No") {
+            studentData["Type_Vehicle"] = "";
         }
+
         var array = [];
 
         var checkboxes = document.querySelectorAll('input[name=driverLicenses]:checked');
@@ -219,8 +164,40 @@ function vStudentAccount() {
         academicData = this.ctrlActions.GetDataForm('frmAddAcademic');
         academicData['DegreeType'] = $('input[name="rdDegreeType"]:checked').val();
         academicData["StudentID"] = document.getElementById("txtIdStudent").value;
+        var fileUpload = $("#txtCertificateA").get(0);
+        var files = fileUpload.files;
 
-        this.ctrlActions.PostToAPI('academic', academicData, function () {
+        var fileData = new FormData();
+
+        //fileData.append(files[0].name, files[0]);
+
+        if (fileUpload.files.length > 0) {
+            fileData.append("fileName", files[0].name);
+            fileData.append("file", files[0]);
+        }
+        fileData.append("academic", JSON.stringify(academicData));
+
+        $.ajax({
+            url: 'http://localhost:57056/api/academic',
+            type: 'post',
+            datatype: 'json',
+            contentType: false,
+            processData: false,
+            async: false,
+            data: fileData,
+            success: function (response) {
+                $('#addAcademic').modal('toggle');
+                this.ctrlActions2 = new ControlActions();
+                this.student = new vStudentAccount();
+
+                //setTimeout(function redirection() { location.reload; }, 5000);
+                this.ctrlActions2.GetById("academic/student/" + academicData["StudentID"], this.student.GetAcademic);
+                $('#addAcademic').modal('toggle');
+                $('.selectedFinishA').hide();
+
+            }
+        });
+        /*this.ctrlActions.PostToAPI('academic', academicData, function () {
             resetFormAcademic();
             this.ctrlActions2 = new ControlActions();
             this.student = new vStudentAccount();
@@ -228,7 +205,7 @@ function vStudentAccount() {
             //setTimeout(function redirection() { location.reload; }, 5000);
             this.ctrlActions2.GetById("academic/student/" + academicData["StudentID"], this.student.GetAcademic);
             $('#addAcademic').modal('toggle');
-        });
+        });*/
     }
 
     this.UpdateAcademic = function () {
@@ -249,13 +226,46 @@ function vStudentAccount() {
         });
     }
 
-
     this.CreateExtraCourse = function () {
         var courseData = {};
         courseData = this.ctrlActions.GetDataForm('frmAddCourse');
         courseData["StudentID"] = document.getElementById("txtIdStudent").value;
 
-        this.ctrlActions.PostToAPI('extracourse', courseData, function () {
+        var fileUpload = $("#txtCertificateC").get(0);
+        var files = fileUpload.files;
+
+        var fileData = new FormData();
+
+        //fileData.append(files[0].name, files[0]);
+
+        if (fileUpload.files.length > 0) {
+            fileData.append("fileName", files[0].name);
+            fileData.append("file", files[0]);
+        }
+        fileData.append("course", JSON.stringify(courseData));
+
+        $.ajax({
+            url: 'http://localhost:57056/api/extracourse',
+            type: 'post',
+            datatype: 'json',
+            contentType: false,
+            processData: false,
+            async: false,
+            data: fileData,
+            success: function (response) {
+                this.ctrlActions2 = new ControlActions();
+                this.student = new vStudentAccount();
+
+                //setTimeout(function redirection() { location.reload; }, 5000);
+                this.ctrlActions2.GetById("extracourse/student/" + courseData["StudentID"], this.student.GetCourse);
+                $('#addCourse').modal('toggle');
+                $('.selectedFinishC').hide();
+
+            }
+        });
+
+
+        /*this.ctrlActions.PostToAPI('extracourse', courseData, function () {
             resetFormCourse();
             this.ctrlActions2 = new ControlActions();
             this.student = new vStudentAccount();
@@ -263,7 +273,7 @@ function vStudentAccount() {
             //setTimeout(function redirection() { location.reload; }, 5000);
             this.ctrlActions2.GetById("extracourse/student/" + courseData["StudentID"], this.student.GetCourse);
             $('#addCourse').modal('toggle');
-        });
+        });*/
     }
 
     this.UpdateExtraCourse = function () {
@@ -292,7 +302,6 @@ function vStudentAccount() {
             resetFormReference();
             this.ctrlActions2 = new ControlActions();
             this.student = new vStudentAccount();
-
             //setTimeout(function redirection() { location.reload; }, 5000);
             this.ctrlActions2.GetById("reference/student/" + referenceData["StudentID"], this.student.GetReference);
             $('#addReference').modal('toggle');
@@ -348,7 +357,6 @@ function vStudentAccount() {
             $('#editLanguage').modal('toggle');
         });
     }
-
     
     this.ValidateInputsAddLaboral = function () {
         if ($("#frmAddLaboral").valid()) {
@@ -410,7 +418,6 @@ function vStudentAccount() {
         }
     }
 
-    
     this.GetLaboral = function (data) {
         let start = '';
         let end = '';
@@ -473,10 +480,8 @@ function vStudentAccount() {
                                             onclick="GetDataLaboral(${data[i].LaboralID})">
                                             Editar
                                         </button>
-
                                         <button class="btn btn-orange my-2"
                                             style="width: 170px;"  onclick="DeleteLaboral(${data[i].LaboralID})">
-                                              
                                             Eliminar
                                         </button>
                                     </div>
@@ -487,14 +492,13 @@ function vStudentAccount() {
             }
             document.getElementById("listLaboral").innerHTML = text2;
             $("#infoProgress").width($("#infoProgress").width() + 100);
-
         } else {
             document.getElementById("listLaboral").innerHTML = "Sin experiencia laboral";
-            $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
-            $('#profileContent').append("Sin experiencia laboral"); 
+            
+            $('#profileContent').append("Sin experiencia laboral");
+            $("#infoProgress").width($("#infoProgress").width() - 100);
 
         }
-
     }
 
     this.GetAcademic = function (data) {
@@ -502,9 +506,9 @@ function vStudentAccount() {
         let end = '';
 
         let text2 = '';
+        academicList = [];
         if (data.length > 0) {
             academicList = data;
-
             for (let i in data) {
 
                 start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
@@ -515,6 +519,14 @@ function vStudentAccount() {
                     end = new Date(data[i].EndDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
 
                 }
+                let btnDownload = "";
+                if (data[i].Certificate_File != null && data[i].Certificate_File != "") {
+                    btnDownload = `<button class="btn btn-orange my-2" type="button" style="width: 170px;padding: 0 10px;"
+                                                onclick="DownlandCertificateAcademic('${data[i].Certificate_File}', '${data[i].Certificate_Name}')">
+                                                Descargar Certificado
+                                            </button>`;
+                } 
+
                 text2 += `<div class="card-academic">
                                <div class="container">
                                     <div class="row">
@@ -551,8 +563,8 @@ function vStudentAccount() {
                                                 onclick="DeleteAcademic(${data[i].AcademicID})"
                                                 >
                                                 Eliminar
-                                            
-                                            </button> 
+                                            </button>
+                                           ${btnDownload}
                                         </div>
                                     </div>
                                 </div>
@@ -561,11 +573,9 @@ function vStudentAccount() {
             }
             document.getElementById("listAcademic").innerHTML = text2;
             $("#infoProgress").width($("#infoProgress").width() + 100);
-
         } else {
             document.getElementById("listAcademic").innerHTML = "Sin experiencia académica";
             $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
-
         }
     }
 
@@ -574,11 +584,11 @@ function vStudentAccount() {
         let start = '';
         let end = '';
         let text2 = '';
+        courseList = [];
         if (data.length > 0) {
             courseList = data;
 
         for (let i in data) {
-
             start = new Date(data[i].StartDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
             let endIsNull = new Date(data[i].EndDate);
             if (endIsNull.getFullYear() == 1900) {
@@ -586,6 +596,15 @@ function vStudentAccount() {
             } else {
                 end = new Date(data[i].EndDate).toLocaleDateString('es-us', { year: "numeric", month: "long" });
             }
+
+            let btnDownload = "";
+            if (data[i].Certificate_File != null && data[i].Certificate_File != "") {
+                btnDownload = `<button class="btn btn-orange my-2" type="button" style="width: 170px;padding: 0 10px;"
+                                                onclick="DownlandCertificateCourse('${data[i].Certificate_File}', '${data[i].Certificate_Name}')">
+                                                Descargar Certificado
+                                            </button>`;
+            }
+
             text2 += `<div class="card-course">
                            <div class="container">
                                 <div class="row">
@@ -599,7 +618,6 @@ function vStudentAccount() {
                                                 <strong>${data[i].Institution}</strong>
                                                 <span> ${start} - ${end}</span>
                                             </li>
-                                            
                                             <li style="list-style-type: none;">
                                                 ${data[i].CourseName}
                                             </li>
@@ -619,8 +637,8 @@ function vStudentAccount() {
                                             onclick="DeleteCourse(${data[i].CourseID})"
                                             >
                                             Eliminar
-                                            
-                                        </button> 
+                                        </button>
+                                            ${btnDownload}
                                     </div>
                                 </div>
                             </div>
@@ -629,21 +647,19 @@ function vStudentAccount() {
         }
             document.getElementById("listCourse").innerHTML = text2;
             $("#infoProgress").width($("#infoProgress").width() + 100);
-
         } else {
             document.getElementById("listCourse").innerHTML = "Sin educación extracurricular";
-            $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
-
+        $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
         }
     }
 
     this.GetReference = function (data) {
         let text2 = '';
+        referenceList = [];
+        $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
         if (data.length > 0) {
             referenceList = data;
-
             for (let i in data) {
-
                 text2 += `<div class="card-reference">
                                <div class="container">
                                     <div class="row">
@@ -652,7 +668,6 @@ function vStudentAccount() {
                                                 <li style="list-style-type: none;">
                                                     ${data[i].ReferrerName}
                                                 </li>
-                                            
                                                 <li style="list-style-type: none;">
                                                     ${data[i].Workstation}
                                                 </li>
@@ -675,7 +690,6 @@ function vStudentAccount() {
                                                 onclick="DeleteReference(${data[i].ReferenceID})"
                                                 >
                                                 Eliminar
-                                            
                                             </button> 
                                         </div>
                                     </div>
@@ -685,19 +699,17 @@ function vStudentAccount() {
             }
             document.getElementById("listReference").innerHTML = text2;
             $("#infoProgress").width($("#infoProgress").width() + 100);
-
         }
         else {
             document.getElementById("listReference").innerHTML = "Sin referencias";
             $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
-
         }
-        
     }
-
 
     this.GetLanguages = function (data) {
         let text2 = '';
+        languageList = [];
+        $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
         if (data.length > 0) {
             languageList = data;
             for (let i in data) {
@@ -710,13 +722,10 @@ function vStudentAccount() {
                                             <i class="fa-solid fa-earth-americas"></i>
                                         </div>
                                         <div class="col-lg-9">
-
                                             <ul class="unstyled" style="padding: 0;">
-
                                                 <li style="list-style-type: none;">
                                                     <strong>${data[i].LanguageName}</strong>
                                                 </li>
-                                            
                                                 <li style="list-style-type: none;">
                                                     ${data[i].Level}
                                                 </li>
@@ -733,7 +742,6 @@ function vStudentAccount() {
                                                 onclick="DeleteLanguage(${data[i].LanguageID})"
                                                 >
                                                 Eliminar
-                                            
                                             </button> 
                                         </div>
                                     </div>
@@ -743,17 +751,12 @@ function vStudentAccount() {
             }
             document.getElementById("listLanguages").innerHTML = text2;
             $("#infoProgress").width($("#infoProgress").width() + 100);
-
         }
         else {
             document.getElementById("listLanguages").innerHTML = "Sin idiomas";
-            $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
-
+          //  $("#infoProgress").outerWidth($("#infoProgress").width() - 100);
         }
-
     }
-
-    
 }
  
 function padTo2Digits(num) {
@@ -795,8 +798,6 @@ function resetFormEditLanguage() {
     $("#frmEditLanguage")[0].reset();
 }
 
-
-
 function formatDate(date) {
     return ([
         date.getFullYear(),
@@ -825,7 +826,6 @@ FillDataFormLaboral = function (data) {
         document.querySelector('#txtEditEndDate').value = "";
     } else {
         document.querySelector('#txtEditEndDate').value = formatDateStringMonths(data['EndDate']);
-
     }
 }
 
@@ -1056,7 +1056,7 @@ function getEdad(dateString) {
 
 $(document).ready(function () {
     $(function () {
-       
+
 
         var showCanton = function (selectedProvince) {
             $('#txtCanton option').hide();
@@ -1096,7 +1096,7 @@ $(document).ready(function () {
         $('#txtCanton').change(function () {
             showDistrict($(this).val());
         });
-        
+
         $('#txtDistrict').change(function () {
 
         });
@@ -1167,75 +1167,89 @@ $(document).ready(function () {
         $('html, body').animate({ scrollTop: 0 }, '300');
     });
 
-    $("#downloadCV").click(function () {
-        DowlandCV();
+    $("#downloadCV").click(async function () {
+
+        await DowlandCV();
+       $('.bg-gray').css("color", "white");
+
     });
+
+    $("#txtVehicle").change(function () {
+        if ($('#txtVehicle').val() == "Sí") {
+            $('.selectedVehicle').show();
+        } else {
+            $('.selectedVehicle').hide();
+        }
+    });
+   
 
 })
 
 
-function DowlandCV() {
+
+function DownlandCertificateCourse(url, fileName) {
+
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.setAttribute("download", fileName);
+    anchor.setAttribute('target', '_blank');
+
+    anchor.click();
+    /*
+        URL.revokeObjectURL(href);*/
+
+    /*$.ajax({
+        url: url,
+        type: "get",
+        contentType: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.log(response);
+        }
+    })*/
+}
+
+
+function DownlandCertificateAcademic(url, fileName) {
+
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.setAttribute("download", fileName);
+    anchor.setAttribute('target', '_blank');
+
+    anchor.click();
+/*
+    URL.revokeObjectURL(href);*/
+
+    /*$.ajax({
+        url: url,
+        type: "get",
+        contentType: false,
+        processData: false,
+        async: false,
+        success: function (response) {
+            console.log(response);
+        }
+    })*/  
+}
+
+async function DowlandCV() {
+
+    $('.bg-gray').css("color", "black");
+
+
     var doc = new jspdf();
-    /*doc.text(20, 20, 'Hola mundo');
-    doc.text(20, 30, 'Vamos a generar un pdf desde el lado del cliente');
+    var studentProfileData;
+    if (getCookie('type') == 2) {
+        studentProfileData = JSON.parse(getCookie('user'));
+    } else if (getCookie('type') == 1) {
+        studentProfileData = dataStudent;
+    }
 
-    // Add new page
-    doc.addPage();
-    doc.text(20, 20, 'Visita programacion.net');
-
-    // Save the PDF
-    doc.save('documento.pdf');*/
-    doc.setFontSize(18);
-    doc.setTextColor(0, 170, 228);
-    doc.setFontType("bold");
-    doc.text('CURRICULUM VITAE', 70, 20, { align: 'center' });
-
-    doc.setFont("helvetica");
-
-    doc.setFontSize(16);
-    doc.setTextColor(0, 170, 228);
-    doc.setFontType("bold");
-    doc.text('Información personal', 80, 35, { align: 'center' });
-
-    var elementHTML = $('#my_info').html();
-    var specialElementHandlers = {
-        '#elementH': function (element, renderer) {
-            return true;
-        }
-        
-    };
-
-    doc.setFont("helvetica");
-
-    doc.fromHTML(elementHTML, 20, 50, {
-        'width': 170,
-        'elementHandlers': specialElementHandlers
-    });
-
-    doc.addPage();
-
-    doc.setFontSize(16);
-    doc.setTextColor(0, 170, 228);
-    doc.setFontType("bold");
-    doc.text('Mi Perfil Profesional', 80, 20, { align: 'center' });
-
-    var elementHTML = $('#profileContentContainer').html();
-    var specialElementHandlers = {
-        '#elementH': function (element, renderer) {
-            return true;
-        }
-        
-    };
-    doc.fromHTML(elementHTML, 20, 25, {
-        'width': 170,
-        'elementHandlers': specialElementHandlers
-    });
+    var nameFile = studentProfileData["FirstName"] + " " + studentProfileData["FirstLastName"] + " " + studentProfileData["SecondLastName"] + ".pdf";
 
 
-    doc.setFontSize(16);
-    doc.setTextColor(0, 170, 228);
-    doc.setFontType("bold");
-    doc.text('Experiencia', 90, 50, { align: 'center' });
     elementHTML = "";
     var laboral = laboralList;
     for (let i in laboral) {
@@ -1254,10 +1268,10 @@ function DowlandCV() {
         doc.text(20, 60 + (i * 20), text);
     }
 
-    doc.setFontSize(16);
+    /*doc.setFontSize(16);
     doc.setTextColor(0, 170, 228);
     doc.setFontType("bold");
-    doc.text('Formación Educativa', 80, 120, { align: 'center' });
+    doc.text('Formación Educativa', 80, 120, { align: 'center' });*/
 
     var academic = academicList;
     for (let i in academic) {
@@ -1276,11 +1290,11 @@ function DowlandCV() {
         doc.text(20, 135 + (i * 20), text);
     }
 
-    doc.setFontSize(16);
+    /*doc.setFontSize(16);
     doc.setTextColor(0, 170, 228);
     doc.setFontType("bold");
-    doc.text('Otros Cursos', 90, 190, { align: 'center' });
-
+    doc.text('Otros Cursos', 90, 190, { align: 'center' });*/
+    
     var course = courseList;
     for (let i in course) {
         doc.setFontSize(12);
@@ -1298,12 +1312,12 @@ function DowlandCV() {
         doc.text(20, 200 + (i * 20), text);
     }
 
-    doc.addPage();
+    /*doc.addPage();
 
     doc.setFontSize(16);
     doc.setTextColor(0, 170, 228);
     doc.setFontType("bold");
-    doc.text('Idiomas', 94, 20, { align: 'center' });
+    doc.text('Idiomas', 94, 20, { align: 'center' });*/
 
     var language = languageList;
     for (let i in language) {
@@ -1315,10 +1329,10 @@ function DowlandCV() {
         doc.text(20, 30 + (i * 15), text);
     }
 
-    doc.setFontSize(16);
+    /*doc.setFontSize(16);
     doc.setTextColor(0, 170, 228);
     doc.setFontType("bold");
-    doc.text('Referencias', 90, 70, { align: 'center' });
+    doc.text('Referencias', 90, 70, { align: 'center' });*/
 
     var reference = referenceList;
     for (let i in reference) {
@@ -1330,11 +1344,24 @@ function DowlandCV() {
         doc.text(20, 90 + (i * 15), text);
     }
 
-    // Save the PDF
-    //doc.save('sample-document.pdf');
+    container = document.createElement('div');
 
 
-     container = document.createElement('div');
+    doc.setFontSize(18);
+    doc.setTextColor(0, 170, 228);
+    doc.setFontType("bold");
+    doc.text('CURRICULUM VITAE', 70, 20, { align: 'center' });
+
+
+    let title = document.createElement('h3');
+    title.textContent = "CURRICULUM VITAE";
+    title.style.textAlign = 'center';
+
+
+    let image = document.createElement("img");
+    image.src = "../../Content/Logos/Imagotipo Banking Academy 2.png";
+    image.width = "50px";
+
 
     //clone is required because otherwise you alter the current page.
     let titleInfo = document.createElement('h5');
@@ -1391,7 +1418,6 @@ function DowlandCV() {
         liLaboral.append(d1);
         containerLaboral.append(liLaboral);
         containerLaboral.style.margin = "0 30px";
-
     }
 
     containerAcademic = document.createElement('ul');
@@ -1418,7 +1444,6 @@ function DowlandCV() {
         liAcademic.append(d1);
         containerAcademic.append(liAcademic);
         containerAcademic.style.margin = "0 30px";
-
     }
 
     containerCourse = document.createElement('ul');
@@ -1446,9 +1471,7 @@ function DowlandCV() {
         liCourse.append(d1);
         containerCourse.append(liCourse);
         containerCourse.style.margin = "0 30px";
-
     }
-
 
     containerLanguage = document.createElement('ul');
     var language = languageList;
@@ -1469,7 +1492,6 @@ function DowlandCV() {
         containerLanguage.style.margin = "0 30px";
     }
 
-
     containerReference = document.createElement('ul');
     var reference = referenceList;
     for (let i in reference) {
@@ -1487,18 +1509,22 @@ function DowlandCV() {
         liReference.append(d1);
         containerReference.append(liReference);
         containerReference.style.margin = "0 30px";
-
     }
 
-
     //remove some css browser might set.
-    container.style.margin = '40px 25px';
+    container.style.margin = '40px 35px';
     container.style.padding = '25px';
     container.style.display = "inline";
     container.style.fontFamily = "arial";
     container.style.fontSize = "12px";
     container.style.lineHeight = "1.2";  //important for knowing break lines.
 
+    //container.append(image);
+
+    var img = document.getElementById("logo");
+
+    container.append(img);
+    container.append(title);
     container.append(titleInfo);
     container.append(cloneInfo);
     container.append(titleProfile);
@@ -1530,7 +1556,7 @@ function DowlandCV() {
 
     var opt = {
         margin: 2,
-        filename: 'myfile.pdf',
+        filename: nameFile,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -1538,6 +1564,9 @@ function DowlandCV() {
 
     // New Promise-based usage:
     html2pdf(container, opt);
+
+
+    //html2pdf().set(opt).from(container).save();
 
 }
 

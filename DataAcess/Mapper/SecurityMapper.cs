@@ -16,6 +16,8 @@ namespace DataAcess.Mapper
         private const string DB_COL_USER_LOGIN = "User_Login";
         private const string DB_COL_USER_PASSWORD = "User_Password";
         private const string DB_COL_USER_TYPE = "User_Type";
+        private const string DB_COL_USER_NAME = "Name";
+        private const string DB_COL_USER_EMAIL = "Email";
         private const string DB_COL_USER_ACTIVE_STATUS = "User_Active_Status";
         private const string DB_COL_RESULT = "Result";
 
@@ -63,6 +65,8 @@ namespace DataAcess.Mapper
             {
                 UserLogin = GetStringValue(row, DB_COL_USER_LOGIN),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                Name = GetStringValue(row, DB_COL_USER_NAME),
+                Email = GetStringValue(row, DB_COL_USER_EMAIL),
                 UserActiveStatus = GetStringValue(row, DB_COL_USER_TYPE),
                 Result = GetStringValue(row, DB_COL_RESULT),
             };

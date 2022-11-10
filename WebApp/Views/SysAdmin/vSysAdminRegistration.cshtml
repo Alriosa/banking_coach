@@ -5,60 +5,62 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <div class="home">
     <div class="container">
         <div class="row text-center justify-content-between">
             <div class="col-lg-5 col-sm-11">
-                <div class=" text-box">
-                    <h1 class="home-title">BOLSA DE EMPLEO</h1>
+                <div class="page-title text-box">
+                    <h1>REGISTRA A UN ADMINISTRADORR</h1>
                     <p class="subtitle home-subtitle-1">
-                        En está sección, todos los estudiantes podrán subir sus hojas de vida,
-                        para ser evaluados por los reclutadores de entidades financieras
+                        En está sección, puede registrar a un nuevo administrador
                     </p>
-                    <p class="subtitle home-subtitle-2">Exclusiva para egresados de Banking Coach</p>
                 </div>
             </div>
             <div class="col-lg-6 col-sm-11">
-                <img class="img" src="~/Content/imgs/Empleo.jpg" alt="">
-
+                <img class="img" src="~/Content/imgs/Empleo2.jpg" alt="">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="text-center my-4">
-
-                            <h1 class="form-title">REGISTRA A UN ADMINISTRADOR</h1>
-                        </div>
-                        <form id="frmSysAdminCreate" class="form frmSysAdminCreate"action="" method="post">
-                            <div class="row align-content-sm-center">
-
-                                <div class="col-sm-12">
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtLogin", type: "text", required: true, placeHolder: "Nombre de Usuario", columnDataName: "AdminLogin")
-                                        </div>
+                        <form id="frmSysAdminCreate" class="form frmSysAdminCreate">
+                            <div class="col-sm-12 text-center">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtName", type: "text", required: true, placeHolder: "Nombre Completo", columnDataName: "Name")
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-lg-12">
-                                            @Html.CtrlInputSecond(id: "txtPassword", type: "password", required: true, placeHolder: "Nueva Contraseña", columnDataName: "AdminPassword")
-                                        </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtEmail", type: "email", required: true, placeHolder: "Correo electrónico", columnDataName: "Email")
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-lg-12">
-                                             @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", required: true, placeHolder: "Confirmar Contraseña", columnDataName: "")
-                                         </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", required: true, placeHolder: "Nombre de Usuario", columnDataName: "AdminLogin")
                                     </div>
-                                    <div class="form-row" style="margin: 10px auto;">
-                                        <div style="margin: 0px auto 10px;">
-                                            @Html.CtrlButton(viewName: "vSysAdminRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
-                                        </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtPassword", type: "password", required: true, placeHolder: "Nueva Contraseña", columnDataName: "AdminPassword")
                                     </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", required: true, placeHolder: "Confirmar Contraseña", columnDataName: "")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin: 0px auto;">
+                                <div style="margin: 0px auto 10px;">
+                                    @Html.CtrlButton(viewName: "vSysAdminRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
                                 </div>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 
+</div>
 

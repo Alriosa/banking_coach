@@ -3,7 +3,7 @@
 	this.tblSysAdminId = 'tblSysAdmin';
 	this.ctrlActions = new ControlActions();
 	this.service = 'sysadmin';
-	this.columns = "AdminLogin,UserActiveStatus";
+	this.columns = "AdminLogin,Name,Email,UserActiveStatus";
 
 	this.BindFields = function (data) {
 		localStorage.setItem('selectedID', data["SysAdminUserID"]);

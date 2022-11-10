@@ -6,9 +6,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<button id="profileStudent">Ver perfil de estudiante seleccionado</button>
-<button id="updateStudent">Actualizar estudiante seleccionado</button>
-<button id="removeStudent">Eliminar estudiante seleccionado</button>
+<button class="btn btn-orange" id="profileStudent">Ver perfil de estudiante seleccionado</button>
+<button class="btn btn-orange" id="updateStudent">Actualizar estudiante seleccionado</button>
+<button  class="btn btn-orange" id="removeStudent">Eliminar estudiante seleccionado</button>
 
 <div style="margin-top: 20px;" id="studentList" class="d-inline">
     @Html.CtrlTable(viewName: "vStudentList", id: "tblStudent", title: "Estudiantes",

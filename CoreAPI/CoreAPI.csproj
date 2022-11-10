@@ -48,7 +48,7 @@
     <Compile Include="LanguageManager.cs" />
     <Compile Include="ReferenceManager.cs" />
     <Compile Include="ViewPermissionManager.cs" />
-    <Compile Include="FinancialUserManager.cs" />
+    <Compile Include="EntityUserManager.cs" />
     <Compile Include="ListManager.cs" />
     <Compile Include="CustomerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,7 +14,7 @@ namespace WebApp.Models.Controls
         public string OptionsActionName { get; set; }
         private SysAdmin A { get; set; }
         private Student S { get; set; }
-        private FinancialUser F { get; set; }
+        private EntityUser F { get; set; }
         private Recruiter R { get; set; }
 
         private string user_type { get; set; }

@@ -1,6 +1,30 @@
-﻿.navbar-light .navbar-nav .nav-link {
-    color: rgb(0 0 0);
+﻿@font-face {
+    font-family: "Lato-Black";
+    src: url('../fonts/Encabezados/Lato-Black.ttf') format('truetype'), /* Safari, Android, iOS */
 }
+
+
+@font-face {
+    font-family: "Fira";
+    src: url('../fonts/Parrafos/FiraSans-Regular.otf') format('opentype'), /* Safari, Android, iOS */
+}
+
+
+h1, h2, h3 {
+    font-family: 'Lato-Black', Arial, sans-serif;
+}
+
+
+p {
+    font-family: 'Fira', Arial, sans-serif;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: #ffffffd4;
+    }
 
 body {
     padding-top: 50px;
@@ -88,4 +112,10 @@ input[name="driverLicenses"] {
 
 .form-control {
     color: #000;
+}
+
+
+.navbar-dark a:hover, .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+    color: #f37b24;
+    text-decoration: underline;
 }

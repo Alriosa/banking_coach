@@ -1,10 +1,10 @@
 ﻿function vRecruiterAccount() {
     this.ctrlActions = new ControlActions();
     var RecruiterProfileData = {};
-    RecruiterProfileData = getCookie('user');;
+    RecruiterProfileData = getCookie('user');
     if (RecruiterProfileData != null) {
         RecruiterProfileData = localStorage.getItem('selectedID');
-    }
+    
     }
 
     this.GetData = function () {
@@ -16,9 +16,8 @@
     }
 
     this.FillData = function (data) {
-       
+    console.log(data);
     }
-
 
 }
 

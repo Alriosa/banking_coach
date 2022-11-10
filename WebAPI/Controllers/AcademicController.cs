@@ -1,12 +1,15 @@
 ﻿using CoreAPI;
 using Entities_POJO;
 using Exceptions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+//using System.Text.Json;
 using System.Web;
 using System.Web.Http;
 using WebAPI.Models;
@@ -78,30 +81,48 @@ namespace WebAPI.Controllers
 
 
         [Route("")]
-        public IHttpActionResult Post(Academic academic)
+        public IHttpActionResult Post()
         {
             try
             {
                 apiResp = new ApiResponse();
-
                 var mng = new AcademicManager();
 
                 Random rnd = new Random();
-
                 int rndx = rnd.Next(0, 1000);
 
-                string extension = Path.GetExtension(academic.Certificate_Name);
-                string fname = Path.GetFileName(academic.Certificate_Name);
-                academic.Certificate_Name = fname;
+                //Fetch the File Name.
+                string fileName = HttpContext.Current.Request.Form["fileName"];
+                string academicPost = HttpContext.Current.Request.Form["academic"];
+                var settings = new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ" };
 
-                var folder = HttpContext.Current.Server.MapPath("~/Certificados/" + rndx);
-                if (!Directory.Exists(folder))
+                var a = JObject.Parse(academicPost);
+                if (string.IsNullOrEmpty(a["EndDate"].ToString()))
                 {
-                    Directory.CreateDirectory(folder);
-                    string filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Certificados/" + rndx), rndx + "_" + "_" + "_" + extension);
-                    academic.Certificate_File = filePath;
+                    a["EndDate"] = DateTime.MinValue;
                 }
 
+                Academic academic = JsonConvert.DeserializeObject<Academic>(a.ToString());
+
+                if (fileName != null && fileName != "")
+                {
+                    //Create the Directory.
+                    string api = "http://localhost:57056/Uploads/" + rndx + "/";
+                    string path = HttpContext.Current.Server.MapPath("~/Uploads/" + rndx);
+                    string filePath = "";
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                        filePath = Path.Combine(path, rndx + "_" + fileName);
+                        academic.Certificate_File = Path.Combine(api, rndx + "_" + fileName); ;
+                        academic.Certificate_Name = fileName;
+                    }
+
+                    //Fetch the File.
+                    HttpPostedFile postedFile = HttpContext.Current.Request.Files[0];
+                    //Save the File.
+                    postedFile.SaveAs(filePath);
+                }
 
                 if (academic.EndDate == DateTime.MinValue)
                 {

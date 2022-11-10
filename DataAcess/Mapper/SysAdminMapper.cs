@@ -13,6 +13,8 @@ namespace DataAccess.Mapper
         private const string DB_COL_SYS_ADMIN_USER_ID = "Sys_Admin_User_ID";
         private const string DB_COL_ADMIN_LOGIN = "Admin_Login";
         private const string DB_COL_ADMIN_PASSWORD = "Admin_Password";
+        private const string DB_COL_ADMIN_NAME = "Name";
+        private const string DB_COL_ADMIN_EMAIL = "Email"; 
         private const string DB_COL_ADMIN_STATUS = "User_Active_Status";
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_USER_EXIST = "User_Login";
@@ -25,6 +27,8 @@ namespace DataAccess.Mapper
             var sysAdmin = (SysAdmin)entity;
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
             operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
+            operation.AddVarcharParam(DB_COL_ADMIN_NAME, sysAdmin.Name);
+            operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
             operation.AddVarcharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
 
             return operation;
@@ -65,7 +69,8 @@ namespace DataAccess.Mapper
 
             var sysAdmin = (SysAdmin)entity;
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
-            operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
+            operation.AddVarcharParam(DB_COL_ADMIN_NAME, sysAdmin.Name);
+            operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
 
             return operation;
         }
@@ -141,8 +146,27 @@ namespace DataAccess.Mapper
                 SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
                 AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
                 AdminPassword = GetStringValue(row, DB_COL_ADMIN_PASSWORD),
+                Name = GetStringValue(row, DB_COL_ADMIN_NAME),
+                Email = GetStringValue(row, DB_COL_ADMIN_EMAIL),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 UserActiveStatus= GetStringValue(row, DB_COL_ADMIN_STATUS)
+            };
+
+            return sysAdmin;
+        }
+
+
+        public BaseEntity BuildObjectLogin(Dictionary<string, object> row)
+        {
+            var sysAdmin = new SysAdmin
+            {
+                SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
+                AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
+                User_Login = GetStringValue(row, DB_COL_USER_EXIST),
+                Name = GetStringValue(row, DB_COL_ADMIN_NAME),
+                Email = GetStringValue(row, DB_COL_ADMIN_EMAIL),
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                UserActiveStatus = GetStringValue(row, DB_COL_ADMIN_STATUS)
             };
 
             return sysAdmin;

@@ -5,10 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using WebAPI.Models;
+using System.Web;
+using System.IO;
 
 namespace WebAPI.Controllers
 {
@@ -75,14 +79,50 @@ namespace WebAPI.Controllers
 
 
         [Route("")]
-        public IHttpActionResult Post(ExtraCourse extraCourse)
+        public IHttpActionResult Post()
         {
             try
             {
                 apiResp = new ApiResponse();
 
                 var mng = new ExtraCourseManager();
-                
+
+                Random rnd = new Random();
+                int rndx = rnd.Next(0, 1000);
+
+                //Fetch the File Name.
+                string fileName = HttpContext.Current.Request.Form["fileName"];
+                string coursePost = HttpContext.Current.Request.Form["course"];
+                var settings = new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ" };
+
+                var c = JObject.Parse(coursePost);
+                if (string.IsNullOrEmpty(c["EndDate"].ToString()))
+                {
+                    c["EndDate"] = DateTime.MinValue;
+                }
+
+                ExtraCourse extraCourse = JsonConvert.DeserializeObject<ExtraCourse>(c.ToString());
+
+                if (fileName != null && fileName != "")
+                {
+                    //Create the Directory.
+                    string api = "http://localhost:57056/Uploads/" + rndx + "/";
+                    string path = HttpContext.Current.Server.MapPath("~/Uploads/" + rndx);
+                    string filePath = "";
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                        filePath = Path.Combine(path, rndx + "_" + fileName);
+                        extraCourse.Certificate_File = Path.Combine(api, rndx + "_" + fileName); ;
+                        extraCourse.Certificate_Name = fileName;
+                    }
+
+                    //Fetch the File.
+                    HttpPostedFile postedFile = HttpContext.Current.Request.Files[0];
+                    //Save the File.
+                    postedFile.SaveAs(filePath);
+                }
+
                 if (extraCourse.EndDate == DateTime.MinValue)
                 {
                     //DateTime is null

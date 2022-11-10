@@ -14,7 +14,8 @@ namespace DataAcess.Mapper
         private const string DB_COL_COURSE_ID = "Course_ID";
         private const string DB_COL_INSTITUTION = "Institution";
         private const string DB_COL_COURSE_NAME = "Course_Name";
-        private const string DB_COL_CERTIFICATE = "Certificate";
+        private const string DB_COL_CERTIFICATE_NAME = "Certificate_Name";
+        private const string DB_COL_CERTIFICATE_FILE = "Certificate_File";
         private const string DB_COL_STATUS = "Status";
         private const string DB_COL_START_DATE = "Start_Date";
         private const string DB_COL_END_DATE = "End_Date";
@@ -29,7 +30,8 @@ namespace DataAcess.Mapper
 
             operation.AddVarcharParam(DB_COL_INSTITUTION, extraCourse.Institution);
             operation.AddVarcharParam(DB_COL_COURSE_NAME, extraCourse.CourseName);
-            operation.AddVarcharParam(DB_COL_CERTIFICATE, extraCourse.Certificate);
+            operation.AddVarcharParam(DB_COL_CERTIFICATE_NAME, extraCourse.Certificate_Name);
+            operation.AddVarcharParam(DB_COL_CERTIFICATE_FILE, extraCourse.Certificate_File);
             operation.AddVarcharParam(DB_COL_STATUS, extraCourse.Status);
             operation.AddDateTimeParam(DB_COL_START_DATE, extraCourse.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, extraCourse.EndDate);
@@ -73,7 +75,8 @@ namespace DataAcess.Mapper
             operation.AddIntParam(DB_COL_COURSE_ID, extraCourse.CourseID);
             operation.AddVarcharParam(DB_COL_INSTITUTION, extraCourse.Institution);
             operation.AddVarcharParam(DB_COL_COURSE_NAME, extraCourse.CourseName);
-            operation.AddVarcharParam(DB_COL_CERTIFICATE, extraCourse.Certificate);
+            operation.AddVarcharParam(DB_COL_CERTIFICATE_NAME, extraCourse.Certificate_Name);
+            operation.AddVarcharParam(DB_COL_CERTIFICATE_FILE, extraCourse.Certificate_File);
             operation.AddVarcharParam(DB_COL_STATUS, extraCourse.Status);
             operation.AddDateTimeParam(DB_COL_START_DATE, extraCourse.StartDate);
             operation.AddDateTimeParam(DB_COL_END_DATE, extraCourse.EndDate);
@@ -98,7 +101,8 @@ namespace DataAcess.Mapper
                 Institution = GetStringValue(row, DB_COL_INSTITUTION),
                 CourseName = GetStringValue(row, DB_COL_COURSE_NAME),
                 Status = GetStringValue(row, DB_COL_STATUS),
-                Certificate = GetStringValue(row, DB_COL_CERTIFICATE),
+                Certificate_Name = GetStringValue(row, DB_COL_CERTIFICATE_NAME),
+                Certificate_File = GetStringValue(row, DB_COL_CERTIFICATE_FILE),
                 StartDate = GetDateValue(row, DB_COL_START_DATE),
                 EndDate = GetDateValue(row, DB_COL_END_DATE),
                 EntryDate = GetDateValue(row, DB_COL_ENTRY_DATE),

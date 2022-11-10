@@ -5,11 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<button id="profileAdmin">Ver perfil de administrador seleccionado</button>
-<button id="updateAdmin">Actualizar administrador seleccionado</button>
-<button id="removeAdmin">Eliminar administrador seleccionado</button>
+<button class="btn btn-orange" id="updateAdmin">Actualizar administrador seleccionado</button>
+<button class="btn btn-orange" id="removeAdmin">Eliminar administrador seleccionado</button>
 
 <div style="margin-top: 20px;" id="sysAdminList" class="d-inline">
     @Html.CtrlTable(viewName: "vSysAdminList", id: "tblSysAdmin", title: "Administradores del sistema",
-    columnsTitle: "Nombre de Usuario, Estado", ColumnsDataName: "AdminLogin,UserActiveStatus", onSelectFunction: "BindFields")
+    columnsTitle: "Nombre de Usuario,Nombre, Correo Electrónico, Estado", ColumnsDataName: "AdminLogin,Name,Email,UserActiveStatus", onSelectFunction: "BindFields")
 </div>

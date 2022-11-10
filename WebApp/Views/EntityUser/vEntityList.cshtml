@@ -1,0 +1,15 @@
+﻿@using WebApp.Helpers;
+<script src="~/Scripts/Views/EntityUser/vEntityList.js"></script>
+@{
+    ViewBag.Title = "vEntityList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<button class="btn btn-orange" id="updateEntity">Actualizar entitad financiera  seleccionada</button>
+<button class="btn btn-orange" id="removeEntity">Eliminar entitad financiera seleccionada</button>
+
+<div style="margin-top: 20px;" id="financialList" class="d-inline">
+    @Html.CtrlTable(viewName: "vEntityList", id: "tblEntity", title: "Entidades Financieras",
+    columnsTitle: "Nombre,Cédula Jurídica,Cantidad de usuaris,Estado", ColumnsDataName: "Name,Id,Quantity,UserActiveStatus", onSelectFunction: "BindFields")
+</div>
+

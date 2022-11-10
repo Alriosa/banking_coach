@@ -11,6 +11,8 @@ namespace Entities_POJO
        
         public string UserLogin { get; set; }
         public string UserPassword { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string UserType { get; set; }
         public string UserActiveStatus { get; set; }
         public string Result { get; set; }
@@ -22,10 +24,12 @@ namespace Entities_POJO
         {
         }
 
-        public Security(string userLogin, string userPassword, string userType)
+        public Security(string userLogin, string name, string email, string userPassword, string userType)
         {
             UserLogin = userLogin;
             UserPassword = userPassword;
+            Name = name;
+            Email = email;
             UserType = userType;
         }
     }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banking Coach</title>
+    <title>Banking Academy</title>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -22,13 +22,13 @@
     <script src="~/Scripts/Views/ControlActions.js"></script>
 
 </head>
-<body >
+<body class="bg-gray">
     
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-             <!--   <img class="bg-top" src="~/Content/imgs/background-top.png" />-->
-                @Html.CtrlNavBarMenu(id: "navbar", optionsName: "Administradores,Financieros,Reclutadores,Estudiantes", optionsActionName: "SysAdmin,Financial,Recruiter,Students")
+                <img class="bg-top" src="~/Content/imgs/background-top.png" />
+                @Html.CtrlNavBarMenu(id: "navbar", optionsName: "Administradores,Entidades,Reclutadores,Estudiantes", optionsActionName: "SysAdmin,EntityUser,Recruiter,Students")
             </div>
         </div>
                     <!-- <a href="../" class="navbar-brand">Banking Coach</a>

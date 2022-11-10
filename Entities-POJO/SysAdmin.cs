@@ -11,6 +11,8 @@ namespace Entities_POJO
         public int SysAdminUserID { get; set; }
         public string AdminLogin { get; set; }
         public string AdminPassword { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
         public string UserType { get; set; }
         public string UserActiveStatus { get; set; }
         public string User_Login { get; set; }
@@ -19,15 +21,17 @@ namespace Entities_POJO
         {
             
         }
-        public SysAdmin(int sysAdminUserId, string adminLogin, string adminPassword, string userActiveStatus, string userType)
+
+        public SysAdmin(int sysAdminUserID, string adminLogin, string adminPassword, string name, string email, string userType, string userActiveStatus, string user_Login)
         {
-            SysAdminUserID = sysAdminUserId;
+            SysAdminUserID = sysAdminUserID;
             AdminLogin = adminLogin;
             AdminPassword = adminPassword;
-            UserActiveStatus = userActiveStatus;
+            Name = name;
+            Email = email;
             UserType = userType;
+            UserActiveStatus = userActiveStatus;
+            User_Login = user_Login;
         }
-
-
     }
 }

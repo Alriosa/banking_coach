@@ -5,45 +5,111 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Actualizar Administrador del Sistema</h2>
-
-
-<div class="dashboard-heading d-flex justify-content-center">
-    <h2>Cambiar <span>Contraseña</span></h2>
-</div>
-
 <div class="d-flex justify-content-center">
-    <div class="custom-form custom-form-fields text-center col-lg-6">
-        <p>Para modificar la contraseña necesitamos verificar los siguientes datos de su cuenta:</p>
-        <form id="frmSysAdminUpdatePassword" class="form" action="">
-            <input type="text" id="txtIdSysAdmin" class="d-none">
-            <input type="text" id="txtAdminLogin" class="d-none">
-            <div class="form-row ">
-                <div class="col-lg-12">
-                    @Html.CtrlInputSecond(id: "txtOldPassword", type: "password", required: true, placeHolder: "Contraseña actual", columnDataName: "OldPassword")
+    <div class="container">
+        <div class="row text-center justify-content-between">
+            <div class="col-lg-5 col-sm-11">
+                <div class=" text-box page-title">
+                    <h1>ACTUALIZA AL ADMINISTRADOR</h1>
+                    <p class="subtitle home-subtitle-1">
+                    </p>
                 </div>
             </div>
-            <div class="form-row ">
-                <div class="col-lg-12">
-                    @Html.CtrlInputSecond(id: "txtNewPassword", type: "password", required: true,
-           placeHolder: "Nueva contraseña", columnDataName: "SysAdminUserID")
+            <div class="col-lg-6 col-sm-11">
+                <img class="img" src="~/Content/imgs/Empleo.jpg" alt="">
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="text-center mt-4">
+
+                        </div>
+                        <form id="frmSysAdminUpdate" class="form frmSysAdminUpdate">
+                            <div class="row align-content-sm-center">
+                                <div class="col-sm-12 text-center">
+                                    <input type="text" id="txtIdSysAdmin" class="d-none">
+                                    <input type="text" id="txtAdminLogin" class="d-none">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtName", type: "text", required: true, placeHolder: "Nombre Completo", columnDataName: "Name")
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtEmail", type: "email", required: true, placeHolder: "Correo electrónico", columnDataName: "Email")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-row" style="margin: 0px auto;">
+                                        <div style="margin: 0px auto 10px;">
+                                            @Html.CtrlButton(viewName: "vSysAdminUpdate", id: "btnChange", type: "button",
+              label: "Modificar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="form-row ">
-                <div class="col-lg-12">
-                    @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "password", required: true,
-          placeHolder: "Confirmar nueva contraseña", columnDataName: "")
-                </div>
-            </div>
-            <div class="form-row ">
-                <div class="col-lg-12">
-                    @Html.CtrlButton(viewName: "vSysAdminUpdate", id: "btnChangePassword", type: "button",
-               label: "Modificar", onClickFunction: "ValidateInputPassword", buttonType: "orange")
-                </div>
-            </div>
-        </form>
-    </div><!-- end custom-form -->
+        </div>
+    </div>
 </div><!-- end form-content -->
+<br />
+<div class="d-flex justify-content-center">
+    <div class="container">
+        <div class="row text-center justify-content-between">
+
+            <div class="col-lg-6 col-sm-11">
+                <img class="img" src="~/Content/imgs/Empleo.jpg" alt="">
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="text-center mt-4">
+
+                        </div>
+                        <form id="frmSysAdminUpdatePassword" class="form frmSysAdminUpdatePassword">
+                            <div class="row align-content-sm-center">
+                                <div class="col-sm-12 text-center">
+                                    <input type="text" id="txtIdRecruiterP" class="d-none">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtNewPassword", type: "password", required: true,
+                                   placeHolder: "Nueva contraseña", columnDataName: "AdminPassword")
+                                        </div>
+                                    </div>
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "password", required: true,
+                                  placeHolder: "Confirmar nueva contraseña", columnDataName: "")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-row" style="margin: 0px auto;">
+                                        <div style="margin: 0px auto 10px;">
+                                            @Html.CtrlButton(viewName: "vSysAdminUpdate", id: "btnChangePassword", type: "button",
+              label: "Modificar", onClickFunction: "ValidateInputsPassword", buttonType: "orange")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-sm-11">
+                <div class=" text-box page-title">
+                    <h1>ACTUALIZA LA CONTRASEÑA</h1>
+                    <p class="subtitle home-subtitle-1">
+                        En está sección, se podrá modificar la contraseña
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- end form-content -->
+
 
 <script>
 

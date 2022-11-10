@@ -18,6 +18,7 @@ namespace Entities_POJO
         public string IdentificationNumber { get; set; }
         public DateTime Birthdate { get; set; }
         public int Age { get; set; }
+        public string Sex { get; set; }
         public string Email { get; set; }
         public string FirstPhoneNumber { get; set; }
         public string SecondPhoneNumber { get; set; }
@@ -47,7 +48,7 @@ namespace Entities_POJO
             
         }
 
-        public Student(int studentID, string bankingStudent, string userActiveStatus, string firstName, string firstLastName, string secondLastName, string idType, string identificationNumber, DateTime birthdate, int age, string email, string firstPhoneNumber, string secondPhoneNumber, string country, string province, string nProvince, string canton, string nCanton, string district, string nDistrict, string laboralStatus, string educationStatus, string curriculum, string agreeJobExchange, string userType, string studentLogin, string studentPassword, string userLogin, string jobAvailability, string transportAvailability, string vehicle, string type_Vehicle, string driverLicenses, DateTime entryDate)
+        public Student(int studentID, string bankingStudent, string userActiveStatus, string firstName, string firstLastName, string secondLastName, string idType, string identificationNumber, DateTime birthdate, int age, string sex, string email, string firstPhoneNumber, string secondPhoneNumber, string country, string province, string nProvince, string canton, string nCanton, string district, string nDistrict, string laboralStatus, string educationStatus, string curriculum, string agreeJobExchange, string userType, string studentLogin, string studentPassword, string userLogin, string jobAvailability, string transportAvailability, string vehicle, string type_Vehicle, string driverLicenses, DateTime entryDate)
         {
             StudentID = studentID;
             BankingStudent = bankingStudent;
@@ -59,6 +60,7 @@ namespace Entities_POJO
             IdentificationNumber = identificationNumber;
             Birthdate = birthdate;
             Age = age;
+            Sex = sex;
             Email = email;
             FirstPhoneNumber = firstPhoneNumber;
             SecondPhoneNumber = secondPhoneNumber;

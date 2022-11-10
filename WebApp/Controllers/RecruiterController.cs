@@ -44,5 +44,10 @@ namespace WebApp.Controllers
 
             return View();
         }
+
+        public ActionResult Recruitment()
+        {
+            return View();
+        }
     }
 }

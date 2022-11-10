@@ -25,6 +25,13 @@ $(document).ready(function () {
 	studentList.RetrieveAll();
 
 
+	if (getCookie('type') == 3) {
+		$('#profileStudent').hide();
+		$('#updateStudent').hide();
+		$('#removeStudent').hide();
+    }
+
+
 	$('#tblStudent tbody').on('click', 'tr', function () {
 		if ($(this).hasClass('selected')) {
 			$(this).removeClass('selected');

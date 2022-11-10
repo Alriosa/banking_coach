@@ -114,6 +114,7 @@ function ControlActions() {
 				document.documentElement.scrollTop = 0;
 			} else {
 				ctrlActions.ShowMessage('I', response.Message);
+				setCookie('user', JSON.stringify(data), 30);
 			}
 			callBackFunction();
 		})
@@ -146,6 +147,7 @@ function ControlActions() {
 				ctrlActions.ShowMessage('E', response.Message);
 			} else {
 				var data = response.Data;
+				setCookie('user', JSON.stringify(data), 30);
 
 				ctrlActions.ShowMessage('I', response.Message);
 
@@ -168,8 +170,7 @@ function ControlActions() {
 			sessionStorage.setItem('type', response.Data['UserType']);
 			setCookie('type', response.Data['UserType'], 30);
 
-			setCookie('user', JSON.stringify(data), 30);
-
+			//setCookie('user', JSON.stringify(data), 30);
 
 			callBackFunction(data);
 		})
@@ -217,6 +218,7 @@ function getCookie(cname) {
 			return unescape(y);
 		}
 	}
+
 }
 
 function formatDateString(s) {
