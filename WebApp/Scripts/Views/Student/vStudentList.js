@@ -3,7 +3,7 @@
 	this.tblStudentId = 'tblStudent';
 	this.ctrlActions = new ControlActions();
 	this.service = 'student';
-	this.columns = "IdentificationNumber,Email,BankingStudent,UserActiveStatus";
+	this.columns = "FirstName,FirstLastName,SecondLastName,IdentificationNumber,Email,BankingStudent,UserActiveStatus";
 
 	this.BindFields = function (data) {
 		//window.location.href = "/student/vStudentUpdate/" + data["StudentID"];

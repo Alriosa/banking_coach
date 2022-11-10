@@ -7,12 +7,11 @@
 }
 
 <button class="btn btn-orange" id="profileStudent">Ver perfil de estudiante seleccionado</button>
-<button class="btn btn-orange" id="updateStudent">Actualizar estudiante seleccionado</button>
 <button  class="btn btn-orange" id="removeStudent">Eliminar estudiante seleccionado</button>
 
 <div style="margin-top: 20px;" id="studentList" class="d-inline">
     @Html.CtrlTable(viewName: "vStudentList", id: "tblStudent", title: "Estudiantes",
-    columnsTitle: "Identificación,Correo Electrónico,Estudiante de Banking Coach,Estado", ColumnsDataName: "IdentificationNumber,Email,BankingStudent,UserActiveStatus", onSelectFunction: "BindFields")
+    columnsTitle: "Nombre,Apellido,Segundo Apellido,Identificación,Correo Electrónico,Estudiante de Banking Coach,Estado", ColumnsDataName: "FirstName,FirstLastName,SecondLastName,IdentificationNumber,Email,BankingStudent,UserActiveStatus", onSelectFunction: "BindFields")
 </div>
 
 
