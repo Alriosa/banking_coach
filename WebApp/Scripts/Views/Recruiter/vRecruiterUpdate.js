@@ -13,6 +13,8 @@
         document.querySelector('#txtRecruiterLogin').value = data['RecruiterLogin'];
         document.querySelector('#txtName').value = data['Name'];
         document.querySelector('#txtEmail').value = data['Email'];
+        document.querySelector('#txtIdType').value = data['IdType'];
+        document.querySelector('#txtIdentificationNumber').value = data['IdentificationNumber'];
 
     }
     

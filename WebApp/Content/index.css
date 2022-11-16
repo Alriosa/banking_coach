@@ -163,9 +163,12 @@ table.dataTable.stripe tbody tr.odd {
     color: #fff;
     background-color: #fda935;
     border-color: #fda935;
-    padding: 1px 50px;
+    padding: 1px auto;
     border-radius: 100px;
-    height: 2rem;
+    height: 3rem;
+    white-space: break-spaces;
+    word-wrap: break-word;
+    width: 200px;
 }
 
     .btn-orange:focus {

@@ -9,13 +9,13 @@
 <div class="d-flex justify-content-center savepdf">
     <div class="container">
         <div class="row text-center justify-content-between">
-            <div class="col-lg-5 col-sm-11">
+            <div class="col-lg-12 col-sm-11">
                 <div class=" text-box ">
                     <h1>ÁREA DE RECLUTAMIENTO</h1>
                     <p class="subtitle home-subtitle-1">
                         Ingrese los criterios de selección que requiere en los candidatos:
                     </p>
-                    <form id="frmSearchStudents" class="form frmSearchStudents">
+                   <!-- <form id="frmSearchStudents" class="form frmSearchStudents">
                         <div class="row align-content-sm-center">
                             <div class="col-sm-12 text-center">
                                 <div class="form-row ">
@@ -73,21 +73,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-row ">
                                     <p><strong>Residencia en Costa Rica</strong></p>
                                     <div class="col-lg-12">
-                                        @Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
+                                        Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
                                     </div>
                                 </div>
                                 <div class="form-row ">
                                     <div class="col-lg-12">
-                                        @Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
+                                       Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
                                     </div>
                                 </div>
                                 <div class="form-row ">
                                     <div class="col-lg-12">
-                                        @Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
+                                        Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
                                     </div>
                                 </div>
                                 <div class="form-row ">
@@ -168,7 +168,7 @@
                             <div class="col-sm-12 text-center">
                                 <div class="form-row" style="margin: 0px auto;">
                                     <div style="margin: 0px auto 10px;">
-                                        @Html.CtrlButton(viewName: "Recruitment", id: "btnSearch", type: "button",
+                                       Html.CtrlButton(viewName: "Recruitment", id: "btnSearch", type: "button",
                                                     label: "Buscar", onClickFunction: "ReloadResults", buttonType: "orange")
                                     </div>
                                 </div>
@@ -177,20 +177,49 @@
 
 
                         </div>
-                    </form>
+                    </form> -->
 
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-11 ">
+            <div class="col-lg-12 col-sm-11 ">
                 <div>
-                    <img class="img" src="~/Content/imgs/Empleo2.jpg" alt="">
 
                     <div class="container ">
                         <div class="justify-content-center">
-                            <h1>RESULTADOS</h1>
-                            <div style="height: 500px; overflow-y: scroll;">
-                                <ul id="results">
-                                </ul>
+                            <div class="card border-secondary mb-6">
+                                <div class="card-header">Lista de Resultados</div>
+                                <div class="card-body">
+                                    <table id="resultList" class="display" cellspacing="0" width="100%"
+                                            ColumnsDataName="Name,Curriculum">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre </th>
+                                                <th>Apellido </th>
+                                                <th>Tipo de documento </th>
+                                                <th>País de Origen </th>
+                                                <th>Residencia en Costa Rica</th>
+                                                <th>Licencias de conducir </th>
+                                                <th>Sexo</th>
+                                                <th>Idioma</th>
+                                                <th>Curriculum </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mariano</td>
+                                                <td>Mercedes</td>
+                                                <td>Cédula persona física</td>
+                                                <td>Panamá</td>
+                                                <td>San José, San José, El Carmen</td>
+                                                <th>A1, B1</th>
+                                                <td>Femenino</td>
+                                                <td>Inglés: Avanzado, Francés: Básico</td>
+                                                <td><button>Descargar</button></td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,9 +228,15 @@
                 </div>
             </div>
         </div>
-    </div>
-</div><!-- end form-content -->
+        <div class="row text-center justify-content-between">
 
+        </div>
+    </div>
+    </div><!-- end form-content -->
+
+<script>
+   
+</script>
 
 <div class="d-none savepdf" style="color:#000000!important">
     <div class="container pdf" id="my_info">

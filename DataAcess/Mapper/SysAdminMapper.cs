@@ -14,7 +14,9 @@ namespace DataAccess.Mapper
         private const string DB_COL_ADMIN_LOGIN = "Admin_Login";
         private const string DB_COL_ADMIN_PASSWORD = "Admin_Password";
         private const string DB_COL_ADMIN_NAME = "Name";
-        private const string DB_COL_ADMIN_EMAIL = "Email"; 
+        private const string DB_COL_ADMIN_EMAIL = "Email";
+        private const string DB_COL_ID_TYPE = "Id_Type";
+        private const string DB_COL_IDENTIFICATION_NUMBER = "Identification_Number"; 
         private const string DB_COL_ADMIN_STATUS = "User_Active_Status";
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_USER_EXIST = "User_Login";
@@ -29,6 +31,8 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
             operation.AddVarcharParam(DB_COL_ADMIN_NAME, sysAdmin.Name);
             operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
+            operation.AddVarcharParam(DB_COL_ID_TYPE, sysAdmin.IdType);
+            operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, sysAdmin.IdentificationNumber);
             operation.AddVarcharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
 
             return operation;
@@ -71,7 +75,8 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
             operation.AddVarcharParam(DB_COL_ADMIN_NAME, sysAdmin.Name);
             operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
-
+            operation.AddVarcharParam(DB_COL_ID_TYPE, sysAdmin.IdType);
+            operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, sysAdmin.IdentificationNumber);
             return operation;
         }
 
@@ -148,6 +153,8 @@ namespace DataAccess.Mapper
                 AdminPassword = GetStringValue(row, DB_COL_ADMIN_PASSWORD),
                 Name = GetStringValue(row, DB_COL_ADMIN_NAME),
                 Email = GetStringValue(row, DB_COL_ADMIN_EMAIL),
+                IdType = GetStringValue(row, DB_COL_ID_TYPE),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 UserActiveStatus= GetStringValue(row, DB_COL_ADMIN_STATUS)
             };
@@ -165,6 +172,8 @@ namespace DataAccess.Mapper
                 User_Login = GetStringValue(row, DB_COL_USER_EXIST),
                 Name = GetStringValue(row, DB_COL_ADMIN_NAME),
                 Email = GetStringValue(row, DB_COL_ADMIN_EMAIL),
+                IdType = GetStringValue(row, DB_COL_ID_TYPE),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 UserActiveStatus = GetStringValue(row, DB_COL_ADMIN_STATUS)
             };

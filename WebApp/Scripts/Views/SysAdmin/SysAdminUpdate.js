@@ -15,6 +15,8 @@
         document.querySelector('#txtAdminLogin').value = data['AdminLogin'];
         document.querySelector('#txtName').value = data['Name'];
         document.querySelector('#txtEmail').value = data['Email'];
+        document.querySelector('#txtIdType').value = data['IdType'];
+        document.querySelector('#txtIdentificationNumber').value = data['IdentificationNumber'];
     }
     this.UpdatePassword = function () {
         var adminData = {};

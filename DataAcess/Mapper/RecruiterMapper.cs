@@ -15,6 +15,8 @@ namespace DataAccess.Mapper
         private const string DB_COL_RECRUITER_PASSWORD = "Recruiter_Password";
         private const string DB_COL_RECRUITER_NAME = "Name";
         private const string DB_COL_RECRUITER_EMAIL = "Email";
+        private const string DB_COL_ID_TYPE = "Id_Type";
+        private const string DB_COL_IDENTIFICATION_NUMBER = "Identification_Number";
         private const string DB_COL_ENTITY_ASSOCIATION = "Entity_Association";
         private const string DB_COL_ENTITY_ASSOCIATION_NAME = "Entity_Association_Name";
         private const string DB_COL_USER_TYPE = "User_Type";
@@ -32,7 +34,9 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
             operation.AddVarcharParam(DB_COL_RECRUITER_NAME, recruiter.Name);
-            operation.AddVarcharParam(DB_COL_RECRUITER_EMAIL, recruiter.Email); 
+            operation.AddVarcharParam(DB_COL_RECRUITER_EMAIL, recruiter.Email);
+            operation.AddVarcharParam(DB_COL_ID_TYPE, recruiter.IdType);
+            operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, recruiter.IdentificationNumber);
             operation.AddIntParam(DB_COL_ENTITY_ASSOCIATION, recruiter.EntityAssociation);
             operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
 
@@ -74,7 +78,8 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
             operation.AddVarcharParam(DB_COL_RECRUITER_NAME, recruiter.Name);
             operation.AddVarcharParam(DB_COL_RECRUITER_EMAIL, recruiter.Email);
-
+            operation.AddVarcharParam(DB_COL_ID_TYPE, recruiter.IdType);
+            operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, recruiter.IdentificationNumber);
             return operation;
         }
 
@@ -129,6 +134,8 @@ namespace DataAccess.Mapper
                 RecruiterPassword = GetStringValue(row, DB_COL_RECRUITER_PASSWORD),
                 Name = GetStringValue(row, DB_COL_RECRUITER_NAME),
                 Email = GetStringValue(row, DB_COL_RECRUITER_EMAIL),
+                IdType = GetStringValue(row, DB_COL_ID_TYPE),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
                 EntityAssociation = GetIntValue(row, DB_COL_ENTITY_ASSOCIATION),
                 EntityAssociationName = GetStringValue(row, DB_COL_ENTITY_ASSOCIATION_NAME),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),

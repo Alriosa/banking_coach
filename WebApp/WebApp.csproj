@@ -182,10 +182,12 @@
     <Content Include="Content\imgs\background2.jpg" />
     <Content Include="Content\imgs\Empleo.jpg" />
     <Content Include="Content\imgs\Empleo2.jpg" />
+    <Content Include="Content\imgs\Empleo3.jpg" />
     <Content Include="Content\imgs\entidad.jpg" />
     <Content Include="Content\imgs\reclutador.jpg" />
     <Content Include="Content\imgs\reclutador2.jpg" />
     <Content Include="Content\imgs\reclutador3.jpg" />
+    <Content Include="Content\imgs\reclutador4.jpg" />
     <Content Include="Content\index.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="Content\Logos\Imagotipo Banking Academy 1.jpg" />

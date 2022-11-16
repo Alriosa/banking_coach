@@ -117,6 +117,8 @@ Admin_Login VARCHAR(20) NOT NULL,
 Admin_Password VARCHAR(50) NOT NULL,
 Name VARCHAR(100) NOT NULL,
 Email VARCHAR(100) NOT NULL, 
+Id_Type VARCHAR(30) NOT NULL,
+Identification_Number VARCHAR(20) NOT NULL UNIQUE, ---MUST BE UNIQUE ---
 User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
 User_Type VARCHAR(1) NOT NULL  DEFAULT '1',
 Entry_Date DATETIME NOT NULL,
@@ -140,6 +142,8 @@ Recruiter_Login VARCHAR(20) NOT NULL,
 Recruiter_Password VARCHAR(50) NOT NULL,
 Name VARCHAR(100) NOT NULL , 
 Email VARCHAR(100) NOT NULL, 
+Id_Type VARCHAR(30) NOT NULL,
+Identification_Number VARCHAR(20) NOT NULL UNIQUE, ---MUST BE UNIQUE ---
 User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
 User_Type VARCHAR(1) NOT NULL DEFAULT '3',
 Entity_Association INT NOT NULL,
@@ -226,8 +230,8 @@ SET IDENTITY_INSERT TBL_STUDENT OFF
 
 SET IDENTITY_INSERT TBL_SYS_ADMIN_USER ON
 
-INSERT INTO TBL_SYS_ADMIN_USER(Sys_Admin_User_ID, Admin_Login,Admin_Password, Name, Email, User_Active_Status, Entry_Date) VALUES (
-	0,'A_DEFAULT','DEFAULT','DEFAULT','DEFAULT','0',  GETDATE());
+INSERT INTO TBL_SYS_ADMIN_USER(Sys_Admin_User_ID, Admin_Login,Admin_Password, Name, Email, Id_Type, Identification_Number, User_Active_Status, Entry_Date) VALUES (
+	0,'A_DEFAULT','DEFAULT','DEFAULT','DEFAULT', 'Cédula de persona física', '111111111','0',  GETDATE());
 GO
 
 SET IDENTITY_INSERT TBL_SYS_ADMIN_USER OFF
@@ -243,7 +247,7 @@ GO
 
 SET IDENTITY_INSERT TBL_RECRUITER_USER ON
 
-INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Password,Name, Email, User_Active_Status,Entity_Association, Entry_Date ) VALUES ( 0, 'R_DEFAULT', 'DEFAULT','DEFAULT','DEFAULT', '0', 0,  GETDATE());
+INSERT INTO TBL_RECRUITER_USER (Recruiter_User_ID, Recruiter_Login,Recruiter_Password,Name, Email, Id_Type, Identification_Number, User_Active_Status,Entity_Association, Entry_Date ) VALUES ( 0, 'R_DEFAULT', 'DEFAULT','DEFAULT','DEFAULT', 'Cédula de persona física', '111111111', '0', 0,  GETDATE());
 GO 
 
 SET IDENTITY_INSERT TBL_RECRUITER_USER OFF
@@ -825,7 +829,7 @@ INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminList', 'Listar Administrador
 INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminAccount', 'Mi Cuenta', 'Administradores')
 INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminUpdate','Actualizar Administrador', 'Administradores')
 INSERT INTO TBL_VIEWS VALUES ('EntityUser', 'vEntityRegistration', 'Registrar Entidad', 'Entidades Financieras')
-INSERT INTO TBL_VIEWS VALUES ('EntityUser', 'vEntityList', 'Listar Entidad', 'Entidades Financieras')
+INSERT INTO TBL_VIEWS VALUES ('EntityUser', 'vEntityList', 'Listar Entidades', 'Entidades Financieras')
 INSERT INTO TBL_VIEWS VALUES ('EntityUser', 'vEntityUpdate','Actualizar Financiero','Entidades Financieras')
 INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterRegistration', 'Registrar Reclutador','Reclutadores')
 INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterList', 'Listar Reclutadores','Reclutadores')
@@ -1145,6 +1149,8 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_ADMIN_USER]
         @SP_Admin_Password VARCHAR(50),
         @SP_Name VARCHAR(100),
         @SP_Email VARCHAR(100),
+		@SP_Id_Type VARCHAR(30),
+        @SP_Identification_Number VARCHAR(20),
         @SP_User_Active_Status VARCHAR(1)
 AS
         INSERT INTO [dbo].[TBL_SYS_ADMIN_USER]
@@ -1152,6 +1158,7 @@ AS
                 (@SP_Admin_Login,
                 HashBytes('MD5',@SP_Admin_Password),
 				 @SP_Name, @SP_Email, 
+				 @SP_Id_Type, @SP_Identification_Number,
                 @SP_User_Active_Status, 
 				'1',GETDATE());
 GO
@@ -1161,7 +1168,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER_BY_ID]
         @SP_Sys_Admin_User_ID INT
 AS
-        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, Name, Email, CASE  
+        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, Name, Email, Id_Type, Identification_Number, CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo'
 		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID = @SP_Sys_Admin_User_ID AND Sys_Admin_User_ID != 0;
@@ -1172,7 +1179,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER]
         @SP_Admin_Login VARCHAR(20)
 AS
-        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, Name, Email, CASE  
+        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, Name, Email, Id_Type, Identification_Number, CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo'
 		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Admin_Login = @SP_Admin_Login;
@@ -1181,7 +1188,7 @@ GO
 ---SELECT ALL ADMINS
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_ADMIN_USER]
 AS
-        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, Name, Email, CASE  
+        SELECT Sys_Admin_User_ID, Admin_Login, Admin_Password, Name, Email, Id_Type, Identification_Number, CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo'
 		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_SYS_ADMIN_USER] WHERE Sys_Admin_User_ID != 0;
@@ -1203,11 +1210,15 @@ GO
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_ADMIN_USER]
         @SP_Admin_Login VARCHAR(20),
 		@SP_Name VARCHAR(100),
-        @SP_Email VARCHAR(100)
+        @SP_Email VARCHAR(100),
+		@SP_Id_Type VARCHAR(30),
+        @SP_Identification_Number VARCHAR(20)
 AS
         UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
 				Name = @SP_Name,
-				Email = @SP_Email
+				Email = @SP_Email,
+				Id_Type = @SP_Id_Type,
+				Identification_Number = @SP_Identification_Number
                 WHERE Admin_Login = @SP_Admin_Login;                
 GO
 
@@ -1256,6 +1267,8 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_RECRUITER_USER]
         @SP_Recruiter_Password VARCHAR(50),
 		@SP_Name VARCHAR(100),
         @SP_Email VARCHAR(100),
+		@SP_Id_Type VARCHAR(30),
+        @SP_Identification_Number VARCHAR(20),
         @SP_User_Active_Status VARCHAR(10),
 		@SP_Entity_Association INT
 AS
@@ -1264,6 +1277,7 @@ AS
                 (@SP_Recruiter_Login,
                 HashBytes('MD5',@SP_Recruiter_Password),
 				@SP_Name, @SP_Email,
+				@SP_Id_Type, @SP_Identification_Number,
                 @SP_User_Active_Status,
 				'3',
 				@SP_Entity_Association,
@@ -1276,7 +1290,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_USER_BY_ID]
         @SP_Recruiter_User_ID INT
 AS
-       SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
+       SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Id_Type, R.Identification_Number, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
 		WHEN R.User_Active_Status= '1' THEN 'Activo'
 		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
 		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
@@ -1289,7 +1303,7 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_USER]
         @SP_Recruiter_Login VARCHAR(20)
 AS
-       SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
+       SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Id_Type, R.Identification_Number, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
 		WHEN R.User_Active_Status= '1' THEN 'Activo'
 		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
 		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
@@ -1300,7 +1314,7 @@ GO
 
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_RECRUITER_USER]
 AS
-        SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
+        SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Id_Type, R.Identification_Number, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
 		WHEN R.User_Active_Status= '1' THEN 'Activo'
 		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
 		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
@@ -1313,10 +1327,14 @@ GO
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER]
         @SP_Recruiter_Login VARCHAR(20),
 		@SP_Name VARCHAR(100),
-        @SP_Email VARCHAR(100)
+        @SP_Email VARCHAR(100),
+		@SP_Id_Type VARCHAR(30),
+        @SP_Identification_Number VARCHAR(20)
 AS
         UPDATE [dbo].[TBL_RECRUITER_USER] SET
-				Name = @SP_Name, Email = @SP_Email
+				Name = @SP_Name, Email = @SP_Email,
+				Id_Type = @SP_Id_Type,
+				Identification_Number = @SP_Identification_Number
                 WHERE Recruiter_Login = @SP_Recruiter_Login;
 GO
 
@@ -2115,11 +2133,11 @@ STORAGE PROCEDURES FOR LABORAL
 */
 
 
-EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'admin', '12345678', 'testing', 'testing12', '1'
+EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'admin', '12345678', 'testing', 'testing12@gmail.com','Cédula persona física', '987654321', '1'
 GO
 EXEC [dbo].[SP_INSERT_TBL_ENTITY_USER] 'financiero', '1234567888' ,2, '1'
 GO
-EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'reclutador', '12345678', 'testing3', 'testing13', '1', 1
+EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'reclutador', '12345678', 'testing3', 'testing13@gmail.com','Cédula persona física', '154648759', '1', 1
 GO
 
 
