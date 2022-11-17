@@ -53,6 +53,7 @@
     <Compile Include="EntityUser.cs" />
     <Compile Include="Laboral.cs" />
     <Compile Include="Language.cs" />
+    <Compile Include="Mail.cs" />
     <Compile Include="ObjectDumper.cs" />
     <Compile Include="OptionList.cs" />
     <Compile Include="Permission.cs" />

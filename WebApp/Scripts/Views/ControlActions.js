@@ -194,6 +194,29 @@ function ControlActions() {
 
 			})
 	}
+
+
+
+	this.RecoverPassword = function (service, data, callBackFunction) {
+		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
+			var ctrlActions = new ControlActions();
+			if (response.Data == "error") {
+				ctrlActions.ShowMessage('E', response.Message);
+			} else {
+				var data = response.Data;
+
+				ctrlActions.ShowMessage('I', response.Message);
+
+			}
+			callBackFunction(data["UserLogin"]);
+
+		})
+			.fail(function (response) {
+				var data = response.responseJSON;
+				var ctrlActions = new ControlActions();
+				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+			})
+	};
 }
 
 

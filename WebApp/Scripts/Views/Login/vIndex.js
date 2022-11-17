@@ -38,8 +38,47 @@
             
         }
     }
+
+    this.RecoverPassword = function () {
+
+        var user = {};
+
+        user = this.ctrlActions.GetDataForm('formRecoverPassword');
+
+        user['text'] = "Recuperación de Contraseña";
+        user['subject'] = "Recuperación de Contraseña";
+        user['UserType'] = response
+
+        this.ctrlActions.RecoverPassword(this.service + "/login", data, function (response) {
+            var userLogin = response;
+            switch (response["UserType"]) {
+                case "1":
+                    this.ctrlActions.PostToAPI('mail/recoverPasswordAdmin', user, function () {
+                        resetFormRecoverPassword();
+                    });
+                    break;
+                case "2":
+                    this.ctrlActions.PostToAPI('mail/recoverPasswordStudent', user, function () {
+                        resetFormRecoverPassword();
+                    });
+                    break;
+                case "3":
+                    this.ctrlActions.PostToAPI('mail/recoverPasswordRecruiter', user, function () {
+                        resetFormRecoverPassword();
+                    });
+                    break;
+                default:
+                    window.location.href = "/Home"
+                    break;
+            }
+        }
+    }
 }
 
+function resetFormRecoverPassword() {
+    $("#formRecoverPassword")[0].reset();
+    $('#modal-password').modal('toggle');
+}
 
 function resetForm() {
     $("#frmLogin")[0].reset();

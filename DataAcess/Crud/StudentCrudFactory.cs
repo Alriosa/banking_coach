@@ -77,7 +77,7 @@ namespace DataAccess.Crud
             dao.ExecuteProcedure(mapper.GetDeleteStatement(student));
         }
 
-         public string ValidateUserExistence(BaseEntity entity)
+        public string ValidateUserExistence(BaseEntity entity)
         {
             var lstResult = dao.ExecuteQueryProcedure(mapper.GetValidateUserNameExistenceStatement(entity));
             var dic = new Dictionary<string, object>();
@@ -85,10 +85,10 @@ namespace DataAccess.Crud
             var response = "0";
 
             var result = lstResult.SelectMany(d => d.Values).ToList().ToArray()[0];
-            if(result.Equals("1"))
-               {
-                   response = "1";
-               }
+            if (result.Equals("1"))
+            {
+                response = "1";
+            }
             return response;
         }
 
@@ -124,6 +124,20 @@ namespace DataAccess.Crud
         public override List<T> RetrieveAllById<T>(BaseEntity entity)
         {
             throw new NotImplementedException();
+        }
+
+        public T RetrieveByUserByEmail<T>(BaseEntity entity)
+        {
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveStatementByEmail(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var objs = mapper.BuildObjectBasic(dic);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
+
+            return default(T);
         }
     }
 }

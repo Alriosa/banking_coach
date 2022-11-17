@@ -102,7 +102,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_STUDENT_BY_EMAIL" };
 
             var student = (Student)entity;
-            operation.AddVarcharParam(DB_COL_STUDENT_ID, student.IdentificationNumber);
+            operation.AddVarcharParam(DB_COL_EMAIL, student.Email);
 
             return operation;
         }
@@ -209,6 +209,27 @@ namespace DataAccess.Mapper
 
             return lstResults;
         }
+
+
+        public BaseEntity BuildObjectBasic(Dictionary<string, object> row)
+        {
+            var student = new Student
+            {
+                StudentID = GetIntValue(row, DB_COL_STUDENT_ID),
+                BankingStudent = GetStringValue(row, DB_COL_USER_BANKING_STUDENT),
+                UserActiveStatus = GetStringValue(row, DB_COL_USER_ACTIVE_STATUS),
+                FirstName = GetStringValue(row, DB_COL_FIRST_NAME),
+                FirstLastName = GetStringValue(row, DB_COL_FIRST_LAST_NAME),
+                SecondLastName = GetStringValue(row, DB_COL_SECOND_LAST_NAME),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
+                Email = GetStringValue(row, DB_COL_EMAIL),
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                StudentLogin = GetStringValue(row, DB_COL_STUDENT_LOGIN),
+            };
+
+            return student;
+        }
+
 
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {

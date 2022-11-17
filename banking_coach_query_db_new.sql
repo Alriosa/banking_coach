@@ -829,7 +829,7 @@ INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminList', 'Listar Administrador
 INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminAccount', 'Mi Cuenta', 'Administradores')
 INSERT INTO TBL_VIEWS VALUES ('SysAdmin', 'vSysAdminUpdate','Actualizar Administrador', 'Administradores')
 INSERT INTO TBL_VIEWS VALUES ('EntityUser', 'vEntityRegistration', 'Registrar Entidad', 'Entidades Financieras')
-INSERT INTO TBL_VIEWS VALUES ('EntityUser', 'vEntityList', 'Listar Entidades', 'Entidades Financieras')
+INSERT INTO TBL_VIEWS VALUES ('EntityUser', 'vEntityList', 'Listar Entidad', 'Entidades Financieras')
 INSERT INTO TBL_VIEWS VALUES ('EntityUser', 'vEntityUpdate','Actualizar Financiero','Entidades Financieras')
 INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterRegistration', 'Registrar Reclutador','Reclutadores')
 INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'vRecruiterList', 'Listar Reclutadores','Reclutadores')
@@ -988,18 +988,12 @@ GO
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_EMAIL]
         @SP_Student_Email VARCHAR(200)
 AS
-        SELECT S.Student_ID,S.Banking_Student,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Birthdate, S.Age, S.Sex, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
-	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+        SELECT S.Student_ID,S.Banking_Student,  S.First_Name, S.First_Last_Name, S.Second_Last_Name,  S.Identification_Number, S.Email, CASE  
 		WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
-		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date FROM [dbo].[TBL_STUDENT] AS S
-		INNER JOIN 
-		LST_PROVINCES AS LP ON S.Province = LP.Code
-		INNER JOIN 
-		LST_CANTONS AS LC ON S.Canton = LC.Code
-		INNER JOIN 
-		LST_DISTRICTS AS LD ON S.District = LD.Code
-		WHERE S.Email = @SP_Student_Email AND S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
+		END AS 'User_Active_Status', S.User_Type, S.Student_User FROM [dbo].[TBL_STUDENT] AS S
+		
+		WHERE S.Email = @SP_Student_Email AND S.Student_ID != 0;
 GO
 
 ---BY USER
@@ -1175,6 +1169,18 @@ AS
 GO
 
 
+---BY EMAIL
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER_BY_EMAIL]
+        @SP_Email VARCHAR(200)
+AS
+        SELECT Sys_Admin_User_ID, Admin_Login, Name, Email,  Identification_Number, CASE  
+		WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', User_Type FROM [dbo].[TBL_SYS_ADMIN_USER] 
+		
+		WHERE Email = @SP_Email AND Sys_Admin_User_ID != 0;
+GO
+
 ---SELECT ADMIN BY ID
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_ADMIN_USER]
         @SP_Admin_Login VARCHAR(20)
@@ -1310,6 +1316,15 @@ AS
 		INNER JOIN 
 		TBL_ENTITY_USER AS F ON R.Entity_Association = F.Entity_User_ID
 		WHERE Recruiter_Login = @SP_Recruiter_Login AND Recruiter_User_ID != 0;
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_BY_EMAIL]
+        @SP_Email VARCHAR(200)
+AS
+       SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Name, R.Email,  R.Identification_Number, CASE WHEN User_Active_Status = '1' THEN 'Activo'
+		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
+		WHERE R.Email = @SP_Email AND R.Email  != 0;
 GO
 
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_RECRUITER_USER]
@@ -2149,7 +2164,7 @@ EXEC [dbo].[SP_INSERT_TBL_STUDENT] 'Sí','1',
            ,'2002-03-27'
            ,20
            ,'Femenino'
-           ,'example@gmail.com'
+           ,'mbonilla.guti@gmail.com'
            ,'87878787'
            ,'87878787'
 		   ,'Costa Rica'

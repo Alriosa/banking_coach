@@ -63,6 +63,16 @@ namespace DataAccess.Mapper
 
             return operation;
         }
+        //Select by Email
+        public SqlOperation GetRetriveStatementByEmail(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_RECRUITER_BY_EMAIL" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddVarcharParam(DB_COL_RECRUITER_EMAIL, recruiter.Email);
+
+            return operation;
+        }
 
         public SqlOperation GetRetriveAllStatement()
         {
@@ -125,6 +135,7 @@ namespace DataAccess.Mapper
             return lstResults;
         }
 
+
         public BaseEntity BuildObject(Dictionary<string, object> row)
         {
             var recruiter = new Recruiter
@@ -138,6 +149,22 @@ namespace DataAccess.Mapper
                 IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
                 EntityAssociation = GetIntValue(row, DB_COL_ENTITY_ASSOCIATION),
                 EntityAssociationName = GetStringValue(row, DB_COL_ENTITY_ASSOCIATION_NAME),
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS)
+            };
+
+            return recruiter;
+        }
+
+        public BaseEntity BuildObjectBasic(Dictionary<string, object> row)
+        {
+            var recruiter = new Recruiter
+            {
+                RecruiterUserID = GetIntValue(row, DB_COL_RECRUITER_USER_ID),
+                RecruiterLogin = GetStringValue(row, DB_COL_RECRUITER_LOGIN),
+                Name = GetStringValue(row, DB_COL_RECRUITER_NAME),
+                Email = GetStringValue(row, DB_COL_RECRUITER_EMAIL),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS)
             };

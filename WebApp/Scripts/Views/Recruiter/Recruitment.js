@@ -9,7 +9,7 @@ function Recruitment() {
 	this.tblStudentId = 'tblStudent';
 	this.ctrlActions = new ControlActions();
 	this.service = 'student';
-	this.columns = "IdentificationNumber,Email,BankingStudent,UserActiveStatus";
+    this.columns = "FirstName,FirstLastName,IdType,Country,Residence,Licenses,Sex,Curriculum";
 
 
 	this.BindFields = function (data) {
@@ -21,7 +21,30 @@ function Recruitment() {
 	this.RetrieveStudents = function () {
 		this.ctrlActions = new ControlActions();
 		this.ctrlActions.GetById(this.service, function (data) {
-			console.log(data)
+            console.log(data)
+           var t = $('#resultList').DataTable()
+
+            for (let i in data) {
+               /* var downloadBtn = document.createElement("button");
+                downloadBtn.innerHTML = 'Descargar';
+                downloadBtn.type = 'button';
+                downloadBtn.className = "btn btn-orange";
+                downloadBtn.addEventListener('click', async function () {
+                    await getData(data[i])
+                });*/
+
+               t.row.add([
+                    data[i].FirstName,
+                    data[i].FirstLastName,
+                    data[i].IdType,
+                    data[i].Country,
+                    data[i].NProvince + ", " + data.NCanton + ", " + data.NDistrict,
+                   data[i].DriverLicenses,
+                    data[i].Sex,
+                    '<button class="btn btn-orange" onclick="await getData(data[i])">Descargar</button>'
+                ]).draw(false);
+            }14
+
 			students = data;
         });
       
@@ -31,7 +54,7 @@ function Recruitment() {
         var searchData = {};
         searchData = this.ctrlActions.GetDataForm('frmSearchStudents');
 
-        $("#results").empty();
+
 
         var checkboxes = document.querySelectorAll('input[name=driverLicenses]:checked');
         var values = [];
@@ -81,6 +104,9 @@ function intersection(first, second) {
 };
 
 $(document).ready(function () {
+
+   
+
     var table = $('#resultList').DataTable({
         language: {
             "decimal": "",
@@ -107,6 +133,9 @@ $(document).ready(function () {
         var data = table.row(this).data();
         console.log(data);
     });
+
+    var students = new Recruitment();
+    students.RetrieveStudents();
 });
 
 $(document).ready(function () {

@@ -65,7 +65,16 @@ namespace DataAccess.Mapper
             return operation;
         }
 
-      
+        //Select by Email
+        public SqlOperation GetRetriveStatementByEmail(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_ADMIN_USER_BY_EMAIL" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
+
+            return operation;
+        }
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
@@ -162,6 +171,21 @@ namespace DataAccess.Mapper
             return sysAdmin;
         }
 
+        public BaseEntity BuildObjectBasic(Dictionary<string, object> row)
+        {
+            var sysAdmin = new SysAdmin
+            {
+                SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
+                AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
+                Name = GetStringValue(row, DB_COL_ADMIN_NAME),
+                Email = GetStringValue(row, DB_COL_ADMIN_EMAIL),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                UserActiveStatus = GetStringValue(row, DB_COL_ADMIN_STATUS)
+            };
+
+            return sysAdmin;
+        }
 
         public BaseEntity BuildObjectLogin(Dictionary<string, object> row)
         {

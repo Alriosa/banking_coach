@@ -265,6 +265,7 @@
     <Compile Include="Controllers\LaboralController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
