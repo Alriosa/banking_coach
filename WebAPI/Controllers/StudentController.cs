@@ -34,6 +34,7 @@ namespace WebAPI.Controllers
                 };
 
                 student = mng.RetrieveById(student);
+                student.StudentPassword = null;
                 apiResp = new ApiResponse
                 {
                     Data = student

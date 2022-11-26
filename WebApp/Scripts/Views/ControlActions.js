@@ -231,6 +231,7 @@ function setCookie(name, value, days) {
 }
 
 function getCookie(cname) {
+	
 	var i, x, y, ARRcookies = document.cookie.split(";");
 
 	for (i = 0; i < ARRcookies.length; i++) {

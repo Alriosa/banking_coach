@@ -9,7 +9,7 @@ function Recruitment() {
 	this.tblStudentId = 'tblStudent';
 	this.ctrlActions = new ControlActions();
 	this.service = 'student';
-    this.columns = "FirstName,FirstLastName,IdType,Country,Residence,Licenses,Sex,Curriculum";
+    this.columns = "FirstName,FirstLastName,IdType,IdentificationNumber,Country,Residence,Licenses,Sex,Curriculum";
 
 
 	this.BindFields = function (data) {
@@ -18,35 +18,43 @@ function Recruitment() {
 	}
 
 
-	this.RetrieveStudents = function () {
+	this.RetrieveStudents = async function () {
 		this.ctrlActions = new ControlActions();
-		this.ctrlActions.GetById(this.service, function (data) {
+		this.ctrlActions.GetById(this.service, async function (data) {
             console.log(data)
-           var t = $('#resultList').DataTable()
+            var t = $('#resultList').DataTable()
 
             for (let i in data) {
-               /* var downloadBtn = document.createElement("button");
+                var downloadBtn = document.createElement("button");
                 downloadBtn.innerHTML = 'Descargar';
                 downloadBtn.type = 'button';
                 downloadBtn.className = "btn btn-orange";
+                //downloadBtn.setAttribute( "onClick", await getData(data[i]) );
                 downloadBtn.addEventListener('click', async function () {
-                    await getData(data[i])
-                });*/
+                    //await getData(data[i])
+                    console.log('hola')
+                });
 
                t.row.add([
                     data[i].FirstName,
                     data[i].FirstLastName,
-                    data[i].IdType,
+                   data[i].IdType,
+                   data[i].IdentificationNumber,
                     data[i].Country,
-                    data[i].NProvince + ", " + data.NCanton + ", " + data.NDistrict,
+                   data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
                    data[i].DriverLicenses,
-                    data[i].Sex,
-                    '<button class="btn btn-orange" onclick="await getData(data[i])">Descargar</button>'
+                   data[i].Sex,
+                   '<button class="btn btn-orange" onclick="getData(' + data[i].StudentID + ')">Descargar</button>'
+                  // downloadBtn.outerHTML
                 ]).draw(false);
-            }14
+            }
+
+
 
 			students = data;
         });
+
+
       
 	}
 
@@ -139,10 +147,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-
-
-
-
     $(function () {
 
         this.ctrlActions = new ControlActions();
@@ -226,32 +230,43 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function getData(student) {
+async function getData(StudentID) {
     this.ctrlActions = new ControlActions();
 
-    await this.ctrlActions.GetById("laboral/student/" + student.StudentID, (data) => {
-        laboralList = data
-        for (let i in data) {
-            $('#profileContent').append(data[i].Responsabilites);
-            if ((i + 1) < data.length) {
-                $('#profileContent').append(', ');
+    await this.ctrlActions.GetById("laboral/student/" + StudentID, (data) => {
+        if (data.length > 0) {
+            laboralList = data
+            for (let i in data) {
+                $('#profileContent').append(data[i].Responsabilites);
+                if ((i + 1) < data.length) {
+                    $('#profileContent').append(', ');
+                }
             }
+        } else {
+            $('#profileContent').append('Sin experiencia profesional');
         }
     });
     await sleep(1000)
-    await this.ctrlActions.GetById("academic/student/" + student.StudentID, (data) => { academicList = data });
+    await this.ctrlActions.GetById("academic/student/" + StudentID, (data) => { academicList = data });
     await sleep(1000)
-    await this.ctrlActions.GetById("extracourse/student/" + student.StudentID, (data) => { courseList = data });
-    await this.ctrlActions.GetById("reference/student/" + student.StudentID, (data) => { referenceList = data });
+    await this.ctrlActions.GetById("extracourse/student/" + StudentID, (data) => { courseList = data });
+    await this.ctrlActions.GetById("reference/student/" + StudentID, (data) => { referenceList = data });
     await sleep(1000)
-    await this.ctrlActions.GetById("language/student/" + student.StudentID, async (data) => {
+    await this.ctrlActions.GetById("language/student/" + StudentID, async (data) => {
         languageList = data
-        await DowlandCV(student);
-        await $('.bg-gray').css("color", "white");
+        this.ctrlActions2 = new ControlActions();
+
+        this.ctrlActions.GetById('student/' + StudentID, async function (student) {
+            await DowlandCV(student);
+            await $('.bg-gray').css("color", "white");
+        })
+        //
+       
     });
 }
 
 async function DowlandCV(student) {
+    
 
     $('.bg-gray').css("color", "black");
 
@@ -514,3 +529,8 @@ async function DowlandCV(student) {
     //html2pdf().set(opt).from(container).save();
 
 }
+
+
+
+
+

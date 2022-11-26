@@ -12,7 +12,7 @@
             switch (response["UserType"]) {
                 case "1":
                     control.LoginByUser("sysadmin/getUser/" + userLogin, function (data) {
-                        setTimeout(function redirection() { window.location.href = "/Home"}, 3000);
+                        setTimeout(function redirection() { window.location.href = "/Home" }, 3000);
                     });
                     break;
                 case "2":
@@ -35,7 +35,7 @@
     this.ValidateInputs = function () {
         if ($("#frmLogin").valid()) {
             this.Login();
-            
+
         }
     }
 
@@ -71,7 +71,7 @@
                     window.location.href = "/Home"
                     break;
             }
-        }
+        })
     }
 }
 
@@ -102,7 +102,7 @@ $(document).ready(function () {
 });
 
 RulesValidateCreate = function () {
- 
+
     $("#frmLogin").validate({
         lang: 'es',
         errorClass: "is-invalid",
