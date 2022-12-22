@@ -1,6 +1,6 @@
 ﻿<script>
     $(document).ready(function () {
-        var table = $('#-#Id-').DataTable({
+       /* var table = $('#-#Id-').DataTable({
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -21,8 +21,13 @@
                     "previous": "Anterior"
                 }
             },
-        });
-        $('#-#Id- tbody').on('click', 'tr', function () {
+        });*/
+        $('#-#Id- thead tr')
+            .clone(true)
+            .addClass('filters')
+            .appendTo('#-#Id- thead');
+
+      /*  $('#-#Id- tbody').on('click', 'tr', function () {
             var data = table.row(this).data();
             sessionStorage.setItem('-#Id-_selected', JSON.stringify(data));
             console.log(data);
@@ -31,7 +36,7 @@
             if (view != undefined) {
                 view.-#FunctionName-(data);
             }
-        });
+        });*/
     });
 </script>
 <div class="card border-secondary mb-6">

@@ -52,7 +52,12 @@ namespace DataAcess.Mapper
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            var operation = new SqlOperation { ProcedureName = "SP_RETRIEVE_USER" };
+
+            var security = (Security)entity;
+            operation.AddVarcharParam(DB_COL_USER_EMAIL, security.Email);
+
+            return operation;
         }
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)

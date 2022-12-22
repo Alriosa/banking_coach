@@ -254,7 +254,7 @@
     <Content Include="Scripts\Views\Recruiter\vRecruiterRegistration.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterList.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterUpdate.js" />
-    <Content Include="Scripts\Views\Student\StudentsRecruited.js" />
+    <Content Include="Scripts\Views\Recruiter\StudentsRecruited.js" />
     <Content Include="Scripts\Views\Student\vStudentAccount.js" />
     <Content Include="Scripts\Views\Student\vStudentList.js" />
     <Content Include="Scripts\Views\Student\vStudentRegistration.js" />
@@ -289,7 +289,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Modal\AddAcademic.cshtml" />
     <Content Include="Views\Recruiter\Recruitment.cshtml" />
-    <Content Include="Views\Student\StudentsRecruited.cshtml" />
+    <Content Include="Views\Recruiter\StudentsRecruited.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

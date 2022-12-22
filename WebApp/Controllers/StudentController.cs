@@ -1,4 +1,5 @@
 ﻿using Entities_POJO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,38 +18,75 @@ namespace WebApp.Controllers
             return View();
         }
 
-
         public ActionResult vStudentList()
         {
-            return View();
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                {
+                    return View();
+                }
+                else {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
         public ActionResult vStudentUpdate(string id)
         {
-            if (id != null)
+            if (Request.Cookies["user"] != null)
             {
-                ViewBag.IdStudent = id;
-            }
-            else
-            {
-                ViewBag.IdStudent = "null";
-            }
+                if (id != null)
+                {
+                    ViewBag.IdStudent = id;
+                }
+                else
+                {
+                    ViewBag.IdStudent = "null";
+                }
 
-            return View();
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1 || typeNumber == 2)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
 
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
         public ActionResult vStudentAccount(string id)
         {
-            if (id != null)
+            if (Request.Cookies["user"] != null)
             {
-                ViewBag.IdStudent = id;
+                if (id != null)
+                {
+                    ViewBag.IdStudent = id;
+                }
+                else
+                {
+                    ViewBag.IdStudent = "null";
+                }
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1 || typeNumber == 2)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
             }
-            else
-            {
-                ViewBag.IdStudent = "null";
-            }
-
-            return View();
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
 

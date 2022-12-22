@@ -21,7 +21,7 @@
     this.UpdatePassword = function () {
         var recruiterData = {};
         recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdatePassword');
-        recruiterData["RecruiterUserID"] = document.getElementById("txtIdRecruiter").value;
+        recruiterData["Email"] = document.querySelector('#txtEmail').value;
         this.ctrlActions.PutToAPI(this.service + "/changePassword", recruiterData,
             resetForm()
         );
@@ -39,6 +39,8 @@
         var recruiterData = {};
         recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdate');
         recruiterData["RecruiterLogin"] = document.getElementById("txtRecruiterLogin").value;
+        recruiterData["IdType"] = document.getElementById("txtIdType").value;
+        recruiterData["IdentificationNumber"] = document.getElementById("txtIdentificationNumber").value;
         this.ctrlActions.PutToAPI(this.service, recruiterData,
             resetForm()
         );

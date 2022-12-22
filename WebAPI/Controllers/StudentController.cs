@@ -22,6 +22,33 @@ namespace WebAPI.Controllers
             return Ok(apiResp);
         }
 
+        [HttpGet]
+        [Route("allInRecruitment")]
+        public IHttpActionResult GetAllInRecruitment()
+        {
+            apiResp = new ApiResponse();
+            var mng = new StudentManager();
+            apiResp.Data = mng.RetrieveAllInRecruitment();
+
+            return Ok(apiResp);
+        }
+
+        [HttpGet]
+        [Route("allInRecruitment/{id}")]
+        public IHttpActionResult GetAllInRecruitmentByEntity(int id)
+        {
+            apiResp = new ApiResponse();
+            var mng = new StudentManager();
+            var student = new Student
+            {
+                EntityId = id
+            };
+            apiResp.Data = mng.RetrieveAllInRecruitmentByEntity(student);
+
+            return Ok(apiResp);
+        }
+
+
         [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
@@ -88,7 +115,7 @@ namespace WebAPI.Controllers
                 switch (c)
                 {
                     case "1":
-                        apiResp.Message = "Nombre de usuario ya existe";
+                        apiResp.Message = "Identificación ya existe";
                         apiResp.Data = "error";
                         break;
                       case "2":
@@ -174,6 +201,145 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPut]
+        [Route("recruitStudent")]
+        public IHttpActionResult RecruitStudent(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.RecruitStudent(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estado de proceso de reclutamiento de estudiante modificado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al reclutar al estudiante";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+
+        [HttpPut]
+        [Route("finishRecruitStudent")]
+        public IHttpActionResult finishRecruitStudent(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.FinishRecruitStudent(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estudiante se eliminó de la lista de reclutados de la entidad bancaria"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al eliminar al estudiante de la lista de reclutamiento";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPut]
+        [Route("updateTestEconomic")]
+        public IHttpActionResult StudentProcessTestEconomic(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.StudentProcessTestEconomic(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Proceso de Pruebas Económicas actualizado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al cambiar el estado de las pruebas económicas";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPut]
+        [Route("updateTestPsychometric")]
+        public IHttpActionResult StudentProcessTestPsychometric(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.StudentProcessTestPsychometric(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Proceso de Pruebas Psicométricas actualizado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al cambiar el estado de las pruebas psicométricas";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPut]
+        [Route("updateProcessInterview")]
+        public IHttpActionResult StudentProcessInterview(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.StudentProcessInterview(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Proceso de Entrevista actualizado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al cambiar el estado de la entrevista";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPut]
+        [Route("updateStatusHiring")]
+        public IHttpActionResult StudentStatusHiring(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.StudentProcessHiring(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estado de contratración actualizado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al cambiar el estado de contratación";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }

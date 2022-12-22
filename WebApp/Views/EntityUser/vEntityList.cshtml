@@ -5,11 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<button class="btn btn-orange" id="updateEntity">Actualizar entitad financiera  seleccionada</button>
-<button class="btn btn-orange" id="removeEntity">Eliminar entitad financiera seleccionada</button>
+<div style="margin: 10px auto;">
+    <button class="btn btn-orange" id="addEntity">Agregar Entidad Financiera</button>
 
+</div>
 <div style="margin-top: 20px;" id="financialList" class="d-inline">
-    @Html.CtrlTable(viewName: "vEntityList", id: "tblEntity", title: "Entidades Financieras",
-    columnsTitle: "Nombre,Cédula Jurídica,Cantidad de usuarios,Estado", ColumnsDataName: "Name,Id,Quantity,UserActiveStatus", onSelectFunction: "BindFields")
+   
+    <div class="col-lg-12 col-sm-11">
+        <div class="container-fluid">
+
+            <div class="justify-content-center">
+                <div class="card border-secondary mb-6">
+                    <div class="card-header">Entidades Financieras</div>
+                    <div class="card-body">
+                        <table id="tblEntity" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cédula Jurídica</th>
+                                    <th>Cantidad de usuarios</th>
+                                    <th style="width: 100px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

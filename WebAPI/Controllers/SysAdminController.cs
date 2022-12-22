@@ -93,7 +93,7 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
-                    apiResp.Message = "Nombre de usuario ya existe";
+                    apiResp.Message = "Identificación ya existe";
                     apiResp.Data = "error";
 
                 }

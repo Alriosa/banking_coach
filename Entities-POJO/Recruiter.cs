@@ -20,6 +20,7 @@ namespace Entities_POJO
         public string UserType { get; set; }
         public string UserActiveStatus { get; set; }
         public string User_Login { get; set; }
+        public int QuantityDownload { get; set; }
 
         public Recruiter()
         {

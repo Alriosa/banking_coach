@@ -100,6 +100,16 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRecoverPasswordStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_RECOVER_PASSWORD_TBL_ADMIN" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
+            operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
+
+            return operation;
+        }
         public SqlOperation GetUpdateStatusStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_ADMIN_USER_STATUS" };

@@ -14,27 +14,58 @@ namespace WebAPI.Controllers
 
 
 
-       /* [HttpPost]
-        [Route("")]
-        public IHttpActionResult Post(Mail mail)
+        /* [HttpPost]
+         [Route("")]
+         public IHttpActionResult Post(Mail mail)
+         {
+             var  mailManager = new MailManager();
+             try
+             {
+                 string mensajefinal = "<h1>Proyecto Techclub Tajamar(MVC NetCore Correos)<h1/><h4>" + mail.texto + " <h4/>";
+
+
+                 mailManager.SendMail(mail.receptor, mail.asunto, mensajefinal);
+
+
+                 return Ok("Mensaje enviado a '" + mail.receptor + "'");
+             }
+             catch (Exception bex)
+             {
+                 return InternalServerError(new Exception("Error al enviar el correo"));
+             }
+         }
+        */
+
+        [HttpPost]
+        [Route("studentRegistered")]
+        public IHttpActionResult studentRegistered(Mail mail)
         {
-            var  mailManager = new MailManager();
+            var mailManager = new MailManager();
             try
             {
-                string mensajefinal = "<h1>Proyecto Techclub Tajamar(MVC NetCore Correos)<h1/><h4>" + mail.texto + " <h4/>";
+                string message = "<h1>Banking Coach: <h1/><h4>" + mail.Text + " <h4/>";
 
-          
-                mailManager.SendMail(mail.receptor, mail.asunto, mensajefinal);
-              
 
-                return Ok("Mensaje enviado a '" + mail.receptor + "'");
+                var mng = new StudentManager();
+
+
+                Student student = new Student();
+                student.Email = mail.Email;
+                student = mng.RetrieveByEmail(student);
+
+
+                var text = @"<p>Estudiante registrado: " + student.FirstName + " " + student.FirstLastName + " "+ student.SecondLastName + " </p><p>Credenciales:</p><p>Usuario: " + student.IdentificationNumber + "</p><p>Contraseña: " + student.StudentPassword + "</p>";
+                message = message + "\n" + text;
+                mailManager.SendMail(mail.Email, mail.Subject, message);
+
+                return Ok("Mensaje enviado a '" + mail.Email + "'");
             }
             catch (Exception bex)
             {
                 return InternalServerError(new Exception("Error al enviar el correo"));
             }
         }
-       */
+
 
         [HttpPost]
         [Route("recoverPasswordAdmin")]
@@ -52,7 +83,7 @@ namespace WebAPI.Controllers
                 admin.AdminPassword = CreateRandomPassword();
                 mng.UpdatePassword(admin);
                 var text = @"<p>Nueva contraseña: " + admin.AdminPassword + " </p>";
-
+                message = message + "\n" + text;
                 mailManager.SendMail(mail.Email, mail.Subject, message);
 
                 return Ok("Mensaje enviado a '" + mail.Email + "'");
@@ -79,7 +110,7 @@ namespace WebAPI.Controllers
                 recruiter.RecruiterPassword = CreateRandomPassword();
                 mng.UpdatePassword(recruiter);
                 var text = @"<p>Nueva contraseña: " + recruiter.RecruiterPassword + " </p>";
-
+                message = message + "\n" + text;
                 mailManager.SendMail(mail.Email, mail.Subject, message);
 
                 return Ok("Mensaje enviado a '" + mail.Email + "'");
@@ -105,7 +136,8 @@ namespace WebAPI.Controllers
                 student.Email = mail.Email;
                 student.StudentPassword = CreateRandomPassword();
                 mng.UpdatePassword(student);
-                var text = "<p>Nueva contraseña: " + student.StudentPassword + " </p>";
+                var text = @"<p>Nueva contraseña: " + student.StudentPassword + " </p>";
+                message = message + "\n" + text;
                 mailManager.SendMail(mail.Email, mail.Subject, message);
 
                 return Ok("Mensaje enviado a '" + mail.Email + "'");

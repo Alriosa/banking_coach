@@ -5,266 +5,101 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    .btn {
+        width: 50px;
+    }
+    table.dataTable thead th, table.dataTable thead td {
+        padding: 10px 6px;
+    }
+</style>
 <div class="d-flex justify-content-center savepdf">
-    <div class="container">
-        <div class="row text-center justify-content-between">
-            <div class="col-lg-12 col-sm-11">
-                <div class=" text-box ">
-                    <h1>ÁREA DE RECLUTAMIENTO</h1>
-                    <p class="subtitle home-subtitle-1">
-                        Ingrese los criterios de selección que requiere en los candidatos:
-                    </p>
-                   <!-- <form id="frmSearchStudents" class="form frmSearchStudents">
-                        <div class="row align-content-sm-center">
-                            <div class="col-sm-12 text-center">
-                                <div class="form-row ">
-                                    <div class="col-lg-12">
-                                        <div class="input-group mb-3">
-                                            <div class="form-group input-group flex-column ">
-                                                <label>Tipo de documento:</label>
-                                                <select style="height:54px;" class="form-control w-100" id="txtIdType" name="IdType" ColumnDataName="IdType" required>
-                                                    <option value="">Seleccione un tipo de documento</option>
-                                                    <option value="Cédula persona física">Cédula persona física</option>
-                                                    <option value="Residencia">Residencia</option>
-                                                    <option value="Pasaporte">Pasaporte</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row ">
-                                    <div class="col-lg-12">
-                                        <div class="input-group mb-3">
-                                            <div class="form-group input-group flex-column ">
-                                                <label>País de Origen</label>
-                                                <select style="height:54px;" class="form-control w-100" id="txtCountry" name="Country" ColumnDataName="Country">
-                                                    <option value="">Seleccione un país de origen</option>
-                                                    <option value="Bolivia">Bolivia</option>
-                                                    <option value="Canadá">Canadá</option>
-                                                    <option value="Chile">Chile</option>
-                                                    <option value="China">China</option>
-                                                    <option value="Colombia">Colombia</option>
-                                                    <option value="Corea">Corea</option>
-                                                    <option value="Corea del Norte">Corea del Norte</option>
-                                                    <option value="Cuba">Cuba</option>
-                                                    <option value="Costa Rica">Costa Rica</option>
-                                                    <option value="Ecuador">Ecuador</option>
-                                                    <option value="El Salvador">El Salvador</option>
-                                                    <option value="España">España</option>
-                                                    <option value="Estados Unidos">Estados Unidos</option>
-                                                    <option value="Guatemala">Guatemala</option>
-                                                    <option value="Haití">Haití</option>
-                                                    <option value="Honduras">Honduras</option>
-                                                    <option value="India">India</option>
-                                                    <option value="Italia">Italia</option>
-                                                    <option value="Japón">Japón</option>
-                                                    <option value="México">México</option>
-                                                    <option value="Nicaragua">Nicaragua</option>
-                                                    <option value="Panamá">Panamá</option>
-                                                    <option value="Paraguay">Paraguay</option>
-                                                    <option value="Perú">Perú</option>
-                                                    <option value="Puerto Rico">Puerto Rico</option>
-                                                    <option value="República Dominicana">República Dominicana</option>
-                                                    <option value="Uruguay">Uruguay</option>
-                                                    <option value="Venezuela">Venezuela</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row ">
-                                    <p><strong>Residencia en Costa Rica</strong></p>
-                                    <div class="col-lg-12">
-                                        Html.CtrlDropDown(id: "txtProvince", label: "Provincia", listId: "LST_PROVINCES", columnDataName: "Province")
-                                    </div>
-                                </div>
-                                <div class="form-row ">
-                                    <div class="col-lg-12">
-                                       Html.CtrlDropDown(id: "txtCanton", listId: "LST_CANTONS", label: "Cantón", columnDataName: "Canton")
-                                    </div>
-                                </div>
-                                <div class="form-row ">
-                                    <div class="col-lg-12">
-                                        Html.CtrlDropDown(id: "txtDistrict", listId: "LST_DISTRICTS", label: "Distrito", columnDataName: "District")
-                                    </div>
-                                </div>
-                                <div class="form-row ">
-                                    <div class="col-lg-12">
-                                        <div>
-                                            <div class="input-group mb-3">
-                                                <div class="form-group input-group flex-column ">
-                                                    <label for="txtDriveLicense">Licencia de conducir</label>
-                                                    <div class="d-flex justify-content-around">
-                                                        <div>
-                                                            <label for="licenseA1"> <input type="checkbox" id="licenseA1" name="driverLicenses" value="A1" />A1</label>
-                                                        </div>
-                                                        <div>
-                                                            <label for="licenseA2"> <input type="checkbox" id="licenseA2" name="driverLicenses" value="A2" />A2</label>
-                                                        </div>
-                                                        <div>
-                                                            <label for="licenseA3">  <input type="checkbox" id="licenseA3" name="driverLicenses" value="A3" />A3</label>
-                                                        </div>
-                                                        <div>
-                                                            <label for="licenseB1"><input type="checkbox" id="licenseB1" name="driverLicenses" value="B1" />B1</label>
-                                                        </div>
-                                                        <div>
-                                                            <label for="licenseB2"> <input type="checkbox" id="licenseB2" name="driverLicenses" value="B2" />B2</label>
-                                                        </div>
-                                                        <div>
-                                                            <label for="licenseB3"><input type="checkbox" id="licenseB3" name="driverLicenses" value="B3" />B3</label>
-                                                        </div>
-                                                        <div>
-                                                            <label for="licenseC1"><input type="checkbox" id="licenseC1" name="driverLicenses" value="C1" />C1</label>
-                                                        </div>
-                                                        <div>
-                                                            <labels for="licenseC2"><input type="checkbox" id="licenseC2" name="driverLicenses" value="C2" />C2</labels>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group mb-3">
-                                            <div class="form-group input-group flex-column ">
-                                                <label>Sexo</label>
-                                                <select class="form-control w-100" id="txtSex" name="Sex" ColumnDataName="Sex">
-                                                    <option value="">Seleccione un sexo</option>
-                                                    <option value="Masculino">Masculino</option>
-                                                    <option value="Femenino">Femenino</option>
-                                                    <option value="Otro">Otro</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-lg-12">
-                                        <div>
-                                            <div class="input-group mb-3">
-                                                <div class="form-group input-group flex-column ">
-                                                    <label for="txtLanguage">Idioma</label>
-                                                    <select style="height:54px;" class="form-control w-100" id="txtLanguage"
-                                                            name="txtLanguage" ColumnDataName="LanguageName" required>
-                                                        <option value="">Seleccione un idioma</option>
-                                                        <option value="Inglés">Inglés</option>
-                                                        <option value="Francés">Francés</option>
-                                                        <option value="Mandarín">Mandarín</option>
-                                                        <option value="Coreano">Coreano</option>
-                                                        <option value="Portugués">Portugués</option>
-                                                        <option value="Alemán">Alemán</option>
-                                                        <option value="Italiano">Italiano</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 text-center">
-                                <div class="form-row" style="margin: 0px auto;">
-                                    <div style="margin: 0px auto 10px;">
-                                       Html.CtrlButton(viewName: "Recruitment", id: "btnSearch", type: "button",
-                                                    label: "Buscar", onClickFunction: "ReloadResults", buttonType: "orange")
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </form> -->
-
-                </div>
+    <div class="row text-center justify-content-between">
+        <div class="col-lg-12 col-sm-11">
+            <div class=" text-box ">
+                <h1>ÁREA DE RECLUTAMIENTO</h1>
+                <p class="subtitle home-subtitle-1">
+                    Ingrese los criterios de selección que requiere en los candidatos:
+                </p>
             </div>
-            <div class="col-lg-12 col-sm-11 ">
-                <div>
+        </div>
+        <div class="col-lg-12 col-sm-11">
+            <div class="container-fluid">
 
-                    <div class="container ">
-                        <div class="justify-content-center">
-                            <div class="card border-secondary mb-6">
-                                <div class="card-header">Lista de Resultados</div>
-                                <div class="card-body">
-                                    <table id="resultList" class="display" cellspacing="0" width="100%"
-                                            ColumnsDataName="FirstName,FirstLastName,IdType,IdentificationNumber,Country,Residence,Licenses,Sex,Curriculum">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre </th>
-                                                <th>Apellido </th>
-                                                <th>Tipo de documento </th>
-                                                <th>Número de Identificación</th>
-                                                <th>País de Origen </th>
-                                                <th>Residencia en Costa Rica</th>
-                                                <th>Licencias de conducir </th>
-                                                <th>Sexo</th>
-                                                <th>Curriculum </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!--<tr>
-            <td>Mariano</td>
-            <td>Mercedes</td>
-            <td>Cédula persona física</td>
-            <td>Panamá</td>
-            <td>San José, San José, El Carmen</td>
-            <th>A1, B1</th>
-            <td>Femenino</td>
-             <td>Inglés: Avanzado, Francés: Básico</td>
-    <td><button>Descargar</button></td>
-                                                </tr>-->
+                <div class="justify-content-center">
+                    <div class="card border-secondary mb-6">
+                        <div class="card-header">Estudiantes posibles a reclutar</div>
+                        <div class="card-body">
+                            <table id="resultList" class="display" cellspacing="0" width="100%"
+                                   ColumnsDataName="FirstName,FirstLastName,IdType,IdentificationNumber,Birthdate,Country,Residence,JobAvailability,Type_Vehicle,Licenses,Sex,Curriculum">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre </th>
+                                        <th>Apellido </th>
+                                        <th>Tipo de documento </th>
+                                        <th>Número de Identificación</th>
+                                        <th>Fecha Nacimiento</th>
+                                        <th>País de Origen</th>
+                                        <th>Residencia en Costa Rica</th>
+                                        <th>Disponibilidad Laboral</th>
+                                        <th>Vehículos</th>
+                                        <th>Licencias de conducir </th>
+                                        <th>Sexo</th>
+                                        <th>CV</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--<tr>
+                                            <td>Mariano</td>
+                                            <td>Mercedes</td>
+                                            <td>Cédula persona física</td>
+                                            <td>Panamá</td>
+                                            <td>San José, San José, El Carmen</td>
+                                            <th>A1, B1</th>
+                                            <td>Femenino</td>
+                                             <td>Inglés: Avanzado, Francés: Básico</td>
+                                    <td><button>Descargar</button></td>
+                                                                                </tr>-->
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <p>El máximo de descargas por su usuario es de 20 al mes</p>
+                </div>
+            </div>
+            <p>El máximo de descargas por su usuario es de 20 al mes</p>
+        </div>
+    </div>
+
+</div>
+    <div class="d-none savepdf" style="color:#000000!important">
+        <div class="container pdf" id="my_info">
+            <div class="row flex-rows">
+                <div class="col-lg-7">
+                    <p><strong>Estudiante de Banking Academy: </strong><span id="P_BankingStudent"></span></p>
+                    <p><strong>Nombre Completo: </strong><span id="P_CompleteName"></span></p>
+                    <p><strong>País de Origen: </strong><span id="P_Country"></span></p>
+                    <p><strong>Residencia en Costa Rica: </strong><span id="P_Location"></span></p>
+                    <p><strong>Tipo de documento: </strong><span id="P_Id_Type"></span></p>
+                    <p><strong>Número de Identificación: </strong><span id="P_IdentificationNumber"></span></p>
+                    <p><strong>Fecha de Nacimiento: </strong><span id="P_Birthdate"></span></p>
+                    <p><strong>Edad: </strong><span id="P_Age"></span></p>
+                    <p><strong>Correo Electrónico: </strong><span id="P_Email"></span></p>
+                </div>
+                <div class="col-lg-4">
+                    <p><strong>Teléfono Principal </strong><span id="P_PhoneNumber"></span></p>
+                    <p><strong>Teléfono Secundario </strong><span id="P_SecondPhoneNumber"></span></p>
+                    <p><strong>Licencia(s): </strong><span id="P_DriverLicenses"></span></p>
+                    <p><strong>¿Con Vehículo?: </strong><span id="P_Vehicle"></span></p>
+                    <p id="P_Type_Vehicle"></p>
+                    <p><strong>Estado de Disponibilidad: </strong><span id="P_JobAvailability"></span></p>
                 </div>
             </div>
         </div>
-        <div class="row text-center justify-content-between">
-
+        <div class="col-lg-10" id="profileContentContainer">
+            <p>Con experiencia en: <span id="profileContent"></span></p>
         </div>
     </div>
-    </div><!-- end form-content -->
-
-<script>
-   
-</script>
-
-<div class="d-none savepdf" style="color:#000000!important">
-    <div class="container pdf" id="my_info">
-        <div class="row flex-rows">
-            <div class="col-lg-7">
-                <p><strong>Estudiante del Banco: </strong><span id="P_BankingStudent"></span></p>
-                <p><strong>Nombre Completo: </strong><span id="P_CompleteName"></span></p>
-                <p><strong>País de Origen: </strong><span id="P_Country"></span></p>
-                <p><strong>Residencia en Costa Rica: </strong><span id="P_Location"></span></p>
-                <p><strong>Tipo de documento: </strong><span id="P_Id_Type"></span></p>
-                <p><strong>Número de Identificación: </strong><span id="P_IdentificationNumber"></span></p>
-                <p><strong>Fecha de Nacimiento: </strong><span id="P_Birthdate"></span></p>
-                <p><strong>Edad: </strong><span id="P_Age"></span></p>
-                <p><strong>Correo Electrónico: </strong><span id="P_Email"></span></p>
-            </div>
-            <div class="col-lg-4">
-                <p><strong>Teléfono Principal </strong><span id="P_PhoneNumber"></span></p>
-                <p><strong>Teléfono Secundario </strong><span id="P_SecondPhoneNumber"></span></p>
-                <p><strong>Licencia(s): </strong><span id="P_DriverLicenses"></span></p>
-                <p><strong>¿Con Vehículo?: </strong><span id="P_Vehicle"></span></p>
-                <p id="P_Type_Vehicle"></p>
-                <p><strong>Estado de Disponibilidad: </strong><span id="P_JobAvailability"></span></p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-10" id="profileContentContainer">
-        <p>Con experiencia en: <span id="profileContent"></span></p>
-    </div>
-</div>
 
 
 

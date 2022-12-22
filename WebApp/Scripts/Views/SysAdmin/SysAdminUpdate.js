@@ -20,9 +20,9 @@
     }
     this.UpdatePassword = function () {
         var adminData = {};
-        var adminLogin = document.getElementById("txtAdminLogin").value;
+        var email = document.querySelector('#txtEmail').value;
         adminData = this.ctrlActions.GetDataForm('frmSysAdminUpdatePassword');
-        adminData["AdminLogin"] = adminLogin;
+        adminData["Email"] = email;
         this.ctrlActions.PutToAPI(this.service + "/changePassword", adminData,
             resetForm());
     }

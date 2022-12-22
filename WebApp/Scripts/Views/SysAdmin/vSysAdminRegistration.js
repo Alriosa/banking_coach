@@ -5,6 +5,9 @@
         var sysAdmin = {};
 
         sysAdmin = this.ctrlActions.GetDataForm('frmSysAdminCreate');
+        sysAdmin["AdminLogin"] = $("#txtIdentificationNumber").val();
+        sysAdmin["User_Login"] = $("#txtIdentificationNumber").val();
+
 
         this.ctrlActions.PostToAPI('sysadmin', sysAdmin, function () {
             resetForm();
@@ -15,6 +18,8 @@
         if ($("#frmSysAdminCreate").valid()) {
             this.Create();
             resetForm();
+            setTimeout(function redirection() { window.location.href = '/SysAdmin/vSysAdminList'; }, 4000);
+
         } 
     }  
 }

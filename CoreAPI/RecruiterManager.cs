@@ -81,6 +81,25 @@ namespace CoreAPI
 
             return c;
         }
+         public Recruiter RetrieveEntityId(Recruiter recruiter)
+        {
+            Recruiter c = null;
+            try
+            {
+                c = crudRecruiter.RetrieveEntityId<Recruiter>(recruiter);
+               /* if (c == null)
+                {
+                    throw new BussinessException(4);
+                }*/
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+
+            return c;
+        }
 
         public void Update(Recruiter recruiter)
         {
@@ -103,6 +122,11 @@ namespace CoreAPI
                 //s ExceptionManager.GetInstance().Process(ex);
                 throw new Exception("Error al retornar datos", ex);
             }
+        }
+
+        public void AddQuantityDownload(Recruiter recruiter)
+        {
+            crudRecruiter.AddQuantity(recruiter);
         }
 
         public void Delete(Recruiter recruiter)

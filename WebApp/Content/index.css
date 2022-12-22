@@ -111,6 +111,12 @@ input {
     border-radius: 40px;
 }
 
+table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected,
+table.dataTable.display tbody tr.odd.selected > .sorting_1,
+table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1, table.dataTable.hover tbody tr:hover.selected,
+table.dataTable.display tbody tr:hover.selected {
+    background-color: #000;
+}
 
 
 .card {
@@ -163,7 +169,7 @@ table.dataTable.stripe tbody tr.odd {
     color: #fff;
     background-color: #fda935;
     border-color: #fda935;
-    padding: 1px auto;
+    padding: 0 4px;
     border-radius: 100px;
     height: 3rem;
     white-space: break-spaces;
@@ -181,6 +187,17 @@ table.dataTable.stripe tbody tr.odd {
         color: #fff;
     }
 
+.btn-secondary {
+    color: #fff;
+    background-color: #E74C3C;
+    border-color: #E74C3C;
+    padding: 0 4px;
+    border-radius: 100px;
+    height: 3rem;
+    white-space: break-spaces;
+    word-wrap: break-word;
+    width: 200px;
+}
 
 .progress {
     height: 2rem;

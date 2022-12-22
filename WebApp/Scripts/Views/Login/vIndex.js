@@ -11,17 +11,27 @@
             var userLogin = response["UserLogin"];
             switch (response["UserType"]) {
                 case "1":
+                    setCookie('type', 1, 30);
+
                     control.LoginByUser("sysadmin/getUser/" + userLogin, function (data) {
                         setTimeout(function redirection() { window.location.href = "/Home" }, 3000);
                     });
                     break;
                 case "2":
+                    setCookie('type', 2, 30);
                     control.LoginByUser("student/getUser/" + userLogin, function (data) {
-                        setTimeout(function redirection() { window.location.href = "/Student/VStudentAccount/" + data['StudentID'] }, 3000);
+                        setTimeout(function redirection() {
+                            this.ctrlActions2 = new ControlActions();
+
+                            setCookie('token', JSON.stringify(data['StudentID']), 30);
+
+                            window.location.href = "/Student/VStudentAccount/" + data['StudentID']
+                        }, 3000);
                     });
                     break;
                 case "3":
-                    control.LoginByUser("recruiter/getUser/" + userLogin, function (data) {
+                    setCookie('type', 3, 30);
+  control.LoginByUser("recruiter/getUser/" + userLogin, function (data) {
                         setTimeout(function redirection() { window.location.href = "/Home" }, 3000);
                     });
                     break;
@@ -47,23 +57,24 @@
 
         user['text'] = "Recuperación de Contraseña";
         user['subject'] = "Recuperación de Contraseña";
-        user['UserType'] = response
 
-        this.ctrlActions.RecoverPassword(this.service + "/login", data, function (response) {
-            var userLogin = response;
+        this.ctrlActions.RecoverPassword(this.service + "/retrieveByEmail", user, function (response) {
+            user['UserType'] = response["UserType"];
+            this.ctrlActions2 = new ControlActions();
+
             switch (response["UserType"]) {
                 case "1":
-                    this.ctrlActions.PostToAPI('mail/recoverPasswordAdmin', user, function () {
+                    this.ctrlActions2.PostToAPI('mail/recoverPasswordAdmin', user, function () {
                         resetFormRecoverPassword();
                     });
                     break;
                 case "2":
-                    this.ctrlActions.PostToAPI('mail/recoverPasswordStudent', user, function () {
+                    this.ctrlActions2.PostToAPI('mail/recoverPasswordStudent', user, function () {
                         resetFormRecoverPassword();
                     });
                     break;
                 case "3":
-                    this.ctrlActions.PostToAPI('mail/recoverPasswordRecruiter', user, function () {
+                    this.ctrlActions2.PostToAPI('mail/recoverPasswordRecruiter', user, function () {
                         resetFormRecoverPassword();
                     });
                     break;
@@ -93,12 +104,18 @@ $(document).ready(function () {
         document.getElementById("name").innerHTML = user.Name;
         document.getElementById("username").innerHTML = user.UserLogin;
         document.getElementById("email").innerHTML = user.Email;
+        if (JSON.parse(getCookie('type')) == 2) {
+
+            window.location.href = "/Student/VStudentAccount/" + getCookie("token");
+        }
     } else {
         ShowFormLogin();
         document.getElementById("username").innerHTML = "";
         document.getElementById("name").innerHTML = "";
         document.getElementById("email").innerHTML = "";
     }
+
+   
 });
 
 RulesValidateCreate = function () {

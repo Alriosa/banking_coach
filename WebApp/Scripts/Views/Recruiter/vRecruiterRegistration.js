@@ -19,15 +19,27 @@
         recruiterData = this.ctrlActions.GetDataForm('frmRecruiterCreate');
         recruiterData.EntityAssociation = $('#selectEntity').val();
 
-        this.ctrlActions.PostToAPI('recruiter', recruiterData, function () {
-            resetForm();
+        recruiterData["RecruiterLogin"] = $("#txtIdentificationNumber").val();
+        recruiterData["User_Login"] = $("#txtIdentificationNumber").val();
+
+        
+
+        this.ctrlActions.PostToAPI('recruiter', recruiterData, function (response) {
+            if (response == "error data") {
+                this.ctrlActions2 = new ControlActions();
+                ctrlActions2.ShowMessage('E', 'Es posible que haya rebasado la cantidad de usuarios disponibles para la entidad financiera seleccionada. Por favor, verifique');
+            } else {
+               resetForm();
+                setTimeout(function redirection() { window.location.href = '/Recruiter/vRecruiterList'; }, 4000);
+            }
+            
         });
     }
 
     this.ValidateInputs = function () {
         if ($("#frmRecruiterCreate").valid()) {
             this.Create();
-            resetForm();
+            //resetForm();
         }
     }
 }

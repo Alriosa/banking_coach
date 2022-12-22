@@ -7,7 +7,7 @@
         var studentData = {};
         studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
 
-        var studentLogin = document.getElementById("txtStudentLogin").value;
+        var studentLogin = $("#txtIdentificationNumber").val();
         studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
         if (studentData["JobAvailability"] == "Sí") {
             studentData["LaboralStatus"] = "No";
@@ -17,11 +17,20 @@
         studentData["StudentLogin"] = studentLogin;
         studentData["UserLogin"] = studentLogin;
 
+        var array = [];
+
         if (studentData["Vehicle"] == "No") {
             studentData["Type_Vehicle"] = "";
-        }
+        } else {
+            var checkboxesV = document.querySelectorAll('input[name=typeVehicles]:checked');
+            for (var i = 0; i < checkboxesV.length; i++) {
+                array.push(checkboxesV[i].value);
+            }
+            studentData["Type_Vehicle"] = array.join(', ');
 
-        var array = [];
+        }
+        array = [];
+
 
         var checkboxes = document.querySelectorAll('input[name=driverLicenses]:checked');
         for (var i = 0; i < checkboxes.length; i++) {
@@ -29,9 +38,35 @@
         }
         studentData["DriverLicenses"] = array.join(', ');
         
-        this.ctrlActions.PostToAPI('student', studentData, function () {
-            resetForm();
-            //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+        this.ctrlActions.PostToAPI('student', studentData, function (response) {
+
+            let user = JSON.parse(getCookie('user'));
+
+            if (user) {
+                setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 4000);
+            } else {
+                setTimeout(function redirection() { window.location.href = '/Student/vStudentList'; }, 4000);
+                resetForm();
+            }
+
+          /*  var user = {};
+
+
+            user['text'] = "Estudiante Registrado";
+            user['subject'] = "Registro de Estudiante";
+            user['email'] = studentData['Email'];
+            this.ctrlActions2.PostToAPI('mail/studentRegistered', user, function () {
+                let user = JSON.parse(getCookie('user'));
+
+                if (user) {
+                    setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 4000);
+                } else {
+                    setTimeout(function redirection() { window.location.href = '/Student/vStudentList'; }, 4000);
+                    resetForm();
+                }
+            });*/
+
+            
 
         });
     }

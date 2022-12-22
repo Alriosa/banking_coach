@@ -72,6 +72,31 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("getEntity/{id}")]
+        public IHttpActionResult getEntity(string id)
+        {
+            try
+            {
+                var mng = new RecruiterManager();
+                var recruiter = new Recruiter
+                {
+                    RecruiterLogin = id
+                };
+
+                recruiter = mng.RetrieveEntityId(recruiter);
+                apiResp = new ApiResponse
+                {
+                    Data = recruiter
+                };
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
         [Route("")]
         public IHttpActionResult Post(Recruiter recruiter)
         {
@@ -91,7 +116,7 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
-                    apiResp.Message = "Nombre de usuario ya existe";
+                    apiResp.Message = "Identificación ya existe";
                     apiResp.Data = "error";
 
                 }
@@ -148,6 +173,46 @@ namespace WebAPI.Controllers
             }
         }
 
+
+        [HttpPut]
+        [Route("addQuantity")]
+        public IHttpActionResult AddQuantity(Recruiter recruiter)
+        {
+            try
+            {
+                var mng = new RecruiterManager();
+
+                var c = mng.RetrieveById(recruiter);
+
+                if(c != null)
+                {
+                    if(c.QuantityDownload <= 20)
+                    {
+                        mng.AddQuantityDownload(recruiter);
+
+                        apiResp = new ApiResponse
+                        {
+                            Data = "success",
+                            Message = "Descarga realizada"
+                        };
+                    } else
+                    {
+                        apiResp = new ApiResponse
+                        {
+                            Message = "Ha sobrepasado el límite de descargas permitidas al mes",
+                            Data = "error"
+
+                        };
+                    }
+                } 
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al descargar el currículum";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
         [Route("")]
         public IHttpActionResult Delete(Recruiter recruiter)
         {

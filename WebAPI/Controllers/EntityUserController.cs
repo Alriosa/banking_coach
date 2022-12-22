@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
-                    apiResp.Message = "Nombre de usuario ya existe";
+                    apiResp.Message = "Nombre de entidad ya existe";
                     apiResp.Data = "error";
 
                 }
@@ -78,6 +78,8 @@ namespace WebAPI.Controllers
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
+
+
 
         [HttpGet]
         [Route("getUser/{id}")]

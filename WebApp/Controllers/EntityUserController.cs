@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,39 +12,91 @@ namespace WebApp.Controllers
         // GET: Entity
         public ActionResult vEntityRegistration()
         {
-            return View();
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
         public ActionResult vEntityList()
         {
-            return View();
+            if (Request.Cookies["user"] != null)
+            {
+
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1 )
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
         public ActionResult vEntityUpdate(string id)
         {
-            if (id != null)
+            if (Request.Cookies["user"] != null)
             {
-                ViewBag.IdEntity = id;
+                if (id != null)
+                {
+                    ViewBag.IdEntity = id;
+                }
+                else
+                {
+                    ViewBag.IdEntity = "null";
+                }
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
             }
-            else
-            {
-                ViewBag.IdEntity = "null";
-            }
-
-            return View();
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
 
         public ActionResult vEntityAccount(string id)
         {
-            if (id != null)
+            if (Request.Cookies["user"] != null)
             {
-                ViewBag.IdEntity = id;
-            }
-            else
-            {
-                ViewBag.IdEntity = "null";
-            }
+                if (id != null)
+                {
+                    ViewBag.IdEntity = id;
+                }
+                else
+                {
+                    ViewBag.IdEntity = "null";
+                }
 
-            return View();
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
     }
 }

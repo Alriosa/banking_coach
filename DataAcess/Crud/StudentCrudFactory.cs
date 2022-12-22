@@ -59,6 +59,43 @@ namespace DataAccess.Crud
             return lstStudent;
         }
 
+
+        public List<T> RetrieveAllInRecruitment<T>()
+        {
+            var lstStudent = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveAllInRecruitmentStatement());
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjectsInRecruitment(lstResult);
+                foreach (var c in objs)
+                {
+                    lstStudent.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return lstStudent;
+        }
+
+        public List<T> RetrieveAllInRecruitmentByEntity<T>(BaseEntity entity)
+        {
+            var lstStudent = new List<T>();
+
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveAllInRecruitmentByEntityStatement(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                var objs = mapper.BuildObjectsInRecruitment(lstResult);
+                foreach (var c in objs)
+                {
+                    lstStudent.Add((T)Convert.ChangeType(c, typeof(T)));
+                }
+            }
+
+            return lstStudent;
+        }
+
         public override void Update(BaseEntity entity)
         {
             var student = (Student)entity;
@@ -68,7 +105,7 @@ namespace DataAccess.Crud
         public void UpdatePassword(BaseEntity entity)
         {
             var student = (Student)entity;
-            dao.ExecuteProcedure(mapper.GetUpdatePasswordStatement(student));
+            dao.ExecuteProcedure(mapper.GetRecoverPasswordStatement(student));
         }
 
         public override void Delete(BaseEntity entity)
@@ -138,6 +175,38 @@ namespace DataAccess.Crud
             }
 
             return default(T);
+        }
+
+
+        public void RecruitStudent(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetRecruitStudentStatement(student));
+        }
+        public void FinishRecruitStudent(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetFinishRecruitStudentStatement(student));
+        }
+        public void StudentProcessTestEconomic(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetUpdateProcessTestEconomicStatement(student));
+        }
+        public void StudentProcessTestPsychometric(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetUpdateProcessTestPsychometricStatement(student));
+        }
+        public void StudentProcessInterview(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetUpdateProcessInterviewStatement(student));
+        }
+        public void StudentProcessHiring(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetUpdateProcessHiringStatement(student));
         }
     }
 }

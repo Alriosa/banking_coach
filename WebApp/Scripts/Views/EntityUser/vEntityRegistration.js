@@ -7,9 +7,11 @@
         var entityData = {};
 
         entityData = this.ctrlActions.GetDataForm('frmEntityCreate');
+        entityData["User_Login"] = $("#txtID").val();
 
         this.ctrlActions.PostToAPI('entity', entityData, function () {
             resetForm();
+            setTimeout(function redirection() { window.location.href = '/EntityUser/vEntityList'; }, 4000);
         });
     }
 

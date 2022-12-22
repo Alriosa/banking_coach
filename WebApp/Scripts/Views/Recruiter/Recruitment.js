@@ -6,103 +6,124 @@ var languageListStudents = [];
 
 function Recruitment() {
 
-	this.tblStudentId = 'tblStudent';
-	this.ctrlActions = new ControlActions();
-	this.service = 'student';
-    this.columns = "FirstName,FirstLastName,IdType,IdentificationNumber,Country,Residence,Licenses,Sex,Curriculum";
+    this.resultList = 'resultList';
+    this.ctrlActions = new ControlActions();
+    this.service = 'student';
+    this.columns = "FirstName,FirstLastName,IdType,IdentificationNumber,Birthdate,Country,Residence,JobAvailability,Type_Vehicle,Licenses,Sex,Curriculum";
 
 
-	this.BindFields = function (data) {
-		//window.location.href = "/student/vStudentUpdate/" + data["StudentID"];
-		localStorage.setItem('selectedID', data["StudentID"]);
-	}
+    this.BindFields = function (data) {
+        //window.location.href = "/student/vStudentUpdate/" + data["StudentID"];
+        localStorage.setItem('selectedID', data["StudentID"]);
+    }
 
 
-	this.RetrieveStudents = async function () {
-		this.ctrlActions = new ControlActions();
-		this.ctrlActions.GetById(this.service, async function (data) {
-            console.log(data)
-            var t = $('#resultList').DataTable()
+    this.RetrieveStudents = async function () {
+        let columns = [];
 
-            for (let i in data) {
-                var downloadBtn = document.createElement("button");
-                downloadBtn.innerHTML = 'Descargar';
-                downloadBtn.type = 'button';
-                downloadBtn.className = "btn btn-orange";
-                //downloadBtn.setAttribute( "onClick", await getData(data[i]) );
-                downloadBtn.addEventListener('click', async function () {
-                    //await getData(data[i])
-                    console.log('hola')
-                });
+        this.ctrlActions.GetById(this.service, function (data) {
+            $('#resultList thead tr')
+                .clone(true)
+                .addClass('filters')
+                .appendTo('#resultList thead');
 
-               t.row.add([
-                    data[i].FirstName,
-                    data[i].FirstLastName,
-                   data[i].IdType,
-                   data[i].IdentificationNumber,
-                    data[i].Country,
-                   data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
-                   data[i].DriverLicenses,
-                   data[i].Sex,
-                   '<button class="btn btn-orange" onclick="getData(' + data[i].StudentID + ')">Descargar</button>'
-                  // downloadBtn.outerHTML
-                ]).draw(false);
-            }
+            var t = $('#resultList').DataTable({
+                orderCellsTop: true,
+                fixedHeader: true,
+                initComplete: function () {
+                    var api = this.api();
 
+                    // For each column
+                    api
+                        .columns()
+                        .eq(0)
+                        .each(function (colIdx) {
+                            // Set the header cell to contain the input element
+                            var cell = $('.filters th').eq(
+                                $(api.column(colIdx).header()).index()
+                            );
+                            var title = $(cell).text();
+                            $(cell).html('<input type="text" placeholder="' + title + '" />');
 
+                            // On every keypress in this input
+                            $(
+                                'input',
+                                $('.filters th').eq($(api.column(colIdx).header()).index())
+                            )
+                                .off('keyup change')
+                                .on('change', function (e) {
+                                    // Get the search value
+                                    $(this).attr('title', $(this).val());
+                                    var regexr = '({search})'; //$(this).parents('th').find('select').val();
 
-			students = data;
-        });
+                                    var cursorPosition = this.selectionStart;
+                                    // Search the column for that value
+                                    api
+                                        .column(colIdx)
+                                        .search(
+                                            this.value != ''
+                                                ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                                : '',
+                                            this.value != '',
+                                            this.value == ''
+                                        )
+                                        .draw();
+                                })
+                                .on('keyup', function (e) {
+                                    e.stopPropagation();
 
-
-      
-	}
-
-    this.ReloadResults = function () {
-        var searchData = {};
-        searchData = this.ctrlActions.GetDataForm('frmSearchStudents');
-
-
-
-        var checkboxes = document.querySelectorAll('input[name=driverLicenses]:checked');
-        var values = [];
-        for (const value of checkboxes.values()) {
-            values.push(value.value);
-        }
-
-        var studentsResults = students.filter(x => x.Country == searchData['Country'] || x.Province == searchData['Province'] || x.Canton == searchData['Canton'] || x.District == searchData['District']
-            || x.Sex == searchData['Sex'] || languageListStudents.find(l => l.LanguageName == searchData['LanguageName'] || intersection( x["DriverLicenses"].split(", "), values) > 0)
-
-        )
-        //var studentsResults = students.filter(x => x["DriverLicenses"].split(", ").retainAll(checkboxes))
-
-
-        var cantResults = studentsResults.length;
-        $('#cant_results').empty();
-        $('#cant_results').append(cantResults);
-		studentsResults.forEach((s) => {
-			var li = document.createElement("li");
-            var p = document.createElement("p");
-            p.innerHTML = s.FirstName + ' ' + s.FirstLastName + ' ' + s.SecondLastName
-            p.style.display = "flex";
-            p.style.justifyContent = "space-evenly";
-
-
-            var downloadBtn = document.createElement("button");
-            downloadBtn.innerHTML = 'Descargar';
-            downloadBtn.type = 'button';
-            downloadBtn.className = "btn btn-orange";
-            downloadBtn.addEventListener('click', async function () {
-               await getData(s)
+                                    $(this).trigger('change');
+                                    $(this)
+                                        .focus()[0]
+                                        .setSelectionRange(cursorPosition, cursorPosition);
+                                });
+                        });
+                },
+                language: {
+                    "decimal": "",
+                    "emptyTable": "No hay estudiantes disponibles para reclutar",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Registros",
+                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                    "infoFiltered": "(Filtrado de _MAX_ total registros)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
             });
 
+    
 
-            p.appendChild(downloadBtn);
-			li.appendChild(p);
-
-			document.querySelector("#results").append(li);
-		})
-	}
+            for (let i in data) {
+                if (data[i].StatusRecruitment == '0') {
+                    t.row.add([
+                        data[i].FirstName,
+                        data[i].FirstLastName,
+                        data[i].IdType,
+                        data[i].IdentificationNumber,
+                        formatDate(new Date(data[i].Birthdate)),
+                        data[i].Country,
+                        data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
+                        data[i].JobAvailability,
+                        data[i].Type_Vehicle,
+                        data[i].DriverLicenses,
+                        data[i].Sex,
+                        '<button class="btn btn-orange" onclick="getData(' + data[i].StudentID + ')"><i class="fas fa-download"></i></button>'
+                    ]).draw(false);
+                }
+            }
+            students = data;
+        });
+    }
 }
 
 function intersection(first, second) {
@@ -113,37 +134,13 @@ function intersection(first, second) {
 
 $(document).ready(function () {
 
-   
-
-    var table = $('#resultList').DataTable({
-        language: {
-            "decimal": "",
-            "emptyTable": "No hay información",
-            "info": "Mostrando _START_ a _END_ de _TOTAL_ Registros",
-            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-            "infoFiltered": "(Filtrado de _MAX_ total registros)",
-            "infoPostFix": "",
-            "thousands": ",",
-            "lengthMenu": "Mostrar _MENU_ registros",
-            "loadingRecords": "Cargando...",
-            "processing": "Procesando...",
-            "search": "Buscar:",
-            "zeroRecords": "Sin resultados encontrados",
-            "paginate": {
-                "first": "Primero",
-                "last": "Ultimo",
-                "next": "Siguiente",
-                "previous": "Anterior"
-            }
-        },
-    });
-    $('#resultList tbody').on('click', 'tr', function () {
-        var data = table.row(this).data();
-        console.log(data);
-    });
 
     var students = new Recruitment();
     students.RetrieveStudents();
+
+
+ 
+
 });
 
 $(document).ready(function () {
@@ -151,12 +148,10 @@ $(document).ready(function () {
 
         this.ctrlActions = new ControlActions();
         this.ctrlActions.GetById('student', function (data) {
-            console.log(data)
             students = data;
         });
 
         this.ctrlActions.GetById('language', function (data) {
-            console.log(data)
             languageListStudents = data;
         });
 
@@ -254,19 +249,48 @@ async function getData(StudentID) {
     await sleep(1000)
     await this.ctrlActions.GetById("language/student/" + StudentID, async (data) => {
         languageList = data
-        this.ctrlActions2 = new ControlActions();
+        let student = {};
+        let user = JSON.parse(getCookie('user'));
 
-        this.ctrlActions.GetById('student/' + StudentID, async function (student) {
-            await DowlandCV(student);
-            await $('.bg-gray').css("color", "white");
-        })
-        //
-       
+        if (user['UserType'] == '3') {
+            this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
+
+                this.ctrlActions.PutToAPI('recruiter/addQuantity', recruiter,
+                    function (response) {
+                        if (response) {
+                            setTimeout(function () {
+                                this.ctrlActions2 = new ControlActions();
+
+                                this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
+                                    student['EntityId'] = recruiter['EntityAssociation'];
+                                    await DowlandCV(student);
+                                    await $('.bg-gray').css("color", "white");
+                                })
+                            }, 4000)
+                        }
+                        else if (response.Data == "error") {
+                            console.log(response)
+                        } 
+                           
+                    }
+                )
+            })
+        }
     });
 }
 
 async function DowlandCV(student) {
-    
+
+    let user = JSON.parse(getCookie('user'));
+
+    if (user['UserType'] == '3') {
+        setTimeout(function () {
+            this.ctrlActions2 = new ControlActions();
+
+            this.ctrlActions2.PutToAPI('student/recruitStudent', student,
+                setTimeout(function redirection() { window.location.reload() }, 5000));
+        })
+    }
 
     $('.bg-gray').css("color", "black");
 
@@ -300,7 +324,7 @@ async function DowlandCV(student) {
     document.querySelector('#P_BankingStudent').append(student['BankingStudent']);
 
     // getData(student.StudentID);
-    
+
 
 
     var studentProfileData = student;
@@ -326,7 +350,7 @@ async function DowlandCV(student) {
     titleInfo.textContent = "Información Personal";
     titleInfo.style.textAlign = 'center';
     let cloneInfo = document.getElementById("my_info").cloneNode(true);
-    
+
     let titleProfile = document.createElement('h5');
     titleProfile.textContent = "Perfil Profesional";
     titleProfile.style.textAlign = 'center';
@@ -380,7 +404,7 @@ async function DowlandCV(student) {
     }
 
     containerAcademic = document.createElement('ul');
-    var academic =  academicList;
+    var academic = academicList;
     for (let i in academic) {
         let dateEnd = formatDateStringMonths(academic[i].EndDate);
 
@@ -406,7 +430,7 @@ async function DowlandCV(student) {
     }
 
     containerCourse = document.createElement('ul');
-    var course =  courseList;
+    var course = courseList;
     for (let i in course) {
         let dateEnd = formatDateStringMonths(course[i].EndDate);
 
@@ -433,7 +457,7 @@ async function DowlandCV(student) {
     }
 
     containerLanguage = document.createElement('ul');
-    var language =  languageList;
+    var language = languageList;
     for (let i in language) {
 
         p1 = document.createElement('p');
@@ -452,7 +476,7 @@ async function DowlandCV(student) {
     }
 
     containerReference = document.createElement('ul');
-    var reference =  referenceList;
+    var reference = referenceList;
     for (let i in reference) {
 
         p1 = document.createElement('p');
@@ -476,7 +500,7 @@ async function DowlandCV(student) {
     container.style.display = "inline";
     container.style.fontFamily = "arial";
     container.style.fontSize = "12px";
-   // container.style.color = "#000";
+    // container.style.color = "#000";
     container.style.lineHeight = "1.2";  //important for knowing break lines.
 
     //container.append(image);
@@ -523,9 +547,9 @@ async function DowlandCV(student) {
     };
 
     // New Promise-based usage:
-     html2pdf(container, opt);
+    html2pdf(container, opt);
 
-    
+
     //html2pdf().set(opt).from(container).save();
 
 }

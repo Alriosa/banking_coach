@@ -2,9 +2,6 @@
     this.service = 'student';
     this.ctrlActions = new ControlActions();
 
-   
-
-
     this.GetData = function () {
         var idStudent = document.getElementById("txtIdStudent").value;
         if (idStudent != 'null') {

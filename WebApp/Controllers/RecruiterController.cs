@@ -3,51 +3,139 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WebApp.Controllers
 {
     public class RecruiterController : Controller
     {
         // GET: Recruiter
-        public ActionResult vRecruiterRegistration()
+        public ActionResult VRecruiterRegistration()
         {
-            return View();
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
+
+
         }
         public ActionResult vRecruiterList()
         {
-            return View();
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
         public ActionResult vRecruiterUpdate(string id)
         {
-            if (id != null)
+            if (Request.Cookies["user"] != null)
             {
-                ViewBag.IdRecruiter = id;
-            }
-            else
-            {
-                ViewBag.IdRecruiter = "null";
-            }
+                if (id != null)
+                {
+                    ViewBag.IdRecruiter = id;
+                }
+                else
+                {
+                    ViewBag.IdRecruiter = "null";
+                }
 
-            return View();
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1 || typeNumber == 3)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
+
         }
 
         public ActionResult vRecruiterAccount(string id)
         {
-            if (id != null)
+            if (Request.Cookies["user"] != null)
             {
-                ViewBag.IdRecruiter = id;
+                if (id != null)
+                {
+                    ViewBag.IdRecruiter = id;
+                }
+                else
+                {
+                    ViewBag.IdRecruiter = "null";
+                }
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1 || typeNumber == 3)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
             }
-            else
-            {
-                ViewBag.IdRecruiter = "null";
-            }
-
-            return View();
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
         public ActionResult Recruitment()
         {
-            return View();
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1 || typeNumber == 3)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
+        }
+
+        public ActionResult StudentsRecruited()
+        {
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1 || typeNumber == 3)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
     }
 }

@@ -62,6 +62,7 @@
     <Compile Include="Reference.cs" />
     <Compile Include="Security.cs" />
     <Compile Include="Student.cs" />
+    <Compile Include="StudentRecruited.cs" />
     <Compile Include="SysAdmin.cs" />
     <Compile Include="UserLog.cs" />
     <Compile Include="ViewPermission.cs" />

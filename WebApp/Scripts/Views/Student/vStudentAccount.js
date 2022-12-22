@@ -14,6 +14,16 @@ function vStudentAccount() {
         StudentProfileData = localStorage.getItem('selectedID');
     }
 
+
+    this.UpdatePassword = function () {
+        var studentData = {};
+        var studentLogin = document.getElementById("P_Email").textContent;
+        studentData = this.ctrlActions.GetDataForm('frmEditPassword');
+        studentData["Email"] = studentLogin;
+        this.ctrlActions.PutToAPI("student/changePassword", studentData,
+            setTimeout(function redirection() { window.location.reload() }, 3000));
+    }
+
     this.GetData = function () {
         var idStudent = document.getElementById("txtIdStudent").value;
 
@@ -29,6 +39,7 @@ function vStudentAccount() {
 
     this.FillData = function (data) {
         let licences = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2"];
+        let typeVehicles = ["Motocicleta", "Vehículo Particular", "Camioneta", "Buseta", "Camión"];
         let cont = -1;
        
         if (data != null) {
@@ -47,6 +58,16 @@ function vStudentAccount() {
                 $(this).val(licences[cont]);
 
                 if (array.includes(licences[cont])) {
+                    $(this).prop("checked", true)
+                }
+            })
+            cont = -1;
+            var array = data["Type_Vehicle"].split(", ");
+            $("input[name=typeVehicles]").each(function () {
+                cont++;
+                $(this).val(typeVehicles[cont]);
+
+                if (array.includes(typeVehicles[cont])) {
                     $(this).prop("checked", true)
                 }
             })
@@ -81,6 +102,10 @@ function vStudentAccount() {
             }
 
             document.querySelector('#P_BankingStudent').append(data['BankingStudent']);
+
+            var entityName = (data['EntityName'] == "F_DEFAULT" || data['EntityName'] == "") ? "Sin reclutar" : data['EntityName'];
+
+            document.querySelector('#P_EntityName').append(entityName);
             /*
             if (data['BankingStudent'] == "1") {
                 document.querySelector('#P_BankingStudent').append("Sí");
@@ -102,12 +127,20 @@ function vStudentAccount() {
         }
         studentData["StudentLogin"] = studentLogin;
         studentData["StudentID"] = id;
-        
+        var array = [];
+
         if (studentData["Vehicle"] == "No") {
             studentData["Type_Vehicle"] = "";
+        } else {
+            var checkboxesV = document.querySelectorAll('input[name=typeVehicles]:checked');
+            for (var i = 0; i < checkboxesV.length; i++) {
+                array.push(checkboxesV[i].value);
+            }
+            studentData["Type_Vehicle"] = array.join(', ');
+
         }
 
-        var array = [];
+        array = [];
 
         var checkboxes = document.querySelectorAll('input[name=driverLicenses]:checked');
         for (var i = 0; i < checkboxes.length; i++) {
@@ -1238,16 +1271,17 @@ async function DowlandCV() {
 
     $('.bg-gray').css("color", "black");
 
-
+    var nameFile = "";
     var doc = new jspdf();
     var studentProfileData;
     if (getCookie('type') == 2) {
         studentProfileData = JSON.parse(getCookie('user'));
+        nameFile = studentProfileData["Name"] + ".pdf";
     } else if (getCookie('type') == 1) {
         studentProfileData = dataStudent;
+        nameFile = studentProfileData["FirstName"] + " " + studentProfileData["FirstLastName"] + " " + studentProfileData["SecondLastName"] + ".pdf";
     }
 
-    var nameFile = studentProfileData["FirstName"] + " " + studentProfileData["FirstLastName"] + " " + studentProfileData["SecondLastName"] + ".pdf";
 
 
     elementHTML = "";

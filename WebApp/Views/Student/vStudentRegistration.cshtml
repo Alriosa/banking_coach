@@ -1,5 +1,4 @@
-﻿
-@using WebApp.Helpers;
+﻿@using WebApp.Helpers;
 
 <script src="~/Scripts/Views/Student/vStudentRegistration.js"></script>
 @{
@@ -11,7 +10,7 @@
     #frmStudentCreate .col-lg-6 {
         height: 700px;
         padding: 25px;
-        margin: 10px -18px ;
+        margin: 10px -18px;
     }
 </style>
 
@@ -39,7 +38,7 @@
                                 <div class="form-row ">
                                     <div class="col-lg-12">
                                         <div class="form-group w-100 mb-3">
-                                            <label for="txtBankingStudent" id="labelBankingStudent">Estudiante del banco</label>
+                                            <label for="txtBankingStudent" id="labelBankingStudent">Estudiante de Banking Academy</label>
                                             <select class="form-control input-secondaryl" id="txtBankingStudent" name="BankingStudent" ColumnDataName="BankingStudent" required>
                                                 <option value="Sí">Sí</option>
                                                 <option value="No">No</option>
@@ -141,12 +140,12 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="col-lg-6 col-sm-11">
                     <img class="img" src="~/Content/imgs/Empleo2.jpg" alt="">
 
@@ -243,7 +242,7 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="col-lg-6 col-sm-11">
                     <img class="img" src="~/Content/imgs/Empleo2.jpg" alt="">
 
@@ -295,7 +294,7 @@
                                                             <label for="licenseC1"><input type="checkbox" id="licenseC1" name="driverLicenses" value="C1" />C1</label>
                                                         </div>
                                                         <div>
-                                                            <labels for="licenseC2"><input type="checkbox" id="licenseC2" name="driverLicenses" value="C2" />C2</labels>
+                                                            <label for="licenseC2"><input type="checkbox" id="licenseC2" name="driverLicenses" value="C2" />C2</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -322,46 +321,52 @@
                                 <div class="selectedVehicle">
                                     <div class="form-row ">
                                         <div class="col-lg-12">
-                                            <div class="input-group mb-3">
-                                                <div class="form-group input-group flex-column ">
-                                                    <label for="txtTypeVehicle">¿Tipo de vehículo?</label>
-                                                    <select style="height:54px;" class="form-control w-100 " id="txtTypeVehicle"
-                                                            name="txtTypeVehicle" ColumnDataName="Type_Vehicle" required>
-                                                        <option value="Motocicleta">Motocicleta</option>
-                                                        <option value="Vehículo Particular">Vehículo particular</option>
-                                                        <option value="Camioneta">Camioneta</option>
-                                                        <option value="Buseta">Buseta</option>
-                                                        <option value="Camión">Camión</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            <div class="input-group mb-3">
-                                                <div class="form-group input-group flex-column">
-                                                    <label for="txtStudentLogin">Nombre de usuario</label>
-                                                    <input type="text" class="form-control input-secondary" id="txtStudentLogin" placeholder="Nombre de usuario" ColumnDataName="StudentLogin" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row ">
-                                        <div class="col-lg-12">
-                                            <div class="input-group mb-3">
-                                                <div class="form-group input-group flex-column">
-                                                    <label for="txtAge">Contraseña</label>
-                                                    <input type="password" class="form-control input-secondary" id="txtPassword" placeholder="Contraseña" ColumnDataName="StudentPassword" >
+                                            <div>
+                                                <div class="input-group mb-3">
+                                                    <div class="form-group input-group flex-column ">
+                                                        <label for="txtTypeVehicle">Tipos de Vehículos</label>
+                                                        <div class="d-flex justify-content-around">
+                                                            <div>
+                                                                <label for="tvMotocicleta"> <input type="checkbox" id="tvMotocicleta" name="typeVehicles" value="Motocicleta" />Motocicleta</label>
+                                                            </div>
+                                                            <div>
+                                                                <label for="tvVehicle"> <input type="checkbox" id="tvVehicle" name="typeVehicles" value="Vehículo Particular" />Vehículo Particular</label>
+                                                            </div>
+                                                            <div>
+                                                                <label for="tvCamioneta">  <input type="checkbox" id="tvCamioneta" name="typeVehicles" value="Camioneta" />Camioneta</label>
+                                                            </div>
+                                                            <div>
+                                                                <label for="tvBuseta"><input type="checkbox" id="tvBuseta" name="typeVehicles" value="Buseta" />Buseta</label>
+                                                            </div>
+                                                            <div>
+                                                                <label for="tvCamion"> <input type="checkbox" id="tvCamion" name="typeVehicles" value="Camión" />Camión</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row my-4 mx-auto">
-                                    <div style="margin: 0px auto 10px;">
-                                        @Html.CtrlButton(viewName: "vStudentRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <div class="input-group mb-3">
+                                            <div class="form-group input-group flex-column">
+                                                <label for="txtAge">Contraseña</label>
+                                                <input type="password" class="form-control input-secondary" id="txtPassword" placeholder="Contraseña" ColumnDataName="StudentPassword">
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtConfirmPassword", type: "password", required: true, placeHolder: "Confirmar Contraseña", columnDataName: "ConfirmPassword")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-4 mx-auto">
+                                <div style="margin: 0px auto 10px;">
+                                    @Html.CtrlButton(viewName: "vStudentRegistration", type: "button", id: "btnRegister", label: "Registrar", onClickFunction: "ValidateInputs", buttonType: "orange")
                                 </div>
                             </div>
                         </div>

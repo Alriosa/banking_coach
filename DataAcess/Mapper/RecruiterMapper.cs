@@ -22,6 +22,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_RECRUITER_STATUS = "User_Active_Status";
         private const string DB_COL_USER_EXIST = "User_Login";
+        private const string DB_COL_QUANTITY_DOWNLOAD = "Quantity_Download";
 
 
 
@@ -74,6 +75,15 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRetriveEntityIdStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_ENTITY_BY_RECRUITER" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddVarcharParam(DB_COL_RECRUITER_LOGIN, recruiter.RecruiterLogin);
+
+            return operation;
+        }
         public SqlOperation GetRetriveAllStatement()
         {
             var operation = new SqlOperation { ProcedureName = "SP_SELECT_ALL_TBL_RECRUITER_USER" };
@@ -100,6 +110,27 @@ namespace DataAccess.Mapper
             var recruiter = (Recruiter)entity;
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
             operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
+
+            return operation;
+        }
+
+        public SqlOperation GetRecoverPasswordStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_RECOVER_PASSWORD_TBL_RECRUITER" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddVarcharParam(DB_COL_RECRUITER_EMAIL, recruiter.Email);
+            operation.AddVarcharParam(DB_COL_RECRUITER_PASSWORD, recruiter.RecruiterPassword);
+
+            return operation;
+        }
+
+        public SqlOperation GetAddQuantityStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_ADD_QUANTITY_DOWNLOAD" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
 
             return operation;
         }
@@ -150,7 +181,8 @@ namespace DataAccess.Mapper
                 EntityAssociation = GetIntValue(row, DB_COL_ENTITY_ASSOCIATION),
                 EntityAssociationName = GetStringValue(row, DB_COL_ENTITY_ASSOCIATION_NAME),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
-                UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS)
+                UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS),
+                QuantityDownload = GetIntValue(row, DB_COL_QUANTITY_DOWNLOAD)
             };
 
             return recruiter;
@@ -166,7 +198,8 @@ namespace DataAccess.Mapper
                 Email = GetStringValue(row, DB_COL_RECRUITER_EMAIL),
                 IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
-                UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS)
+                UserActiveStatus = GetStringValue(row, DB_COL_RECRUITER_STATUS),
+                QuantityDownload = GetIntValue(row, DB_COL_QUANTITY_DOWNLOAD)
             };
 
             return recruiter;

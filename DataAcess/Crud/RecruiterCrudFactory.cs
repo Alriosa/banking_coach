@@ -55,6 +55,20 @@ namespace DataAccess.Crud
 
                 return default(T);
             }
+        
+            public T RetrieveEntityId<T>(BaseEntity entity)
+            {
+                var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveEntityIdStatement(entity));
+                var dic = new Dictionary<string, object>();
+                if (lstResult.Count > 0)
+                {
+                    dic = lstResult[0];
+                    var objs = mapper.BuildObject(dic);
+                    return (T)Convert.ChangeType(objs, typeof(T));
+                }
+
+                return default(T);
+            }
 
             public override List<T> RetrieveAll<T>()
             {
@@ -79,10 +93,15 @@ namespace DataAccess.Crud
                 var recruiter = (Recruiter)entity;
                 dao.ExecuteProcedure(mapper.GetUpdateStatement(recruiter));
             }
+        public void AddQuantity(BaseEntity entity)
+        {
+            var recruiter = (Recruiter)entity;
+            dao.ExecuteProcedure(mapper.GetAddQuantityStatement(recruiter));
+        }
         public void UpdatePassword(BaseEntity entity)
         {
             var recruiter = (Recruiter)entity;
-            dao.ExecuteProcedure(mapper.GetUpdatePasswordStatement(recruiter));
+            dao.ExecuteProcedure(mapper.GetRecoverPasswordStatement(recruiter));
         }
         public override void Delete(BaseEntity entity)
             {

@@ -31,6 +31,22 @@ namespace CoreAPI
 
             return c;
         }
+
+        public Security RetrieveByEmail(Security security)
+        {
+            Security c = null;
+            try
+            {
+                c = crudSecurity.RetrieveByEmail<Security>(security);
+            }
+            catch (Exception ex)
+            {
+                //ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+
+            return c;
+        }
     }
 
     

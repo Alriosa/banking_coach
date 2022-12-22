@@ -32,7 +32,7 @@ Job_Availability VARCHAR(30) NULL,
 Transport_Availability VARCHAR(200) NOT NULL,
 Vehicle VARCHAR(10) NOT NULL,
 Sex VARCHAR(10) NOT NULL,
-Type_Vehicle VARCHAR(20)  NULL,
+Type_Vehicle VARCHAR(200)  NULL,
 Driver_Licenses VARCHAR(200) NULL,
 Curriculum VARCHAR(400) NULL,
 Agree_Job_Exchange VARCHAR(200) NOT NULL,
@@ -40,6 +40,12 @@ Student_User VARCHAR(20) NOT NULL,---MUST BE UNIQUE ---
 Student_Password VARCHAR(50) NOT NULL,
 User_Type VARCHAR(1)  NOT NULL DEFAULT '2',
 Entry_Date DATETIME NOT NULL,
+Status_Recruitment INT DEFAULT 0,--proccess recruitment
+Entity_Id INT NULL, --proccess recruitment
+Status_Economic_Test INT DEFAULT 0,--proccess recruitment
+Status_Psychometric_Test INT DEFAULT 0,--proccess recruitment
+Status_Interview INT NULL,--proccess recruitment
+Status_Hired INT DEFAULT 0,--proccess recruitment
 PRIMARY KEY(Student_ID),
 CONSTRAINT UC_Student UNIQUE (Identification_Number,
                                Student_User,
@@ -148,6 +154,7 @@ User_Active_Status VARCHAR(1) NOT NULL DEFAULT '1', /*True or False*/
 User_Type VARCHAR(1) NOT NULL DEFAULT '3',
 Entity_Association INT NOT NULL,
 Entry_Date DATETIME NOT NULL,
+Quantity_Download INT NOT NULL DEFAULT 0,
 PRIMARY KEY(Recruiter_User_ID),
 CONSTRAINT UC_Recruiter_User UNIQUE (Recruiter_Login),
 CONSTRAINT FK_Entity_Association_ID FOREIGN KEY (Entity_Association) REFERENCES TBL_ENTITY_USER(Entity_User_ID)
@@ -840,6 +847,7 @@ INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentList', 'Listar Estudiantes','E
 INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentAccount', 'Perfil Estudiante','Estudiantes')
 INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentUpdate','Actualizar Estudiante','Estudiantes')
 INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'Recruitment','Área de Reclutamiento','Área de Reclutamiento')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'StudentsRecruited','Estudiantes en Reclutamiento','Área de Reclutamiento')
 
 
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '1')
@@ -853,8 +861,8 @@ INSERT INTO TBL_PERMISSIONS VALUES ('1', '13')
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '16')
 
 
-INSERT INTO TBL_PERMISSIONS VALUES ('3', '13')
 INSERT INTO TBL_PERMISSIONS VALUES ('3', '16')
+INSERT INTO TBL_PERMISSIONS VALUES ('3', '17')
 
 
 
@@ -909,7 +917,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT]
         @SP_Job_Availability VARCHAR(200),
         @SP_Transport_Availability VARCHAR(10),
         @SP_Vehicle VARCHAR(10),
-		@SP_Type_Vehicle VARCHAR(20),
+		@SP_Type_Vehicle VARCHAR(200),
         @SP_Driver_Licenses VARCHAR(200),
         @SP_Curriculum VARCHAR(200) = null,
         @SP_Agree_Job_Exchange VARCHAR(200) = 'Sí',
@@ -954,15 +962,19 @@ CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_STUDENT]
 AS
         SELECT S.Student_ID, S.Banking_Student, S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Birthdate, S.Age, S.Sex, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
-		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo' 
-		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date FROM [dbo].[TBL_STUDENT] AS S
+		WHEN S.User_Active_Status = '1' THEN 'Activo'
+		WHEN S.User_Active_Status = '0' THEN 'Inactivo'  
+		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name
+		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
 		INNER JOIN 
 		LST_CANTONS AS LC ON S.Canton = LC.Code
 		INNER JOIN 
 		LST_DISTRICTS AS LD ON S.District = LD.Code
+		LEFT JOIN
+		TBL_ENTITY_USER AS TE ON S.Entity_Id = TE.Entity_User_ID
 		WHERE S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
@@ -972,8 +984,8 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_IDENTIFICATION]
 AS
         SELECT S.Student_ID, S.Banking_Student, S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number,  S.Country,S.Birthdate, S.Age,  S.Sex, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
-		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		WHEN S.User_Active_Status = '1' THEN 'Activo'
+		WHEN S.User_Active_Status = '0' THEN 'Inactivo'  
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
@@ -989,8 +1001,8 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_EMAIL]
         @SP_Student_Email VARCHAR(200)
 AS
         SELECT S.Student_ID,S.Banking_Student,  S.First_Name, S.First_Last_Name, S.Second_Last_Name,  S.Identification_Number, S.Email, CASE  
-		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		WHEN S.User_Active_Status = '1' THEN 'Activo'
+		WHEN S.User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User FROM [dbo].[TBL_STUDENT] AS S
 		
 		WHERE S.Email = @SP_Student_Email AND S.Student_ID != 0;
@@ -1002,15 +1014,19 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_USER]
 AS
        SELECT S.Student_ID, S.Banking_Student, S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Birthdate, S.Age, S.Sex, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
-		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo' 
-		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date FROM [dbo].[TBL_STUDENT] AS S
+	    WHEN S.User_Active_Status = '1' THEN 'Activo'
+		WHEN S.User_Active_Status = '0' THEN 'Inactivo'  
+		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired,  S.Entity_Id, TE.Name AS Entity_Name
+		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
 		INNER JOIN 
 		LST_CANTONS AS LC ON S.Canton = LC.Code
 		INNER JOIN 
 		LST_DISTRICTS AS LD ON S.District = LD.Code
+		LEFT JOIN
+		TBL_ENTITY_USER AS TE ON S.Entity_Id = TE.Entity_User_ID
 		WHERE S.Student_User = @SP_Student_User AND S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
@@ -1020,15 +1036,19 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_ID]
 AS
         SELECT S.Student_ID, S.Banking_Student, S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number,  S.Country,S.Birthdate, S.Age, S.Sex, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
-		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo' 
-		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date FROM [dbo].[TBL_STUDENT] AS S
+		WHEN S.User_Active_Status = '1' THEN 'Activo'
+		WHEN S.User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired,  S.Entity_Id, TE.Name AS Entity_Name
+		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
 		INNER JOIN 
 		LST_CANTONS AS LC ON S.Canton = LC.Code
 		INNER JOIN 
 		LST_DISTRICTS AS LD ON S.District = LD.Code
+		LEFT JOIN
+		TBL_ENTITY_USER AS TE ON S.Entity_Id = TE.Entity_User_ID
 		WHERE S.Student_ID = @SP_Student_ID AND S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
 GO
 
@@ -1040,8 +1060,8 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_STUDENT_BY_FIRST_NAME_AND_LAST_NAME]
 AS
        SELECT S.Student_ID,S.Banking_Student,  S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Birthdate, S.Age, S.Sex, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number,S.Laboral_Status, S.Job_Availability, S.Transport_Availability, S.Vehicle, S.Type_Vehicle, S.Driver_Licenses,
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
-		WHEN User_Active_Status = '1' THEN 'Activo'
-		WHEN User_Active_Status = '0' THEN 'Inactivo' 
+		WHEN S.User_Active_Status = '1' THEN 'Activo'
+		WHEN S.User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
@@ -1050,6 +1070,49 @@ AS
 		INNER JOIN 
 		LST_DISTRICTS AS LD ON S.District = LD.Code
 		WHERE  S.First_Name = @SP_First_Name AND S.First_Last_Name = @SP_First_Last_Name AND Student_ID != 0  AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code;
+GO
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_STUDENT_IN_RECRUITMENT]
+AS
+        SELECT S.Student_ID, S.Banking_Student, S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Sex, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number, S.Driver_Licenses,
+	   S.Curriculum, S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+		WHEN S.User_Active_Status = '1' THEN 'Activo'
+		WHEN S.User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name
+		FROM [dbo].[TBL_STUDENT] AS S
+		INNER JOIN 
+		LST_PROVINCES AS LP ON S.Province = LP.Code
+		INNER JOIN 
+		LST_CANTONS AS LC ON S.Canton = LC.Code
+		INNER JOIN 
+		LST_DISTRICTS AS LD ON S.District = LD.Code
+		LEFT JOIN
+		TBL_ENTITY_USER AS TE ON S.Entity_Id = TE.Entity_User_ID
+		WHERE S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code AND S.Status_Recruitment = 1;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_TBL_STUDENT_IN_RECRUITMENT_BY_ENTITY]
+	@SP_Entity_Id INT
+AS
+        SELECT S.Student_ID, S.Banking_Student, S.First_Name, S.First_Last_Name, S.Second_Last_Name, S.Id_Type, S.Identification_Number, S.Country, S.Sex, S.Email,S.Primary_Phone_Number, S.Second_Phone_Number, S.Driver_Licenses,
+	   S.Curriculum, S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
+		WHEN S.User_Active_Status = '1' THEN 'Activo'
+		WHEN S.User_Active_Status = '0' THEN 'Inactivo' 
+		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name
+		FROM [dbo].[TBL_STUDENT] AS S
+		INNER JOIN 
+		LST_PROVINCES AS LP ON S.Province = LP.Code
+		INNER JOIN 
+		LST_CANTONS AS LC ON S.Canton = LC.Code
+		INNER JOIN 
+		LST_DISTRICTS AS LD ON S.District = LD.Code
+		LEFT JOIN
+		TBL_ENTITY_USER AS TE ON S.Entity_Id = TE.Entity_User_ID
+		WHERE S.Student_ID != 0 AND LC.P_Code = LP.Code AND LD.P_Code = LC.Code AND S.Status_Recruitment = 1 
+		AND S.Entity_Id =  @SP_Entity_Id;
 GO
 
 --- UPDATE STUDENT
@@ -1072,7 +1135,7 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_STUDENT]
         @SP_Transport_Availability VARCHAR(10),
         @SP_Driver_Licenses VARCHAR(200),
         @SP_Vehicle VARCHAR(10),
-		@SP_Type_Vehicle VARCHAR(20) = NULL,
+		@SP_Type_Vehicle VARCHAR(200) = NULL,
         @SP_Province VARCHAR(200) = NULL,
         @SP_Canton VARCHAR(200) = NULL,
         @SP_District VARCHAR(200) = NULL,
@@ -1104,27 +1167,115 @@ AS
                 WHERE Student_ID = @SP_Student_ID;
 GO
 
+CREATE PROCEDURE [dbo].[SP_RECRUIT_STUDENT] 
+        @SP_Student_ID INT,
+        @SP_Entity_Id INT
+AS
+BEGIN
+		
+		IF @SP_Entity_Id = 0 
+		BEGIN 
+			UPDATE [dbo].[TBL_STUDENT] SET
+			Entity_Id = @SP_Entity_Id,
+			status_Recruitment = 0,
+			Status_Economic_Test = 0,
+			Status_Psychometric_Test = 0,
+			Status_Interview = 0
+			WHERE Student_ID = @SP_Student_ID;
+
+		END 
+		ELSE 
+		BEGIN 
+			UPDATE [dbo].[TBL_STUDENT] SET
+			Entity_Id = @SP_Entity_Id,
+			Status_Recruitment = 1
+			WHERE Student_ID = @SP_Student_ID;
+		END
+	END
+GO
+
+CREATE PROCEDURE [dbo].[SP_FINISH_RECRUIT_STUDENT] 
+        @SP_Student_ID INT AS
+BEGIN
+		UPDATE [dbo].[TBL_STUDENT] SET
+			Entity_Id = 0,
+			Status_Recruitment = 0
+			WHERE Student_ID = @SP_Student_ID;
+		
+	END
+GO
+
+CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_TEST_ECONOMIC] 
+        @SP_Student_ID INT,
+        @SP_Status_Economic_Test INT
+AS
+BEGIN
+		UPDATE [dbo].[TBL_STUDENT] SET
+			Status_Economic_Test = @SP_Status_Economic_Test
+			WHERE Student_ID = @SP_Student_ID;
+	END
+GO
+
+CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_TEST_PSYCHOMETRIC] 
+        @SP_Student_ID INT,
+        @SP_Status_Psychometric_Test INT
+AS
+BEGIN
+		UPDATE [dbo].[TBL_STUDENT] SET
+			Status_Psychometric_Test = @SP_Status_Psychometric_Test
+			WHERE Student_ID = @SP_Student_ID;
+	END
+GO
+
+CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_INTERVIEW] 
+        @SP_Student_ID INT,
+        @SP_Status_Interview INT
+AS
+BEGIN
+		UPDATE [dbo].[TBL_STUDENT] SET
+			Status_Interview = @SP_Status_Interview
+			WHERE Student_ID = @SP_Student_ID;
+	END
+GO
+
+CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_HIRING] 
+        @SP_Student_ID INT,
+        @SP_Status_Hired INT
+AS
+BEGIN
+		UPDATE [dbo].[TBL_STUDENT] SET
+			Status_Hired = @SP_Status_Hired
+			WHERE Student_ID = @SP_Student_ID;
+
+		
+	END
+GO
+
 
 --- UPDATE STUDENT PASSWORD
-CREATE PROCEDURE [dbo].[SP_UPDATE_PASSWORD_TBL_STUDENT]
-        @SP_Student_User VARCHAR(20),
+CREATE PROCEDURE [dbo].[SP_RECOVER_PASSWORD_TBL_STUDENT]
+        @SP_Email VARCHAR(100),
         @SP_Student_Password VARCHAR(50)
 AS
 	BEGIN
 		
 		UPDATE [dbo].[TBL_STUDENT] SET
 			Student_Password = HashBytes('MD5',@SP_Student_Password)
-			WHERE Student_User = @SP_Student_User;
+			WHERE Email = @SP_Email;
 		
 	END
 GO
-
 
 
 ---DELETE STUDENT
 CREATE PROCEDURE [dbo].[SP_DELETE_TBL_STUDENT]
         @SP_Student_ID INT
 AS
+UPDATE [dbo].[TBL_STUDENT] SET
+			Entity_Id = 0,
+			Status_Recruitment = 0
+			WHERE Student_ID = @SP_Student_ID;
+
         DELETE FROM [dbo].[TBL_STUDENT] WHERE Student_ID = @SP_Student_ID;
 GO
 
@@ -1242,6 +1393,19 @@ AS
 	END
 GO
 
+CREATE PROCEDURE [dbo].[SP_RECOVER_PASSWORD_TBL_ADMIN]
+        @SP_Email VARCHAR(100),
+        @SP_Admin_Password VARCHAR(50)
+AS
+	BEGIN
+		
+		UPDATE [dbo].[TBL_SYS_ADMIN_USER] SET
+			Admin_Password = HashBytes('MD5',@SP_Admin_Password)
+			WHERE Email = @SP_Email;
+		
+	END
+GO
+
 ---DELETE ADMIN
 CREATE PROCEDURE [dbo].[SP_DELETE_TBL_ADMIN_USER]
         @SP_Sys_Admin_User_ID INT
@@ -1269,7 +1433,7 @@ STORAGE PROCEDURES FOR RECRUITER USER
 **/
 
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_RECRUITER_USER]
-        @SP_Recruiter_Login VARCHAR(20),
+        @SP_Recruiter_Login VARCHAR(50),
         @SP_Recruiter_Password VARCHAR(50),
 		@SP_Name VARCHAR(100),
         @SP_Email VARCHAR(100),
@@ -1278,17 +1442,53 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_RECRUITER_USER]
         @SP_User_Active_Status VARCHAR(10),
 		@SP_Entity_Association INT
 AS
-        INSERT INTO [dbo].[TBL_RECRUITER_USER]
-        VALUES
-                (@SP_Recruiter_Login,
-                HashBytes('MD5',@SP_Recruiter_Password),
-				@SP_Name, @SP_Email,
-				@SP_Id_Type, @SP_Identification_Number,
-                @SP_User_Active_Status,
-				'3',
-				@SP_Entity_Association,
-				GETDATE()
-				);
+
+BEGIN TRY
+BEGIN TRANSACTION
+		DECLARE @Quantity INT
+		DECLARE @StatusQuantity INT
+		SELECT @Quantity = Quantity FROM TBL_ENTITY_USER where Entity_User_ID = @SP_Entity_Association;
+		SELECT @StatusQuantity = COUNT(Recruiter_User_ID) FROM [TBL_RECRUITER_USER] where Entity_Association = @SP_Entity_Association;
+				
+
+				IF(@StatusQuantity < @Quantity)
+				BEGIN 
+						INSERT INTO [dbo].[TBL_RECRUITER_USER]
+						VALUES
+								(@SP_Recruiter_Login,
+								HashBytes('MD5',@SP_Recruiter_Password),
+								@SP_Name, @SP_Email,
+								@SP_Id_Type, @SP_Identification_Number,
+								@SP_User_Active_Status,
+								'3',
+								@SP_Entity_Association,
+							GETDATE(), 0
+							);
+				END 
+				ELSE 
+				BEGIN 
+					RAISERROR ('ERROR', -1, -1);
+					 ROLLBACK TRANSACTION
+				END 
+COMMIT TRANSACTION
+
+END TRY
+BEGIN CATCH
+
+   SELECT
+    ERROR_NUMBER() AS ErrorNumber,
+    ERROR_STATE() AS ErrorState,
+    ERROR_SEVERITY() AS ErrorSeverity,
+    ERROR_PROCEDURE() AS ErrorProcedure,
+    ERROR_LINE() AS ErrorLine,
+    ERROR_MESSAGE() AS ErrorMessage;
+	ROLLBACK TRANSACTION
+END CATCH;
+GO
+
+		
+
+        
 GO
 
 
@@ -1299,7 +1499,7 @@ AS
        SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Id_Type, R.Identification_Number, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
 		WHEN R.User_Active_Status= '1' THEN 'Activo'
 		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
-		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
+		END AS 'User_Active_Status', R.User_Type, R.Quantity_Download FROM [dbo].[TBL_RECRUITER_USER] AS R
 		INNER JOIN 
 		TBL_ENTITY_USER AS F ON R.Entity_Association = F.Entity_User_ID
 		WHERE Recruiter_User_ID = @SP_Recruiter_User_ID AND Recruiter_User_ID != 0;
@@ -1307,12 +1507,12 @@ GO
 
 --- SELECT BY USER
 CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_USER]
-        @SP_Recruiter_Login VARCHAR(20)
+        @SP_Recruiter_Login VARCHAR(50)
 AS
        SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Id_Type, R.Identification_Number, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
 		WHEN R.User_Active_Status= '1' THEN 'Activo'
 		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
-		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
+		END AS 'User_Active_Status', R.User_Type, R.Quantity_Download FROM [dbo].[TBL_RECRUITER_USER] AS R
 		INNER JOIN 
 		TBL_ENTITY_USER AS F ON R.Entity_Association = F.Entity_User_ID
 		WHERE Recruiter_Login = @SP_Recruiter_Login AND Recruiter_User_ID != 0;
@@ -1323,7 +1523,7 @@ CREATE PROCEDURE [dbo].[SP_SELECT_TBL_RECRUITER_BY_EMAIL]
 AS
        SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Name, R.Email,  R.Identification_Number, CASE WHEN User_Active_Status = '1' THEN 'Activo'
 		WHEN User_Active_Status = '0' THEN 'Inactivo' 
-		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
+		END AS 'User_Active_Status', R.User_Type, R.Quantity_Download FROM [dbo].[TBL_RECRUITER_USER] AS R
 		WHERE R.Email = @SP_Email AND R.Email  != 0;
 GO
 
@@ -1332,7 +1532,7 @@ AS
         SELECT R.Recruiter_User_ID, R.Recruiter_Login, R.Recruiter_Password, R.Name, R.Email, R.Id_Type, R.Identification_Number, R.Entity_Association, F.Name AS 'Entity_Association_Name', CASE  
 		WHEN R.User_Active_Status= '1' THEN 'Activo'
 		WHEN R.User_Active_Status= '0' THEN 'Inactivo'
-		END AS 'User_Active_Status', R.User_Type FROM [dbo].[TBL_RECRUITER_USER] AS R
+		END AS 'User_Active_Status', R.User_Type, R.Quantity_Download FROM [dbo].[TBL_RECRUITER_USER] AS R
 		INNER JOIN 
 		TBL_ENTITY_USER AS F ON R.Entity_Association = F.Entity_User_ID
 		WHERE Recruiter_User_ID != 0;
@@ -1340,7 +1540,7 @@ GO
 
 --- UPDATE RECRUITER 
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER]
-        @SP_Recruiter_Login VARCHAR(20),
+        @SP_Recruiter_Login VARCHAR(50),
 		@SP_Name VARCHAR(100),
         @SP_Email VARCHAR(100),
 		@SP_Id_Type VARCHAR(30),
@@ -1353,14 +1553,48 @@ AS
                 WHERE Recruiter_Login = @SP_Recruiter_Login;
 GO
 
+--- UPDATE RECRUITER 
+CREATE PROCEDURE [dbo].[SP_ADD_QUANTITY_DOWNLOAD]
+        @SP_Recruiter_User_ID INT
+AS
+		DECLARE @QUANTITY_NOW INT
+
+		SELECT @QUANTITY_NOW = Quantity_Download FROM TBL_RECRUITER_USER WHERE Recruiter_User_ID = @SP_Recruiter_User_ID;
+
+        UPDATE [dbo].[TBL_RECRUITER_USER] SET
+				Quantity_Download = @QUANTITY_NOW + 1
+                WHERE Recruiter_User_ID = @SP_Recruiter_User_ID;
+GO
+
+--- RESET QUANTITY DOWNLOAD
+CREATE PROCEDURE [dbo].[SP_RESET_QUANTITY_DOWNLOAD]
+AS
+
+        UPDATE [dbo].[TBL_RECRUITER_USER] SET
+				Quantity_Download = 0;
+GO
+
 --- UPDATE RECRUITER STATUS
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_RECRUITER_USER_STATUS]
-        @SP_Recruiter_Login VARCHAR(20),
+        @SP_Recruiter_Login VARCHAR(50),
         @SP_User_Active_Status VARCHAR(1)
 AS
         UPDATE [dbo].[TBL_RECRUITER_USER] SET
                 User_Active_Status = @SP_User_Active_Status
                 WHERE Recruiter_Login = @SP_Recruiter_Login;
+GO
+
+CREATE PROCEDURE [dbo].[SP_RECOVER_PASSWORD_TBL_RECRUITER]
+        @SP_Email VARCHAR(100),
+        @SP_Recruiter_Password VARCHAR(50)
+AS
+	BEGIN
+		
+		UPDATE [dbo].[TBL_RECRUITER_USER] SET
+			Recruiter_Password = HashBytes('MD5',@SP_Recruiter_Password)
+			WHERE Email = @SP_Email;
+		
+	END
 GO
 
 /*
@@ -1615,7 +1849,7 @@ STORAGE PROCEDURES FOR LOGIN
 --RETURN 0 IF DONT EXIST OR 1 IF EXIST
 
 CREATE PROCEDURE [dbo].[SP_VERIFY_USERNAME]
-        @SP_User_Login VARCHAR(20)
+        @SP_User_Login VARCHAR(50)
 AS
 	BEGIN
 		DECLARE @COUNT_LOGIN_USERNAME INT 
@@ -1670,6 +1904,34 @@ BEGIN
 		WHEN @GET_STATUS = '1' THEN '3' -- STATUS ACTIVE
 	END 
 	SELECT @RESULT AS 'Result', @GET_LOGIN AS 'User_Login', @GET_USER_TYPE AS 'User_Type', @GET_STATUS AS 'User_Active_Status', VW_USER.Name, VW_USER.Email FROM VW_ALL_USER_LOGIN AS VW_USER WHERE VW_USER.User_Login = @SP_User_Login;
+END
+GO
+
+CREATE PROCEDURE [dbo].[SP_RETRIEVE_USER]
+	    @SP_Email VARCHAR(100)
+AS
+BEGIN
+	DECLARE @RESULT VARCHAR(1) = '0'
+	DECLARE @GET_LOGIN VARCHAR(20) = 'NO'
+	DECLARE @GET_USER_TYPE VARCHAR(1) = '0'
+	DECLARE @GET_STATUS VARCHAR(1) = '0'
+
+	SELECT @GET_LOGIN = VW_USER.User_Login FROM VW_ALL_USER_LOGIN AS VW_USER
+	WHERE VW_USER.Email = @SP_Email
+
+	SELECT @GET_USER_TYPE = VW_USER.User_Type FROM VW_ALL_USER_LOGIN AS VW_USER
+	WHERE VW_USER.Email = @SP_Email
+
+	SELECT @GET_STATUS = VW_USER.User_Active_Status FROM VW_ALL_USER_LOGIN AS VW_USER
+	WHERE VW_USER.Email = @SP_Email
+
+
+	SELECT @RESULT = CASE 
+		WHEN @GET_LOGIN = 'NO' THEN '0' -- IF NOT USER EXISTS
+		WHEN @GET_STATUS = '0' THEN '1' -- STATUS INACTIVE
+		WHEN @GET_STATUS = '1' THEN '2' -- STATUS ACTIVE
+	END 
+	SELECT @RESULT AS 'Result', @GET_LOGIN AS 'User_Login', @GET_USER_TYPE AS 'User_Type', @GET_STATUS AS 'User_Active_Status', VW_USER.Name, VW_USER.Email FROM VW_ALL_USER_LOGIN AS VW_USER WHERE VW_USER.Email = @SP_Email;
 END
 GO
 
@@ -2148,19 +2410,22 @@ STORAGE PROCEDURES FOR LABORAL
 */
 
 
-EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] 'admin', '12345678', 'testing', 'testing12@gmail.com','Cédula persona física', '987654321', '1'
+EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] '987654321', '12345678', 'testing', 'testing12@gmail.com','Cédula persona física', '987654321', '1'
 GO
 EXEC [dbo].[SP_INSERT_TBL_ENTITY_USER] 'financiero', '1234567888' ,2, '1'
 GO
-EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] 'reclutador', '12345678', 'testing3', 'testing13@gmail.com','Cédula persona física', '154648759', '1', 1
+
+
+EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] '1546487594', '12345678', 'testing4', 'testing14@gmail.com','Cédula persona física', '1546487594', '1', 1
+
 GO
 
 
 EXEC [dbo].[SP_INSERT_TBL_STUDENT] 'Sí','1',
            'Estudiante'
-           ,'Estudiante'
-           ,'Estudiante'
-           ,'Cédula persona física', '123456789'
+           ,'EstudianteP1'
+           ,'EstudianteP2'
+           ,'Cédula persona física', '1123456788'
            ,'2002-03-27'
            ,20
            ,'Femenino'
@@ -2169,15 +2434,15 @@ EXEC [dbo].[SP_INSERT_TBL_STUDENT] 'Sí','1',
            ,'87878787'
 		   ,'Costa Rica'
            ,'1','01', '10'
+           ,'Inmediata'
            ,'Sí'
-           ,'Sí'
            ,'No'
            ,'No'
            ,'No'
-           ,''
+           ,'A1'
 		   ,''
            ,'Si'
-           ,'estudiante'
+           ,'1123456788'
            ,'12345678'
 		   
 

@@ -27,8 +27,8 @@ function ControlActions() {
 				obj.data = value;
 				arrayColumnsData.push(obj);
 			});
-
-			$('#' + tableId).DataTable({
+			
+			var table = $('#' + tableId).DataTable({
 				"processing": true,
 				"ajax": {
 					"url": this.GetUrlApiService(service),
@@ -37,7 +37,13 @@ function ControlActions() {
 				"columns": arrayColumnsData,
 				"language": {
 					"url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
-				}
+				},
+			});
+
+			$('#' + tableId + ' tbody').on('click', 'tr', function () {
+				var data = table.row(this).data();
+				sessionStorage.setItem(tableId + '_selected', JSON.stringify(data));
+				console.log(data);
 			});
 		} else {
 			//RECARGA LA TABLA
@@ -45,6 +51,8 @@ function ControlActions() {
 		}
 		
 	}
+
+
 
 	this.GetSelectedRow = function () {
 		var data = sessionStorage.getItem(tableId + '_selected');
@@ -91,10 +99,36 @@ function ControlActions() {
 				ctrlActions.ShowMessage('E', response.Message);
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
+				callBackFunction(response);
 			} else {
 				ctrlActions.ShowMessage('I', response.Message);
+				callBackFunction(response);
+
 			}
-			callBackFunction();
+		})
+			.fail(function (response) {
+				var data = response.responseJSON;
+				var ctrlActions = new ControlActions();
+				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				console.log(data);
+				callBackFunction("error data")
+			})
+	};
+
+	this.PutToAPI = function (service, data, callBackFunction) {
+		var jqxhr = $.put(this.GetUrlApiService(service), data, function (response) {
+			var ctrlActions = new ControlActions();
+			ctrlActions.ShowMessage('I', response.Message);
+			if (response.Data == "error") {
+				ctrlActions.ShowMessage('E', response.Message);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+				callBackFunction(response);
+			} else {
+				ctrlActions.ShowMessage('I', response.Message);
+				callBackFunction(response);
+
+			}
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;
@@ -104,7 +138,7 @@ function ControlActions() {
 			})
 	};
 
-	this.PutToAPI = function (service, data, callBackFunction) {
+	this.PutToAPIMyData = function (service, data, callBackFunction) {
 		var jqxhr = $.put(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
 			ctrlActions.ShowMessage('I', response.Message);
@@ -208,7 +242,7 @@ function ControlActions() {
 				ctrlActions.ShowMessage('I', response.Message);
 
 			}
-			callBackFunction(data["UserLogin"]);
+			callBackFunction(response.Data);
 
 		})
 			.fail(function (response) {

@@ -6,6 +6,7 @@
         ShowBarLogin();
         HideBarVisit();
         //redirection();
+        
     } else {
         ShowBarVisit();
         HideBarLogin();
@@ -19,8 +20,10 @@
 });
 function LogOut() {
     sessionStorage.clear();
+    localStorage.clear();
     document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "type=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.href = "/Home"
 }
 

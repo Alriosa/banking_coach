@@ -43,6 +43,15 @@ namespace Entities_POJO
         public string Type_Vehicle { get; set; }
         public string DriverLicenses { get; set; }
         public DateTime EntryDate { get; set; }
+
+        //process recruitment
+        public int EntityId { get; set; }
+        public string EntityName { get; set; }
+        public int StatusRecruitment { get; set; }
+        public int StatusEconomicTest { get; set; }
+        public int StatusPsychometricTest { get; set; }
+        public int StatusInterview { get; set; }
+        public int StatusHired { get; set; }
         public Student()
         {
             
