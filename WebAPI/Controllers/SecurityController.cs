@@ -25,26 +25,34 @@ namespace WebAPI.Controllers
                 var mng = new SecurityLoginManager();
                 Security login = mng.RetrieveById(security);
                 apiResp = new ApiResponse();
-                switch (login.Result)
+                if (login != null)
                 {
-                    case "0":
-                        apiResp.Message = "Usuario no existe";
-                        apiResp.Data = "error";
+                    switch (login.Result)
+                    {
+                        case "0":
+                            apiResp.Message = "Usuario no existe";
+                            apiResp.Data = "error";
 
-                        break;
-                    case "1":
-                        apiResp.Message = "Contraseña incorrecta!";
-                        apiResp.Data = "error";
-                        break;
-                    case "2":
-                        apiResp.Message = "Usuario inactivo";
-                        apiResp.Data = "error";
-                        break;
-                    default:
-                        apiResp.Message = "Bienvenido!";
-                        apiResp.Data = login;
-                        break;
+                            break;
+                        case "1":
+                            apiResp.Message = "Contraseña incorrecta!";
+                            apiResp.Data = "error";
+                            break;
+                        case "2":
+                            apiResp.Message = "Usuario inactivo";
+                            apiResp.Data = "error";
+                            break;
+                        default:
+                            apiResp.Message = "Bienvenido!";
+                            apiResp.Data = login;
+                            break;
+                    }
+                } else
+                {
+                    apiResp.Message = "Usuario no existe";
+                    apiResp.Data = "error";
                 }
+                
                    return Ok(apiResp);
                 
             }

@@ -43,7 +43,6 @@ function ControlActions() {
 			$('#' + tableId + ' tbody').on('click', 'tr', function () {
 				var data = table.row(this).data();
 				sessionStorage.setItem(tableId + '_selected', JSON.stringify(data));
-				console.log(data);
 			});
 		} else {
 			//RECARGA LA TABLA
@@ -75,7 +74,6 @@ function ControlActions() {
 			data[columnDataName] = this.value;
 		});
 
-		console.log(data);
 		return data;
 	}
 
@@ -286,7 +284,6 @@ function formatDateString(s) {
 
 function formatDateStringMonths(s) {
 	var s = s.split(/\D/);
-	console.log(s[0] + '-' + s[1]);
 	return s[0] + '-' + s[1];
 }
 

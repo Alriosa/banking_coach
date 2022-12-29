@@ -9,7 +9,7 @@ function Recruitment() {
     this.resultList = 'resultList';
     this.ctrlActions = new ControlActions();
     this.service = 'student';
-    this.columns = "FirstName,FirstLastName,IdType,IdentificationNumber,Birthdate,Country,Residence,JobAvailability,Type_Vehicle,Licenses,Sex,Curriculum";
+    this.columns = "FirstName,FirstLastName,IdType,IdentificationNumber,Age,Country,Residence,JobAvailability,Type_Vehicle,Licenses,Sex,Curriculum";
 
 
     this.BindFields = function (data) {
@@ -110,7 +110,7 @@ function Recruitment() {
                         data[i].FirstLastName,
                         data[i].IdType,
                         data[i].IdentificationNumber,
-                        formatDate(new Date(data[i].Birthdate)),
+                        data[i].Age,
                         data[i].Country,
                         data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
                         data[i].JobAvailability,
@@ -414,7 +414,7 @@ async function DowlandCV(student) {
         p1 = document.createElement('p');
         p1.append(formatDateStringMonths(academic[i].StartDate) + " - " + dateEnd);
         p2 = document.createElement('p');
-        p2.append(academic[i].Institution + " - " + academic[i].DegreeType + " - " + academic[i].University_Preparation);
+        p2.append(academic[i].Institution + " - " + academic[i].DegreeType + " - " + academic[i].UniversityPreparation);
         p3 = document.createElement('p');
         p3.append(academic[i].Status);
         d1 = document.createElement('div');

@@ -51,7 +51,7 @@
                     '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
                     '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected disabled>Seleccione</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
                     '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID + '" aria-label="Contratación"><option value="0" selected disabled>Seleccione</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
-                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID +')" id="profileStudent"><i class="fa fa-user"></i></button ><button class="btn btn-danger" id="remove' + data[i].StudentID + '"><i class="fa fa-trash"></i></button >',
+                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button class="btn btn-danger" id="remove' + data[i].StudentID + '" onclick="removeStudent(' + data[i].StudentID +')"><i class="fa fa-trash"></i></button >',
 
                 ]).draw(false);
 
@@ -148,7 +148,7 @@ $(document).ready(async function () {
 		ctrlActions = new ControlActions();
 		ctrlActions.DeleteToAPI(studentList.service, studentData, function () {
 			var callback = new vStudentList();
-			callback.ReloadTable();
+		//	callback.ReloadTable();
 		});
 	});
     $('#addStudent').click(function () {

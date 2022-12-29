@@ -4,6 +4,7 @@ var courseList = [];
 var languageList = [];
 var referenceList = [];
 var dataStudent;
+var apiURl = 'http://localhost:57056/';
 function vStudentAccount() {
     this.ctrlActions = new ControlActions();
     var StudentProfileData = {};
@@ -211,7 +212,7 @@ function vStudentAccount() {
         fileData.append("academic", JSON.stringify(academicData));
 
         $.ajax({
-            url: 'http://localhost:57056/api/academic',
+            url: apiURl + 'api/academic',
             type: 'post',
             datatype: 'json',
             contentType: false,
@@ -248,7 +249,43 @@ function vStudentAccount() {
         academicData['AcademicID'] = document.querySelector('#academic_token').value;
         academicData["StudentID"] = document.getElementById("txtIdStudent").value;
 
-        this.ctrlActions.PutToAPI('academic', academicData, function () {
+
+        var fileUpload = $("#txtCertificateA").get(0);
+        var files = fileUpload.files;
+
+        var fileData = new FormData();
+
+        //fileData.append(files[0].name, files[0]);
+
+        if (fileUpload.files.length > 0) {
+            fileData.append("fileName", files[0].name);
+            fileData.append("file", files[0]);
+        }
+        fileData.append("academic", JSON.stringify(academicData));
+
+        $.ajax({
+            url: apiURl + 'api/academic',
+            type: 'post',
+            datatype: 'json',
+            contentType: false,
+            processData: false,
+            async: false,
+            data: fileData,
+            success: function (response) {
+                $('#editAcademic').modal('toggle');
+                this.ctrlActions2 = new ControlActions();
+                this.student = new vStudentAccount();
+
+                //setTimeout(function redirection() { location.reload; }, 5000);
+                this.ctrlActions2.GetById("academic/student/" + academicData["StudentID"], this.student.GetAcademic);
+                $('#editAcademic').modal('toggle');
+                $('.selectedFinishA').hide();
+
+            }
+        });
+
+
+      /*  this.ctrlActions.PutToAPI('academic', academicData, function () {
             resetFormEditAcademic();
             //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
             this.ctrlActions2 = new ControlActions();
@@ -256,7 +293,7 @@ function vStudentAccount() {
 
             this.ctrlActions2.GetById("academic/student/" + academicData["StudentID"], this.student.GetAcademic);
             $('#editAcademic').modal('toggle');
-        });
+        });*/
     }
 
     this.CreateExtraCourse = function () {
@@ -278,7 +315,7 @@ function vStudentAccount() {
         fileData.append("course", JSON.stringify(courseData));
 
         $.ajax({
-            url: 'http://localhost:57056/api/extracourse',
+            url: apiURl + 'api/extracourse',
             type: 'post',
             datatype: 'json',
             contentType: false,
@@ -315,7 +352,41 @@ function vStudentAccount() {
         courseData['CourseID'] = document.querySelector('#course_token').value;
         courseData["StudentID"] = document.getElementById("txtIdStudent").value;
 
-        this.ctrlActions.PutToAPI('extracourse', courseData, function () {
+        var fileUpload = $("#txtCertificateC").get(0);
+        var files = fileUpload.files;
+
+        var fileData = new FormData();
+
+        //fileData.append(files[0].name, files[0]);
+
+        if (fileUpload.files.length > 0) {
+            fileData.append("fileName", files[0].name);
+            fileData.append("file", files[0]);
+        }
+        fileData.append("course", JSON.stringify(courseData));
+
+        $.ajax({
+            url: apiURl + 'api/extracourse',
+            type: 'post',
+            datatype: 'json',
+            contentType: false,
+            processData: false,
+            async: false,
+            data: fileData,
+            success: function (response) {
+                $('#editCourse').modal('toggle');
+                this.ctrlActions2 = new ControlActions();
+                this.student = new vStudentAccount();
+
+                //setTimeout(function redirection() { location.reload; }, 5000);
+                this.ctrlActions2.GetById("extracourse/student/" + academicData["StudentID"], this.student.GetCourse);
+                $('#editCourse').modal('toggle');
+                $('.selectedFinishC').hide();
+
+            }
+        });
+
+        /*this.ctrlActions.PutToAPI('extracourse', courseData, function () {
             resetFormEditCourse();
             //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
             this.ctrlActions2 = new ControlActions();
@@ -323,7 +394,7 @@ function vStudentAccount() {
 
             this.ctrlActions2.GetById("extracourse/student/" + courseData["StudentID"], this.student.GetCourse);
             $('#editCourse').modal('toggle');
-        });
+        });*/
     }
 
     this.CreateReference = function () {
@@ -559,6 +630,12 @@ function vStudentAccount() {
                                                 Descargar Certificado
                                             </button>`;
                 } 
+                let levelAcademic = "";
+                if (data[i].DegreeType == "Universitario") {
+                    levelAcademic = data[i].UniversityPreparation + " " + data[i].DegreeType;
+                } else {
+                    levelAcademic = data[i].DegreeType;
+                }
 
                 text2 += `<div class="card-academic">
                                <div class="container">
@@ -570,7 +647,7 @@ function vStudentAccount() {
                                         <div class="col-lg-9">
                                             <ul class="unstyled">
                                                 <li style="list-style-type: none;">
-                                                    ${data[i].DegreeType}
+                                                    ${levelAcademic}
                                                 </li>
                                                 <li style="list-style-type: none;">
                                                     <strong>${data[i].Institution}</strong>
@@ -801,6 +878,8 @@ function resetFormLaboral() {
 }
 function resetFormAcademic() {
     $("#frmAddAcademic")[0].reset();
+    $('input[name="rdDegreeType"][value="Secundaria"').prop("checked", true);
+
 }
 
 function resetFormEditLaboral() {
@@ -873,6 +952,11 @@ GetDataAcademic = function (idAcademic) {
 FillDataFormAcademic = function (data) {
     document.querySelector('#academic_token').value = data['AcademicID'];
     $(`input[name="rdDegreeType"][value="${data['DegreeType']}"]`).prop("checked", true);
+    if (data['DegreeType'] == "Secundaria") {
+        $(".selectedUniversity").hide();
+    } else if (data['DegreeType'] == "Universitario") {
+        $(".selectedUniversity").show();
+    }
     document.querySelector('#txtEditInstitution').value = data['Institution'];
     document.querySelector('#txtEditCareer').value = data['Career'];
     $(`#txtEditStatusAcademic option[value="${data['Status']}"]`).attr("selected", "selected");
@@ -1320,7 +1404,7 @@ async function DowlandCV() {
         }
 
         let text = formatDateStringMonths(academic[i].StartDate) + " - " + dateEnd + "\n" + academic[i].Institution + " - " +
-            academic[i].DegreeType + " - " + academic[i].University_Preparation + "\n" + academic[i].Status
+            academic[i].DegreeType + " - " + academic[i].UniversityPreparation + "\n" + academic[i].Status
         doc.text(20, 135 + (i * 20), text);
     }
 
@@ -1401,7 +1485,11 @@ async function DowlandCV() {
     let titleInfo = document.createElement('h5');
     titleInfo.textContent = "Información Personal";
     titleInfo.style.textAlign = 'center';
+    $("#birthdateText").hide();
+    $("#ageText").hide();
     let cloneInfo = document.getElementById("my_info").cloneNode(true);
+    $("#birthdateText").show();
+    $("#ageText").show();
     let titleProfile = document.createElement('h5');
     titleProfile.textContent = "Perfil Profesional";
     titleProfile.style.textAlign = 'center';
@@ -1465,7 +1553,7 @@ async function DowlandCV() {
         p1 = document.createElement('p');
         p1.append(formatDateStringMonths(academic[i].StartDate) + " - " + dateEnd);
         p2 = document.createElement('p');
-        p2.append(academic[i].Institution + " - " +  academic[i].DegreeType + " - " + academic[i].University_Preparation);
+        p2.append(academic[i].Institution + " - " +  academic[i].DegreeType + " - " + academic[i].UniversityPreparation);
         p3 = document.createElement('p');
         p3.append(academic[i].Status);
         d1 = document.createElement('div');

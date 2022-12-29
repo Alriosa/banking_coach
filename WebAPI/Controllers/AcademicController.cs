@@ -148,14 +148,55 @@ namespace WebAPI.Controllers
             try
             {
                 var mng = new AcademicManager();
+                string academicPost = HttpContext.Current.Request.Form["academic"];
+                var a = JObject.Parse(academicPost);
 
-                if (academic.EndDate == DateTime.MinValue)
+                Academic academicData = JsonConvert.DeserializeObject<Academic>(a.ToString());
+
+                var academicFounded = mng.RetrieveById(academicData);
+                if(academicFounded.Certificate_Name == null)
                 {
-                    //DateTime is null
-                    academic.EndDate = (DateTime)SqlDateTime.Null; ;
+                     Random rnd = new Random();
+                int rndx = rnd.Next(0, 1000);
+
+                //Fetch the File Name.
+                string fileName = HttpContext.Current.Request.Form["fileName"];
+                var settings = new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ" };
+
+                if (string.IsNullOrEmpty(a["EndDate"].ToString()))
+                {
+                    a["EndDate"] = DateTime.MinValue;
                 }
 
-                mng.Update(academic);
+
+                if (fileName != null && fileName != "")
+                {
+                    //Create the Directory.
+                    string api = "http://localhost:57056/Uploads/" + rndx + "/";
+                    string path = HttpContext.Current.Server.MapPath("~/Uploads/" + rndx);
+                    string filePath = "";
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                        filePath = Path.Combine(path, rndx + "_" + fileName);
+                            academicData.Certificate_File = Path.Combine(api, rndx + "_" + fileName); ;
+                            academicData.Certificate_Name = fileName;
+                    }
+
+                    //Fetch the File.
+                    HttpPostedFile postedFile = HttpContext.Current.Request.Files[0];
+                    //Save the File.
+                    postedFile.SaveAs(filePath);
+                }
+                }
+
+                if (academicData.EndDate == DateTime.MinValue)
+                {
+                    //DateTime is null
+                    academicData.EndDate = (DateTime)SqlDateTime.Null; ;
+                }
+
+                mng.Update(academicData);
 
                 apiResp = new ApiResponse
                 {

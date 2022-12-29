@@ -49,7 +49,7 @@
                 resetForm();
             }
 
-          /*  var user = {};
+          /* var user = {};
 
 
             user['text'] = "Estudiante Registrado";

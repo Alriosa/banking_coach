@@ -1873,7 +1873,9 @@ GO
 -------- 2 IF STATUS INACTIVE
 -------- 3 IF STATUS ACTIVE
 
-CREATE PROCEDURE [dbo].[SP_LOGIN]
+
+
+ALTER PROCEDURE [dbo].[SP_LOGIN]
 	    @SP_User_Login VARCHAR(20),
         @SP_User_Password VARCHAR(20)
 AS
@@ -1898,7 +1900,7 @@ BEGIN
 
 
 	SELECT @RESULT = CASE 
-		WHEN @GET_LOGIN = 'NO' THEN '0' -- IF NOT USER EXISTS
+		WHEN @GET_LOGIN = '' THEN '0' -- IF NOT USER EXISTS
 		WHEN @GET_PASS != HashBytes('MD5',@SP_User_Password) THEN '1' -- PASSWORD IS INCORRECT
 		WHEN @GET_STATUS = '0' THEN '2' -- STATUS INACTIVE
 		WHEN @GET_STATUS = '1' THEN '3' -- STATUS ACTIVE
@@ -2409,14 +2411,13 @@ STORAGE PROCEDURES FOR LABORAL
 	EXECUTE PROCEDURES
 */
 
+EXEC [SP_LOGIN] '154648759', '12345678'
 
 EXEC [dbo].[SP_INSERT_TBL_ADMIN_USER] '987654321', '12345678', 'testing', 'testing12@gmail.com','Cédula persona física', '987654321', '1'
 GO
 EXEC [dbo].[SP_INSERT_TBL_ENTITY_USER] 'financiero', '1234567888' ,2, '1'
 GO
-
-
-EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] '1546487594', '12345678', 'testing4', 'testing14@gmail.com','Cédula persona física', '1546487594', '1', 1
+EXEC [dbo].[SP_INSERT_TBL_RECRUITER_USER] '154648759', '12345678', 'testing4', 'testing14@gmail.com','Cédula persona física', '1546487594', '1', 1
 
 GO
 

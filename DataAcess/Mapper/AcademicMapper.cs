@@ -31,7 +31,7 @@ namespace DataAcess.Mapper
 
             operation.AddVarcharParam(DB_COL_INSTITUTION, academic.Institution);
             operation.AddVarcharParam(DB_COL_DEGREE_TYPE, academic.DegreeType);
-            operation.AddVarcharParam(DB_COL_UNIVERSTITY_PREPARATION, academic.University_Preparation);
+            operation.AddVarcharParam(DB_COL_UNIVERSTITY_PREPARATION, academic.UniversityPreparation);
             operation.AddVarcharParam(DB_COL_CAREER, academic.Career);
             operation.AddVarcharParam(DB_COL_STATUS, academic.Status);
             operation.AddVarcharParam(DB_COL_CERTIFICATE_NAME, academic.Certificate_Name);
@@ -76,7 +76,7 @@ namespace DataAcess.Mapper
             operation.AddIntParam(DB_COL_ACADEMIC_ID, academic.AcademicID);
             operation.AddVarcharParam(DB_COL_INSTITUTION, academic.Institution);
             operation.AddVarcharParam(DB_COL_DEGREE_TYPE, academic.DegreeType);
-            operation.AddVarcharParam(DB_COL_UNIVERSTITY_PREPARATION, academic.University_Preparation);
+            operation.AddVarcharParam(DB_COL_UNIVERSTITY_PREPARATION, academic.UniversityPreparation);
             operation.AddVarcharParam(DB_COL_CAREER, academic.Career);
             operation.AddVarcharParam(DB_COL_STATUS, academic.Status);
             operation.AddVarcharParam(DB_COL_CERTIFICATE_NAME, academic.Certificate_Name);
@@ -104,7 +104,7 @@ namespace DataAcess.Mapper
                 AcademicID = GetIntValue(row, DB_COL_ACADEMIC_ID),
                 Institution = GetStringValue(row, DB_COL_INSTITUTION),
                 DegreeType = GetStringValue(row, DB_COL_DEGREE_TYPE),
-                University_Preparation = GetStringValue(row, DB_COL_UNIVERSTITY_PREPARATION),
+                UniversityPreparation = GetStringValue(row, DB_COL_UNIVERSTITY_PREPARATION),
                 Career = GetStringValue(row, DB_COL_CAREER),
                 Status = GetStringValue(row, DB_COL_STATUS),
                 Certificate_Name = GetStringValue(row, DB_COL_CERTIFICATE_NAME),

@@ -13,7 +13,7 @@ namespace Entities_POJO
         public int AcademicID { get; set; }
         public string Institution { get; set; }
         public string DegreeType { get; set; }
-        public string University_Preparation { get; set; }
+        public string UniversityPreparation { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Career { get; set; }
@@ -28,12 +28,12 @@ namespace Entities_POJO
         {
         }
 
-        public Academic(int academicID, string institution, string degreeType, string university_Preparation, DateTime startDate, DateTime endDate, string career, string status, string certificate_Name, string certificate_File, DateTime entryDate, int studentID)
+        public Academic(int academicID, string institution, string degreeType, string universityPreparation, DateTime startDate, DateTime endDate, string career, string status, string certificate_Name, string certificate_File, DateTime entryDate, int studentID)
         {
             AcademicID = academicID;
             Institution = institution;
             DegreeType = degreeType;
-            University_Preparation = university_Preparation;
+            UniversityPreparation = universityPreparation;
             StartDate = startDate;
             EndDate = endDate;
             Career = career;
