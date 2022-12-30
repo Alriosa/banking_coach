@@ -1,13 +1,18 @@
 ﻿<!DOCTYPE html>
-<html>
+<html xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banking Coach</title>
+    <title>Banking Academy</title>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+          integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
@@ -16,6 +21,8 @@
     <script src="~/Scripts/Views/Login/vIndex.js"></script>
     <script src="~/Scripts/Views/Layout.js"></script>
     <script src="~/Scripts/Views/ControlActions.js"></script>
+    <link rel="icon" href="../../Content/Logos/Isotipo Banking Academy 2.png" type="image/icon type">
+        
 </head>
 <body class="bg-gray">
     
@@ -23,7 +30,7 @@
         <div class="row">
             <div class="col-12">
                 <img class="bg-top" src="~/Content/imgs/background-top.png" />
-                @Html.CtrlNavBarMenu(id: "navbar", optionsName: "Administradores,Financieros,Reclutadores,Estudiantes", optionsActionName: "SysAdmin,Financial,Recruiter,Students")
+                @Html.CtrlNavBarMenu(id: "navbar", optionsName: "Administradores,Entidades,Reclutadores,Estudiantes", optionsActionName: "SysAdmin,EntityUser,Recruiter,Students")
             </div>
         </div>
                     <!-- <a href="../" class="navbar-brand">Banking Coach</a>
@@ -90,7 +97,7 @@
 
 
 
-            <div class="container body-content">
+            <div class="container-fluid body-content">
                 <div class="alert alert-success alert-dismissable" style="display: none" id="alert_container">
                     <button type="button" class="close" onclick="$('.alert').hide()">&times;</button>
                     <span id="alert_message"></span>

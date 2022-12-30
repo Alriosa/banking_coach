@@ -5,8 +5,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div style="margin: 10px auto;">
+    <button class="btn btn-orange" id="addRecruiter" style="">Agregar reclutador</button>
+
+</div>
+
+
 <div style="margin-top: 20px;" id="recruiterList" class="d-inline">
-    @Html.CtrlTable(viewName: "vRecruiterList", id: "tblRecruiter", title: "Reclutadores",
-    columnsTitle: "Nombre de usuario, Entidad Asociada,Estado", ColumnsDataName: "RecruiterLogin,FinantialAssociationName,UserActiveStatus", onSelectFunction: "BindFields")
+    <div class="col-lg-12 col-sm-11">
+        <div class="container-fluid">
+
+            <div class="justify-content-center">
+                <div class="card border-secondary mb-6">
+                    <div class="card-header">Lista de Resultados</div>
+                    <div class="card-body">
+                        <table id="tblRecruiter" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tipo de documento </th>
+                                    <th>Número de Identificación</th>
+                                    <th>Correo Electrónico </th>
+                                    <th style="width: 80px;">Entidad Asociadad</th>
+                                    <th style="width: 100px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
 

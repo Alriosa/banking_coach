@@ -13,6 +13,10 @@ namespace DataAccess.Mapper
         private const string DB_COL_SYS_ADMIN_USER_ID = "Sys_Admin_User_ID";
         private const string DB_COL_ADMIN_LOGIN = "Admin_Login";
         private const string DB_COL_ADMIN_PASSWORD = "Admin_Password";
+        private const string DB_COL_ADMIN_NAME = "Name";
+        private const string DB_COL_ADMIN_EMAIL = "Email";
+        private const string DB_COL_ID_TYPE = "Id_Type";
+        private const string DB_COL_IDENTIFICATION_NUMBER = "Identification_Number"; 
         private const string DB_COL_ADMIN_STATUS = "User_Active_Status";
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_USER_EXIST = "User_Login";
@@ -25,6 +29,10 @@ namespace DataAccess.Mapper
             var sysAdmin = (SysAdmin)entity;
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
             operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
+            operation.AddVarcharParam(DB_COL_ADMIN_NAME, sysAdmin.Name);
+            operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
+            operation.AddVarcharParam(DB_COL_ID_TYPE, sysAdmin.IdType);
+            operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, sysAdmin.IdentificationNumber);
             operation.AddVarcharParam(DB_COL_ADMIN_STATUS, sysAdmin.UserActiveStatus);
 
             return operation;
@@ -57,11 +65,33 @@ namespace DataAccess.Mapper
             return operation;
         }
 
-      
+        //Select by Email
+        public SqlOperation GetRetriveStatementByEmail(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_SELECT_TBL_ADMIN_USER_BY_EMAIL" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
+
+            return operation;
+        }
 
         public SqlOperation GetUpdateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_ADMIN_USER" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            operation.AddVarcharParam(DB_COL_ADMIN_NAME, sysAdmin.Name);
+            operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
+            operation.AddVarcharParam(DB_COL_ID_TYPE, sysAdmin.IdType);
+            operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, sysAdmin.IdentificationNumber);
+            return operation;
+        }
+
+        public SqlOperation GetUpdatePasswordStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_UPDATE_PASSWORD_TBL_SYS_ADMIN_USER" };
 
             var sysAdmin = (SysAdmin)entity;
             operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
@@ -70,6 +100,16 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetRecoverPasswordStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_RECOVER_PASSWORD_TBL_ADMIN" };
+
+            var sysAdmin = (SysAdmin)entity;
+            operation.AddVarcharParam(DB_COL_ADMIN_EMAIL, sysAdmin.Email);
+            operation.AddVarcharParam(DB_COL_ADMIN_PASSWORD, sysAdmin.AdminPassword);
+
+            return operation;
+        }
         public SqlOperation GetUpdateStatusStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_UPDATE_TBL_ADMIN_USER_STATUS" };
@@ -86,7 +126,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_ADMIN_USER" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
             return operation;
         }
 
@@ -95,7 +135,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_SOFT_DELETE_TBL_ADMIN_USER" };
 
             var sysAdmin = (SysAdmin)entity;
-            operation.AddVarcharParam(DB_COL_ADMIN_LOGIN, sysAdmin.AdminLogin);
+            operation.AddIntParam(DB_COL_SYS_ADMIN_USER_ID, sysAdmin.SysAdminUserID);
             return operation;
         }
 
@@ -130,8 +170,46 @@ namespace DataAccess.Mapper
                 SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
                 AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
                 AdminPassword = GetStringValue(row, DB_COL_ADMIN_PASSWORD),
+                Name = GetStringValue(row, DB_COL_ADMIN_NAME),
+                Email = GetStringValue(row, DB_COL_ADMIN_EMAIL),
+                IdType = GetStringValue(row, DB_COL_ID_TYPE),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
                 UserType = GetStringValue(row, DB_COL_USER_TYPE),
                 UserActiveStatus= GetStringValue(row, DB_COL_ADMIN_STATUS)
+            };
+
+            return sysAdmin;
+        }
+
+        public BaseEntity BuildObjectBasic(Dictionary<string, object> row)
+        {
+            var sysAdmin = new SysAdmin
+            {
+                SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
+                AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
+                Name = GetStringValue(row, DB_COL_ADMIN_NAME),
+                Email = GetStringValue(row, DB_COL_ADMIN_EMAIL),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                UserActiveStatus = GetStringValue(row, DB_COL_ADMIN_STATUS)
+            };
+
+            return sysAdmin;
+        }
+
+        public BaseEntity BuildObjectLogin(Dictionary<string, object> row)
+        {
+            var sysAdmin = new SysAdmin
+            {
+                SysAdminUserID = GetIntValue(row, DB_COL_SYS_ADMIN_USER_ID),
+                AdminLogin = GetStringValue(row, DB_COL_ADMIN_LOGIN),
+                User_Login = GetStringValue(row, DB_COL_USER_EXIST),
+                Name = GetStringValue(row, DB_COL_ADMIN_NAME),
+                Email = GetStringValue(row, DB_COL_ADMIN_EMAIL),
+                IdType = GetStringValue(row, DB_COL_ID_TYPE),
+                IdentificationNumber = GetStringValue(row, DB_COL_IDENTIFICATION_NUMBER),
+                UserType = GetStringValue(row, DB_COL_USER_TYPE),
+                UserActiveStatus = GetStringValue(row, DB_COL_ADMIN_STATUS)
             };
 
             return sysAdmin;

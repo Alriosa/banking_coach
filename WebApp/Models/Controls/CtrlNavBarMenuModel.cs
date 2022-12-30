@@ -14,7 +14,7 @@ namespace WebApp.Models.Controls
         public string OptionsActionName { get; set; }
         private SysAdmin A { get; set; }
         private Student S { get; set; }
-        private FinancialUser F { get; set; }
+        private EntityUser F { get; set; }
         private Recruiter R { get; set; }
 
         private string user_type { get; set; }
@@ -44,7 +44,7 @@ namespace WebApp.Models.Controls
                     var views = GetViewsFromAPI(user_type.ToString());
                     var optionsActionName = OptionsActionName.Split(',').ToList();
                     var optionsName = Options.Split(',').ToList();
-                    var lstGrupos = views.GroupBy(x => x.ControllerName).ToList();
+                    var lstGrupos = views.GroupBy(x => x.GroupView).ToList();
 
 
                     var cont = 0;
@@ -54,9 +54,10 @@ namespace WebApp.Models.Controls
                         if (group.Key != "")
                         {
                            
+
                             links +=
                                 "<li class='nav-item dropdown'>" +
-                                    "<a style='cursor:pointer;' class='nav-link' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" + optionsName[cont] + "<span><i class='fa fa-angle-down '></i></span></a>" +
+                                    "<a style='cursor:pointer;' class='nav-link' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" + group.Key + "<span><i class='fa fa-angle-down '></i></span></a>" +
                                     "<ul class='dropdown-menu' aria-labelledby='navbarDropdown'>";
 
                             foreach (var item in group)

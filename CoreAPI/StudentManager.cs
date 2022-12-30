@@ -41,6 +41,32 @@ namespace CoreAPI
             return crudStudent.RetrieveAll<Student>();
         }
 
+
+        public List<Student> RetrieveAllInRecruitment()
+        {
+            return crudStudent.RetrieveAllInRecruitment<Student>();
+        }
+
+        public List<Student> RetrieveAllInRecruitmentByEntity(Student student)
+        {
+            List<Student> c = null;
+            try
+            {
+                c = crudStudent.RetrieveAllInRecruitmentByEntity<Student>(student);
+                if (c == null)
+                {
+                    //    throw new BussinessException(4);
+                }
+            }
+            catch (Exception ex)
+            {
+                // ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+
+            return c;
+        }
+
         public Student RetrieveById(Student student)
         {
             Student c = null;
@@ -49,7 +75,7 @@ namespace CoreAPI
                 c = crudStudent.Retrieve<Student>(student);
                 if (c == null)
                 {
-                    throw new BussinessException(4);
+                //    throw new BussinessException(4);
                 }
             }
             catch (Exception ex)
@@ -81,10 +107,49 @@ namespace CoreAPI
             return c;
         }
 
+        public Student RetrieveByEmail(Student student)
+        {
+            Student c = null;
+            try
+            {
+                c = crudStudent.RetrieveByUserByEmail<Student>(student);
+                /* if (c == null)
+                 {
+                     throw new BussinessException(4);
+                 }*/
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+
+            return c;
+        }
+
         public void Update(Student student)
         {
             crudStudent.Update(student);
         }
+
+
+        public void UpdatePassword(Student student)
+        {
+            Student s = null;
+           
+
+            try
+            {
+               crudStudent.UpdatePassword(student);                       
+            }
+            catch (Exception ex)
+            {
+                //s ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al retornar datos", ex);
+            }
+         
+        }
+
 
         public void Delete(Student student)
         {
@@ -108,6 +173,35 @@ namespace CoreAPI
                 throw new Exception("Error al validar datos", ex);
             }
             return response;
+        }
+
+        public void RecruitStudent(Student student)
+        {
+            crudStudent.RecruitStudent(student);
+        }
+        
+        public void FinishRecruitStudent(Student student)
+        {
+            crudStudent.FinishRecruitStudent(student);
+        }
+
+        public void StudentProcessTestEconomic(Student student)
+        {
+            crudStudent.StudentProcessTestEconomic(student);
+        }
+
+        public void StudentProcessTestPsychometric(Student student)
+        {
+            crudStudent.StudentProcessTestPsychometric(student);
+        }
+
+        public void StudentProcessInterview(Student student)
+        {
+            crudStudent.StudentProcessInterview(student);
+        }
+        public void StudentProcessHiring(Student student)
+        {
+            crudStudent.StudentProcessHiring(student);
         }
     }
 }

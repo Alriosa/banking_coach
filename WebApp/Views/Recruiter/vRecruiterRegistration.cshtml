@@ -9,34 +9,53 @@
     <div class="container">
         <div class="row text-center justify-content-between">
             <div class="col-lg-5 col-sm-11">
-                <div class=" text-box">
-                    <h1 class="home-title">BOLSA DE EMPLEO</h1>
+                <div class="page-title text-box">
+                    <h1 >REGISTRA AL RECLUTADOR</h1>
                     <p class="subtitle home-subtitle-1">
-                        En está sección, todos los estudiantes podrán subir sus hojas de vida,
-                        para ser evaluados por los reclutadores de entidades financieras
+                        En está sección, puede registrar a un nuevo reclutador
                     </p>
-                    <p class="subtitle home-subtitle-2">Exclusiva para egresados de Banking Coach</p>
                 </div>
             </div>
             <div class="col-lg-6 col-sm-11">
-                <img class="img" src="~/Content/imgs/Empleo.jpg" alt="">
-
+                <img class="img" src="~/Content/imgs/reclutador3.jpg" alt="">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="text-center my-4">
-
-                            <h1 class="form-title">REGISTRA AL RECLUTADOR</h1>
-                        </div>
                         <form id="frmRecruiterCreate" class="form frmRecruiterCreate">
                             <div class="col-sm-12 text-center">
                                 <div class="form-row ">
                                     <div class="col-lg-12">
-                                        @Html.CtrlDropDownSecond(id: "selectFinancial", title:"Entidad Financiera", label: "labelFinancial", name:"financialfinancial", columnDataName: "RecruiterLogin")
+                                        @Html.CtrlDropDownSecond(id: "selectEntity", title: "Entidad Financiera", label: "labelEntity", name: "entityUser", columnDataName: "RecruiterLogin")
                                     </div>
                                 </div>
                                 <div class="form-row ">
                                     <div class="col-lg-12">
-                                        @Html.CtrlInputSecond(id: "txtLogin", type: "text", required: true, placeHolder: "Nombre de Usuario", columnDataName: "RecruiterLogin")
+                                        <div class="input-group mb-3">
+                                            <div class="form-group input-group flex-column ">
+                                                <label>Tipo de documento:</label>
+                                                <select style="height:54px;" class="form-control w-100" id="txtIdType" name="IdType" ColumnDataName="IdType" required>
+                                                    <option value="Cédula persona física">Cédula persona física</option>
+                                                    <option value="Residencia">Residencia</option>
+                                                    <option value="Pasaporte">Pasaporte</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <div class="input-group mb-3">
+                                            @Html.CtrlInputSecond(id: "txtIdentificationNumber", type: "text", required: true, placeHolder: "Número de identificación", columnDataName: "IdentificationNumber")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtName", type: "text", required: true, placeHolder: "Nombre Completo", columnDataName: "Name")
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        @Html.CtrlInputSecond(id: "txtEmail", type: "email", required: true, placeHolder: "Correo electrónico", columnDataName: "Email")
                                     </div>
                                 </div>
                                 <div class="form-row ">
@@ -61,3 +80,5 @@
             </div>
         </div>
     </div>
+
+</div>

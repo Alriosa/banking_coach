@@ -93,7 +93,7 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
-                    apiResp.Message = "Nombre de usuario ya existe";
+                    apiResp.Message = "Identificación ya existe";
                     apiResp.Data = "error";
 
                 }
@@ -116,13 +116,36 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "SysAdmin Modified."
+                    Message = "Administrador Modificado"
                 };
 
                 return Ok(apiResp);
             }
             catch (BussinessException bex)
             {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+        [HttpPut]
+        [Route("changePassword")]
+        public IHttpActionResult ChangePassword(SysAdmin sysAdmin)
+        {
+            try
+            {
+                var mng = new SysAdminManager();
+                mng.UpdatePassword(sysAdmin);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Contraseña Modificada"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
@@ -137,7 +160,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "SysAdmin deleted."
+                    Message = "Administrador Eliminado"
                 };
 
                 return Ok(apiResp);

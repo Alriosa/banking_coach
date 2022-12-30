@@ -1,51 +1,65 @@
 ﻿function vRecruiterUpdate() {
     this.ctrlActions = new ControlActions();
- 
+    this.service = 'recruiter';
 
     this.GetData = function () {
         var idRecruiter = document.getElementById("txtIdRecruiter").value;
-
         if (idRecruiter != 'null') {
             this.ctrlActions.GetById("recruiter/" + idRecruiter, this.FillData);
         }
     }
 
+    this.FillData = function (data) {
+        document.querySelector('#txtRecruiterLogin').value = data['RecruiterLogin'];
+        document.querySelector('#txtName').value = data['Name'];
+        document.querySelector('#txtEmail').value = data['Email'];
+        document.querySelector('#txtIdType').value = data['IdType'];
+        document.querySelector('#txtIdentificationNumber').value = data['IdentificationNumber'];
+
+    }
     
+    this.UpdatePassword = function () {
+        var recruiterData = {};
+        recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdatePassword');
+        recruiterData["Email"] = document.querySelector('#txtEmail').value;
+        this.ctrlActions.PutToAPI(this.service + "/changePassword", recruiterData,
+            resetForm()
+        );
+    }
+
+    this.ValidateInputPassword = function () {
+        if ($("#frmRecruiterUpdatePassword").valid()) {
+            this.UpdatePassword();
+            resetForm();
+        }
+    }
 
 
     this.Update = function () {
-
         var recruiterData = {};
-
-        recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdatePassword');
-        recruiterData.RecruiterPassword = recruiterData["Password"];
-        this.ctrlActions.PutToAPI('recruiter', recruiterData, function () {
-            resetForm();
-        });
+        recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdate');
+        recruiterData["RecruiterLogin"] = document.getElementById("txtRecruiterLogin").value;
+        recruiterData["IdType"] = document.getElementById("txtIdType").value;
+        recruiterData["IdentificationNumber"] = document.getElementById("txtIdentificationNumber").value;
+        this.ctrlActions.PutToAPI(this.service, recruiterData,
+            resetForm()
+        );
     }
 
     this.ValidateInputs = function () {
-        if ($("#frmRecruiterUpdatePassword").valid()) {
+        if ($("#frmRecruiterUpdate").valid()) {
             this.Update();
             resetForm();
         }
     }
 }
 
-
-
-RulesValidateCreate = function () {
-
+RulesValidateUpdate = function () {
 
     $("#frmRecruiterUpdatePassword").validate({
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
-            txtOldPassword: {
-                required: "Ingrese la contraseña actual",
-                minlength: "El nombre de usuario debe contener mínimo 6 caracteres",
-                maxlength: "El nombre de usuario debe contener máximo 20 caracteres",
-            },
             txtPassword: {
                 required: "Ingrese una nueva contraseña",
                 minlength: "La contraseña debe de tener mínimo 6 caracteres",
@@ -58,8 +72,7 @@ RulesValidateCreate = function () {
             },
         },
         rules: {
-            txtOldPassword: { required: true, minlength: 6, maxlength: 20 },
-            txtNewPassword: { required: true, minlength: 6, maxlength: 20 },
+            txtNewPassword: { required: true, minlength: 6, maxlength: 20, new_password_not_same: true },
             txtConfirmNewPassword: { required: true, equalTo: "#txtNewPassword" },
         }
     });

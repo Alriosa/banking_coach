@@ -2,9 +2,6 @@
     this.service = 'student';
     this.ctrlActions = new ControlActions();
 
-   
-
-
     this.GetData = function () {
         var idStudent = document.getElementById("txtIdStudent").value;
         if (idStudent != 'null') {
@@ -16,7 +13,6 @@
         document.querySelector('#txtBankingStudent').value = data['BankingStudent'];
         document.querySelector('#txtStudentLogin').value = data['StudentLogin'];
         document.querySelector('#txtEmail').value = data['Email'];
-        document.querySelector('#txtEntryDate').value = formatDateString(data['EntryDate']);
         document.querySelector('#txtIdentificationNumber').value =  data['IdentificationNumber'];
         document.querySelector('#txtFirstName').value = data['FirstName'];
         document.querySelector('#txtSecondName').value = data['SecondName'];
@@ -34,6 +30,7 @@
         document.querySelector('#txtCanton').value = data['Canton'];
         document.querySelector('#txtDistrict').value = data['District'];
         document.querySelector('#txtWorkAddress').value = data['WorkAddress'];
+        localStorage.setItem('keyStudent', data['StudentPassword'])
     }
 
     this.Update = function () {
@@ -44,8 +41,16 @@
         studentData["StudentLogin"] = studentLogin;
         this.ctrlActions.PutToAPI(this.service, studentData,
            setTimeout(function redirection() { window.location.href = '/Student/vStudentList/'}, 3000));
+    }
 
-
+    this.UpdatePassword = function () {
+        var studentData = {};
+        var id = document.getElementById("txtIdStudent").value;
+        var studentLogin = document.getElementById("txtStudentLogin").value;
+        studentData = this.ctrlActions.GetDataForm('frmStudentUpdatePassword');
+        studentData["StudentLogin"] = studentLogin;
+        this.ctrlActions.PutToAPI(this.service + "/changePassword", studentData,
+            setTimeout(function redirection() { window.location.href = '/Student/vStudentList/' }, 3000));
     }
 
     this.ValidateInputs = function () {
@@ -57,7 +62,7 @@
 
     this.ValidateInputsPassword = function () {
         if ($("#frmStudentUpdatePassword").valid()) {
-            this.Create();
+            this.UpdatePassword();
 
         }
     }
@@ -65,10 +70,7 @@
 
 this.RulesValidateCreate = function () {
 
-    $.validator.addMethod("notEqual", function (value, element, param) {
-        return this.optional(element) || value != param;
-    }),
-
+  
         $.validator.addMethod(
             "regex",
             function (value, element, regexp) {
@@ -92,7 +94,7 @@ this.RulesValidateCreate = function () {
             txtFirstName: {
                 regex: "No se permiten números ni caracteres especiales",
             },
-            txtFirstName: {
+            txtSecondName: {
                 required: "Debe ingresar el primer nombre",
                 regex: "No se permiten números ni caracteres especiales",
             },
@@ -136,17 +138,6 @@ this.RulesValidateCreate = function () {
                 maxlength: "El nombre de usuario debe contener máximo 20 caracteres",
                 regex: "Solo se permiten minusculas, numeros y el _",
             },
-            txtPassword: {
-                required: "Ingrese una contraseña",
-                minlength: "La contraseña debe de tener mínimo 6 caracteres",
-                maxlength: "La contraseña debe de tener máximo 20 caracteres",
-            },
-
-
-            txtConfirmPassword: {
-                required: "Ingrese una contraseña",
-                equalTo: "No coinciden las contraseñas"
-            },
         },
         rules: {
             txtBankingStudent: { required: true },
@@ -174,42 +165,38 @@ this.RulesValidateCreate = function () {
         },
     });
 
+
     $("#frmStudentUpdatePassword").validate({
         lang: 'es',
         errorClass: "is-invalid",
         messages: {
-            txtStudentLogin: {
-                required: "Ingrese un nombre de usuario",
-                minlength: "El nombre de usuario debe contener mínimo 6 caracteres",
-                maxlength: "El nombre de usuario debe contener máximo 20 caracteres",
-                regex: "Solo se permiten minusculas, numeros y el _",
-            },
-            txtPassword: {
+            txtOldPassword: {
                 required: "Ingrese una contraseña",
                 minlength: "La contraseña debe de tener mínimo 6 caracteres",
                 maxlength: "La contraseña debe de tener máximo 20 caracteres",
             },
-
-
-            txtConfirmPassword: {
+            txtNewPassword: {
+                required: "Ingrese una contraseña",
+                minlength: "La contraseña debe de tener mínimo 6 caracteres",
+                maxlength: "La contraseña debe de tener máximo 20 caracteres",
+            },
+            txtConfirmNewPassword: {
                 required: "Ingrese una contraseña",
                 equalTo: "No coinciden las contraseñas"
             },
         },
         rules: {
-            
-            txtStudentLogin: { required: true, regex: /^[a-z0-9_]+$/, minlength: 6, maxlength: 20 },
-            txtPassword: { required: true, minlength: 6, maxlength: 20 },
-            txtConfirmPassword: { required: true, equalTo: "#txtPassword" },
+            txtOldPassword: { required: true, minlength: 6, maxlength: 20 },
+            txtNewPassword: {
+                required: true, minlength: 6, maxlength: 20, new_password_not_same: true },
+            txtConfirmNewPassword: { required: true, equalTo: "#txtNewPassword" },
         },
     });
 }
 
 
 
-function resetForm() {
-    $("#frmStudentUpdate")[0].reset();
-}
+
 
 
 $(document).ready(function () {

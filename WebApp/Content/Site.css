@@ -1,14 +1,41 @@
-﻿body {
+﻿@font-face {
+    font-family: "Lato-Black";
+    src: url('../fonts/Encabezados/Lato-Black.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+
+@font-face {
+    font-family: "Fira";
+    src: url('../fonts/Parrafos/FiraSans-Regular.otf') format('opentype'), /* Safari, Android, iOS */
+}
+
+
+h1, h2, h3 {
+    font-family: 'Lato-Black', Arial, sans-serif;
+}
+
+
+p {
+    font-family: 'Fira', Arial, sans-serif;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: #ffffffd4;
+    }
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
-    color: #ffffff;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
+  /*  padding-left: 15px;
     padding-right: 15px;
-    padding-top: 75px;
+    padding-top: 75px;*/
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -23,4 +50,72 @@ input,
 select,
 textarea {
     max-width: 600px;
+}
+
+
+#btnToTop {
+    display: inline-block;
+    background-color: #FF9800;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color .3s, opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+    #btnToTop::after {
+        content: "\f077";
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 2em;
+        line-height: 50px;
+        color: #fff;
+    }
+
+    #btnToTop:hover {
+        cursor: pointer;
+        background-color: #333;
+    }
+
+    #btnToTop:active {
+        background-color: #555;
+    }
+
+#btnToTop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Styles for the content section */
+
+
+
+@media (min-width: 500px) {
+
+
+    #btnToTop {
+        margin: 30px;
+    }
+}
+
+
+input[name="driverLicenses"] {
+    width:30px;
+}
+
+.form-control {
+    color: #000;
+}
+
+
+.navbar-dark a:hover, .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+    color: #f37b24;
+    text-decoration: underline;
 }

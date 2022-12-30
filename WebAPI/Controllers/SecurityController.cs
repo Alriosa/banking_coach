@@ -25,7 +25,54 @@ namespace WebAPI.Controllers
                 var mng = new SecurityLoginManager();
                 Security login = mng.RetrieveById(security);
                 apiResp = new ApiResponse();
-                switch (login.Result)
+                if (login != null)
+                {
+                    switch (login.Result)
+                    {
+                        case "0":
+                            apiResp.Message = "Usuario no existe";
+                            apiResp.Data = "error";
+
+                            break;
+                        case "1":
+                            apiResp.Message = "Contraseña incorrecta!";
+                            apiResp.Data = "error";
+                            break;
+                        case "2":
+                            apiResp.Message = "Usuario inactivo";
+                            apiResp.Data = "error";
+                            break;
+                        default:
+                            apiResp.Message = "Bienvenido!";
+                            apiResp.Data = login;
+                            break;
+                    }
+                } else
+                {
+                    apiResp.Message = "Usuario no existe";
+                    apiResp.Data = "error";
+                }
+                
+                   return Ok(apiResp);
+                
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+
+        [HttpPost]
+        [Route("retrieveByEmail")]
+        public IHttpActionResult RetrieveByEmail(Security security)
+        {
+            try
+            {
+                var mng = new SecurityLoginManager();
+                Security user = mng.RetrieveByEmail(security);
+                apiResp = new ApiResponse();
+                switch (user.Result)
                 {
                     case "0":
                         apiResp.Message = "Usuario no existe";
@@ -33,20 +80,16 @@ namespace WebAPI.Controllers
 
                         break;
                     case "1":
-                        apiResp.Message = "Contraseña incorrecta!";
-                        apiResp.Data = "error";
-                        break;
-                    case "2":
                         apiResp.Message = "Usuario inactivo";
                         apiResp.Data = "error";
                         break;
                     default:
-                        apiResp.Message = "Bienvenido!";
-                        apiResp.Data = login;
+                        apiResp.Message = "Mensaje enviado a su correo electrónico!";
+                        apiResp.Data = user;
                         break;
                 }
-                   return Ok(apiResp);
-                
+                return Ok(apiResp);
+
             }
             catch (BussinessException bex)
             {

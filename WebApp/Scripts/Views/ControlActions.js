@@ -1,4 +1,6 @@
-﻿
+﻿var editor;
+
+
 function ControlActions() {
 
 	this.URL_API = "http://localhost:57056/api/";
@@ -25,8 +27,8 @@ function ControlActions() {
 				obj.data = value;
 				arrayColumnsData.push(obj);
 			});
-
-			$('#' + tableId).DataTable({
+			
+			var table = $('#' + tableId).DataTable({
 				"processing": true,
 				"ajax": {
 					"url": this.GetUrlApiService(service),
@@ -35,7 +37,12 @@ function ControlActions() {
 				"columns": arrayColumnsData,
 				"language": {
 					"url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
-				}
+				},
+			});
+
+			$('#' + tableId + ' tbody').on('click', 'tr', function () {
+				var data = table.row(this).data();
+				sessionStorage.setItem(tableId + '_selected', JSON.stringify(data));
 			});
 		} else {
 			//RECARGA LA TABLA
@@ -44,6 +51,8 @@ function ControlActions() {
 		
 	}
 
+
+
 	this.GetSelectedRow = function () {
 		var data = sessionStorage.getItem(tableId + '_selected');
 
@@ -51,7 +60,6 @@ function ControlActions() {
 	};
 
 	this.BindFields = function (formId, data) {
-		console.log(data);
 		$('#' + formId +' *').filter(':input').each(function (input) {
 			var columnDataName = $(this).attr("ColumnDataName");
 			this.value = data[columnDataName];
@@ -66,7 +74,6 @@ function ControlActions() {
 			data[columnDataName] = this.value;
 		});
 
-		console.log(data);
 		return data;
 	}
 
@@ -83,17 +90,65 @@ function ControlActions() {
 		$('.alert').show();
 	};
 
-	this.PostToAPI = function (service, data) {
+	this.PostToAPI = function (service, data, callBackFunction) {
 		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
+			if (response.Data == "error") {
+				ctrlActions.ShowMessage('E', response.Message);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+				callBackFunction(response);
+			} else {
+				ctrlActions.ShowMessage('I', response.Message);
+				callBackFunction(response);
 
+			}
+		})
+			.fail(function (response) {
+				var data = response.responseJSON;
+				var ctrlActions = new ControlActions();
+				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				console.log(data);
+				callBackFunction("error data")
+			})
+	};
+
+	this.PutToAPI = function (service, data, callBackFunction) {
+		var jqxhr = $.put(this.GetUrlApiService(service), data, function (response) {
+			var ctrlActions = new ControlActions();
+			ctrlActions.ShowMessage('I', response.Message);
+			if (response.Data == "error") {
+				ctrlActions.ShowMessage('E', response.Message);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+				callBackFunction(response);
+			} else {
+				ctrlActions.ShowMessage('I', response.Message);
+				callBackFunction(response);
+
+			}
+		})
+			.fail(function (response) {
+				var data = response.responseJSON;
+				var ctrlActions = new ControlActions();
+				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				console.log(data);
+			})
+	};
+
+	this.PutToAPIMyData = function (service, data, callBackFunction) {
+		var jqxhr = $.put(this.GetUrlApiService(service), data, function (response) {
+			var ctrlActions = new ControlActions();
+			ctrlActions.ShowMessage('I', response.Message);
 			if (response.Data == "error") {
 				ctrlActions.ShowMessage('E', response.Message);
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
 			} else {
 				ctrlActions.ShowMessage('I', response.Message);
-            }
+				setCookie('user', JSON.stringify(data), 30);
+			}
+			callBackFunction();
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;
@@ -103,23 +158,11 @@ function ControlActions() {
 			})
 	};
 
-	this.PutToAPI = function (service, data) {
-		var jqxhr = $.put(this.GetUrlApiService(service), data, function (response) {
-			var ctrlActions = new ControlActions();
-			ctrlActions.ShowMessage('I', response.Message);
-		})
-			.fail(function (response) {
-				var data = response.responseJSON;
-				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
-				console.log(data);
-			})
-	};
-
-	this.DeleteToAPI = function (service, data) {
+	this.DeleteToAPI = function (service, data, callBackFunction) {
 		var jqxhr = $.delete(this.GetUrlApiService(service), data, function (response) {
 			var ctrlActions = new ControlActions();
 			ctrlActions.ShowMessage('I', response.Message);
+			callBackFunction();
 		})
 			.fail(function (response) {
 				var data = response.responseJSON;
@@ -136,6 +179,7 @@ function ControlActions() {
 				ctrlActions.ShowMessage('E', response.Message);
 			} else {
 				var data = response.Data;
+				setCookie('user', JSON.stringify(data), 30);
 
 				ctrlActions.ShowMessage('I', response.Message);
 
@@ -158,8 +202,7 @@ function ControlActions() {
 			sessionStorage.setItem('type', response.Data['UserType']);
 			setCookie('type', response.Data['UserType'], 30);
 
-			setCookie('user', JSON.stringify(data), 30);
-
+			//setCookie('user', JSON.stringify(data), 30);
 
 			callBackFunction(data);
 		})
@@ -183,6 +226,29 @@ function ControlActions() {
 
 			})
 	}
+
+
+
+	this.RecoverPassword = function (service, data, callBackFunction) {
+		var jqxhr = $.post(this.GetUrlApiService(service), data, function (response) {
+			var ctrlActions = new ControlActions();
+			if (response.Data == "error") {
+				ctrlActions.ShowMessage('E', response.Message);
+			} else {
+				var data = response.Data;
+
+				ctrlActions.ShowMessage('I', response.Message);
+
+			}
+			callBackFunction(response.Data);
+
+		})
+			.fail(function (response) {
+				var data = response.responseJSON;
+				var ctrlActions = new ControlActions();
+				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+			})
+	};
 }
 
 
@@ -197,24 +263,28 @@ function setCookie(name, value, days) {
 }
 
 function getCookie(cname) {
-	let name = cname + "=";
-	let decodedCookie = decodeURIComponent(document.cookie);
-	let ca = decodedCookie.split(';');
-	for (let i = 0; i < ca.length; i++) {
-		let c = ca[i];
-		while (c.charAt(0) == ' ') {
-			c = c.substring(1);
-		}
-		if (c.indexOf(name) == 0) {
-			return c.substring(name.length, c.length);
+	
+	var i, x, y, ARRcookies = document.cookie.split(";");
+
+	for (i = 0; i < ARRcookies.length; i++) {
+		x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+		y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+		x = x.replace(/^\s+|\s+$/g, "");
+		if (x == cname) {
+			return unescape(y);
 		}
 	}
-	return "";
+
 }
 
 function formatDateString(s) {
 	var s = s.split(/\D/);
 	return s[0] + '-' + s[1] + '-' + s[2];
+}
+
+function formatDateStringMonths(s) {
+	var s = s.split(/\D/);
+	return s[0] + '-' + s[1];
 }
 
 //Custom jquery actions
@@ -247,3 +317,9 @@ $.delete = function (url, data, callback) {
 		contentType: 'application/json'
 	});
 }
+
+
+
+$.validator.addMethod("new_password_not_same", function (value, element) {
+	return $('#txtOldPassword').val() != $('#txtNewPassword').val()
+}, "* Debe elegir una contraseña diferente a la actual");

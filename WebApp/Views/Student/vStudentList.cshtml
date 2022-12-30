@@ -6,10 +6,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .btn-radius {
+        border-radius: 100%;
+        margin: 2px 4px;
+    }
+
+    .select-tests {
+        color: white;
+        background: #565656;
+        padding: 4px 20px;
+        border: 1px solid #f39c12;
+        width: 250px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+</style>
+
+<div style="margin: 10px auto;">
+    <button class="btn btn-orange" id="addStudent">Agregar estudiante</button>
+
+</div>
 
 <div style="margin-top: 20px;" id="studentList" class="d-inline">
-    @Html.CtrlTable(viewName: "vStudentList", id: "tblStudent", title: "Estudiantes",
-    columnsTitle: "Identificación,Correo Electrónico,Estudiante de Banking Coach,Estado", ColumnsDataName: "IdentificationNumber,Email,BankingStudent,UserActiveStatus", onSelectFunction: "BindFields")
+    <div class="col-lg-12 col-sm-11">
+        <div class="container-fluid">
+
+            <div class="justify-content-center">
+                <div class="card border-secondary mb-6">
+                    <div class="card-header">Estudiantes</div>
+                    <div class="card-body">
+                        <table id="tblStudent" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Nombre Completo</th>
+                                    <th>Tipo de documento </th>
+                                    <th>Número de Identificación</th>
+                                    <th>Correo Electrónico </th>
+                                    <th style="width: 80px;">Estudiante de Banking Coach</th>
+                                    <th>Entidad Bancaria</th>
+                                    <th style="width: 250px;">Estado de Reclutamiento</th>
+                                    <th style="width: 100px;">Acciones</th>
+                                </tr>
+                            </thead>
+                           <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

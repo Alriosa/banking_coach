@@ -11,7 +11,7 @@ namespace DataAccess.Dao
     public class SqlDao
     {   
                      
-       private const string CONNECTION_STRING = "Data Source=.;Initial Catalog=BANKING_COACH_DB;Integrated Security=True;Pooling=False";
+       private const string CONNECTION_STRING = "Data Source=.;Initial Catalog=BANKING_COACH_DB_V2;Integrated Security=True;Pooling=False";
        
        private static SqlDao instance;
 
@@ -41,7 +41,6 @@ namespace DataAccess.Dao
                 {
                     command.Parameters.Add(param);
                 }
-
                 conn.Open();
                 command.ExecuteNonQuery();
             }
@@ -77,7 +76,6 @@ namespace DataAccess.Dao
                     }
                 }
             }
-
             return lstResult;
         }      
     }

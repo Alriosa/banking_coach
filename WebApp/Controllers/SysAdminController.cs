@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,28 +12,89 @@ namespace WebApp.Controllers
         // GET: Financial
         public ActionResult vSysAdminRegistration()
         {
-            return View();
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                    return View();
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
         public ActionResult vSysAdminList()
         {
-            return View();
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                    return View();
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
-        public ActionResult vSysAdminUpdate()
+        public ActionResult vSysAdminUpdate(string id)
         {
-            return View();
+
+
+            if (Request.Cookies["user"] != null)
+            {
+                if (id != null)
+                {
+                    ViewBag.IdSysAdmin = id;
+                }
+                else
+                {
+                    ViewBag.IdSysAdmin = "null";
+                }
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                    return View();
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home"); ;
         }
         public ActionResult vSysAdminAccount(string id)
         {
-            if (id != null)
-            {
-                ViewBag.IdSysAdmin = id;
-            }
-            else
-            {
-                ViewBag.IdSysAdmin = "null";
-            }
 
-            return View();
+
+            if (Request.Cookies["user"] != null)
+            {
+                if (id != null)
+                {
+                    ViewBag.IdSysAdmin = id;
+                }
+                else
+                {
+                    ViewBag.IdSysAdmin = "null";
+                }
+                if (Request.Cookies["user"] != null)
+                {
+                    var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                    int typeNumber = Convert.ToInt32(type);
+                    if (typeNumber == 1)
+                    {
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction(actionName: "Index", controllerName: "Home");
+                    }
+                }
+                return RedirectToAction(actionName: "Index", controllerName: "Home");
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
     }
 }

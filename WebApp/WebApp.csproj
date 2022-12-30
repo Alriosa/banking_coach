@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Html.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Razor, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Razor.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -54,6 +60,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -144,7 +153,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
-    <Compile Include="Controllers\FinancialController.cs" />
+    <Compile Include="Controllers\EntityUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -159,6 +168,7 @@
     <Compile Include="Models\Controls\CtrlDropDownModel.cs" />
     <Compile Include="Models\Controls\CtrlInputSecondModel.cs" />
     <Compile Include="Models\Controls\CtrlNavBarMenuModel.cs" />
+    <Compile Include="Models\Controls\CtrlRadioButtonModel.cs" />
     <Compile Include="Models\Controls\CtrlTableModel.cs" />
     <Compile Include="Models\Helpers\ControlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -171,8 +181,27 @@
     <Content Include="Content\imgs\background.png" />
     <Content Include="Content\imgs\background2.jpg" />
     <Content Include="Content\imgs\Empleo.jpg" />
+    <Content Include="Content\imgs\Empleo2.jpg" />
+    <Content Include="Content\imgs\Empleo3.jpg" />
+    <Content Include="Content\imgs\entidad.jpg" />
+    <Content Include="Content\imgs\reclutador.jpg" />
+    <Content Include="Content\imgs\reclutador2.jpg" />
+    <Content Include="Content\imgs\reclutador3.jpg" />
+    <Content Include="Content\imgs\reclutador4.jpg" />
     <Content Include="Content\index.css" />
     <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Content\Logos\Imagotipo Banking Academy 1.jpg" />
+    <Content Include="Content\Logos\Imagotipo Banking Academy 1.png" />
+    <Content Include="Content\Logos\Imagotipo Banking Academy 2.jpg" />
+    <Content Include="Content\Logos\Imagotipo Banking Academy 2.png" />
+    <Content Include="Content\Logos\Imagotipo Banking Academy 3.jpg" />
+    <Content Include="Content\Logos\Imagotipo Banking Academy 3.png" />
+    <Content Include="Content\Logos\Isotipo Banking Academy 1.jpg" />
+    <Content Include="Content\Logos\Isotipo Banking Academy 1.png" />
+    <Content Include="Content\Logos\Isotipo Banking Academy 2.jpg" />
+    <Content Include="Content\Logos\Isotipo Banking Academy 2.png" />
+    <Content Include="Content\Logos\Isotipo Banking Academy 3.jpg" />
+    <Content Include="Content\Logos\Isotipo Banking Academy 3.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -184,6 +213,7 @@
     <Content Include="Models\Controls\CtrlButtonModel.html" />
     <Content Include="Models\Controls\CtrlInputSecondModel.html" />
     <Content Include="Models\Controls\CtrlNavBarMenuModel.html" />
+    <Content Include="Models\Controls\CtrlRadioButtonModel.html" />
     <Content Include="Models\Controls\CtrlTableModel.html" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -197,24 +227,39 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.form.js" />
+    <Content Include="fonts\Encabezados\Lato-Black.ttf" />
+    <Content Include="fonts\Encabezados\Lato-Bold.ttf" />
+    <Content Include="fonts\Parrafos\FiraSans-Bold.otf" />
+    <Content Include="fonts\Parrafos\FiraSans-BoldItalic.otf" />
+    <Content Include="fonts\Parrafos\FiraSans-Book.otf" />
+    <Content Include="fonts\Parrafos\FiraSans-BookItalic.otf" />
+    <Content Include="fonts\Parrafos\FiraSans-Italic.otf" />
+    <Content Include="fonts\Parrafos\FiraSans-Medium.otf" />
+    <Content Include="fonts\Parrafos\FiraSans-Regular.otf" />
+    <Content Include="fonts\Parrafos\FiraSans-SemiBoldItalic.otf" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Views\ControlActions.js" />
-    <Content Include="Scripts\Views\Financial\vFinancialAccount.js" />
-    <Content Include="Scripts\Views\Financial\vFinancialList.js" />
-    <Content Include="Scripts\Views\Financial\vFinancialRegistration.js" />
+    <Content Include="Scripts\Views\EntityUser\vEntityAccount.js" />
+    <Content Include="Scripts\Views\EntityUser\vEntityList.js" />
+    <Content Include="Scripts\Views\EntityUser\vEntityRegistration.js" />
+    <Content Include="Scripts\Views\EntityUser\vEntityUpdate.js" />
     <Content Include="Scripts\Views\Layout.js" />
     <Content Include="Scripts\Views\Login\vIndex.js" />
+    <Content Include="Scripts\Views\Recruiter\Recruitment.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterAccount.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterRegistration.js" />
     <Content Include="Scripts\Views\Recruiter\vRecruiterList.js" />
+    <Content Include="Scripts\Views\Recruiter\vRecruiterUpdate.js" />
+    <Content Include="Scripts\Views\Recruiter\StudentsRecruited.js" />
     <Content Include="Scripts\Views\Student\vStudentAccount.js" />
     <Content Include="Scripts\Views\Student\vStudentList.js" />
     <Content Include="Scripts\Views\Student\vStudentRegistration.js" />
     <Content Include="Scripts\Views\Student\vStudentUpdate.js" />
+    <Content Include="Scripts\Views\SysAdmin\SysAdminUpdate.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminAccount.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminRegistration.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminList.js" />
@@ -233,10 +278,18 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Financial\vFinancialAccount.cshtml" />
+    <Content Include="Views\EntityUser\vEntityAccount.cshtml" />
     <Content Include="Views\SysAdmin\vSysAdminAccount.cshtml" />
     <Content Include="Views\Student\vStudentAccount.cshtml" />
     <Content Include="Views\Recruiter\vRecruiterAccount.cshtml" />
+    <Content Include="Views\Home\vEnrollment.cshtml" />
+    <Content Include="Views\Home\vServices.cshtml" />
+    <Content Include="Views\Home\vNotices.cshtml" />
+    <Content Include="Views\Home\MyAccount.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Modal\AddAcademic.cshtml" />
+    <Content Include="Views\Recruiter\Recruitment.cshtml" />
+    <Content Include="Views\Recruiter\StudentsRecruited.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -263,9 +316,9 @@
     <Content Include="Views\SysAdmin\vSysAdminList.cshtml" />
     <Content Include="Views\SysAdmin\vSysAdminRegistration.cshtml" />
     <Content Include="Views\SysAdmin\vSysAdminUpdate.cshtml" />
-    <Content Include="Views\Financial\vFinancialList.cshtml" />
-    <Content Include="Views\Financial\vFinancialRegistration.cshtml" />
-    <Content Include="Views\Financial\vFinancialUpdate.cshtml" />
+    <Content Include="Views\EntityUser\vEntityList.cshtml" />
+    <Content Include="Views\EntityUser\vEntityRegistration.cshtml" />
+    <Content Include="Views\EntityUser\vEntityUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities-POJO\Entities-POJO.csproj">
