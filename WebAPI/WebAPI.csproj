@@ -276,11 +276,88 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Controllers\ViewPermissionController.cs" />
+    <Compile Include="DataAccess\Crud\AcademicCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\AppMessagesCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\CrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\CustomerCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\EntityUserCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\ExtraCourseCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\LaboralCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\LanguageCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\ListCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\PermissionCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\RecruiterCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\ReferenceCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\SecurityCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\StudentCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\SysAdminCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\UserLogCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\ViewCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\ViewPermissionCrudFactory.cs" />
+    <Compile Include="DataAccess\Dao\SqlDao.cs" />
+    <Compile Include="DataAccess\Dao\SqlOperation.cs" />
+    <Compile Include="DataAccess\Mapper\AcademicMapper.cs" />
+    <Compile Include="DataAccess\Mapper\AppMessageMapper.cs" />
+    <Compile Include="DataAccess\Mapper\CustomerMapper.cs" />
+    <Compile Include="DataAccess\Mapper\EntityMapper.cs" />
+    <Compile Include="DataAccess\Mapper\EntityUserMapper.cs" />
+    <Compile Include="DataAccess\Mapper\ExtraCourseMapper.cs" />
+    <Compile Include="DataAccess\Mapper\IObjectMapper.cs" />
+    <Compile Include="DataAccess\Mapper\ISqlStaments.cs" />
+    <Compile Include="DataAccess\Mapper\LaboralMapper.cs" />
+    <Compile Include="DataAccess\Mapper\LanguageMapper.cs" />
+    <Compile Include="DataAccess\Mapper\ListMapper.cs" />
+    <Compile Include="DataAccess\Mapper\RecruiterMapper.cs" />
+    <Compile Include="DataAccess\Mapper\ReferenceMapper.cs" />
+    <Compile Include="DataAccess\Mapper\SecurityMapper.cs" />
+    <Compile Include="DataAccess\Mapper\StudentMapper.cs" />
+    <Compile Include="DataAccess\Mapper\SysAdminMapper.cs" />
+    <Compile Include="DataAccess\Mapper\UserLogMapper.cs" />
+    <Compile Include="DataAccess\Mapper\ViewPermissionMapper.cs" />
     <Compile Include="ExceptionFilter.cs" />
+    <Compile Include="Exceptions\BussinessException.cs" />
+    <Compile Include="Exceptions\ExceptionManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Manager\AcademicManager.cs" />
+    <Compile Include="Manager\BaseManager.cs" />
+    <Compile Include="Manager\CustomerManager.cs" />
+    <Compile Include="Manager\EntityUserManager.cs" />
+    <Compile Include="Manager\ExtraCourseManager.cs" />
+    <Compile Include="Manager\LaboralManager.cs" />
+    <Compile Include="Manager\LanguageManager.cs" />
+    <Compile Include="Manager\ListManager.cs" />
+    <Compile Include="Manager\MailManager.cs" />
+    <Compile Include="Manager\RecruiterManager.cs" />
+    <Compile Include="Manager\ReferenceManager.cs" />
+    <Compile Include="Manager\SecurityLoginManager.cs" />
+    <Compile Include="Manager\StudentManager.cs" />
+    <Compile Include="Manager\SysAdminManager.cs" />
+    <Compile Include="Manager\UserLogManager.cs" />
+    <Compile Include="Manager\ViewPermissionManager.cs" />
+    <Compile Include="Models\Academic.cs" />
     <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\ApplicationMessage.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\EntityUser.cs" />
+    <Compile Include="Models\ExtraCourse.cs" />
+    <Compile Include="Models\Laboral.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Mail.cs" />
+    <Compile Include="Models\ObjectDumper.cs" />
+    <Compile Include="Models\OptionList.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\Recruiter.cs" />
+    <Compile Include="Models\Reference.cs" />
+    <Compile Include="Models\Security.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentRecruited.cs" />
+    <Compile Include="Models\SysAdmin.cs" />
+    <Compile Include="Models\UserLog.cs" />
+    <Compile Include="Models\ViewPermission.cs" />
+    <Compile Include="Models\Views.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -351,20 +428,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CoreAPI\CoreAPI.csproj">
-      <Project>{F52A3DA6-7E9F-4E35-BEEA-B8D5634B3FAA}</Project>
-      <Name>CoreAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entities-POJO\Entities-POJO.csproj">
-      <Project>{0F68B956-C774-491B-94F7-EC177D7DBD3C}</Project>
-      <Name>Entities-POJO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Exceptions\Exceptions.csproj">
-      <Project>{DE68F413-04DB-453B-BF57-1F234503B808}</Project>
-      <Name>Exceptions</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

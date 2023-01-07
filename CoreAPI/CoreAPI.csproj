@@ -64,23 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseManager.cs" />
-    <Compile Include="AcademicManager.cs" />
-    <Compile Include="ExtraCourseManager.cs" />
-    <Compile Include="LaboralManager.cs" />
-    <Compile Include="LanguageManager.cs" />
-    <Compile Include="MailManager.cs" />
-    <Compile Include="ReferenceManager.cs" />
-    <Compile Include="ViewPermissionManager.cs" />
-    <Compile Include="EntityUserManager.cs" />
-    <Compile Include="ListManager.cs" />
-    <Compile Include="CustomerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecruiterManager.cs" />
-    <Compile Include="SecurityLoginManager.cs" />
-    <Compile Include="StudentManager.cs" />
-    <Compile Include="SysAdminManager.cs" />
-    <Compile Include="UserLogManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAcess\DataAccess.csproj">

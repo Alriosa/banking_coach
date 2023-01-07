@@ -320,12 +320,6 @@
     <Content Include="Views\EntityUser\vEntityRegistration.cshtml" />
     <Content Include="Views\EntityUser\vEntityUpdate.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Entities-POJO\Entities-POJO.csproj">
-      <Project>{0F68B956-C774-491B-94F7-EC177D7DBD3C}</Project>
-      <Name>Entities-POJO</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
