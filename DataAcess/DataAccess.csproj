@@ -81,11 +81,5 @@
     <Compile Include="Dao\SqlDao.cs" />
     <Compile Include="Dao\SqlOperation.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Entities-POJO\Entities-POJO.csproj">
-      <Project>{0F68B956-C774-491B-94F7-EC177D7DBD3C}</Project>
-      <Name>Entities-POJO</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
