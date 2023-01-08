@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Dao;
-using Entities_POJO;
+using Models;
 
 namespace DataAccess.Mapper
 {

@@ -1,4 +1,8 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Web.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\Alriosa Code\banking_coach\WebAPI\Bin\System.Web.Mvc.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/Environment/ExcludedFiles/FilesAndFoldersToSkip/=1A4259FC_002DF0B5_002D4E73_002D9B34_002D5925498B97A5_002Fd_003AScripts_002Ff_003Abootstrap_002Ejs/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/ExcludedFiles/FilesAndFoldersToSkip/=1A4259FC_002DF0B5_002D4E73_002D9B34_002D5925498B97A5_002Fd_003AScripts_002Ff_003Amodernizr_002D2_002E6_002E2_002Ejs/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/ExcludedFiles/FilesAndFoldersToSkip/=1A4259FC_002DF0B5_002D4E73_002D9B34_002D5925498B97A5_002Fd_003AScripts_002Ff_003Ajquery_002D1_002E10_002E2_002Eintellisense_002Ejs/@EntryIndexedValue">True</s:Boolean>

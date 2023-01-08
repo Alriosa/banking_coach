@@ -1,4 +1,4 @@
-﻿using Entities_POJO;
+﻿using Models;
 using System.Collections.Generic;
 
 namespace DataAccess.Mapper

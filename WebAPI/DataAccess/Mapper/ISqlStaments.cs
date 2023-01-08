@@ -1,6 +1,6 @@
 ﻿
 using DataAccess.Dao;
-using Entities_POJO;
+using Models;
 
 namespace DataAccess.Mapper
 {

@@ -1,12 +1,11 @@
 ﻿using CoreAPI;
-using Entities_POJO;
 using Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
-using WebAPI.Models;
+using Models;
 
 namespace WebAPI.Controllers
 {

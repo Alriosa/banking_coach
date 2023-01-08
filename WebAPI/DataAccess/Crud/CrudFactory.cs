@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DataAccess.Dao;
-using Entities_POJO;
+using Models;
 
 namespace DataAccess.Crud
 {

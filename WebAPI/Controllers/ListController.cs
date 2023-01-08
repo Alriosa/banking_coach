@@ -1,5 +1,4 @@
 ﻿using CoreAPI;
-using Entities_POJO;
 using Exceptions;
 using Newtonsoft.Json;
 using System;
@@ -8,8 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Cors;
-using WebAPI.Models;
+using Models;
 
 namespace WebAPI.Controllers
 {

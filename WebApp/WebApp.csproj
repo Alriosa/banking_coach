@@ -320,6 +320,12 @@
     <Content Include="Views\EntityUser\vEntityRegistration.cshtml" />
     <Content Include="Views\EntityUser\vEntityUpdate.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebAPI\WebAPI.csproj">
+      <Project>{1A4259FC-F0B5-4E73-9B34-5925498B97A5}</Project>
+      <Name>WebAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

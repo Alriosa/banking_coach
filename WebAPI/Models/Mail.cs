@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities_POJO
+namespace Models
 {
     public class Mail
     {

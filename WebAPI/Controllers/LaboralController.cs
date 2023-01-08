@@ -1,5 +1,4 @@
 ﻿using CoreAPI;
-using Entities_POJO;
 using Exceptions;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using WebAPI.Models;
+using Models;
 
 
 namespace WebAPI.Controllers

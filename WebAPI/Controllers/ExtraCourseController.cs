@@ -1,5 +1,4 @@
 ﻿using CoreAPI;
-using Entities_POJO;
 using Exceptions;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using WebAPI.Models;
+using Models;
 using System.Web;
 using System.IO;
 

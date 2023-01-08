@@ -1,9 +1,8 @@
 ﻿using System;
 using CoreAPI;
-using Entities_POJO;
 using System.Net;
 using System.Web.Http;
-using WebAPI.Models;
+using Models;
 using Exceptions;
 
 namespace WebAPI.Controllers
