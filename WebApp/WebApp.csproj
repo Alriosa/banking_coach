@@ -274,6 +274,7 @@
     <Content Include="fonts\Parrafos\FiraSans-Medium.otf" />
     <Content Include="fonts\Parrafos\FiraSans-Regular.otf" />
     <Content Include="fonts\Parrafos\FiraSans-SemiBoldItalic.otf" />
+    <None Include="Properties\PublishProfiles\bcjyd - Web Deploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
