@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
                 if (fileName != null && fileName != "")
                 {
                     //Create the Directory.
-                    string api = "http://localhost:57056/Uploads/" + rndx + "/";
+                    string api = "https://api-bcjyd.azurewebsites.net/Uploads/" + rndx + "/";
                     string path = HttpContext.Current.Server.MapPath("~/Uploads/" + rndx);
                     string filePath = "";
                     if (!Directory.Exists(path))
