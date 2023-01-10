@@ -55,9 +55,9 @@ namespace WebAPI.Controllers
                    return Ok(apiResp);
                 
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return InternalServerError(bex);
             }
         }
 
