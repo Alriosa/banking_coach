@@ -108,9 +108,6 @@ namespace CoreAPI
 
         public void UpdatePassword(Recruiter recruiter)
         {
-            Recruiter s = null;
-
-
             try
             {
                 crudRecruiter.UpdatePassword(recruiter);

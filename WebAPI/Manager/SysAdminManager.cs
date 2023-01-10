@@ -88,14 +88,10 @@ namespace CoreAPI
 
         public void UpdatePassword(SysAdmin sysAdmin)
         {
-            SysAdmin s = null;
-
 
             try
             {
                 crudSysAdmin.UpdatePassword(sysAdmin);
-
-
             }
             catch (Exception ex)
             {

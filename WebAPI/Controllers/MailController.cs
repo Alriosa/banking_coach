@@ -61,7 +61,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception bex)
             {
-                return InternalServerError(new Exception("Error al enviar el correo"));
+                return InternalServerError(new Exception("Error al enviar el correo", bex));
             }
         }
 
@@ -89,7 +89,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception bex)
             {
-                return InternalServerError(new Exception("Error al enviar el correo"));
+                return InternalServerError(new Exception("Error al enviar el correo", bex));
             }
         }
 
@@ -116,7 +116,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception bex)
             {
-                return InternalServerError(new Exception("Error al enviar el correo"));
+                return InternalServerError(new Exception("Error al enviar el correo", bex));
             }
         }
 
@@ -143,7 +143,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception bex)
             {
-                return InternalServerError(new Exception("Error al enviar el correo"));
+                return InternalServerError(new Exception("Error al enviar el correo", bex));
             }
         }
 

@@ -73,6 +73,7 @@ namespace CoreAPI
             }
             catch (Exception ex)
             {
+                throw new Exception("Error al devolver datos", ex);
                 //s ExceptionManager.GetInstance().Process(ex);
             }
 
@@ -99,6 +100,8 @@ namespace CoreAPI
             }
             catch (Exception ex)
             {
+                throw new Exception("Error al devolver datos", ex);
+
                 //ExceptionManager.GetInstance().Process(ex);
             }
             return repeated;

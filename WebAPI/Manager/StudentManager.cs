@@ -135,9 +135,6 @@ namespace CoreAPI
 
         public void UpdatePassword(Student student)
         {
-            Student s = null;
-           
-
             try
             {
                crudStudent.UpdatePassword(student);                       
