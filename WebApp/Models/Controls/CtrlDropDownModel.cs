@@ -16,7 +16,7 @@ namespace WebApp.Models.Controls
         public string ListId { get; set; }
         public string ColumnDataName { get; set; }
 
-        private string URL_API_LISTs = "https://api-bcjyd.azurewebsites.net/api/list/";
+        private string URL_API_LISTs = "http://localhost:57056/api/list/";
 
         public string ListOptions
         {

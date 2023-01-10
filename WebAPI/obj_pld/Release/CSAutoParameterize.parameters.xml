@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="CONN_STRING-Web.config Connection String" description="CONN_STRING Connection String used in web.config by the application to access the database." defaultValue="Data Source=.;Initial Catalog=BANKING_COACH_DB;Integrated Security=False;User Id=mariela;Password=1234;MultipleActiveResultSets=True;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\Alriosa\ Code\\banking_coach\\WebAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CONN_STRING']/@connectionString" />
-  </parameter>
-</parameters>

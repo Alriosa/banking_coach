@@ -37,16 +37,12 @@ namespace WebAPI.Controllers
                 ApiResponse apiResp = new ApiResponse();
                 apiResp.Data = mng.RetrieveByUser(view);
                 return Ok(apiResp.Data);
-             }
-              catch (Exception bex)
-                {
-                    return InternalServerError(bex);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al obtener las vistas";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
         }
-    /*catch (BussinessException bex)
-    {
-        bex.AppMessage.Message = "Hubo un error al obtener las vistas";
-        return InternalServerError(new Exception(bex.AppMessage.Message));
-    }*/
-}
     }
 }
