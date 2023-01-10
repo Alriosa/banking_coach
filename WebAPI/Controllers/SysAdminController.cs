@@ -17,11 +17,19 @@ namespace WebAPI.Controllers
         [Route("")]
         public IHttpActionResult Get()
         {
-            apiResp = new ApiResponse();
-            var mng = new SysAdminManager();
-            apiResp.Data = mng.RetrieveAll();
+           
 
-            return Ok(apiResp);
+            try
+            {
+                apiResp = new ApiResponse();
+                var mng = new SysAdminManager();
+                apiResp.Data = mng.RetrieveAll();
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                return InternalServerError(bex);
+            }
         }
 
         [Route("{id}")]
@@ -42,9 +50,9 @@ namespace WebAPI.Controllers
                 };
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return InternalServerError(bex);
             }
         }
 
@@ -67,9 +75,9 @@ namespace WebAPI.Controllers
                 };
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return InternalServerError(bex);
             }
         }
 
@@ -99,9 +107,9 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return InternalServerError(bex);
             }
         }
 
@@ -120,9 +128,9 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+          catch (Exception bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return InternalServerError(bex);
             }
         }
 
@@ -142,10 +150,10 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                //bex.Message = "Hubo un error al cambiar la contraseña del usuario";
+                return InternalServerError(new Exception("Hubo un error al cambiar la contraseña del usuario", bex));
             }
         }
 
@@ -164,9 +172,9 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return InternalServerError(bex);
             }
         }
 
