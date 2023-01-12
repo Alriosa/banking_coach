@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using Models;
+using System.Net.Http;
 
 namespace WebAPI.Controllers
 {
@@ -29,7 +30,10 @@ namespace WebAPI.Controllers
             catch (Exception bex)
             {
                 Console.WriteLine(bex);
-                return InternalServerError(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
             }
         }
 
@@ -54,7 +58,10 @@ namespace WebAPI.Controllers
             }
             catch (Exception bex)
             {
-                return InternalServerError(bex);
+                return ResponseMessage(
+                            Request.CreateResponse(
+                                HttpStatusCode.BadRequest,
+                                bex));
             }
         }
 
