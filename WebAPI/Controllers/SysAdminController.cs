@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     {
         ApiResponse apiResp = new ApiResponse();
 
-        [Route("")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
            
@@ -28,10 +28,12 @@ namespace WebAPI.Controllers
             }
             catch (Exception bex)
             {
+                Console.WriteLine(bex);
                 return InternalServerError(bex);
             }
         }
 
+        [HttpGet]
         [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
