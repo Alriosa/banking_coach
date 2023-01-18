@@ -15,6 +15,7 @@ namespace WebAPI.Controllers
     {
         ApiResponse apiResp = new ApiResponse();
 
+        [Route("")]
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -90,6 +91,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPost]
         [Route("")]
         public IHttpActionResult Post(SysAdmin sysAdmin)
         {
@@ -122,6 +124,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPut]
         [Route("")]
         public IHttpActionResult Put(SysAdmin sysAdmin)
         {
@@ -166,6 +169,7 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpDelete]
         [Route("")]
         public IHttpActionResult Delete(SysAdmin sysAdmin)
         {

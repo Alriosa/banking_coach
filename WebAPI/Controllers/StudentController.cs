@@ -11,6 +11,7 @@ namespace WebAPI.Controllers
     public class StudentController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
+        [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
         {
@@ -48,6 +49,7 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpGet]
         [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
@@ -100,6 +102,7 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpPost]
         [Route("")]
         public IHttpActionResult Post(Student student)
         {
@@ -138,6 +141,7 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpPut]
         [Route("")]
         public IHttpActionResult Put(Student student)
         {
@@ -182,7 +186,7 @@ namespace WebAPI.Controllers
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
-
+        [HttpDelete]
         [Route("")]
         public IHttpActionResult Delete(Student student)
         {
