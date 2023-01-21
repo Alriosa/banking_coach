@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Http;
 using Models;
 using Exceptions;
+using System.Net.Http;
 
 namespace WebAPI.Controllers
 {
@@ -42,7 +43,9 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return ResponseMessage(Request.CreateResponse(
+                                                                HttpStatusCode.BadRequest,
+                                                                bex));
             }
         }
 
@@ -74,11 +77,12 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                Console.WriteLine(bex);
+                return ResponseMessage(Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
             }
         }
-
-
 
         [HttpGet]
         [Route("getUser/{id}")]
@@ -101,7 +105,9 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return ResponseMessage(Request.CreateResponse(
+                                                                HttpStatusCode.BadRequest,
+                                                                bex));
             }
         }
 
@@ -122,7 +128,9 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return ResponseMessage(Request.CreateResponse(
+                                                                HttpStatusCode.BadRequest,
+                                                                bex));
             }
         }
 
@@ -145,7 +153,9 @@ namespace WebAPI.Controllers
             catch (BussinessException bex)
             {
                 bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return ResponseMessage(Request.CreateResponse(
+                                                                HttpStatusCode.BadRequest,
+                                                                bex));
             }
         }
 
@@ -167,7 +177,9 @@ namespace WebAPI.Controllers
             }
             catch (BussinessException bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                return ResponseMessage(Request.CreateResponse(
+                                                                HttpStatusCode.BadRequest,
+                                                                bex));
             }
         }
     }

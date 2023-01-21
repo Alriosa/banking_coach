@@ -43,10 +43,10 @@
             let user = JSON.parse(getCookie('user'));
 
             if (user) {
-                setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 4000);
-            } else {
                 setTimeout(function redirection() { window.location.href = '/Student/vStudentList'; }, 4000);
-                resetForm();
+
+            } else {
+                setTimeout(function redirection() { window.location.href = '/Home'; }, 4000);
             }
 
           /* var user = {};
