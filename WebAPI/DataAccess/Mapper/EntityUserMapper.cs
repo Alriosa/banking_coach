@@ -86,7 +86,7 @@ namespace DataAccess.Mapper
             var operation = new SqlOperation { ProcedureName = "SP_VERIFY_USERNAME" };
 
             var entityUser = (EntityUser)entity;
-            //operation.AddVarcharParam(DB_COL_USER_EXIST, entityUser.EntityLogin);
+            operation.AddVarcharParam(DB_COL_USER_EXIST, entityUser.User_Login);
 
             return operation;
         }

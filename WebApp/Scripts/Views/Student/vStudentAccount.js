@@ -1426,7 +1426,7 @@ async function DowlandCV() {
         }
 
         let text = formatDateStringMonths(course[i].StartDate) + " - " + dateEnd + "\n" + course[i].Institution + " - " +
-            course[i].CourseName + "\n" + academic[i].Status
+            course[i].CourseName + "\n" + course[i].Status
         doc.text(20, 200 + (i * 20), text);
     }
 
