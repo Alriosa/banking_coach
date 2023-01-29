@@ -96,7 +96,7 @@ namespace WebAPI.Controllers
                 };
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
                 Console.WriteLine(bex);
                 return ResponseMessage(
@@ -138,7 +138,7 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
                 Console.WriteLine(bex);
                 return ResponseMessage(
@@ -165,7 +165,7 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
                 Console.WriteLine(bex);
                 return ResponseMessage(
@@ -191,9 +191,9 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
+              //  bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
                 Console.WriteLine(bex);
                 return ResponseMessage(
                                             Request.CreateResponse(
@@ -217,7 +217,7 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
                 Console.WriteLine(bex);
                 return ResponseMessage(
@@ -243,7 +243,7 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
                 Console.WriteLine(bex);
                 return ResponseMessage(
