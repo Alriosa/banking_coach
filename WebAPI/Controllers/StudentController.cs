@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Http;
 using Models;
 using Exceptions;
+using System.Net.Http;
 
 namespace WebAPI.Controllers
 {
@@ -11,6 +12,7 @@ namespace WebAPI.Controllers
     public class StudentController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
+        [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
         {
@@ -48,6 +50,7 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpGet]
         [Route("{id}")]
         public IHttpActionResult Get(int id)
         {
@@ -93,13 +96,18 @@ namespace WebAPI.Controllers
                 };
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
             }
         }
 
 
+        [HttpPost]
         [Route("")]
         public IHttpActionResult Post(Student student)
         {
@@ -130,14 +138,18 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                bex.AppMessage.Message = "Hubo un error al registrar al usuario";
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
             }
         }
 
 
+        [HttpPut]
         [Route("")]
         public IHttpActionResult Put(Student student)
         {
@@ -153,10 +165,13 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                bex.AppMessage.Message = "Hubo un error al modificar al usuario";
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
             }
         }
 
@@ -176,13 +191,17 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+              //  bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
             }
         }
-
+        [HttpDelete]
         [Route("")]
         public IHttpActionResult Delete(Student student)
         {
@@ -198,9 +217,13 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
             }
         }
 
@@ -220,10 +243,13 @@ namespace WebAPI.Controllers
 
                 return Ok(apiResp);
             }
-            catch (BussinessException bex)
+            catch (Exception bex)
             {
-                bex.AppMessage.Message = "Hubo un error al reclutar al estudiante";
-                return InternalServerError(new Exception(bex.AppMessage.Message));
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
             }
         }
 

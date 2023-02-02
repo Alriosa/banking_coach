@@ -249,34 +249,46 @@ async function getData(StudentID) {
     await sleep(1000)
     await this.ctrlActions.GetById("language/student/" + StudentID, async (data) => {
         languageList = data
-        let student = {};
-        let user = JSON.parse(getCookie('user'));
-
-        if (user['UserType'] == '3') {
-            this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-
-                this.ctrlActions.PutToAPI('recruiter/addQuantity', recruiter,
-                    function (response) {
-                        if (response) {
-                            setTimeout(function () {
-                                this.ctrlActions2 = new ControlActions();
-
-                                this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
-                                    student['EntityId'] = recruiter['EntityAssociation'];
-                                    await DowlandCV(student);
-                                    await $('.bg-gray').css("color", "white");
-                                })
-                            }, 4000)
-                        }
-                        else if (response.Data == "error") {
-                            console.log(response)
-                        } 
-                           
-                    }
-                )
-            })
-        }
+        
     });
+    await sleep(1000)
+
+    let student = {};
+    let user = JSON.parse(getCookie('user'));
+
+    if (user['UserType'] == '3') {
+        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
+
+            this.ctrlActions.PutToAPI('recruiter/addQuantity', recruiter,
+                function (response) {
+                    if (response) {
+                        setTimeout(function () {
+                            this.ctrlActions2 = new ControlActions();
+
+                            this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
+                                student['EntityId'] = recruiter['EntityAssociation'];
+                                await DowlandCV(student);
+                                await $('.bg-gray').css("color", "white");
+                            })
+                        }, 4000)
+                    }
+                    else if (response.Data == "error") {
+                        console.log(response)
+                    }
+
+                }
+            )
+        })
+    } else if (user['UserType'] == '1') {
+        setTimeout(function () {
+            this.ctrlActions2 = new ControlActions();
+
+            this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
+                await DowlandCV(student);
+                await $('.bg-gray').css("color", "white");
+            })
+        }, 4000)
+    }
 }
 
 async function DowlandCV(student) {
@@ -311,9 +323,7 @@ async function DowlandCV(student) {
     document.querySelector('#P_Location').append(student['NProvince'] + ", " + student['NCanton'] + ", " + student['NDistrict']);
 
     document.querySelector('#P_Country').append(student['Country']);
-
-    document.querySelector('#P_Birthdate').append(formatDate(new Date(student['Birthdate'])));
-    document.querySelector('#P_Age').append(student['Age']);
+  
 
     if (student['Vehicle'] == "Sí") {
         $('.selectedVehicle').show();

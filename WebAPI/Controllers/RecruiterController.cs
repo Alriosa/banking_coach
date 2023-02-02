@@ -13,6 +13,7 @@ namespace WebAPI.Controllers
         ApiResponse apiResp = new ApiResponse();
 
         [Route("")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -23,6 +24,7 @@ namespace WebAPI.Controllers
         }
 
         [Route("{id}")]
+        [HttpGet]
         public IHttpActionResult Get(int id)
         {
             try
@@ -97,6 +99,7 @@ namespace WebAPI.Controllers
         }
 
         [Route("")]
+        [HttpPost]
         public IHttpActionResult Post(Recruiter recruiter)
         {
             try
@@ -129,6 +132,7 @@ namespace WebAPI.Controllers
         }
 
         [Route("")]
+        [HttpPut]
         public IHttpActionResult Put(Recruiter recruiter)
         {
             try
@@ -213,6 +217,7 @@ namespace WebAPI.Controllers
             }
         }
         [Route("")]
+        [HttpDelete]
         public IHttpActionResult Delete(Recruiter recruiter)
         {
             try

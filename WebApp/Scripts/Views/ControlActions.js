@@ -3,7 +3,7 @@
 
 function ControlActions() {
 
-	this.URL_API = "http://localhost:57056/api/";
+	this.URL_API = "https://api-bcjyd.azurewebsites.net/api/";
 
 	this.GetUrlApiService = function (service) {
 		return this.URL_API + service;

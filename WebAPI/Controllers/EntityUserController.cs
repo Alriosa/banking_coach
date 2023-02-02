@@ -14,6 +14,7 @@ namespace WebAPI.Controllers
         ApiResponse apiResp = new ApiResponse();
 
         [Route("")]
+        [HttpGet]
         public IHttpActionResult Get()
         {
             apiResp = new ApiResponse();
@@ -24,6 +25,7 @@ namespace WebAPI.Controllers
         }
 
         [Route("{id}")]
+        [HttpGet]
         public IHttpActionResult Get(int id)
         {
             try
@@ -50,6 +52,7 @@ namespace WebAPI.Controllers
         }
 
         [Route("")]
+        [HttpPost]
         public IHttpActionResult Post(EntityUser entity)
         {
             try
@@ -112,6 +115,7 @@ namespace WebAPI.Controllers
         }
 
         [Route("")]
+        [HttpPut]
         public IHttpActionResult Put(EntityUser entity)
         {
             try
@@ -161,6 +165,7 @@ namespace WebAPI.Controllers
 
 
         [Route("")]
+        [HttpDelete]
         public IHttpActionResult Delete(EntityUser entity)
         {
             try

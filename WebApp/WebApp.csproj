@@ -258,6 +258,11 @@
     <Content Include="resources\facebook_icon.png" />
     <Content Include="resources\instagram_icon.png" />
     <Content Include="resources\Logo.png" />
+    <Content Include="resources\sort_asc.png" />
+    <Content Include="resources\sort_asc_disabled.png" />
+    <Content Include="resources\sort_both.png" />
+    <Content Include="resources\sort_desc.png" />
+    <Content Include="resources\sort_desc_disabled.png" />
     <Content Include="resources\twitter_icon.png" />
     <Content Include="resources\wallpaper_designs.png" />
     <Content Include="Scripts\bootstrap.min.js" />
