@@ -16,6 +16,7 @@ namespace WebAPI.Controllers
         ApiResponse apiResp = new ApiResponse();
 
         [HttpGet]
+        [Route("")]
         public IHttpActionResult Get()
         {
            
@@ -90,6 +91,7 @@ namespace WebAPI.Controllers
             }
         }
 
+
         [Route("")]
         public IHttpActionResult Post(SysAdmin sysAdmin)
         {
@@ -103,7 +105,7 @@ namespace WebAPI.Controllers
 
                 if (c == false)
                 {
-                    sysAdmin.UserActiveStatus = "1";
+                    sysAdmin.UserActiveStatus = "1";s
                     mng.Create(sysAdmin);
                     apiResp.Message = "Administrador creado";
                 }

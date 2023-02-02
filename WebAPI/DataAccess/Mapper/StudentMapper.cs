@@ -83,8 +83,6 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_VEHICLE, student.Vehicle);
             operation.AddVarcharParam(DB_COL_TYPE_VEHICLE, student.Type_Vehicle);
             operation.AddVarcharParam(DB_COL_DRIVER_LICENSES, student.DriverLicenses);
-            operation.AddVarcharParam(DB_COL_CURRICULUM, student.Curriculum);
-            operation.AddVarcharParam(DB_COL_AGREE_JOB_EXCHANGE, student.AgreeJobExchange);
             operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.StudentLogin);
             operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.StudentPassword);
 

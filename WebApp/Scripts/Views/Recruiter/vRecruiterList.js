@@ -46,7 +46,7 @@
                     data[i].IdentificationNumber,
                     data[i].Email,
                     data[i].EntityAssociationName,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateRecruiter(' + data[i].RecruiterUserID + ')" id="updateRecruiter"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="remove' + data[i].RecruiterUserID + ' onclick="removeRecruiter(' + data[i].RecruiterUserID + ')"><i class="fa fa-trash"></i></button >',
+					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateRecruiter(' + data[i].RecruiterUserID + ')" id="updateRecruiter"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="remove' + data[i].RecruiterUserID + '" onclick="removeRecruiter(' + data[i].RecruiterUserID + ',this)"><i class="fa fa-trash"></i></button >',
 
                 ]).draw(false);
 
@@ -82,16 +82,7 @@ $(document).ready(function () {
 
 	
 
-	$('#removeRecruiter').click(function (data) {
-		var recruiterData = {};
-		recruiterData["RecruiterUserID"] = JSON.parse(sessionStorage.getItem('tblRecruiter_selected'))['RecruiterUserID'];
-
-		ctrlActions = new ControlActions();
-		ctrlActions.DeleteToAPI(recruiterList.service, recruiterData, function () {
-			var callback = new vRecruiterList();
-			callback.ReloadTable();
-		});
-	});
+	
 	$('#addRecruiter').click(function () {
 		window.location.href = "/recruiter/vRecruiterRegistration";
 	});
@@ -110,13 +101,22 @@ function updateRecruiter(data) {
 };
 
 
-function removeRecruiter(data) {
+function removeRecruiter(data, button) {
+	var recruiterList = new vRecruiterList();
 	var recruiterData = {};
 	recruiterData["RecruiterUserID"] = data;
-
+	
 	ctrlActions = new ControlActions();
 	ctrlActions.DeleteToAPI(recruiterList.service, recruiterData, function () {
-		window.location.reload();
+		var t = $('#tblRecruiter').DataTable();
+		t.row($(button).parents('tr')).remove().draw();
+		topFunction()
 
 	});
+}
+
+
+function topFunction() {
+	document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }

@@ -4,7 +4,7 @@ var courseList = [];
 var languageList = [];
 var referenceList = [];
 var dataStudent;
-var apiURl = 'https://api-bcjyd.azurewebsites.net/';
+var apiURl = 'http://localhost:57056/';
 function vStudentAccount() {
     this.ctrlActions = new ControlActions();
     var StudentProfileData = {};

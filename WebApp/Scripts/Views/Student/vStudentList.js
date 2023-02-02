@@ -1,4 +1,6 @@
-﻿function vStudentList() {
+﻿
+
+function vStudentList() {
 
 	this.tblStudentId = 'tblStudent';
 	this.ctrlActions = new ControlActions();
@@ -40,7 +42,7 @@
                 sessionStorage.setItem('tblStudent_selected', JSON.stringify(data));
             });
             for (let i in data) {
-                t.row.add([
+                var newRow = t.row.add([
                     data[i].FirstName + ' ' + data[i].FirstLastName + ' ' + data[i].SecondLastName,
                     data[i].IdType,
                     data[i].IdentificationNumber,
@@ -51,9 +53,10 @@
                     '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
                     '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected disabled>Seleccione</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
                     '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID + '" aria-label="Contratación"><option value="0" selected disabled>Seleccione</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
-                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button class="btn btn-danger" id="remove' + data[i].StudentID + '" onclick="removeStudent(' + data[i].StudentID +')"><i class="fa fa-trash"></i></button >',
+                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button class="btn btn-danger" id="remove' + data[i].StudentID + '" onclick="removeStudent(' + data[i].StudentID + ',this);"><i class="fa fa-trash"></i></button >',
 
                 ]).draw(false);
+
 
                 this.ctrlActions2 = new ControlActions();
 
@@ -142,7 +145,7 @@ $(document).ready(async function () {
 		}
 	});
 
-	$('#removeStudent').click(function (data) {
+	/*$('#removeStudent').click(function (data) {
         var studentData = {};
         studentData["StudentID"] = JSON.parse(sessionStorage.getItem('tblStudent_selected'))[2];
 		ctrlActions = new ControlActions();
@@ -150,7 +153,7 @@ $(document).ready(async function () {
 			var callback = new vStudentList();
 		//	callback.ReloadTable();
 		});
-	});
+	});*/
     $('#addStudent').click(function () {
         window.location.href = "/student/vStudentRegistration";
     });
@@ -161,15 +164,17 @@ $(document).ready(async function () {
 	});
 });
 
-async function removeStudent() {
+async function removeStudent(data, button) {
     var studentList = new vStudentList();
-    await studentList.RetrieveAll();
     var studentData = {};
-    studentData["StudentID"] = JSON.parse(sessionStorage.getItem('tblStudent_selected'))[2];
+    studentData["StudentID"] = data;
+
     ctrlActions = new ControlActions();
     ctrlActions.DeleteToAPI(studentList.service, studentData, function () {
-        window.location.reload();
-
+        //window.location.reload();
+        var t = $('#tblStudent').DataTable();
+        t.row($(button).parents('tr')).remove().draw();
+        topFunction()
     });
 };
 
@@ -252,4 +257,7 @@ function changeEntity(studentID, selectId) {
     this.ctrlActions.PutToAPI('student/recruitStudent', student,
         setTimeout(function redirection() { window.location.reload() }, 5000));
 }
-
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
