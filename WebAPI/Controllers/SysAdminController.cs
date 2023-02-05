@@ -14,14 +14,10 @@ namespace WebAPI.Controllers
     public class SysAdminController : ApiController
     {
         ApiResponse apiResp = new ApiResponse();
-
-        [Route("")]
         [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
         {
-           
-
             try
             {
                 apiResp = new ApiResponse();
@@ -106,7 +102,7 @@ namespace WebAPI.Controllers
 
                 if (c == false)
                 {
-                    sysAdmin.UserActiveStatus = "1";s
+                    sysAdmin.UserActiveStatus = "1";
                     mng.Create(sysAdmin);
                     apiResp.Message = "Administrador creado";
                 }
@@ -170,8 +166,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("")]
+        [HttpDelete]        [Route("")]
         public IHttpActionResult Delete(SysAdmin sysAdmin)
         {
             try

@@ -147,11 +147,55 @@ namespace WebAPI.Controllers
 
         [Route("")]
         [HttpPut]
-        public IHttpActionResult Put(ExtraCourse extraCourse)
+        public IHttpActionResult Put()
         {
             try
             {
+                apiResp = new ApiResponse();
+
                 var mng = new ExtraCourseManager();
+                string coursePost = HttpContext.Current.Request.Form["course"];
+
+                var c = JObject.Parse(coursePost);
+                ExtraCourse extraCourse = JsonConvert.DeserializeObject<ExtraCourse>(c.ToString());
+
+                if (HttpContext.Current.Request.Form["fileName"] != null)
+                {
+
+                    Random rnd = new Random();
+                    int rndx = rnd.Next(0, 1000);
+
+                    //Fetch the File Name.
+                    string fileName = HttpContext.Current.Request.Form["fileName"];
+                    var settings = new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.fffZ" };
+
+                    if (string.IsNullOrEmpty(c["EndDate"].ToString()))
+                    {
+                        c["EndDate"] = DateTime.MinValue;
+                    }
+
+
+                    if (fileName != null && fileName != "")
+                    {
+                        //Create the Directory.
+                        string api = "https://api-bcjyd.azurewebsites.net/Uploads/" + rndx + "/";
+                        string path = HttpContext.Current.Server.MapPath("~/Uploads/" + rndx);
+                        string filePath = "";
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                            filePath = Path.Combine(path, rndx + "_" + fileName);
+                            extraCourse.Certificate_File = Path.Combine(api, rndx + "_" + fileName); ;
+                            extraCourse.Certificate_Name = fileName;
+                        }
+
+                        //Fetch the File.
+                        HttpPostedFile postedFile = HttpContext.Current.Request.Files[0];
+                        //Save the File.
+                        postedFile.SaveAs(filePath);
+                    }
+                }
+                   
 
                 if (extraCourse.EndDate == DateTime.MinValue)
                 {

@@ -250,7 +250,7 @@ function vStudentAccount() {
         academicData["StudentID"] = document.getElementById("txtIdStudent").value;
 
 
-        var fileUpload = $("#txtCertificateA").get(0);
+        var fileUpload = $("#txtEditCertificateA").get(0);
         var files = fileUpload.files;
 
         var fileData = new FormData();
@@ -265,7 +265,7 @@ function vStudentAccount() {
 
         $.ajax({
             url: apiURl + 'api/academic',
-            type: 'post',
+            type: 'put',
             datatype: 'json',
             contentType: false,
             processData: false,
@@ -367,7 +367,7 @@ function vStudentAccount() {
 
         $.ajax({
             url: apiURl + 'api/extracourse',
-            type: 'post',
+            type: 'put',
             datatype: 'json',
             contentType: false,
             processData: false,
@@ -379,7 +379,7 @@ function vStudentAccount() {
                 this.student = new vStudentAccount();
 
                 //setTimeout(function redirection() { location.reload; }, 5000);
-                this.ctrlActions2.GetById("extracourse/student/" + academicData["StudentID"], this.student.GetCourse);
+                this.ctrlActions2.GetById("extracourse/student/" + courseData["StudentID"], this.student.GetCourse);
                 $('#editCourse').modal('toggle');
                 $('.selectedFinishC').hide();
 

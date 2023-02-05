@@ -19,7 +19,7 @@ namespace WebApp.Models.Controls
 
         private string user_type { get; set; }
 
-        private string URL_API_LISTs = "https://api-bcjyd.azurewebsites.net/api/permits/";
+        private string URL_API_LISTs = "http://localhost:57056/api/permits/";
 
 
         public int OptionsCount => Options.Split(',').Length;
