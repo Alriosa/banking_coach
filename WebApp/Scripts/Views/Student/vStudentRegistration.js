@@ -37,10 +37,10 @@
             array.push(checkboxes[i].value);
         }
         studentData["DriverLicenses"] = array.join(', ');
-        
+        $("html, body").animate({ scrollTop: 0 }, 600);
         this.ctrlActions.PostToAPI('student', studentData, function (response) {
 
-            let user = JSON.parse(getCookie('user'));
+            let user = getCookie('user');
 
             if (user) {
                 setTimeout(function redirection() { window.location.href = '/Student/vStudentList'; }, 4000);
@@ -131,7 +131,9 @@ this.RulesValidateCreate = function () {
             txtBirthdate: {
                 required: "Debe ingresar la fecha de nacimiento"
             },
-            
+            txtAge: {
+                min: "Debe ser mayor de 18 años"
+            },
             txtEmail: {
                 required: "Debe ingresar el correo electrónico",
                 email: "Debe ingresar un correo electrónico con el formato correcto"
@@ -169,6 +171,7 @@ this.RulesValidateCreate = function () {
             txtIdType: { required: true },
             txtIdentificationNumber: { required: true },
             txtBirthdate: { required: true },
+            txtAge: { min: 18 },
             txtProvince: { required: true, notEqual: "0" },
             txtCanton: { required: true, notEqual: "0" },
             txtDistrict: { required: true, notEqual: "0" },
@@ -204,6 +207,21 @@ function getEdad(dateString) {
 
 
 $(document).ready(function () {
+
+    let maxDate = new Date()
+    maxDate.setFullYear(maxDate.getFullYear() - 18)
+
+    $('#txtBirthdate').attr('max', maxDate.toISOString().split('T')[0])
+
+    let user = getCookie('user');
+    if (user != undefined) {
+        $('.isAdmin').removeClass("d-none");
+        $('.isStudent').addClass("d-none");
+    } else {
+        $('.isAdmin').addClass("d-none");
+        $('.isStudent').removeClass("d-none");
+    }
+
 
     $(function () {
         var showCanton = function (selectedProvince) {
@@ -249,8 +267,14 @@ $(document).ready(function () {
 
         });
 
-         $('#txtBirthdate').change(function () {
-            $('#txtAge').val(getEdad($('#txtBirthdate').val()));
+        $('#txtBirthdate').change(function () {
+            let edad = getEdad($('#txtBirthdate').val())
+            $('#txtAge').val(edad);
+            if (edad < 18) {
+                $('#btnRegister').attr('disabled', 'disabled')
+            } else {
+                $('#btnRegister').removeAttr('disable')
+            }
         });
 
 

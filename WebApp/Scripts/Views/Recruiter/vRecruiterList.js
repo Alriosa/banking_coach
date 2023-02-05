@@ -102,6 +102,7 @@ function updateRecruiter(data) {
 
 
 function removeRecruiter(data, button) {
+
 	var recruiterList = new vRecruiterList();
 	var recruiterData = {};
 	recruiterData["RecruiterUserID"] = data;
@@ -111,7 +112,6 @@ function removeRecruiter(data, button) {
 		var t = $('#tblRecruiter').DataTable();
 		t.row($(button).parents('tr')).remove().draw();
 		topFunction()
-
 	});
 }
 

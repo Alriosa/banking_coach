@@ -16,9 +16,68 @@
         white-space: normal;
         width: 140px;
     }
+
+    #fader {
+        opacity: 0.5;
+        background: black;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: none;
+    }
+
+    .loader-section {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100%;
+        position: fixed;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0.5;
+        background: black;
+        z-index: 999;
+        transition: all 1s 1s ease-out;
+    }
+.loaded{
+  opacity:0;
+  z-index:-1;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #623ddb;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+@@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+    
 </style>
+<div id="loader-section" class="loader-section loaded">
+    <span class="loader "></span>
+</div>
 
 <a id="btnToTop"></a>
+
+<div id="fader">
+</div>
+
+
 
 <div id="studentAccount" class="container-fluid">
     <div class="row">
@@ -326,34 +385,34 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                                <div class="form-row ">
-                                                                                    <div class="col-lg-12">
-                                                                                        <div>
-                                                                                            <div class="input-group mb-3">
-                                                                                                <div class="form-group input-group flex-column ">
-                                                                                                    <label for="txtTypeVehicle">Tipos de Vehículos</label>
-                                                                                                    <div class="d-flex justify-content-around">
-                                                                                                        <div>
-                                                                                                            <label for="tvMotocicleta"> <input type="checkbox" id="tvMotocicleta" name="typeVehicles" value="Motocicleta" />Motocicleta</label>
-                                                                                                        </div>
-                                                                                                        <div>
-                                                                                                            <label for="tvVehicle"> <input type="checkbox" id="tvVehicle" name="typeVehicles" value="Vehículo Particular" />Vehículo Particular</label>
-                                                                                                        </div>
-                                                                                                        <div>
-                                                                                                            <label for="tvCamioneta">  <input type="checkbox" id="tvCamioneta" name="typeVehicles" value="Camioneta" />Camioneta</label>
-                                                                                                        </div>
-                                                                                                        <div>
-                                                                                                            <label for="tvBuseta"><input type="checkbox" id="tvBuseta" name="typeVehicles" value="Buseta" />Buseta</label>
-                                                                                                        </div>
-                                                                                                        <div>
-                                                                                                            <label for="tvCamion"> <input type="checkbox" id="tvCamion" name="typeVehicles" value="Camión" />Camión</label>
-                                                                                                        </div>
+                                                                            <div class="form-row ">
+                                                                                <div class="col-lg-12">
+                                                                                    <div>
+                                                                                        <div class="input-group mb-3">
+                                                                                            <div class="form-group input-group flex-column ">
+                                                                                                <label for="txtTypeVehicle">Tipos de Vehículos</label>
+                                                                                                <div class="d-flex justify-content-around">
+                                                                                                    <div>
+                                                                                                        <label for="tvMotocicleta"> <input type="checkbox" id="tvMotocicleta" name="typeVehicles" value="Motocicleta" />Motocicleta</label>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <label for="tvVehicle"> <input type="checkbox" id="tvVehicle" name="typeVehicles" value="Vehículo Particular" />Vehículo Particular</label>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <label for="tvCamioneta">  <input type="checkbox" id="tvCamioneta" name="typeVehicles" value="Camioneta" />Camioneta</label>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <label for="tvBuseta"><input type="checkbox" id="tvBuseta" name="typeVehicles" value="Buseta" />Buseta</label>
+                                                                                                    </div>
+                                                                                                    <div>
+                                                                                                        <label for="tvCamion"> <input type="checkbox" id="tvCamion" name="typeVehicles" value="Camión" />Camión</label>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                            </div>
                                                                             <div class="row my-4 mx-auto">
                                                                                 <div style="margin: 0px auto 10px;">
                                                                                     @Html.CtrlButton(viewName: "vStudentAccount", type: "button", id: "btnSaveChangesInfo", label: "Guardar Cambios", onClickFunction: "Update", buttonType: "orange")
@@ -1475,4 +1534,3 @@
 
         });
 </script>
- 

@@ -19,12 +19,14 @@
         document.querySelector('#txtIdentificationNumber').value = data['IdentificationNumber'];
     }
     this.UpdatePassword = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var adminData = {};
         var email = document.querySelector('#txtEmail').value;
         adminData = this.ctrlActions.GetDataForm('frmSysAdminUpdatePassword');
         adminData["Email"] = email;
-        this.ctrlActions.PutToAPI(this.service + "/changePassword", adminData,
-            resetForm());
+        this.ctrlActions.PutToAPI(this.service + "/changePassword", adminData, function () {
+            setTimeout(function redirection() { window.location.href = '/SysAdmin/vSysAdminList'; }, 4000);
+        })
     }
 
 
@@ -36,18 +38,18 @@
     }
 
     this.Update = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var adminData = {};
         adminData = this.ctrlActions.GetDataForm('frmSysAdminUpdate');
         adminData["AdminLogin"] = document.getElementById("txtAdminLogin").value;
         this.ctrlActions.PutToAPI(this.service, adminData,
-            resetForm()
+            setTimeout(function redirection() { window.location.href = '/SysAdmin/vSysAdminList'; }, 4000)
         );
     }
 
     this.ValidateInputs = function () {
         if ($("#frmSysAdminUpdate").valid()) {
             this.Update();
-            resetForm();
         }
     }
 }

@@ -8,17 +8,15 @@
         sysAdmin["AdminLogin"] = $("#txtIdentificationNumber").val();
         sysAdmin["User_Login"] = $("#txtIdentificationNumber").val();
 
-
+        $("html, body").animate({ scrollTop: 0 }, 600);
         this.ctrlActions.PostToAPI('sysadmin', sysAdmin, function () {
-            resetForm();
+            setTimeout(function redirection() { window.location.href = '/SysAdmin/vSysAdminList'; }, 4000);
         });
     }
 
     this.ValidateInputs = function () {
         if ($("#frmSysAdminCreate").valid()) {
             this.Create();
-            resetForm();
-            setTimeout(function redirection() { window.location.href = '/SysAdmin/vSysAdminList'; }, 4000);
 
         } 
     }  

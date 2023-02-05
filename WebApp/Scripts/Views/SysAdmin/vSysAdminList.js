@@ -91,6 +91,7 @@ function updateAdmin(data) {
 };
 
 function removeAdmin(data, button) {
+
 	var sysAdminList = new vSysAdminList();
 	var adminData = {};
 	adminData["SysAdminUserID"] = data;
