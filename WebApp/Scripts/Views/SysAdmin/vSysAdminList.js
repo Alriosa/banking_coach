@@ -44,7 +44,7 @@
                     data[i].IdType,
                     data[i].IdentificationNumber,
                     data[i].Email,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="remove' + data[i].SysAdminUserID + '"  onclick="removeAdmin(' + data[i].SysAdminUserID + ')"><i class="fa fa-trash"></i></button >',
+					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="remove' + data[i].SysAdminUserID + '"  onclick="removeAdmin(' + data[i].SysAdminUserID + ',this)"><i class="fa fa-trash"></i></button >',
 
                 ]).draw(false);
 
@@ -73,16 +73,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$('#removeAdmin').click(function () {
-		var adminData = {};
-		studentData["SysAdminUserID"] = JSON.parse(sessionStorage.getItem('tblSysAdmin_selected'))["SysAdminUserID"];
-		ctrlActions = new ControlActions();
-		ctrlActions.DeleteToAPI(sysAdminList.service, adminData, function () {
-			var callback = new vSysAdminList();
-			callback.ReloadTable();
-			window.location.reload();
-		});
-	});
+	
 	$('#addAdmin').click(function () {
 		window.location.href = "/sysAdmin/vSysAdminRegistration";
 	})
@@ -99,14 +90,20 @@ function updateAdmin(data) {
 	window.location.href = "/sysAdmin/vSysAdminUpdate/" + data;
 };
 
-function removeAdmin(data) {
+function removeAdmin(data, button) {
+
 	var sysAdminList = new vSysAdminList();
-	sysAdminList.RetrieveAll();
 	var adminData = {};
-	studentData["SysAdminUserID"] = data;
+	adminData["SysAdminUserID"] = data;
 	ctrlActions = new ControlActions();
 	ctrlActions.DeleteToAPI(sysAdminList.service, adminData, function () {
-		
-		window.location.reload();
+		var t = $('#tblSysAdmin').DataTable();
+		t.row($(button).parents('tr')).remove().draw();
+		topFunction()
 	});
 };
+
+function topFunction() {
+	document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}

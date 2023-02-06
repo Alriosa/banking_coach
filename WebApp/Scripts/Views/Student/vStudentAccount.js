@@ -4,7 +4,7 @@ var courseList = [];
 var languageList = [];
 var referenceList = [];
 var dataStudent;
-var apiURl = 'https://api-bcjyd.azurewebsites.net/';
+var apiURl = 'http://localhost:57056/';
 function vStudentAccount() {
     this.ctrlActions = new ControlActions();
     var StudentProfileData = {};
@@ -17,6 +17,7 @@ function vStudentAccount() {
 
 
     this.UpdatePassword = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var studentData = {};
         var studentLogin = document.getElementById("P_Email").textContent;
         studentData = this.ctrlActions.GetDataForm('frmEditPassword');
@@ -117,6 +118,7 @@ function vStudentAccount() {
     }
 
     this.Update = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var studentData = {};
         var id = document.getElementById("txtIdStudent").value;
         var studentLogin = document.getElementById("txtStudentLogin").value;
@@ -177,6 +179,7 @@ function vStudentAccount() {
     }
 
     this.UpdateLaboral = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var laboralData = {};
         laboralData = this.ctrlActions.GetDataForm('frmEditLaboral');
         laboralData['LaboralID'] = document.querySelector('#laboral_token').value;
@@ -194,6 +197,7 @@ function vStudentAccount() {
     }
 
     this.CreateAcademic = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var academicData = {};
         academicData = this.ctrlActions.GetDataForm('frmAddAcademic');
         academicData['DegreeType'] = $('input[name="rdDegreeType"]:checked').val();
@@ -243,6 +247,7 @@ function vStudentAccount() {
     }
 
     this.UpdateAcademic = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var academicData = {};
         academicData = this.ctrlActions.GetDataForm('frmEditAcademic');
         academicData['DegreeType'] = $('input[name="rdDegreeType"]:checked').val();
@@ -250,7 +255,7 @@ function vStudentAccount() {
         academicData["StudentID"] = document.getElementById("txtIdStudent").value;
 
 
-        var fileUpload = $("#txtCertificateA").get(0);
+        var fileUpload = $("#txtEditCertificateA").get(0);
         var files = fileUpload.files;
 
         var fileData = new FormData();
@@ -265,7 +270,7 @@ function vStudentAccount() {
 
         $.ajax({
             url: apiURl + 'api/academic',
-            type: 'post',
+            type: 'put',
             datatype: 'json',
             contentType: false,
             processData: false,
@@ -297,6 +302,7 @@ function vStudentAccount() {
     }
 
     this.CreateExtraCourse = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var courseData = {};
         courseData = this.ctrlActions.GetDataForm('frmAddCourse');
         courseData["StudentID"] = document.getElementById("txtIdStudent").value;
@@ -347,6 +353,7 @@ function vStudentAccount() {
     }
 
     this.UpdateExtraCourse = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var courseData = {};
         courseData = this.ctrlActions.GetDataForm('frmEditCourse');
         courseData['CourseID'] = document.querySelector('#course_token').value;
@@ -367,7 +374,7 @@ function vStudentAccount() {
 
         $.ajax({
             url: apiURl + 'api/extracourse',
-            type: 'post',
+            type: 'put',
             datatype: 'json',
             contentType: false,
             processData: false,
@@ -379,7 +386,7 @@ function vStudentAccount() {
                 this.student = new vStudentAccount();
 
                 //setTimeout(function redirection() { location.reload; }, 5000);
-                this.ctrlActions2.GetById("extracourse/student/" + academicData["StudentID"], this.student.GetCourse);
+                this.ctrlActions2.GetById("extracourse/student/" + courseData["StudentID"], this.student.GetCourse);
                 $('#editCourse').modal('toggle');
                 $('.selectedFinishC').hide();
 
@@ -398,6 +405,7 @@ function vStudentAccount() {
     }
 
     this.CreateReference = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var referenceData = {};
         referenceData = this.ctrlActions.GetDataForm('frmAddReference');
         referenceData["StudentID"] = document.getElementById("txtIdStudent").value;
@@ -413,6 +421,7 @@ function vStudentAccount() {
     }
 
     this.UpdateReference = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var referenceData = {};
         referenceData = this.ctrlActions.GetDataForm('frmEditReference');
         referenceData['ReferenceID'] = document.querySelector('#reference_token').value;
@@ -430,6 +439,7 @@ function vStudentAccount() {
     }
 
     this.CreateLanguage = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var languageData = {};
         languageData = this.ctrlActions.GetDataForm('frmAddLanguage');
         languageData["StudentID"] = document.getElementById("txtIdStudent").value;
@@ -446,6 +456,7 @@ function vStudentAccount() {
     }
 
     this.UpdateLanguage = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
         var languageData = {};
         languageData = this.ctrlActions.GetDataForm('frmEditLanguage');
         languageData['LanguageID'] = document.querySelector('#language_token').value;
@@ -1285,9 +1296,12 @@ $(document).ready(function () {
     });
 
     $("#downloadCV").click(async function () {
+        setTimeout(async function () {
 
-        await DowlandCV();
-       $('.bg-gray').css("color", "white");
+            await DowlandCV()
+
+        }, 2000)
+       
 
     });
 
@@ -1305,7 +1319,6 @@ $(document).ready(function () {
 
 
 function DownlandCertificateCourse(url, fileName) {
-
     const anchor = document.createElement("a");
     anchor.href = url;
     anchor.setAttribute("download", fileName);
@@ -1352,7 +1365,7 @@ function DownlandCertificateAcademic(url, fileName) {
 }
 
 async function DowlandCV() {
-
+   
     $('.bg-gray').css("color", "black");
 
     var nameFile = "";

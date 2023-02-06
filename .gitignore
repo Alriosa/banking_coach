@@ -26,3 +26,7 @@ WebAPI/obj/
 WebApp/bin/
 
 WebApp/obj/
+
+*.dll
+
+*.pdb

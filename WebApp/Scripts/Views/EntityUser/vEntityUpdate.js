@@ -26,7 +26,7 @@
 
         entityData = this.ctrlActions.GetDataForm('frmEntityUpdate');
         this.ctrlActions.PutToAPI('entity', entityData, function () {
-            resetForm();
+            setTimeout(function redirection() { window.location.href = '/EntityUser/vEntityList'; }, 4000);
         });
     }
 
@@ -34,7 +34,8 @@
     this.ValidateInputs = function () {
         if ($("#frmEntityUpdate").valid()) {
             this.Update();
-            resetForm();
+           
+
         }
     }
 

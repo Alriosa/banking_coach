@@ -45,7 +45,7 @@
 					data[i].Name,
 					data[i].Id,
 					data[i].Quantity,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateEntity(' + data[i].EntityUserID + ')"><i class="fa fa-pen-to-square"></i></button ><button class="btn btn-danger" id="remove' + data[i].EntityUserID + '"  onclick="removeEntity(' + data[i].EntityUserID + ')"><i class="fa fa-trash"></i></button >',
+					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateEntity(' + data[i].EntityUserID + ')"><i class="fa fa-pen-to-square"></i></button ><button class="btn btn-danger" id="remove' + data[i].EntityUserID + '"  onclick="removeEntity(' + data[i].EntityUserID + ',this)"><i class="fa fa-trash"></i></button >',
 
 				]).draw(false);
 
@@ -84,15 +84,7 @@ $(document).ready(function () {
 	$('#addEntity').click(function () {
 		window.location.href = "/EntityUser/vEntityRegistration";
 	})
-	$('#removeEntity').click(function (data) {
-		var entityData = {};
-		entityData["EntityUserID"] = JSON.parse(sessionStorage.getItem('tblEntity_selected'))['EntityUserID'];
-		ctrlActions = new ControlActions();
-		ctrlActions.DeleteToAPI(entityList.service, entityData, function () {
-			window.location.reload();
 
-		});
-	});
 
 	$('#updateEntity').click(function () {
 		window.location.href = "/EntityUser/vEntityUpdate/" + localStorage.getItem('selectedID');
@@ -100,20 +92,23 @@ $(document).ready(function () {
 
 });
 
-
-function removeEntity(data) {
+function removeEntity(data, button) {
 	var entityList = new vEntityList();
-	entityList.RetrieveAll();
-
 	var entityData = {};
 	entityData["EntityUserID"] = data;
 	ctrlActions = new ControlActions();
 	ctrlActions.DeleteToAPI(entityList.service, entityData, function () {
-		var callback = new vEntityList();
-		callback.ReloadTable();
+		var t = $('#tblEntity').DataTable();
+		t.row($(button).parents('tr')).remove().draw();
+		topFunction()
 	});
 };
 
 function updateEntity(data) {
 	window.location.href = "/EntityUser/vEntityUpdate/" + data;
 };
+
+function topFunction() {
+	document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}

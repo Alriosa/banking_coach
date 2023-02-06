@@ -147,7 +147,7 @@ namespace WebAPI.Controllers
 
         [Route("")]
         [HttpPut]
-        public IHttpActionResult Put(Academic academic)
+        public IHttpActionResult Put()
         {
             try
             {
@@ -158,7 +158,7 @@ namespace WebAPI.Controllers
                 Academic academicData = JsonConvert.DeserializeObject<Academic>(a.ToString());
 
                 var academicFounded = mng.RetrieveById(academicData);
-                if(academicFounded.Certificate_Name == null)
+                if ( HttpContext.Current.Request.Form["fileName"]!=null)
                 {
                      Random rnd = new Random();
                 int rndx = rnd.Next(0, 1000);
@@ -175,23 +175,25 @@ namespace WebAPI.Controllers
 
                 if (fileName != null && fileName != "")
                 {
-                    //Create the Directory.
-                    string api = "https://api-bcjyd.azurewebsites.net/Uploads/" + rndx + "/";
-                    string path = HttpContext.Current.Server.MapPath("~/Uploads/" + rndx);
-                    string filePath = "";
+                        //Create the Directory.
+                        string api = "https://api-bcjyd.azurewebsites.net/Uploads/" + rndx + "/";
+                        string path = HttpContext.Current.Server.MapPath("~/Uploads/" + rndx);
+
+                        string filePath = "";
+
                     if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);
                         filePath = Path.Combine(path, rndx + "_" + fileName);
-                            academicData.Certificate_File = Path.Combine(api, rndx + "_" + fileName); ;
-                            academicData.Certificate_Name = fileName;
+                        academicData.Certificate_File = Path.Combine(api, rndx + "_" + fileName); ;
+                        academicData.Certificate_Name = fileName;
                     }
 
                     //Fetch the File.
                     HttpPostedFile postedFile = HttpContext.Current.Request.Files[0];
                     //Save the File.
                     postedFile.SaveAs(filePath);
-                }
+                    }
                 }
 
                 if (academicData.EndDate == DateTime.MinValue)

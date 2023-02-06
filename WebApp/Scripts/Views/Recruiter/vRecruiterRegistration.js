@@ -15,7 +15,7 @@
 
     this.Create = function () {
         var recruiterData = {};
-
+        $("html, body").animate({ scrollTop: 0 }, 600);
         recruiterData = this.ctrlActions.GetDataForm('frmRecruiterCreate');
         recruiterData.EntityAssociation = $('#selectEntity').val();
 

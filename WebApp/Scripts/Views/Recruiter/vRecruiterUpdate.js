@@ -20,36 +20,37 @@
     
     this.UpdatePassword = function () {
         var recruiterData = {};
+        $("html, body").animate({ scrollTop: 0 }, 600);
         recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdatePassword');
         recruiterData["Email"] = document.querySelector('#txtEmail').value;
         this.ctrlActions.PutToAPI(this.service + "/changePassword", recruiterData,
-            resetForm()
+            setTimeout(function redirection() { window.location.href = '/Recruiter/vRecruiterList'; }, 4000);
         );
     }
 
     this.ValidateInputPassword = function () {
         if ($("#frmRecruiterUpdatePassword").valid()) {
             this.UpdatePassword();
-            resetForm();
         }
     }
 
 
     this.Update = function () {
         var recruiterData = {};
+        $("html, body").animate({ scrollTop: 0 }, 600);
         recruiterData = this.ctrlActions.GetDataForm('frmRecruiterUpdate');
         recruiterData["RecruiterLogin"] = document.getElementById("txtRecruiterLogin").value;
         recruiterData["IdType"] = document.getElementById("txtIdType").value;
         recruiterData["IdentificationNumber"] = document.getElementById("txtIdentificationNumber").value;
         this.ctrlActions.PutToAPI(this.service, recruiterData,
-            resetForm()
+            setTimeout(function redirection() { window.location.href = '/Recruiter/vRecruiterList'; }, 4000);
         );
     }
 
     this.ValidateInputs = function () {
         if ($("#frmRecruiterUpdate").valid()) {
             this.Update();
-            resetForm();
+            
         }
     }
 }
