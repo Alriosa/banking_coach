@@ -107,7 +107,7 @@ function ControlActions() {
 			.fail(function (response) {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
 				console.log(data);
 				callBackFunction("error data")
 			})
@@ -131,7 +131,7 @@ function ControlActions() {
 			.fail(function (response) {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
 				console.log(data);
 			})
 	};
@@ -153,7 +153,7 @@ function ControlActions() {
 			.fail(function (response) {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
 				console.log(data);
 			})
 	};
@@ -167,7 +167,7 @@ function ControlActions() {
 			.fail(function (response) {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
 				console.log(data);
 			})
 	};
@@ -190,7 +190,7 @@ function ControlActions() {
 			.fail(function (response) {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
 			})
 	};
 
@@ -209,7 +209,7 @@ function ControlActions() {
 			.fail(function (response) {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
 			})
 	};
 
@@ -222,7 +222,7 @@ function ControlActions() {
 			.fail(function (response) {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
 
 			})
 	}
@@ -246,7 +246,7 @@ function ControlActions() {
 			.fail(function (response) {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
-				ctrlActions.ShowMessage('E', data.ExceptionMessage);
+				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
 			})
 	};
 }
