@@ -7,6 +7,10 @@
         var studentData = {};
         studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
 
+        let user = getCookie('user');
+        if (user == undefined) {
+            studentData["BankingStudent"] = "Sí";
+        }
         var studentLogin = $("#txtIdentificationNumber").val();
         studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
         if (studentData["JobAvailability"] == "Sí") {
