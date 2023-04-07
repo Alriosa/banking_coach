@@ -12,8 +12,8 @@ namespace DataAccess.Dao
     {
 
 
-        // private const string CONNECTION_STRING = "Server=tcp:serverbankingcoachdb.database.windows.net,1433;Initial Catalog=BANKING_COACH_DB_V2;Persist Security Info=False;User ID=carlosrios15;Password=1115111993Aa!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
-        private const string CONNECTION_STRING = "Data Source=.;Initial Catalog=BANKING_COACH_DB_V2;Integrated Security=True;Pooling=False";
+        private const string CONNECTION_STRING = "Server=tcp:serverbankingcoachdb.database.windows.net,1433;Initial Catalog=BANKING_COACH_DB_V2;Persist Security Info=False;User ID=carlosrios15;Password=1115111993Aa!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+       // private const string CONNECTION_STRING = "Data Source=.;Initial Catalog=BANKING_COACH_DB_V2;Integrated Security=True;Pooling=False";
 
         private static SqlDao instance;
 
