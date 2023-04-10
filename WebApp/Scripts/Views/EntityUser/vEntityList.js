@@ -45,6 +45,7 @@
 					data[i].Name,
 					data[i].Id,
 					data[i].Quantity,
+					data[i].UserActiveStatus,
 					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateEntity(' + data[i].EntityUserID + ')"><i class="fa fa-pen-to-square"></i></button ><button class="btn btn-danger" id="remove' + data[i].EntityUserID + '"  onclick="removeEntity(' + data[i].EntityUserID + ',this)"><i class="fa fa-trash"></i></button >',
 
 				]).draw(false);

@@ -137,12 +137,23 @@ namespace DataAccess.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_RECRUITER_USER" };
+            var operation = new SqlOperation { ProcedureName = "SP_CHANGE_STATUS_TBL_RECRUITER" };
 
             var recruiter = (Recruiter)entity;
             operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
+            operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
             return operation;
         }
+        public SqlOperation GetChangeStatusStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_CHANGE_STATUS_TBL_RECRUITER" };
+
+            var recruiter = (Recruiter)entity;
+            operation.AddIntParam(DB_COL_RECRUITER_USER_ID, recruiter.RecruiterUserID);
+            operation.AddVarcharParam(DB_COL_RECRUITER_STATUS, recruiter.UserActiveStatus);
+            return operation;
+        }
+
         public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_VERIFY_USERNAME" };

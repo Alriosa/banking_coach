@@ -70,16 +70,26 @@ namespace DataAccess.Mapper
             return operation;
         }
 
-       
-
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_ENTITY_USER" };
+            var operation = new SqlOperation { ProcedureName = "SP_CHANGE_STATUS_TBL_ENTITY_USER" };
 
             var entityUser = (EntityUser)entity;
             operation.AddIntParam(DB_COL_ENTITY_USER_ID, entityUser.EntityUserID);
+            operation.AddVarcharParam(DB_COL_ENTITY_STATUS, entityUser.UserActiveStatus);
             return operation;
         }
+        
+        public SqlOperation GetChangeStatusStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_CHANGE_STATUS_TBL_ENTITY_USER" };
+
+            var entityUser = (EntityUser)entity;
+            operation.AddIntParam(DB_COL_ENTITY_USER_ID, entityUser.EntityUserID);
+            operation.AddVarcharParam(DB_COL_ENTITY_STATUS, entityUser.UserActiveStatus);
+            return operation;
+        }
+
 
         public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)
         {

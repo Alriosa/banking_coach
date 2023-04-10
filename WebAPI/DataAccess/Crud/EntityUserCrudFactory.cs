@@ -64,6 +64,12 @@ namespace DataAccess.Crud
             dao.ExecuteProcedure(mapper.GetUpdateStatement(entityUserCrud));
         }
 
+        public void ChangeStatus(BaseEntity entity)
+        {
+            var entityUserCrud = (EntityUser)entity;
+            dao.ExecuteProcedure(mapper.GetChangeStatusStatement(entityUserCrud));
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var entityUserCrud = (EntityUser)entity;

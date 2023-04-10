@@ -46,6 +46,7 @@
                     data[i].IdentificationNumber,
                     data[i].Email,
                     data[i].EntityAssociationName,
+					data[i].UserActiveStatus,
 					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateRecruiter(' + data[i].RecruiterUserID + ')" id="updateRecruiter"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="remove' + data[i].RecruiterUserID + '" onclick="removeRecruiter(' + data[i].RecruiterUserID + ',this)"><i class="fa fa-trash"></i></button >',
 
                 ]).draw(false);

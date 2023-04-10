@@ -201,6 +201,29 @@ namespace WebAPI.Controllers
                                                 bex));
             }
         }
+
+        [HttpPut]
+        [Route("changeStatus")]
+        public IHttpActionResult ChangeStatus(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.ChangeStatus(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estudiante " + (student.UserActiveStatus.Equals("1") ? "Activado" : "Inactivado")
+                };
+
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                return InternalServerError(bex);
+            }
+        }
+
         [HttpDelete]
         [Route("")]
         public IHttpActionResult Delete(Student student)

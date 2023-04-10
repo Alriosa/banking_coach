@@ -48,12 +48,13 @@ function vStudentList() {
                     data[i].IdentificationNumber,
                     data[i].Email,
                     data[i].BankingStudent,
+                    data[i].UserActiveStatus,
                     '<select onchange="changeEntity(' + data[i].StudentID + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select>',
                     '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID + '" aria-label="Pruebas económicas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Econoómicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >' +
                     '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
                     '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected disabled>Seleccione</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
                     '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID + '" aria-label="Contratación"><option value="0" selected disabled>Seleccione</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
-                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button class="btn btn-danger" id="remove' + data[i].StudentID + '" onclick="removeStudent(' + data[i].StudentID + ',this);"><i class="fa fa-trash"></i></button >',
+                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button><button class= "btn btn-danger" id = "changeStatus' + data[i].StudentID + '" onclick = "changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\',this);" > <i class="fa fa-eye"></i></button > ',
 
                 ]).draw(false);
 
@@ -164,16 +165,23 @@ $(document).ready(async function () {
 	});
 });
 
-async function removeStudent(data, button) {
+async function changeStatusStudent(data, data2, button) {
     var studentList = new vStudentList();
     var studentData = {};
     studentData["StudentID"] = data;
 
+    studentData['UserActiveStatus'] = (data2 == 'Activo') ? '0' : '1'
+    console.log(studentData)
+
     ctrlActions = new ControlActions();
-    ctrlActions.DeleteToAPI(studentList.service, studentData, function () {
+    ctrlActions.PutToAPI(studentList.service + "/changeStatus", studentData, function () {
         //window.location.reload();
         var t = $('#tblStudent').DataTable();
-        t.row($(button).parents('tr')).remove().draw();
+        var index = t.row($(button).parents('tr')).index();
+        var data = t.row($(button).parents('tr')).data();
+        data[5] = (studentData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
+        data[8] = data[8].replace(/Activo|Inactivo/g, data[5]);
+        t.row(index).data(data).draw();
         topFunction()
     });
 };

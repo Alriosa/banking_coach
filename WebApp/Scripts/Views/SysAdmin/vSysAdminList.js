@@ -43,7 +43,8 @@
                     data[i].Name,
                     data[i].IdType,
                     data[i].IdentificationNumber,
-                    data[i].Email,
+					data[i].Email,
+					data[i].UserActiveStatus,
 					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="remove' + data[i].SysAdminUserID + '"  onclick="removeAdmin(' + data[i].SysAdminUserID + ',this)"><i class="fa fa-trash"></i></button >',
 
                 ]).draw(false);

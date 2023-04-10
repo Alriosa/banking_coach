@@ -126,6 +126,11 @@ namespace CoreAPI
             crudRecruiter.AddQuantity(recruiter);
         }
 
+        public void ChangeStatus(Recruiter recruiter)
+        {
+            crudRecruiter.ChangeStatus(recruiter);
+        }
+
         public void Delete(Recruiter recruiter)
         {
             crudRecruiter.Delete(recruiter);

@@ -84,7 +84,10 @@ namespace CoreAPI
             entityUserCrudFactory.Update(entityUser);
         }
 
-       
+        public void ChangeStatus(EntityUser entityUser)
+        {
+            entityUserCrudFactory.ChangeStatus(entityUser);
+        }
 
         public void Delete(EntityUser entityUser)
         {
