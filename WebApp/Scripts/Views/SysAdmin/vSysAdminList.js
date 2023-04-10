@@ -45,7 +45,7 @@
                     data[i].IdentificationNumber,
 					data[i].Email,
 					data[i].UserActiveStatus,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="remove' + data[i].SysAdminUserID + '"  onclick="removeAdmin(' + data[i].SysAdminUserID + ',this)"><i class="fa fa-trash"></i></button >',
+					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="changeStatus' + data[i].SysAdminUserID + '"  onclick="changeStatusAdmin(' + data[i].SysAdminUserID + ',\'' + data[i].UserActiveStatus + '\', this)"><i class="fa fa-eye"></i></button >',
 
                 ]).draw(false);
 
@@ -103,6 +103,28 @@ function removeAdmin(data, button) {
 		topFunction()
 	});
 };
+
+
+async function changeStatusAdmin(data, data2, button) {
+	var sysAdminList = new vSysAdminList();
+	var adminData = {};
+	adminData["SysAdminUserID"] = data;
+	adminData['UserActiveStatus'] = (data2 == 'Activo') ? '0' : '1'
+	console.log(adminData)
+
+	ctrlActions = new ControlActions();
+	ctrlActions.PutToAPI(sysAdminList.service + "/changeStatus", adminData, function () {
+		//window.location.reload();
+		var t = $('#tblSysAdmin').DataTable();
+		var index = t.row($(button).parents('tr')).index();
+		var data = t.row($(button).parents('tr')).data();
+		data[4] = (adminData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
+		data[5] = data[5].replace(/Activo|Inactivo/g, data[4]);
+		t.row(index).data(data).draw();
+		topFunction()
+	});
+};
+
 
 function topFunction() {
 	document.body.scrollTop = 0; // For Safari

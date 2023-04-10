@@ -182,7 +182,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Administrador " + ((sysAdmin.UserActiveStatus.Equals('1')) ? "Activado" : "Inactivado")
+                    Message = "Administrador " + (sysAdmin.UserActiveStatus.Equals("1") ? "Activado" : "Inactivado")
                 };
 
                 return Ok(apiResp);

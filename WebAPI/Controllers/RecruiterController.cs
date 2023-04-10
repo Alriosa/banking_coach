@@ -228,7 +228,7 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Reclutador " + ((recruiter.UserActiveStatus.Equals('1')) ? "Activado" : "Inactivado")
+                    Message = "Reclutador " + (recruiter.UserActiveStatus.Equals("1") ? "Activado" : "Inactivado")
                 };
 
                 return Ok(apiResp);

@@ -46,7 +46,7 @@
 					data[i].Id,
 					data[i].Quantity,
 					data[i].UserActiveStatus,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateEntity(' + data[i].EntityUserID + ')"><i class="fa fa-pen-to-square"></i></button ><button class="btn btn-danger" id="remove' + data[i].EntityUserID + '"  onclick="removeEntity(' + data[i].EntityUserID + ',this)"><i class="fa fa-trash"></i></button >',
+					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateEntity(' + data[i].EntityUserID + ')"><i class="fa fa-pen-to-square"></i></button ><button class="btn btn-danger" id="changeStatus' + data[i].EntityUserID + '"  onclick="changeStatusEntity(' + data[i].EntityUserID + ',\'' + data[i].UserActiveStatus + '\',this)"><i class="fa fa-eye"></i></button >',
 
 				]).draw(false);
 
@@ -101,6 +101,26 @@ function removeEntity(data, button) {
 	ctrlActions.DeleteToAPI(entityList.service, entityData, function () {
 		var t = $('#tblEntity').DataTable();
 		t.row($(button).parents('tr')).remove().draw();
+		topFunction()
+	});
+};
+
+async function changeStatusEntity(data, data2, button) {
+	var entityList = new vEntityList();
+	var entityData = {};
+	entityData["EntityUserID"] = data;
+	entityData['UserActiveStatus'] = (data2 == 'Activo') ? '0' : '1'
+	console.log(entityData)
+
+	ctrlActions = new ControlActions();
+	ctrlActions.PutToAPI(entityList.service + "/changeStatus", entityData, function () {
+		//window.location.reload();
+		var t = $('#tblEntity').DataTable();
+		var index = t.row($(button).parents('tr')).index();
+		var data = t.row($(button).parents('tr')).data();
+		data[3] = (entityData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
+		data[4] = data[4].replace(/Activo|Inactivo/g, data[3]);
+		t.row(index).data(data).draw();
 		topFunction()
 	});
 };
