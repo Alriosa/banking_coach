@@ -253,6 +253,18 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetUpdateStatusRecruitment(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_STUDENT_UPDATE_PROCESS_RECRUITMENT" };
+
+            var student = (Student)entity;
+            operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
+            operation.AddIntParam(DB_COL_STATUS_ECONOMIC_TEST, student.StatusEconomicTest);
+            operation.AddIntParam(DB_COL_STATUS_PSYCHOMETRIC_TEST, student.StatusPsychometricTest);
+            operation.AddIntParam(DB_COL_STATUS_INTERVIEW, student.StatusInterview);
+            operation.AddIntParam(DB_COL_STATUS_HIRED, student.StatusHired);
+            return operation;
+        }
         public SqlOperation GetUpdateProcessTestEconomicStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_STUDENT_PROCESS_TEST_ECONOMIC" };

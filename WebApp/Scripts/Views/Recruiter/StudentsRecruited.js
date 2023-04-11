@@ -56,11 +56,8 @@ function StudentsRecruited() {
                             data[i].Country,
                             data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
                             data[i].DriverLicenses,
-                            '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID +'" aria-label="Pruebas económicas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Econoómicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >'+
-                            '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID +'" aria-label="Pruebas psicométricas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >'+
-                            '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID +'" aria-label="Entrevista"><option value="0" selected disabled>Seleccione</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>'+
-                            '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID +'" aria-label="Contratación"><option value="0" selected disabled>Seleccione</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
-                            '<button onclick="finishProcessRecruitemt(' + data[i].StudentID + ')" type="button" class="btn btn-danger btn-radius"><i class="fa fa-close" style="cursor:pointer;"></i></button>',
+                            '<button title="Modificar Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button>',
+                            '<button title="Finalizar / Cancelar" onclick="finishProcessRecruitemt(' + data[i].StudentID + ')" type="button" class="btn btn-danger btn-radius"><i class="fa fa-close" style="cursor:pointer;"></i></button>',
                         ]).draw(false);
 
                         let select1 = $("#selectE" + data[i].StudentID);
@@ -105,7 +102,28 @@ function StudentsRecruited() {
             })
         }
     }
+
+
+    this.UpdateStatusRecruitment = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        var recruitmentData = {};
+        recruitmentData = this.ctrlActions.GetDataForm('formStatusRecruitment');
+        recruitmentData["StudentID"] = Number(document.getElementById("txtIdStudent").value);
+        recruitmentData['StatusEconomicTest'] = Number(document.querySelector('#selectEconomic').value);
+        recruitmentData['StatusPsychometricTest'] = Number(document.querySelector('#selectPsychometric').value);
+        recruitmentData['StatusInterview'] = Number(document.querySelector('#selectInterview').value);
+        recruitmentData['StatusHired'] = Number(document.querySelector('#selectHired').value);
+        console.log(recruitmentData)
+
+
+        this.ctrlActions.PutToAPI('student/updateStatusRecruitment', recruitmentData, function () {
+            //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+            $('#statusRecruitment').modal('toggle');
+        });
+    }
 }
+
+
 
 function intersection(first, second) {
     var s = new Set(second);
@@ -149,6 +167,21 @@ $(document).ready(function () {
             languageListStudents = data;
         });
     });
+
+
+    $('#statusRecruitment').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var identities = button.data('whatever').split(',');  // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Estado de Reclutamiento de ' + identities[1])
+        modal.find('.modal-body #txtIdStudent').val(Number(identities[0]));
+        modal.find('.modal-body #selectEconomic option[value="' + identities[2] + '"]').prop('selected', true);
+        modal.find('.modal-body #selectPsychometric option[value="' + identities[3] + '"]').prop('selected', true);
+        modal.find('.modal-body #selectInterview option[value="' + identities[4] + '"]').prop('selected', true);
+        modal.find('.modal-body #selectHired option[value="' + identities[5] + '"]').prop('selected', true);
+    })
 });
 
 function padTo2Digits(num) {
@@ -167,6 +200,7 @@ function formatDate(date) {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
 
 function updateProcessTestEconomic(studentID, selectId) {
     let user = JSON.parse(getCookie('user'));

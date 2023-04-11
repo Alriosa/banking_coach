@@ -199,6 +199,11 @@ namespace DataAccess.Crud
             var student = (Student)entity;
             dao.ExecuteProcedure(mapper.GetUpdateProcessTestEconomicStatement(student));
         }
+        public void UpdateStatusRecruitment(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetUpdateStatusRecruitment(student));
+        }
         public void StudentProcessTestPsychometric(BaseEntity entity)
         {
             var student = (Student)entity;

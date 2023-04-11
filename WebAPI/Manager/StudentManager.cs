@@ -184,6 +184,10 @@ namespace CoreAPI
             crudStudent.FinishRecruitStudent(student);
         }
 
+        public void UpdateStatusRecruitment(Student student)
+        {
+            crudStudent.UpdateStatusRecruitment(student);
+        }
         public void StudentProcessTestEconomic(Student student)
         {
             crudStudent.StudentProcessTestEconomic(student);

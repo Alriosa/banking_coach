@@ -300,6 +300,30 @@ namespace WebAPI.Controllers
             }
         }
 
+
+        [HttpPut]
+        [Route("updateStatusRecruitment")]
+        public IHttpActionResult UpdateStatusRecruitment(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.UpdateStatusRecruitment(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estado de Reclutamiento actualizado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al guardar el proceso de reclutamiento";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
         [HttpPut]
         [Route("updateTestEconomic")]
         public IHttpActionResult StudentProcessTestEconomic(Student student)

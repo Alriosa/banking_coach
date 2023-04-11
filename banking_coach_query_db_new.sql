@@ -1205,6 +1205,24 @@ BEGIN
 	END
 GO
 
+
+CREATE PROCEDURE [dbo].[SP_STUDENT_UPDATE_PROCESS_RECRUITMENT] 
+        @SP_Student_ID INT,
+        @SP_Status_Economic_Test INT,
+		@SP_Status_Psychometric_Test INT,
+		@SP_Status_Interview INT,
+        @SP_Status_Hired INT
+AS
+BEGIN
+		UPDATE [dbo].[TBL_STUDENT] SET
+			Status_Economic_Test = @SP_Status_Economic_Test,
+			Status_Psychometric_Test = @SP_Status_Psychometric_Test,
+			Status_Interview = @SP_Status_Interview,
+			Status_Hired = @SP_Status_Hired
+			WHERE Student_ID = @SP_Student_ID;
+	END
+GO
+
 CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_TEST_ECONOMIC] 
         @SP_Student_ID INT,
         @SP_Status_Economic_Test INT

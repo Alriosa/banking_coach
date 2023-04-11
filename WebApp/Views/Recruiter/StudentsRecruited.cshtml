@@ -3,6 +3,15 @@
 <script src="~/Scripts/Views/Recruiter/StudentsRecruited.js"></script>
 
 <style>
+    .modal-content {
+        background: #2b2b2bd6;
+        color: white;
+    }
+
+    .modal .close {
+        color: white;
+    }
+
     .btn-radius {
         border-radius: 100%;
         margin: 2px 4px;
@@ -13,9 +22,12 @@
         background: #565656;
         padding: 4px 20px;
         border: 1px solid #f39c12;
-        width: 250px;
+        width: 100%;
         margin-top: 4px;
         margin-bottom: 4px;
+    }
+    .modal-backdrop.show {
+        opacity: 0.8;
     }
 </style>
 
@@ -39,7 +51,7 @@
                         <div class="card-header">Lista de Estudiantes en Proceso de Reclutamiento</div>
                         <div class="card-body">
                             <table id="studentRecruitedList" class="display" cellspacing="0" width="100%"
-                                    ColumnsDataName="FirstName,FirstLastName,IdType,IdentificationNumber,Country,Residence,Licenses">
+                                   ColumnsDataName="FirstName,FirstLastName,IdType,IdentificationNumber,Country,Residence,Licenses">
                                 <thead>
                                     <tr>
                                         <th>Nombre </th>
@@ -49,13 +61,11 @@
                                         <th>País de Origen </th>
                                         <th>Residencia en Costa Rica</th>
                                         <th>Licencias de conducir </th>
-                                        <th style="width: 200px;">Estado Reclutamiento</th>
-                                        <th></th>
+                                        <th>Estado Reclutamiento</th>
+                                        <th>Finalizar / Cancelar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                       
-
                                 </tbody>
                             </table>
                         </div>
@@ -68,6 +78,76 @@
         </div>
     </div>
 </div><!-- end form-content -->
+<!-- Modal -->
+
+
+<div class="modal fade" style="color: #000;" id="statusRecruitment" tabindex="-1" role="dialog" aria-labelledby="statusRecruitmentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="statusRecruitmentLabel">Estado de Reclutamiento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body border-0">
+                <form id="formStatusRecruitment">
+                    <div class="d-flex flex-column">
+                        <input type="text" id="txtIdStudent" class="d-none" ColumnDataName="StudentID">
+                    </div>
+                    <div class="form-row">
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label for="selectEconomic">Pruebas económicas</label>
+                                <select name="txtEditLevelStatusEconomic" ColumnDataName="StatusEconomicTest" class="form-select select-tests" id="selectEconomic" aria-label="Pruebas económicas">
+                                    <option value="0" selected>Sin Realizar</option>
+                                    <option value="1">Aprobado</option>
+                                    <option value="2">Reprobado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label for="selectPsychometric">Pruebas psicométricas</label>
+                                <select name="txtEditStatusPsychometric" ColumnDataName="StatusPsychometricTest" class="form-select select-tests" id="selectPsychometric" aria-label="Pruebas psicométricas">
+                                    <option value="0" selected>Sin Realizar</option>
+                                    <option value="1">Aprobado</option>
+                                    <option value="2">Reprobado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label for="selectInterview">Entrevista</label>
+                                <select name="txtEditStatusInterview" ColumnDataName="StatusInterview" class="form-select select-tests" id="selectInterview" aria-label="Entrevista">
+                                    <option value="0" selected>Sin Realizar</option>
+                                    <option value="1">Aprobado</option>
+                                    <option value="2">Reprobado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label for="selectHired">Contratación</label>
+                                <select name="txtEditStatusHired" ColumnDataName="StatusHired" class="form-select select-tests" id="selectHired" aria-label="Contratación">
+                                    <option value="0" selected>Sin Realizar</option>
+                                    <option value="1">Aprobado</option>
+                                    <option value="2">Rechazado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                @Html.CtrlButton(viewName: "StudentsRecruited", type: "button", id: "btnUpdateStatusRecruitment", label: "Guardar cambios", onClickFunction: "UpdateStatusRecruitment", buttonType: "orange")
+
+            </div>
+        </div>
+
+    </div><!-- /.dialogo-modal -->
+</div>
 
 
 
