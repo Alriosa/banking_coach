@@ -20,12 +20,18 @@ namespace DataAccess.Crud
             dao = SqlDao.GetInstance();
         }
 
-        public override void Create(BaseEntity entity)
+        public T Create<T>(BaseEntity entity)
         {
-            var student = (HistoryStudentRecruited)entity;
-            var sqlOperation = mapper.GetCreateStatement(student);
+            var lstResult = dao.ExecuteQueryProcedure(mapper.GetCreateStatement(entity));
+            var dic = new Dictionary<string, object>();
+            if (lstResult.Count > 0)
+            {
+                dic = lstResult[0];
+                var objs = mapper.BuildObject(dic);
+                return (T)Convert.ChangeType(objs, typeof(T));
+            }
 
-            dao.ExecuteProcedure(sqlOperation);
+            return default(T);
         }
 
         public override T Retrieve<T>(BaseEntity entity)
@@ -77,6 +83,11 @@ namespace DataAccess.Crud
         }
 
         public override List<T> RetrieveAllById<T>(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Create(BaseEntity entity)
         {
             throw new NotImplementedException();
         }

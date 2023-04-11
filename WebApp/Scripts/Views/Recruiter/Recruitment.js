@@ -266,9 +266,39 @@ async function getData(StudentID) {
                             this.ctrlActions2 = new ControlActions();
 
                             this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
+
+
+
                                 student['EntityId'] = recruiter['EntityAssociation'];
-                                await DowlandCV(student);
-                                await $('.bg-gray').css("color", "white");
+
+
+                                var historyData = {};
+
+                                historyData["StudentID"] = student["StudentID"]
+                                historyData["FirstName"] = student["FirstName"]
+                                historyData["FirstLastName"] = student["FirstLastName"]
+                                historyData["SecondLastName"] = student["SecondLastName"]
+                                historyData["IdType"] = student["IdType"]
+                                historyData["IdentificationNumber"] = student["IdentificationNumber"]
+                                historyData['EntityId'] = recruiter['EntityAssociation']
+                                historyData['EntityUser'] = recruiter['EntityAssociationName']
+                                historyData['RecruiterUser'] = user['UserLogin'];
+                                historyData['RecruiterName'] = user['Name'];
+                                historyData['StatusEconomic'] = "Sin realizar";
+                                historyData['StatusPsychometric'] = "Sin realizar";
+                                historyData['StatusInterview'] = "Sin realizar";
+                                historyData['StatusHired'] = "Sin realizar";
+                                historyData['CreateDate'] = formatDate(new Date());
+                                historyData['UpdateDate'] = formatDate(new Date());
+
+                                console.log(historyData)
+
+                                this.ctrlActions3 = new ControlActions();
+                                this.ctrlActions3.PostToAPI('history/recruited/student/', historyData, async function (history) {
+                                    student['IdHistoryRecruitment'] = history.Data['Id'];
+                                    await DowlandCV(student);
+                                    await $('.bg-gray').css("color", "white");
+                                })
                             })
                         }, 4000)
                     }
@@ -282,6 +312,9 @@ async function getData(StudentID) {
     } else if (user['UserType'] == '1') {
         setTimeout(function () {
             this.ctrlActions2 = new ControlActions();
+
+          
+
 
             this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
                 await DowlandCV(student);

@@ -45,6 +45,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_USER_EXIST = "User_Login";
         private const string DB_COL_STATUS_RECRUITMENT = "Status_Recruitment";
+        private const string DB_COL_ID_HISTORY_RECRUITED = "IdHistoryRecruitment";
         private const string DB_COL_ENTITY_ID = "Entity_Id";
         private const string DB_COL_ENTITY_NAME = "Entity_Name";
         private const string DB_COL_STATUS_ECONOMIC_TEST = "Status_Economic_Test";
@@ -242,6 +243,7 @@ namespace DataAccess.Mapper
             var student = (Student)entity;
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
             operation.AddIntParam(DB_COL_ENTITY_ID, student.EntityId);
+            operation.AddIntParam(DB_COL_ID_HISTORY_RECRUITED, student.IdHistoryRecruitment);
             return operation;
         }
         public SqlOperation GetFinishRecruitStudentStatement(BaseEntity entity)
@@ -395,9 +397,10 @@ namespace DataAccess.Mapper
                 StatusEconomicTest = GetIntValue(row, DB_COL_STATUS_ECONOMIC_TEST),
                 StatusPsychometricTest = GetIntValue(row, DB_COL_STATUS_PSYCHOMETRIC_TEST),
                 StatusInterview = GetIntValue(row, DB_COL_STATUS_INTERVIEW),
-                StatusHired = GetIntValue(row, DB_COL_STATUS_HIRED),
-                //UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
-            };
+                StatusHired = GetIntValue(row, DB_COL_STATUS_HIRED)
+
+            //UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
+        };
 
             return student;
         }
@@ -432,6 +435,7 @@ namespace DataAccess.Mapper
                 StatusPsychometricTest = GetIntValue(row, DB_COL_STATUS_PSYCHOMETRIC_TEST),
                 StatusInterview = GetIntValue(row, DB_COL_STATUS_INTERVIEW),
                 StatusHired = GetIntValue(row, DB_COL_STATUS_HIRED),
+                IdHistoryRecruitment = GetIntValue(row, DB_COL_ID_HISTORY_RECRUITED)
             };
 
             return student;

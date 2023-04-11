@@ -48,6 +48,7 @@ namespace Models
         public int EntityId { get; set; }
         public string EntityName { get; set; }
         public int StatusRecruitment { get; set; }
+        public int IdHistoryRecruitment { get; set; }
         public int StatusEconomicTest { get; set; }
         public int StatusPsychometricTest { get; set; }
         public int StatusInterview { get; set; }

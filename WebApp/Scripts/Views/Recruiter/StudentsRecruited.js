@@ -56,7 +56,7 @@ function StudentsRecruited() {
                             data[i].Country,
                             data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
                             data[i].DriverLicenses,
-                            '<button title="Modificar Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button>',
+                            '<button title="Modificar Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + ',' + data[i].IdHistoryRecruitment + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button>',
                             '<button title="Finalizar / Cancelar" onclick="finishProcessRecruitemt(' + data[i].StudentID + ')" type="button" class="btn btn-danger btn-radius"><i class="fa fa-close" style="cursor:pointer;"></i></button>',
                         ]).draw(false);
 
@@ -114,16 +114,32 @@ function StudentsRecruited() {
         recruitmentData['StatusInterview'] = Number(document.querySelector('#selectInterview').value);
         recruitmentData['StatusHired'] = Number(document.querySelector('#selectHired').value);
         console.log(recruitmentData)
+        let user = JSON.parse(getCookie('user'));
 
+        var historyData = {};
+        historyData["Id"] = Number(document.getElementById("txtIdHistory").value);
+        historyData["StudentID"] = recruitmentData["StudentID"]
+        historyData['StatusEconomic'] = document.querySelector('#selectEconomic').options[document.querySelector('#selectEconomic').selectedIndex].text;
+        historyData['StatusPsychometric'] = document.querySelector('#selectPsychometric').options[document.querySelector('#selectPsychometric').selectedIndex].text;
+        historyData['StatusInterview'] = document.querySelector('#selectInterview').options[document.querySelector('#selectInterview').selectedIndex].text;
+        historyData['StatusHired'] = document.querySelector('#selectHired').options[document.querySelector('#selectHired').selectedIndex].text;
+        historyData['Recruiter_User'] = user['UserLogin'];
+        historyData['Recruiter_Name'] = user['Name'];
+        historyData['Update_Date'] = formatDate(new Date());
 
-        this.ctrlActions.PutToAPI('student/updateStatusRecruitment', recruitmentData, function () {
+        console.log(historyData)
+
+        /*this.ctrlActions.PutToAPI('student/updateStatusRecruitment', recruitmentData, function () {
             //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+            this.ctrlActions2 = new ControlActions();
+            this.student = new StudentsRecruited();
+            
+
+            this.ctrlActions2.GetById("language/student/" + languageData["StudentID"], this.student.GetLanguages);
             $('#statusRecruitment').modal('toggle');
-        });
+        });*/
     }
 }
-
-
 
 function intersection(first, second) {
     var s = new Set(second);
@@ -181,6 +197,7 @@ $(document).ready(function () {
         modal.find('.modal-body #selectPsychometric option[value="' + identities[3] + '"]').prop('selected', true);
         modal.find('.modal-body #selectInterview option[value="' + identities[4] + '"]').prop('selected', true);
         modal.find('.modal-body #selectHired option[value="' + identities[5] + '"]').prop('selected', true);
+        modal.find('.modal-body #txtIdHistory').val(Number(identities[6]));
     })
 });
 

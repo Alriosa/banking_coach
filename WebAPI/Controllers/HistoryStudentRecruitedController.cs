@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             {
                 apiResp = new ApiResponse();
                 var mng = new HistoryStudentRecruitedManager();
-                mng.Create(historyStudent);
+                apiResp.Data = mng.Create(historyStudent);
                 apiResp.Message = "Historial Creado";
                 return Ok(apiResp);
             }

@@ -19,10 +19,10 @@ namespace CoreAPI
             crudFactory = new HistoryStudentRecruitedCrudFactory();
         }
 
-        public void Create(HistoryStudentRecruited historyStudent)
+        public HistoryStudentRecruited Create(HistoryStudentRecruited historyStudent)
         {
             try{
-                crudFactory.Create(historyStudent);
+                return crudFactory.Create<HistoryStudentRecruited>(historyStudent);
             }
             catch (Exception ex)
             {

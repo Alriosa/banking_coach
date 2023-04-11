@@ -45,7 +45,8 @@ Entity_Id INT NULL, --proccess recruitment
 Status_Economic_Test INT DEFAULT 0,--proccess recruitment
 Status_Psychometric_Test INT DEFAULT 0,--proccess recruitment
 Status_Interview INT NULL,--proccess recruitment
-Status_Hired INT DEFAULT 0,--proccess recruitment
+Status_Hired INT DEFAULT 0,--proccess recruitment,
+IdHistoryRecruitment INT NULL,
 PRIMARY KEY(Student_ID),
 CONSTRAINT UC_Student UNIQUE (Identification_Number,
                                Student_User,
@@ -1100,7 +1101,7 @@ AS
 		WHEN S.User_Active_Status = '1' THEN 'Activo'
 		WHEN S.User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
-		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name, S.IdHistoryRecruitment
 		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
@@ -1122,7 +1123,7 @@ AS
 		WHEN S.User_Active_Status = '1' THEN 'Activo'
 		WHEN S.User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
-		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name, S.IdHistoryRecruitment
 		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
@@ -1190,7 +1191,8 @@ GO
 
 CREATE PROCEDURE [dbo].[SP_RECRUIT_STUDENT] 
         @SP_Student_ID INT,
-        @SP_Entity_Id INT
+        @SP_Entity_Id INT,
+        @SP_IdHistoryRecruitment INT
 AS
 BEGIN
 		
@@ -1209,7 +1211,8 @@ BEGIN
 		BEGIN 
 			UPDATE [dbo].[TBL_STUDENT] SET
 			Entity_Id = @SP_Entity_Id,
-			Status_Recruitment = 1
+			Status_Recruitment = 1,
+			IdHistoryRecruitment = @SP_IdHistoryRecruitment
 			WHERE Student_ID = @SP_Student_ID;
 		END
 	END
@@ -2552,19 +2555,16 @@ AS
                 @SP_Status_Interview,
                 @SP_Status_Hired
 				);
+		
+		SET @SP_New_Id = SCOPE_IDENTITY(); 		
+		
+		SELECT * FROM [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] where Id = @SP_New_Id;
 GO
 
 
 CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_HISTORY_STUDENT_RECRUITED]
         @SP_Id INT,
         @SP_Student_ID INT,
-        @SP_First_Name VARCHAR(100),
-        @SP_First_Last_Name VARCHAR(100),
-        @SP_Second_Last_Name VARCHAR(100),
-        @SP_Id_Type VARCHAR(30),
-        @SP_Identification_Number VARCHAR(20),
-        @SP_Entity_Id VARCHAR(100),
-        @SP_Entity_User VARCHAR(100),
         @SP_Recruiter_User VARCHAR(100),
         @SP_Recruiter_Name VARCHAR(100),
         @SP_Create_Date VARCHAR(50),
@@ -2576,14 +2576,7 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_HISTORY_STUDENT_RECRUITED]
         @SP_Status_Hired VARCHAR(20)
 AS
         UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] SET
-				[First_Name] = @SP_First_Name
-			   ,[First_Last_Name] = @SP_First_Last_Name
-			   ,[Second_Last_Name] = @SP_Second_Last_Name
-			   ,[Id_Type] = @SP_Id_Type
-			   ,[Identification_Number] = @SP_Identification_Number
-			   ,[Entity_Id] = @SP_Entity_Id
-			   ,[Entity_User] = @SP_Entity_User
-			   ,[Recruiter_User] = @SP_Recruiter_User
+			   [Recruiter_User] = @SP_Recruiter_User
 			   ,[Recruiter_Name] = @SP_Recruiter_Name
 			   ,[Create_Date] = @SP_Create_Date
 			   ,[Update_Date] = @SP_Update_Date
@@ -2593,6 +2586,9 @@ AS
 			   ,[Status_Interview] = @SP_Status_Interview
 			   ,[Status_Hired] = @SP_Status_Hired
 				WHERE Id = @SP_Id and Student_ID = @SP_Student_ID;
+				
+				
+				
 GO
 
 
