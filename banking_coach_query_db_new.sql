@@ -218,6 +218,27 @@ CREATE TABLE TBL_PERMISSIONS (
 );
 
 
+CREATE TABLE TBL_HISTORY_STUDENTS_RECRUITED (
+	Id INT IDENTITY(1,1) NOT NULL,  --PK
+	Student_ID INT NOT NULL,
+	First_Name VARCHAR(100) NOT NULL,
+	First_Last_Name VARCHAR(100) NOT NULL,
+	Second_Last_Name VARCHAR(100) NULL,
+	Id_Type VARCHAR(30) NOT NULL,
+	Identification_Number VARCHAR(20) NOT NULL,
+	Entity_Id VARCHAR(100) NOT NULL, 
+	Entity_User VARCHAR(100) NOT NULL, 
+	Recruiter_User VARCHAR(100) NOT NULL, 
+	Recruiter_Name VARCHAR(100) NOT NULL, 
+	Create_Date VARCHAR(50) NOT NULL, 
+	Update_Date VARCHAR(50) NOT NULL, 
+	Finish_Date VARCHAR(50) NULL, 
+	Status_Economic VARCHAR(20) NOT NULL, 
+	Status_Psychometric VARCHAR(20) NOT NULL, 
+	Status_Interview VARCHAR(20) NOT NULL, 
+	Status_Hired VARCHAR(20) NOT NULL
+);
+
 
 ----------------------------------------------------------------------------------------------------------------------
 ---INSERTS EMPTYS----------------------------------------------------------------------------------------------------
@@ -2473,6 +2494,115 @@ GO
 -END 
 STORAGE PROCEDURES FOR LABORAL
 **/
+
+/*HISTORY STUDENTS RECRUITED*/
+
+
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_HISTORY_STUDENT_RECRUITED]
+        @SP_Student_ID INT,
+        @SP_First_Name VARCHAR(100),
+        @SP_First_Last_Name VARCHAR(100),
+        @SP_Second_Last_Name VARCHAR(100),
+        @SP_Id_Type VARCHAR(30),
+        @SP_Identification_Number VARCHAR(20),
+        @SP_Entity_Id VARCHAR(100),
+        @SP_Entity_User VARCHAR(100),
+        @SP_Recruiter_User VARCHAR(100),
+        @SP_Recruiter_Name VARCHAR(100),
+        @SP_Create_Date VARCHAR(50),
+        @SP_Update_Date VARCHAR(50),
+        @SP_Status_Economic VARCHAR(20),
+        @SP_Status_Psychometric VARCHAR(20),
+        @SP_Status_Interview VARCHAR(20),
+        @SP_Status_Hired VARCHAR(20)
+AS
+        INSERT INTO [dbo].[TBL_HISTORY_STUDENTS_RECRUITED]
+		([Student_ID]
+           ,[First_Name]
+           ,[First_Last_Name]
+           ,[Second_Last_Name]
+           ,[Id_Type]
+           ,[Identification_Number]
+           ,[Entity_Id]
+           ,[Entity_User]
+           ,[Recruiter_User]
+           ,[Recruiter_Name]
+           ,[Create_Date]
+           ,[Update_Date]
+           ,[Status_Economic]
+           ,[Status_Psychometric]
+           ,[Status_Interview]
+           ,[Status_Hired])
+        VALUES
+                (@SP_Student_ID,
+                @SP_First_Name,
+                @SP_First_Last_Name,
+                @SP_Second_Last_Name,
+                @SP_Id_Type,
+                @SP_Identification_Number,
+                @SP_Entity_Id,
+                @SP_Entity_User,
+                @SP_Recruiter_User,
+                @SP_Recruiter_Name,
+                @SP_Create_Date,
+                @SP_Update_Date,
+                @SP_Status_Economic,
+                @SP_Status_Psychometric,
+                @SP_Status_Interview,
+                @SP_Status_Hired
+				);
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_HISTORY_STUDENT_RECRUITED]
+        @SP_Id INT,
+        @SP_Student_ID INT,
+        @SP_First_Name VARCHAR(100),
+        @SP_First_Last_Name VARCHAR(100),
+        @SP_Second_Last_Name VARCHAR(100),
+        @SP_Id_Type VARCHAR(30),
+        @SP_Identification_Number VARCHAR(20),
+        @SP_Entity_Id VARCHAR(100),
+        @SP_Entity_User VARCHAR(100),
+        @SP_Recruiter_User VARCHAR(100),
+        @SP_Recruiter_Name VARCHAR(100),
+        @SP_Create_Date VARCHAR(50),
+        @SP_Update_Date VARCHAR(50),
+        @SP_Finish_Date VARCHAR(50),
+        @SP_Status_Economic VARCHAR(20),
+        @SP_Status_Psychometric VARCHAR(20),
+        @SP_Status_Interview VARCHAR(20),
+        @SP_Status_Hired VARCHAR(20)
+AS
+        UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] SET
+				[First_Name] = @SP_First_Name
+			   ,[First_Last_Name] = @SP_First_Last_Name
+			   ,[Second_Last_Name] = @SP_Second_Last_Name
+			   ,[Id_Type] = @SP_Id_Type
+			   ,[Identification_Number] = @SP_Identification_Number
+			   ,[Entity_Id] = @SP_Entity_Id
+			   ,[Entity_User] = @SP_Entity_User
+			   ,[Recruiter_User] = @SP_Recruiter_User
+			   ,[Recruiter_Name] = @SP_Recruiter_Name
+			   ,[Create_Date] = @SP_Create_Date
+			   ,[Update_Date] = @SP_Update_Date
+			   ,[Finish_Date] = @SP_Finish_Date
+			   ,[Status_Economic] = @SP_Status_Economic
+			   ,[Status_Psychometric] = @SP_Status_Psychometric
+			   ,[Status_Interview] = @SP_Status_Interview
+			   ,[Status_Hired] = @SP_Status_Hired
+				WHERE Id = @SP_Id and Student_ID = @SP_Student_ID;
+GO
+
+
+
+CREATE PROCEDURE [dbo].[SP_SELECT_ALL_HISTORY_STUDENTS_RECRUITED]
+AS
+
+        SELECT * FROM [dbo].[TBL_HISTORY_STUDENTS_RECRUITED];
+GO
+
 
 /*
 	EXECUTE PROCEDURES
