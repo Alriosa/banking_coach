@@ -328,9 +328,9 @@ INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('33', '2', '13', 
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('34', '2', '14', 'Los Chiles');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('35', '2', '15', 'Guatuso');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('36', '3', '01', 'Cartago');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('37', '3', '02', 'Para�so');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('38', '3', '03', 'La Uni�n');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('39', '3', '04', 'Jim�nez');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('37', '3', '02', 'Paraíso');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('38', '3', '03', 'La Unión');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('39', '3', '04', 'Jiménez');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('40', '3', '05', 'Turrialba');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('41', '3', '06', 'Alvarado');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('42', '3', '07', 'Oreamuno');
@@ -338,13 +338,13 @@ INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('43', '3', '08', 
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('44', '4', '01', 'Heredia');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('45', '4', '02', 'Barva');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('46', '4', '03', 'Santo Domingo');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('47', '4', '04', 'Santa B�rbara');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('48', '4', '05', 'San Rafa�l');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('47', '4', '04', 'Santa Bárbara');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('48', '4', '05', 'San Rafael');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('49', '4', '06', 'San Isidro');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('50', '4', '07', 'Bel�n');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('50', '4', '07', 'Belén');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('51', '4', '08', 'Flores');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('52', '4', '09', 'San Pablo');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('53', '4', '10', 'Sarapiqu�');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('53', '4', '10', 'Sarapiquí');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('54', '5', '01', 'Liberia');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('55', '5', '02', 'Nicoya');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('56', '5', '03', 'Santa Cruz');
@@ -367,8 +367,8 @@ INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('72', '6', '08', 
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('73', '6', '09', 'Parrita');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('74', '6', '10', 'Corredores');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('75', '6', '11', 'Garabito');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('76', '7', '01', 'Lim�n');
-INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('77', '7', '02', 'Pococ�');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('76', '7', '01', 'Limón');
+INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('77', '7', '02', 'Pococí');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('78', '7', '03', 'Siquirres');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('79', '7', '04', 'Talamanca');
 INSERT INTO LST_CANTONS (id, p_code, code, name_value) VALUES ('80', '7', '05', 'Matina');
@@ -396,7 +396,7 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('17',  '03', '
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('18',  '03', '04', 'SAN RAFAEL ARRIBA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('19',  '03', '05', 'SAN ANTONIO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('20',  '03', '06', 'FRAILES');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('21',  '03', '07', 'PATARR�');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('21',  '03', '07', 'PATARRÁ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('22',  '03', '08', 'SAN CRIST�BAL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('23',  '03', '09', 'ROSARIO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('24',  '03', '10', 'DAMAS');
@@ -422,7 +422,7 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('43',  '06', '
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('44',  '06', '05', 'LEGUA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('45',  '06', '06', 'MONTERREY');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('46',  '06', '07', 'SALITRILLOS');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('47',  '07', '01', 'COL�N');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('47',  '07', '01', 'COLÓN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('48',  '07', '02', 'GUAYABO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('49',  '07', '03', 'TABARCIA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('50',  '07', '04', 'PIEDRAS NEGRAS');
@@ -433,7 +433,7 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('54',  '08', '
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('55',  '08', '02', 'SAN FRANCISCO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('56',  '08', '03', 'CALLE BLANCOS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('57',  '08', '04', 'MATA DE PL�TANO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('58',  '08', '05', 'IP�S');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('58',  '08', '05', 'IPÍS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('59',  '08', '06', 'RANCHO REDONDO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('60',  '08', '07', 'PURRAL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('61',  '09', '01', 'SANTA ANA');
@@ -475,11 +475,11 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('96',  '16', '
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('97',  '16', '04', 'SAN LUIS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('98',  '16', '05', 'CARARA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('99',  '17', '01', 'SANTA MAR�A');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('100',  '17', '02', 'JARD�N');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('100',  '17', '02', 'JARDÍN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('101',  '17', '03', 'COPEY');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('102',  '18', '01', 'CURRIDABAT');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('103',  '18', '02', 'GRANADILLA');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('104',  '18', '03', 'S�NCHEZ');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('104',  '18', '03', 'SÁNCHEZ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('105',  '18', '04', 'TIRRASES');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('106',  '19', '01', 'SAN ISIDRO DE EL GENERAL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('107',  '19', '02', 'EL GENERAL');
@@ -488,68 +488,68 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('109',  '19', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('110',  '19', '05', 'SAN PEDRO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('111',  '19', '06', 'PLATANARES');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('112',  '19', '07', 'PEJIBAYE');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('113',  '19', '08', 'CAJ�N');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('114',  '19', '09', 'BAR�');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('115',  '19', '10', 'R�O NUEVO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('116',  '19', '11', 'P�RAMO');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('113',  '19', '08', 'CAJÓN');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('114',  '19', '09', 'BARÚ');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('115',  '19', '10', 'RÍO NUEVO');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('116',  '19', '11', 'PÁRAMO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('117',  '20', '01', 'SAN PABLO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('118',  '20', '02', 'SAN ANDR�S');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('118',  '20', '02', 'SAN ANDRÉS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('119',  '20', '03', 'LLANO BONITO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('120',  '20', '04', 'SAN ISIDRO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('121',  '20', '05', 'SANTA CRUZ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('122',  '20', '06', 'SAN ANTONIO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('123',  '21', '01', 'ALAJUELA');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('124',  '21', '02', 'SAN JOS�');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('124',  '21', '02', 'SAN JOSÉ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('125',  '21', '03', 'CARRIZAL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('126',  '21', '04', 'SAN ANTONIO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('127',  '21', '05', 'GU�CIMA');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('127',  '21', '05', 'GUÁCIMA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('128',  '21', '06', 'SAN ISIDRO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('129',  '21', '07', 'SABANILLA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('130',  '21', '08', 'SAN RAFAEL');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('131',  '21', '09', 'R�O SEGUNDO');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('131',  '21', '09', 'RÍO SEGUNDO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('132',  '21', '10', 'DESAMPARADOS');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('133',  '21', '11', 'TURR�CARES');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('133',  '21', '11', 'TURRÚCARES');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('134',  '21', '12', 'TAMBOR');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('135',  '21', '13', 'GARITA');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('136',  '21', '14', 'SARAPIQU�');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('137',  '22', '01', 'SAN RAM�N');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('136',  '21', '14', 'SARAPIQUÍ');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('137',  '22', '01', 'SAN RAMÓN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('138',  '22', '02', 'SANTIAGO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('139',  '22', '03', 'SAN JUAN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('140',  '22', '04', 'PIEDADES NORTE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('141',  '22', '05', 'PIEDADES SUR');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('142',  '22', '06', 'SAN RAFAEL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('143',  '22', '07', 'SAN ISIDRO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('144',  '22', '08', '�NGELES');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('144',  '22', '08', 'ÁNGELES');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('145',  '22', '09', 'ALFARO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('146',  '22', '10', 'VOLIO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('147',  '22', '11', 'CONCEPCI�N');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('147',  '22', '11', 'CONCEPCIÓN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('148',  '22', '12', 'ZAPOTAL');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('149',  '22', '13', 'PE�AS BLANCAS');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('149',  '22', '13', 'PEÑAS BLANCAS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('150',  '23', '01', 'GRECIA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('151',  '23', '02', 'SAN ISIDRO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('152',  '23', '03', 'SAN JOS�');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('152',  '23', '03', 'SAN JOSÉ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('153',  '23', '04', 'SAN ROQUE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('154',  '23', '05', 'TACARES');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('155',  '23', '06', 'R�O CUARTO');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('155',  '23', '06', 'RÍO CUARTO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('156',  '23', '07', 'PUENTE DE PIEDRA');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('157',  '23', '08', 'BOL�VAR');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('157',  '23', '08', 'BOLÍVAR');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('158',  '24', '01', 'SAN MATEO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('159',  '24', '02', 'DESMONTE');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('160',  '24', '03', 'JES�S MAR�A');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('160',  '24', '03', 'JESÚS MARÍA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('161',  '24', '04', 'LABRADOR');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('162',  '25', '01', 'ATENAS');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('163',  '25', '02', 'JES�S');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('163',  '25', '02', 'JESÚS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('164',  '25', '03', 'MERCEDES');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('165',  '25', '04', 'SAN ISIDRO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('166',  '25', '05', 'CONCEPCI�N');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('166',  '25', '05', 'CONCEPCIÓN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('167',  '25', '06', 'SAN JOSE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('168',  '25', '07', 'SANTA EULALIA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('169',  '25', '08', 'ESCOBAL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('170',  '26', '01', 'NARANJO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('171',  '26', '02', 'SAN MIGUEL');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('172',  '26', '03', 'SAN JOS�');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('173',  '26', '04', 'CIRR� SUR');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('174',  '26', '05', 'SAN JER�NIMO');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('172',  '26', '03', 'SAN JOSÉ');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('173',  '26', '04', 'CIRRÍ SUR');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('174',  '26', '05', 'SAN JERÓNIMO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('175',  '26', '06', 'SAN JUAN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('176',  '26', '07', 'EL ROSARIO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('177',  '26', '08', 'PALMITOS');
@@ -558,7 +558,7 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('179',  '27', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('180',  '27', '03', 'BUENOS AIRES');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('181',  '27', '04', 'SANTIAGO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('182',  '27', '05', 'CANDELARIA');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('183',  '27', '06', 'ESQU�PULAS');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('183',  '27', '06', 'ESQUÍPULAS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('184',  '27', '07', 'LA GRANJA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('185',  '28', '01', 'SAN PEDRO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('186',  '28', '02', 'SAN JUAN');
@@ -589,21 +589,21 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('210',  '31', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('211',  '31', '05', 'PALMIRA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('212',  '31', '06', 'ZAPOTE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('213',  '31', '07', 'BRISAS');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('214',  '32', '01', 'SARCH� NORTE');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('215',  '32', '02', 'SARCH� SUR');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('214',  '32', '01', 'SARCHÍ NORTE');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('215',  '32', '02', 'SARCHÍ SUR');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('216',  '32', '03', 'TORO AMARILLO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('217',  '32', '04', 'SAN PEDRO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('218',  '32', '05', 'RODR�GUEZ');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('218',  '32', '05', 'RODRÍGUEZ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('219',  '33', '01', 'UPALA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('220',  '33', '02', 'AGUAS CLARAS');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('221',  '33', '03', 'SAN JOS� o PIZOTE');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('221',  '33', '03', 'SAN JOSÉ o PIZOTE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('222',  '33', '04', 'BIJAGUA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('223',  '33', '05', 'DELICIAS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('224',  '33', '06', 'DOS R�OS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('225',  '33', '07', 'YOLILLAL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('226',  '33', '08', 'CANALETE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('227',  '34', '01', 'LOS CHILES');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('228',  '34', '02', 'CA�O NEGRO');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('228',  '34', '02', 'CAÑO NEGRO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('229',  '34', '03', 'EL AMPARO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('230',  '34', '04', 'SAN JORGE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('231',  '35', '02', 'BUENAVISTA');
@@ -612,7 +612,7 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('233',  '35', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('234',  '36', '01', 'ORIENTAL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('235',  '36', '02', 'OCCIDENTAL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('236',  '36', '03', 'CARMEN');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('237',  '36', '04', 'SAN NICOL�S');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('237',  '36', '04', 'SAN NICOLÁS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('238',  '36', '05', 'AGUACALIENTE o SAN FRANCISCO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('239',  '36', '06', 'GUADALUPE o ARENILLA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('240',  '36', '07', 'CORRALILLO');
@@ -623,17 +623,17 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('244',  '36', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('245',  '37', '01', 'PARA�SO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('246',  '37', '02', 'SANTIAGO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('247',  '37', '03', 'OROSI');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('248',  '37', '04', 'CACH�');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('248',  '37', '04', 'CACHÍ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('249',  '37', '05', 'LLANOS DE SANTA LUC�A');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('250',  '38', '01', 'TRES R�OS');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('250',  '38', '01', 'TRES RÍOS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('251',  '38', '02', 'SAN DIEGO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('252',  '38', '03', 'SAN JUAN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('253',  '38', '04', 'SAN RAFAEL');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('254',  '38', '05', 'CONCEPCI�N');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('254',  '38', '05', 'CONCEPCIÓN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('255',  '38', '06', 'DULCE NOMBRE');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('256',  '38', '07', 'SAN RAM�N');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('256',  '38', '07', 'SAN RAMÓN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('257',  '38', '08', 'R�O AZUL');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('258',  '39', '01', 'JUAN VI�AS');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('258',  '39', '01', 'JUAN VIÑAS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('259',  '39', '02', 'TUCURRIQUE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('260',  '39', '03', 'PEJIBAYE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('261',  '40', '01', 'TURRIALBA');
@@ -647,7 +647,7 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('268',  '40', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('269',  '40', '09', 'SANTA ROSA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('270',  '40', '10', 'TRES EQUIS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('271',  '40', '11', 'LA ISABEL');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('272',  '40', '12', 'CHIRRIP�');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('272',  '40', '12', 'CHIRRIPÓ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('273',  '41', '01', 'PACAYAS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('274',  '41', '02', 'CERVANTES');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('275',  '41', '03', 'CAPELLADES');
@@ -669,28 +669,28 @@ INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('290',  '45', 
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('291',  '45', '02', 'SAN PEDRO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('292',  '45', '03', 'SAN PABLO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('293',  '45', '04', 'SAN ROQUE');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('294',  '45', '05', 'SANTA LUC�A');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('295',  '45', '06', 'SAN JOS� DE LA MONTA�A');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('294',  '45', '05', 'SANTA LUCÍA');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('295',  '45', '06', 'SAN JOSÉ DE LA MONTAÑA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('296',  '46', '02', 'SAN VICENTE');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('297',  '46', '03', 'SAN MIGUEL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('298',  '46', '04', 'PARACITO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('299',  '46', '05', 'SANTO TOM�S');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('299',  '46', '05', 'SANTO TOMÁS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('300',  '46', '06', 'SANTA ROSA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('301',  '46', '07', 'TURES');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('302',  '46', '08', 'PAR�');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('303',  '47', '01', 'SANTA B�RBARA');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('302',  '46', '08', 'PARÁ');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('303',  '47', '01', 'SANTA BÁRBARA');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('304',  '47', '02', 'SAN PEDRO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('305',  '47', '03', 'SAN JUAN');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('306',  '47', '04', 'JES�S');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('306',  '47', '04', 'JESÚS');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('307',  '47', '05', 'SANTO DOMINGO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('308',  '47', '06', 'PURAB�');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('309',  '48', '01', 'SAN RAFAEL');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('310',  '48', '02', 'SAN JOSECITO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('311',  '48', '03', 'SANTIAGO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('312',  '48', '04', '�NGELES');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('313',  '48', '05', 'CONCEPCI�N');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('312',  '48', '04', 'ÁNGELES');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('313',  '48', '05', 'CONCEPCIÓN');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('314',  '49', '01', 'SAN ISIDRO');
-INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('315',  '49', '02', 'SAN JOS�');
+INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('315',  '49', '02', 'SAN JOSÉ');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('316',  '49', '03', 'CONCEPCI�N');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('317',  '49', '04', 'SAN FRANCISCO');
 INSERT INTO LST_DISTRICTS (id, p_code,  code, name_value) VALUES ('318',  '50', '01', 'SAN ANTONIO');
@@ -868,8 +868,9 @@ INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentRegistration', 'Registrar Estu
 INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentList', 'Listar Estudiantes','Estudiantes')
 INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentAccount', 'Perfil Estudiante','Estudiantes')
 INSERT INTO TBL_VIEWS VALUES ('Student', 'vStudentUpdate','Actualizar Estudiante','Estudiantes')
-INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'Recruitment','�rea de Reclutamiento','�rea de Reclutamiento')
-INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'StudentsRecruited','Estudiantes en Reclutamiento','�rea de Reclutamiento')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'Recruitment','Área de Reclutamiento','Área de Reclutamiento')
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'StudentsRecruited','Estudiantes en Reclutamiento','Área de Reclutamiento')
+INSERT INTO TBL_VIEWS VALUES ('Report', 'ReportHistoryRecruitment','Historial de Reclutados','Reportes')
 
 
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '1')
@@ -881,6 +882,7 @@ INSERT INTO TBL_PERMISSIONS VALUES ('1', '9')
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '12')
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '13')
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '16')
+INSERT INTO TBL_PERMISSIONS VALUES ('1', '18')
 
 
 INSERT INTO TBL_PERMISSIONS VALUES ('3', '16')
@@ -1218,6 +1220,7 @@ BEGIN
 		END
 	END
 GO
+
 CREATE PROCEDURE [dbo].[SP_FINISH_RECRUIT_STUDENT] 
         @SP_Student_ID INT AS
 BEGIN

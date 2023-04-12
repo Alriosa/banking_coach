@@ -30,9 +30,9 @@ namespace CoreAPI
             }
         }
 
-        public List<Student> RetrieveAll()
+        public List<HistoryStudentRecruited> RetrieveAll()
         {
-            return crudFactory.RetrieveAll<Student>();
+            return crudFactory.RetrieveAll<HistoryStudentRecruited>();
         }
 
         public void Update(HistoryStudentRecruited historyStudent)

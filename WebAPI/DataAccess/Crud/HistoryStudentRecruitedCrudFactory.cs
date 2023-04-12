@@ -50,7 +50,7 @@ namespace DataAccess.Crud
 
         public override List<T> RetrieveAll<T>()
         {
-            var lstStudent = new List<T>();
+            var lstHistory = new List<T>();
 
             var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveAllStatement());
             var dic = new Dictionary<string, object>();
@@ -59,11 +59,11 @@ namespace DataAccess.Crud
                 var objs = mapper.BuildObjects(lstResult);
                 foreach (var c in objs)
                 {
-                    lstStudent.Add((T)Convert.ChangeType(c, typeof(T)));
+                    lstHistory.Add((T)Convert.ChangeType(c, typeof(T)));
                 }
             }
 
-            return lstStudent;
+            return lstHistory;
         }
       
         public override void Update(BaseEntity entity)
