@@ -328,3 +328,14 @@ table.dataTable.stripe tbody tr.odd {
                     font-weight: 400;
                     color: #fff;
                 }
+
+
+
+.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .custom-select.is-invalid {
+    border: 3px solid #E74C3C;
+}
+
+
+label.is-invalid {
+    color: red;
+}
