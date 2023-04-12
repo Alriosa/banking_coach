@@ -56,11 +56,8 @@ function StudentsRecruited() {
                             data[i].Country,
                             data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
                             data[i].DriverLicenses,
-                            '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID +'" aria-label="Pruebas económicas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Econoómicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >'+
-                            '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID +'" aria-label="Pruebas psicométricas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >'+
-                            '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID +'" aria-label="Entrevista"><option value="0" selected disabled>Seleccione</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>'+
-                            '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID +'" aria-label="Contratación"><option value="0" selected disabled>Seleccione</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
-                            '<button onclick="finishProcessRecruitemt(' + data[i].StudentID + ')" type="button" class="btn btn-danger btn-radius"><i class="fa fa-close" style="cursor:pointer;"></i></button>',
+                            '<button title="Modificar Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + ',' + data[i].IdHistoryRecruitment + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button>',
+                            '<button title="Finalizar / Cancelar" onclick="finishProcessRecruitment(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment +')" type="button" class="btn btn-danger btn-radius"><i class="fa fa-close" style="cursor:pointer;"></i></button>',
                         ]).draw(false);
 
                         let select1 = $("#selectE" + data[i].StudentID);
@@ -104,6 +101,43 @@ function StudentsRecruited() {
                 });
             })
         }
+    }
+
+
+    this.UpdateStatusRecruitment = function () {
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        var recruitmentData = {};
+        recruitmentData = this.ctrlActions.GetDataForm('formStatusRecruitment');
+        recruitmentData["StudentID"] = Number(document.getElementById("txtIdStudent").value);
+        recruitmentData['StatusEconomicTest'] = Number(document.querySelector('#selectEconomic').value);
+        recruitmentData['StatusPsychometricTest'] = Number(document.querySelector('#selectPsychometric').value);
+        recruitmentData['StatusInterview'] = Number(document.querySelector('#selectInterview').value);
+        recruitmentData['StatusHired'] = Number(document.querySelector('#selectHired').value);
+        console.log(recruitmentData)
+        let user = JSON.parse(getCookie('user'));
+
+        var historyData = {};
+        historyData["Id"] = Number(document.getElementById("txtIdHistory").value);
+        historyData["StudentID"] = recruitmentData["StudentID"]
+        historyData['StatusEconomic'] = document.querySelector('#selectEconomic').options[document.querySelector('#selectEconomic').selectedIndex].text;
+        historyData['StatusPsychometric'] = document.querySelector('#selectPsychometric').options[document.querySelector('#selectPsychometric').selectedIndex].text;
+        historyData['StatusInterview'] = document.querySelector('#selectInterview').options[document.querySelector('#selectInterview').selectedIndex].text;
+        historyData['StatusHired'] = document.querySelector('#selectHired').options[document.querySelector('#selectHired').selectedIndex].text;
+        historyData['RecruiterUser'] = user['UserLogin'];
+        historyData['RecruiterName'] = user['Name'];
+        historyData['UpdateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+
+        console.log(historyData)
+
+        this.ctrlActions.PutToAPI("history/recruited/student/", historyData);
+
+        this.ctrlActions.PutToAPI('student/updateStatusRecruitment', recruitmentData,
+            setTimeout(
+                function redirection() {
+                    $('#statusRecruitment').modal('toggle');
+                    window.location.reload()
+                }, 3000)
+        );
     }
 }
 
@@ -149,6 +183,22 @@ $(document).ready(function () {
             languageListStudents = data;
         });
     });
+
+
+    $('#statusRecruitment').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var identities = button.data('whatever').split(',');  // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Estado de Reclutamiento de ' + identities[1])
+        modal.find('.modal-body #txtIdStudent').val(Number(identities[0]));
+        modal.find('.modal-body #selectEconomic option[value="' + identities[2] + '"]').prop('selected', true);
+        modal.find('.modal-body #selectPsychometric option[value="' + identities[3] + '"]').prop('selected', true);
+        modal.find('.modal-body #selectInterview option[value="' + identities[4] + '"]').prop('selected', true);
+        modal.find('.modal-body #selectHired option[value="' + identities[5] + '"]').prop('selected', true);
+        modal.find('.modal-body #txtIdHistory').val(Number(identities[6]));
+    })
 });
 
 function padTo2Digits(num) {
@@ -168,86 +218,31 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function updateProcessTestEconomic(studentID, selectId) {
-    let user = JSON.parse(getCookie('user'));
-    this.ctrlActions = new ControlActions();
-    let student = {
-        StudentID: studentID
-    }
-    if (user['UserType'] == '3') {
-        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-            student['StatusEconomicTest'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateTestEconomic', student,
-               // setTimeout(function redirection() { window.location.reload() })
-            );
-        })
-    }
-}
-
-function updateProcessTestPsychometric(studentID, selectId) {
-    let user = JSON.parse(getCookie('user'));
-    this.ctrlActions = new ControlActions();
-    let student = {
-        StudentID: studentID
-    }
-    if (user['UserType'] == '3') {
-        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-            student['StatusPsychometricTest'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateTestPsychometric', student,
-                // setTimeout(function redirection() { window.location.reload() })
-            );
-        })
-    }
-}
-
-
-function updateProcessInterview(studentID, selectId) {
+function finishProcessRecruitment(studentID, historyID) {
     let user = JSON.parse(getCookie('user'));
     this.ctrlActions = new ControlActions();
     let student = {
         StudentID: studentID
     }
 
-    if (user['UserType'] == '3') {
-        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-            student['StatusInterview'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateProcessInterview', student,
-                //  setTimeout(function redirection() { window.location.reload() })
-            );
-        })
-    }
-}
+    var historyData = {};
+    historyData["Id"] = historyID;
+    historyData["StudentID"] = studentID
+    historyData['RecruiterUser'] = user['UserLogin'];
+    historyData['RecruiterName'] = user['Name'];
+    historyData['FinishDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
 
-
-function updateProcessHiring(studentID, selectId) {
-    let user = JSON.parse(getCookie('user'));
-    this.ctrlActions = new ControlActions();
-    let student = {
-        StudentID: studentID
-    }
-
-    if (user['UserType'] == '3') {
-        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-            student['StatusHired'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateStatusHiring', student,
-                // setTimeout(function redirection() { window.location.reload() })
-            );
-        })
-    }
-}
-
-function finishProcessRecruitemt(studentID) {
-    let user = JSON.parse(getCookie('user'));
-    this.ctrlActions = new ControlActions();
-    let student = {
-        StudentID: studentID
-    }
-
+    console.log(historyData)
     if (user['UserType'] == '3') {
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             //setID Entity to studentData
-            this.ctrlActions.PutToAPI('student/finishRecruitStudent', student,
-                setTimeout(function redirection() { window.location.reload() }, 5000));
-        })
+
+            this.ctrlActions.PutToAPI("history/recruited/student/finish", historyData);
+
+            this.ctrlActions.PutToAPI('student/finishRecruitStudent', student, function () {
+                //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+                setTimeout(function redirection() { window.location.reload() }, 3000)
+            });
+        });
     }
 }

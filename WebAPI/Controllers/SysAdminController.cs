@@ -13,7 +13,8 @@ namespace WebAPI.Controllers
     [RoutePrefix("api/sysadmin")]
     public class SysAdminController : ApiController
     {
-        ApiResponse apiResp = new ApiResponse();
+        ApiResponse apiResp = new ApiResponse();
+
         [HttpGet]
         [Route("")]
         public IHttpActionResult Get()
@@ -86,9 +87,11 @@ namespace WebAPI.Controllers
             {
                 return InternalServerError(bex);
             }
-        }
-
-        [HttpPost]
+        }
+
+
+
+        [HttpPost]
         [Route("")]
         public IHttpActionResult Post(SysAdmin sysAdmin)
         {
@@ -119,9 +122,11 @@ namespace WebAPI.Controllers
             {
                 return InternalServerError(bex);
             }
-        }
-
-        [HttpPut]
+        }
+
+
+
+        [HttpPut]
         [Route("")]
         public IHttpActionResult Put(SysAdmin sysAdmin)
         {
@@ -164,9 +169,32 @@ namespace WebAPI.Controllers
                 //bex.Message = "Hubo un error al cambiar la contraseña del usuario";
                 return InternalServerError(new Exception("Hubo un error al cambiar la contraseña del usuario", bex));
             }
-        }
-
-        [HttpDelete]        [Route("")]
+        }
+
+        [HttpPut]
+        [Route("changeStatus")]
+        public IHttpActionResult ChangeStatus(SysAdmin sysAdmin)
+        {
+            try
+            {
+                var mng = new SysAdminManager();
+                mng.ChangeStatus(sysAdmin);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Administrador " + (sysAdmin.UserActiveStatus.Equals("1") ? "Activado" : "Inactivado")
+                };
+
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                return InternalServerError(bex);
+            }
+        }
+
+        [HttpDelete]
+        [Route("")]
         public IHttpActionResult Delete(SysAdmin sysAdmin)
         {
             try

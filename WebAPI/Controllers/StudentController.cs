@@ -201,6 +201,29 @@ namespace WebAPI.Controllers
                                                 bex));
             }
         }
+
+        [HttpPut]
+        [Route("changeStatus")]
+        public IHttpActionResult ChangeStatus(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.ChangeStatus(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estudiante " + (student.UserActiveStatus.Equals("1") ? "Activado" : "Inactivado")
+                };
+
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                return InternalServerError(bex);
+            }
+        }
+
         [HttpDelete]
         [Route("")]
         public IHttpActionResult Delete(Student student)
@@ -273,6 +296,30 @@ namespace WebAPI.Controllers
             catch (BussinessException bex)
             {
                 bex.AppMessage.Message = "Hubo un error al eliminar al estudiante de la lista de reclutamiento";
+                return InternalServerError(new Exception(bex.AppMessage.Message));
+            }
+        }
+
+
+        [HttpPut]
+        [Route("updateStatusRecruitment")]
+        public IHttpActionResult UpdateStatusRecruitment(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                mng.UpdateStatusRecruitment(student);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estado de Reclutamiento actualizado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                bex.AppMessage.Message = "Hubo un error al guardar el proceso de reclutamiento";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }

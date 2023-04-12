@@ -249,7 +249,6 @@ async function getData(StudentID) {
     await sleep(1000)
     await this.ctrlActions.GetById("language/student/" + StudentID, async (data) => {
         languageList = data
-        
     });
     await sleep(1000)
 
@@ -267,22 +266,44 @@ async function getData(StudentID) {
 
                             this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
                                 student['EntityId'] = recruiter['EntityAssociation'];
-                                await DowlandCV(student);
-                                await $('.bg-gray').css("color", "white");
+
+                                var historyData = {};
+                                historyData["StudentID"] = student["StudentID"]
+                                historyData["FirstName"] = student["FirstName"]
+                                historyData["FirstLastName"] = student["FirstLastName"]
+                                historyData["SecondLastName"] = student["SecondLastName"]
+                                historyData["IdType"] = student["IdType"]
+                                historyData["IdentificationNumber"] = student["IdentificationNumber"]
+                                historyData['EntityId'] = recruiter['EntityAssociation']
+                                historyData['EntityUser'] = recruiter['EntityAssociationName']
+                                historyData['RecruiterUser'] = user['UserLogin'];
+                                historyData['RecruiterName'] = user['Name'];
+                                historyData['StatusEconomic'] = "Sin realizar";
+                                historyData['StatusPsychometric'] = "Sin realizar";
+                                historyData['StatusInterview'] = "Sin realizar";
+                                historyData['StatusHired'] = "Sin realizar";
+                                historyData['CreateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+                                historyData['UpdateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+                                console.log(historyData)
+
+                                this.ctrlActions3 = new ControlActions();
+                                this.ctrlActions3.PostToAPI('history/recruited/student/', historyData, async function (history) {
+                                    student['IdHistoryRecruitment'] = history.Data['Id'];
+                                    await DowlandCV(student);
+                                    await $('.bg-gray').css("color", "white");
+                                })
                             })
                         }, 4000)
                     }
                     else if (response.Data == "error") {
                         console.log(response)
                     }
-
                 }
             )
         })
     } else if (user['UserType'] == '1') {
         setTimeout(function () {
             this.ctrlActions2 = new ControlActions();
-
             this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
                 await DowlandCV(student);
                 await $('.bg-gray').css("color", "white");
@@ -298,7 +319,6 @@ async function DowlandCV(student) {
     if (user['UserType'] == '3') {
         setTimeout(function () {
             this.ctrlActions2 = new ControlActions();
-
             this.ctrlActions2.PutToAPI('student/recruitStudent', student,
                 setTimeout(function redirection() { window.location.reload() }, 5000));
         })
@@ -307,7 +327,6 @@ async function DowlandCV(student) {
     $('.bg-gray').css("color", "black");
 
     let name = student['FirstName'] + ' ' + student['FirstLastName'] + ' ' + student['SecondLastName'];
-
     document.querySelector('#P_JobAvailability').append(student['JobAvailability']);
     document.querySelector('#P_Id_Type').append(student['IdType']);
     document.querySelector('#P_DriverLicenses').append(student['DriverLicenses']);
@@ -323,7 +342,6 @@ async function DowlandCV(student) {
     document.querySelector('#P_Location').append(student['NProvince'] + ", " + student['NCanton'] + ", " + student['NDistrict']);
 
     document.querySelector('#P_Country').append(student['Country']);
-  
 
     if (student['Vehicle'] == "Sí") {
         $('.selectedVehicle').show();
@@ -333,27 +351,18 @@ async function DowlandCV(student) {
 
     document.querySelector('#P_BankingStudent').append(student['BankingStudent']);
 
-    // getData(student.StudentID);
-
-
-
     var studentProfileData = student;
     var nameFile = studentProfileData["FirstName"] + " " + studentProfileData["FirstLastName"] + " " + studentProfileData["SecondLastName"] + ".pdf";
 
-
-
     container = document.createElement('div');
-
 
     let title = document.createElement('h3');
     title.textContent = "CURRICULUM VITAE";
     title.style.textAlign = 'center';
 
-
     let image = document.createElement("img");
     image.src = "../../Content/Logos/Imagotipo Banking Academy 2.png";
     image.width = "50px";
-
 
     //clone is required because otherwise you alter the current page.
     let titleInfo = document.createElement('h5');
@@ -380,7 +389,6 @@ async function DowlandCV(student) {
     let titleLanguage = document.createElement('h5');
     titleLanguage.textContent = "Idiomas";
     titleLanguage.style.textAlign = 'center';
-
 
     let titleReference = document.createElement('h5');
     titleReference.textContent = "Referencias";
@@ -547,7 +555,6 @@ async function DowlandCV(student) {
         container.append(containerReference);
     }
 
-
     var opt = {
         margin: 2,
         filename: nameFile,
@@ -558,10 +565,7 @@ async function DowlandCV(student) {
 
     // New Promise-based usage:
     html2pdf(container, opt);
-
-
     //html2pdf().set(opt).from(container).save();
-
 }
 
 

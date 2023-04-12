@@ -216,6 +216,29 @@ namespace WebAPI.Controllers
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
         }
+
+        [HttpPut]
+        [Route("changeStatus")]
+        public IHttpActionResult ChangeStatus(Recruiter recruiter)
+        {
+            try
+            {
+                var mng = new RecruiterManager();
+                mng.ChangeStatus(recruiter);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Reclutador " + (recruiter.UserActiveStatus.Equals("1") ? "Activado" : "Inactivado")
+                };
+
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                return InternalServerError(bex);
+            }
+        }
+
         [Route("")]
         [HttpDelete]
         public IHttpActionResult Delete(Recruiter recruiter)

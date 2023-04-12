@@ -132,7 +132,6 @@ namespace CoreAPI
             crudStudent.Update(student);
         }
 
-
         public void UpdatePassword(Student student)
         {
             try
@@ -144,9 +143,12 @@ namespace CoreAPI
                 //s ExceptionManager.GetInstance().Process(ex);
                 throw new Exception("Error al retornar datos", ex);
             }
-         
         }
 
+        public void ChangeStatus(Student student)
+        {
+            crudStudent.ChangeStatus(student);
+        }
 
         public void Delete(Student student)
         {
@@ -182,6 +184,10 @@ namespace CoreAPI
             crudStudent.FinishRecruitStudent(student);
         }
 
+        public void UpdateStatusRecruitment(Student student)
+        {
+            crudStudent.UpdateStatusRecruitment(student);
+        }
         public void StudentProcessTestEconomic(Student student)
         {
             crudStudent.StudentProcessTestEconomic(student);

@@ -46,7 +46,8 @@
                     data[i].IdentificationNumber,
                     data[i].Email,
                     data[i].EntityAssociationName,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateRecruiter(' + data[i].RecruiterUserID + ')" id="updateRecruiter"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="remove' + data[i].RecruiterUserID + '" onclick="removeRecruiter(' + data[i].RecruiterUserID + ',this)"><i class="fa fa-trash"></i></button >',
+					data[i].UserActiveStatus,
+					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateRecruiter(' + data[i].RecruiterUserID + ')" id="updateRecruiter"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="changeStatus' + data[i].RecruiterUserID + '" onclick="changeStatusRecruiter(' + data[i].RecruiterUserID + ', \'' + data[i].UserActiveStatus + '\',this)"><i class="fa fa-eye"></i></button >',
 
                 ]).draw(false);
 
@@ -115,6 +116,26 @@ function removeRecruiter(data, button) {
 	});
 }
 
+
+async function changeStatusRecruiter(data, data2, button) {
+	var recruiterList = new vRecruiterList();
+	var recruiterData = {};
+	recruiterData["RecruiterUserID"] = data;
+	recruiterData['UserActiveStatus'] = (data2 == 'Activo') ? '0' : '1'
+	console.log(recruiterData)
+
+	ctrlActions = new ControlActions();
+	ctrlActions.PutToAPI(recruiterList.service + "/changeStatus", recruiterData, function () {
+		//window.location.reload();
+		var t = $('#tblRecruiter').DataTable();
+		var index = t.row($(button).parents('tr')).index();
+		var data = t.row($(button).parents('tr')).data();
+		data[5] = (recruiterData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
+		data[6] = data[6].replace(/Activo|Inactivo/g, data[5]);
+		t.row(index).data(data).draw();
+		topFunction()
+	});
+};
 
 function topFunction() {
 	document.body.scrollTop = 0; // For Safari

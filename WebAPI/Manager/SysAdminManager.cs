@@ -88,7 +88,6 @@ namespace CoreAPI
 
         public void UpdatePassword(SysAdmin sysAdmin)
         {
-
             try
             {
                 crudSysAdmin.UpdatePassword(sysAdmin);
@@ -106,6 +105,10 @@ namespace CoreAPI
             crudSysAdmin.Delete(sysAdmin);
         }
 
+        public void ChangeStatus(SysAdmin sysAdmin)
+        {
+            crudSysAdmin.ChangeStatus(sysAdmin);
+        }
 
         public bool ValidateExist(SysAdmin sysAdmin)
         {

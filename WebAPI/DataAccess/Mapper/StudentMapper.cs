@@ -45,6 +45,7 @@ namespace DataAccess.Mapper
         private const string DB_COL_USER_TYPE = "User_Type";
         private const string DB_COL_USER_EXIST = "User_Login";
         private const string DB_COL_STATUS_RECRUITMENT = "Status_Recruitment";
+        private const string DB_COL_ID_HISTORY_RECRUITED = "IdHistoryRecruitment";
         private const string DB_COL_ENTITY_ID = "Entity_Id";
         private const string DB_COL_ENTITY_NAME = "Entity_Name";
         private const string DB_COL_STATUS_ECONOMIC_TEST = "Status_Economic_Test";
@@ -197,12 +198,23 @@ namespace DataAccess.Mapper
 
         public SqlOperation GetDeleteStatement(BaseEntity entity)
         {
-            var operation = new SqlOperation { ProcedureName = "SP_DELETE_TBL_STUDENT" };
+            var operation = new SqlOperation { ProcedureName = "SP_CHANGE_STATUS_TBL_STUDENT" };
 
             var student = (Student)entity;
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
+            operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS, student.UserActiveStatus);
             return operation;
         }
+        public SqlOperation GetChangeStatusStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_CHANGE_STATUS_TBL_STUDENT" };
+
+            var student = (Student)entity;
+            operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
+            operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS, student.UserActiveStatus);
+            return operation;
+        }
+
 
         public SqlOperation GetValidateUserNameExistenceStatement(BaseEntity entity)
         {
@@ -231,6 +243,7 @@ namespace DataAccess.Mapper
             var student = (Student)entity;
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
             operation.AddIntParam(DB_COL_ENTITY_ID, student.EntityId);
+            operation.AddIntParam(DB_COL_ID_HISTORY_RECRUITED, student.IdHistoryRecruitment);
             return operation;
         }
         public SqlOperation GetFinishRecruitStudentStatement(BaseEntity entity)
@@ -242,6 +255,18 @@ namespace DataAccess.Mapper
             return operation;
         }
 
+        public SqlOperation GetUpdateStatusRecruitment(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_STUDENT_UPDATE_PROCESS_RECRUITMENT" };
+
+            var student = (Student)entity;
+            operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
+            operation.AddIntParam(DB_COL_STATUS_ECONOMIC_TEST, student.StatusEconomicTest);
+            operation.AddIntParam(DB_COL_STATUS_PSYCHOMETRIC_TEST, student.StatusPsychometricTest);
+            operation.AddIntParam(DB_COL_STATUS_INTERVIEW, student.StatusInterview);
+            operation.AddIntParam(DB_COL_STATUS_HIRED, student.StatusHired);
+            return operation;
+        }
         public SqlOperation GetUpdateProcessTestEconomicStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_STUDENT_PROCESS_TEST_ECONOMIC" };
@@ -372,9 +397,10 @@ namespace DataAccess.Mapper
                 StatusEconomicTest = GetIntValue(row, DB_COL_STATUS_ECONOMIC_TEST),
                 StatusPsychometricTest = GetIntValue(row, DB_COL_STATUS_PSYCHOMETRIC_TEST),
                 StatusInterview = GetIntValue(row, DB_COL_STATUS_INTERVIEW),
-                StatusHired = GetIntValue(row, DB_COL_STATUS_HIRED),
-                //UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
-            };
+                StatusHired = GetIntValue(row, DB_COL_STATUS_HIRED)
+
+            //UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
+        };
 
             return student;
         }
@@ -409,6 +435,7 @@ namespace DataAccess.Mapper
                 StatusPsychometricTest = GetIntValue(row, DB_COL_STATUS_PSYCHOMETRIC_TEST),
                 StatusInterview = GetIntValue(row, DB_COL_STATUS_INTERVIEW),
                 StatusHired = GetIntValue(row, DB_COL_STATUS_HIRED),
+                IdHistoryRecruitment = GetIntValue(row, DB_COL_ID_HISTORY_RECRUITED)
             };
 
             return student;

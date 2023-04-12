@@ -163,6 +163,27 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("ChangeStatus")]
+        public IHttpActionResult ChangeStatus(EntityUser entity)
+        {
+            try
+            {
+                var mng = new EntityUserManager();
+                mng.ChangeStatus(entity);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Reclutador " + (entity.UserActiveStatus.Equals("1") ? "Activado" : "Inactivado")
+                };
+
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                return InternalServerError(bex);
+            }
+        }
 
         [Route("")]
         [HttpDelete]

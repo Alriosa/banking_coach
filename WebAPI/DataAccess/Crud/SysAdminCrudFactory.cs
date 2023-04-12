@@ -75,6 +75,11 @@ namespace DataAccess.Crud
             var sysAdmin = (SysAdmin)entity;
             dao.ExecuteProcedure(mapper.GetSoftDeleteStatement(sysAdmin));
         }
+        public void ChangeStatus(BaseEntity entity)
+        {
+            var sysAdmin = (SysAdmin)entity;
+            dao.ExecuteProcedure(mapper.GetChangeStatusStatement(sysAdmin));
+        }
 
 
         public bool ValidateUserExistence(BaseEntity entity)

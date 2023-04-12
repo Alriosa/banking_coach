@@ -103,6 +103,13 @@ namespace DataAccess.Crud
             var recruiter = (Recruiter)entity;
             dao.ExecuteProcedure(mapper.GetRecoverPasswordStatement(recruiter));
         }
+
+        public void ChangeStatus(BaseEntity entity)
+        {
+            var recruiter = (Recruiter)entity;
+            dao.ExecuteProcedure(mapper.GetChangeStatusStatement(recruiter));
+        }
+
         public override void Delete(BaseEntity entity)
             {
                 var recruiter = (Recruiter)entity;

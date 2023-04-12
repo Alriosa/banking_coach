@@ -108,6 +108,12 @@ namespace DataAccess.Crud
             dao.ExecuteProcedure(mapper.GetRecoverPasswordStatement(student));
         }
 
+        public void ChangeStatus(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetChangeStatusStatement(student));
+        }
+
         public override void Delete(BaseEntity entity)
         {
             var student = (Student)entity;
@@ -192,6 +198,11 @@ namespace DataAccess.Crud
         {
             var student = (Student)entity;
             dao.ExecuteProcedure(mapper.GetUpdateProcessTestEconomicStatement(student));
+        }
+        public void UpdateStatusRecruitment(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetUpdateStatusRecruitment(student));
         }
         public void StudentProcessTestPsychometric(BaseEntity entity)
         {

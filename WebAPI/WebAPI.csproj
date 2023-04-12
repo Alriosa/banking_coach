@@ -307,6 +307,7 @@
     <Compile Include="Controllers\EntityUserController.cs" />
     <Compile Include="Controllers\ReferenceController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\HistoryStudentRecruitedController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Controllers\ViewPermissionController.cs" />
@@ -323,6 +324,7 @@
     <Compile Include="DataAccess\Crud\RecruiterCrudFactory.cs" />
     <Compile Include="DataAccess\Crud\ReferenceCrudFactory.cs" />
     <Compile Include="DataAccess\Crud\SecurityCrudFactory.cs" />
+    <Compile Include="DataAccess\Crud\HistoryStudentRecruitedCrudFactory.cs" />
     <Compile Include="DataAccess\Crud\StudentCrudFactory.cs" />
     <Compile Include="DataAccess\Crud\SysAdminCrudFactory.cs" />
     <Compile Include="DataAccess\Crud\UserLogCrudFactory.cs" />
@@ -344,6 +346,7 @@
     <Compile Include="DataAccess\Mapper\RecruiterMapper.cs" />
     <Compile Include="DataAccess\Mapper\ReferenceMapper.cs" />
     <Compile Include="DataAccess\Mapper\SecurityMapper.cs" />
+    <Compile Include="DataAccess\Mapper\HistoryStudentRecruitedMapper.cs" />
     <Compile Include="DataAccess\Mapper\StudentMapper.cs" />
     <Compile Include="DataAccess\Mapper\SysAdminMapper.cs" />
     <Compile Include="DataAccess\Mapper\UserLogMapper.cs" />
@@ -366,6 +369,7 @@
     <Compile Include="Manager\RecruiterManager.cs" />
     <Compile Include="Manager\ReferenceManager.cs" />
     <Compile Include="Manager\SecurityLoginManager.cs" />
+    <Compile Include="Manager\HistoryStudentRecruitedManager.cs" />
     <Compile Include="Manager\StudentManager.cs" />
     <Compile Include="Manager\SysAdminManager.cs" />
     <Compile Include="Manager\UserLogManager.cs" />
@@ -377,6 +381,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\EntityUser.cs" />
     <Compile Include="Models\ExtraCourse.cs" />
+    <Compile Include="Models\HistoryStudentRecruited.cs" />
     <Compile Include="Models\Laboral.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Mail.cs" />

@@ -189,6 +189,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SysAdminController.cs" />
     <Compile Include="Controllers\EntityUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -302,6 +303,7 @@
     <Content Include="Scripts\Views\Student\vStudentList.js" />
     <Content Include="Scripts\Views\Student\vStudentRegistration.js" />
     <Content Include="Scripts\Views\Student\vStudentUpdate.js" />
+    <Content Include="Scripts\Views\Reports\ReportHistoryRecruitment.js" />
     <Content Include="Scripts\Views\SysAdmin\SysAdminUpdate.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminAccount.js" />
     <Content Include="Scripts\Views\SysAdmin\vSysAdminRegistration.js" />
@@ -333,6 +335,7 @@
     <Content Include="Views\Modal\AddAcademic.cshtml" />
     <Content Include="Views\Recruiter\Recruitment.cshtml" />
     <Content Include="Views\Recruiter\StudentsRecruited.cshtml" />
+    <Content Include="Views\Report\ReportHistoryRecruitment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
