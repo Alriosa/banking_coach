@@ -74,7 +74,19 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_STATUS_INTERVIEW, historyStudent.StatusInterview);
             operation.AddVarcharParam(DB_COL_STATUS_HIRED, historyStudent.StatusHired);
             operation.AddVarcharParam(DB_COL_UPDATE_DATE, historyStudent.UpdateDate);
+            return operation;
+        }
+
+        public SqlOperation GetFinishStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_FINISH_TBL_HISTORY_STUDENT_RECRUITED" };
+
+            var historyStudent = (HistoryStudentRecruited)entity;
+            operation.AddIntParam(DB_COL_ID, historyStudent.Id);
+            operation.AddIntParam(DB_COL_STUDENT_ID, historyStudent.StudentID);
             operation.AddVarcharParam(DB_COL_FINISH_DATE, historyStudent.FinishDate);
+            operation.AddVarcharParam(DB_COL_RECRUITER_USER, historyStudent.RecruiterUser);
+            operation.AddVarcharParam(DB_COL_RECRUITER_NAME, historyStudent.RecruiterName);
             return operation;
         }
 

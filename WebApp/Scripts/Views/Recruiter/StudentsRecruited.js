@@ -57,7 +57,7 @@ function StudentsRecruited() {
                             data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
                             data[i].DriverLicenses,
                             '<button title="Modificar Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + ',' + data[i].IdHistoryRecruitment + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button>',
-                            '<button title="Finalizar / Cancelar" onclick="finishProcessRecruitemt(' + data[i].StudentID + ')" type="button" class="btn btn-danger btn-radius"><i class="fa fa-close" style="cursor:pointer;"></i></button>',
+                            '<button title="Finalizar / Cancelar" onclick="finishProcessRecruitment(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment +')" type="button" class="btn btn-danger btn-radius"><i class="fa fa-close" style="cursor:pointer;"></i></button>',
                         ]).draw(false);
 
                         let select1 = $("#selectE" + data[i].StudentID);
@@ -123,21 +123,21 @@ function StudentsRecruited() {
         historyData['StatusPsychometric'] = document.querySelector('#selectPsychometric').options[document.querySelector('#selectPsychometric').selectedIndex].text;
         historyData['StatusInterview'] = document.querySelector('#selectInterview').options[document.querySelector('#selectInterview').selectedIndex].text;
         historyData['StatusHired'] = document.querySelector('#selectHired').options[document.querySelector('#selectHired').selectedIndex].text;
-        historyData['Recruiter_User'] = user['UserLogin'];
-        historyData['Recruiter_Name'] = user['Name'];
-        historyData['Update_Date'] = formatDate(new Date());
+        historyData['RecruiterUser'] = user['UserLogin'];
+        historyData['RecruiterName'] = user['Name'];
+        historyData['UpdateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
 
         console.log(historyData)
 
-        /*this.ctrlActions.PutToAPI('student/updateStatusRecruitment', recruitmentData, function () {
-            //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
-            this.ctrlActions2 = new ControlActions();
-            this.student = new StudentsRecruited();
-            
+        this.ctrlActions.PutToAPI("history/recruited/student/", historyData);
 
-            this.ctrlActions2.GetById("language/student/" + languageData["StudentID"], this.student.GetLanguages);
-            $('#statusRecruitment').modal('toggle');
-        });*/
+        this.ctrlActions.PutToAPI('student/updateStatusRecruitment', recruitmentData,
+            setTimeout(
+                function redirection() {
+                    $('#statusRecruitment').modal('toggle');
+                    window.location.reload()
+                }, 3000)
+        );
     }
 }
 
@@ -218,87 +218,31 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
-function updateProcessTestEconomic(studentID, selectId) {
-    let user = JSON.parse(getCookie('user'));
-    this.ctrlActions = new ControlActions();
-    let student = {
-        StudentID: studentID
-    }
-    if (user['UserType'] == '3') {
-        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-            student['StatusEconomicTest'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateTestEconomic', student,
-               // setTimeout(function redirection() { window.location.reload() })
-            );
-        })
-    }
-}
-
-function updateProcessTestPsychometric(studentID, selectId) {
-    let user = JSON.parse(getCookie('user'));
-    this.ctrlActions = new ControlActions();
-    let student = {
-        StudentID: studentID
-    }
-    if (user['UserType'] == '3') {
-        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-            student['StatusPsychometricTest'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateTestPsychometric', student,
-                // setTimeout(function redirection() { window.location.reload() })
-            );
-        })
-    }
-}
-
-
-function updateProcessInterview(studentID, selectId) {
+function finishProcessRecruitment(studentID, historyID) {
     let user = JSON.parse(getCookie('user'));
     this.ctrlActions = new ControlActions();
     let student = {
         StudentID: studentID
     }
 
-    if (user['UserType'] == '3') {
-        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-            student['StatusInterview'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateProcessInterview', student,
-                //  setTimeout(function redirection() { window.location.reload() })
-            );
-        })
-    }
-}
+    var historyData = {};
+    historyData["Id"] = historyID;
+    historyData["StudentID"] = studentID
+    historyData['RecruiterUser'] = user['UserLogin'];
+    historyData['RecruiterName'] = user['Name'];
+    historyData['FinishDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
 
-
-function updateProcessHiring(studentID, selectId) {
-    let user = JSON.parse(getCookie('user'));
-    this.ctrlActions = new ControlActions();
-    let student = {
-        StudentID: studentID
-    }
-
-    if (user['UserType'] == '3') {
-        this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
-            student['StatusHired'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateStatusHiring', student,
-                // setTimeout(function redirection() { window.location.reload() })
-            );
-        })
-    }
-}
-
-function finishProcessRecruitemt(studentID) {
-    let user = JSON.parse(getCookie('user'));
-    this.ctrlActions = new ControlActions();
-    let student = {
-        StudentID: studentID
-    }
-
+    console.log(historyData)
     if (user['UserType'] == '3') {
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             //setID Entity to studentData
-            this.ctrlActions.PutToAPI('student/finishRecruitStudent', student,
-                setTimeout(function redirection() { window.location.reload() }, 5000));
-        })
+
+            this.ctrlActions.PutToAPI("history/recruited/student/finish", historyData);
+
+            this.ctrlActions.PutToAPI('student/finishRecruitStudent', student, function () {
+                //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+                setTimeout(function redirection() { window.location.reload() }, 3000)
+            });
+        });
     }
 }

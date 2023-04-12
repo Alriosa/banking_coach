@@ -39,6 +39,12 @@ namespace CoreAPI
         {
             crudFactory.Update(historyStudent);
         }
+        
+        public void Finish(HistoryStudentRecruited historyStudent)
+        {
+            crudFactory.Finish(historyStudent);
+        }
+
 
         public void Delete(HistoryStudentRecruited historyStudent)
         {

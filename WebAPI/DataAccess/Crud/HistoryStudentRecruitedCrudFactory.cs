@@ -68,13 +68,18 @@ namespace DataAccess.Crud
       
         public override void Update(BaseEntity entity)
         {
-            var student = (Student)entity;
-            dao.ExecuteProcedure(mapper.GetUpdateStatement(student));
+            var history = (HistoryStudentRecruited)entity;
+            dao.ExecuteProcedure(mapper.GetUpdateStatement(history));
+        }
+        public void Finish(BaseEntity entity)
+        {
+            var history = (HistoryStudentRecruited)entity;
+            dao.ExecuteProcedure(mapper.GetFinishStatement(history));
         }
         public override void Delete(BaseEntity entity)
         {
-            var student = (Student)entity;
-            dao.ExecuteProcedure(mapper.GetDeleteStatement(student));
+            var history = (HistoryStudentRecruited)entity;
+            dao.ExecuteProcedure(mapper.GetDeleteStatement(history));
         }
 
         public override T RetrieveByUserLogin<T>(BaseEntity entity)

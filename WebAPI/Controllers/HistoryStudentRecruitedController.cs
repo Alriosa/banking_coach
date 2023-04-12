@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
                 apiResp = new ApiResponse();
                 var mng = new HistoryStudentRecruitedManager();
                 apiResp.Data = mng.Create(historyStudent);
-                apiResp.Message = "Historial Creado";
+                apiResp.Message = "Estudiante Reclutado satisfactoriamente";
                 return Ok(apiResp);
             }
             catch (Exception bex)
@@ -55,7 +55,32 @@ namespace WebAPI.Controllers
 
                 apiResp = new ApiResponse
                 {
-                    Message = "Historial Modificado"
+                    Message = "Estado de Reclutamiento actualizado"
+                };
+
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
+            }
+        }
+        [HttpPut]
+        [Route("finish")]
+        public IHttpActionResult FinishHistory(HistoryStudentRecruited historyStudent)
+        {
+            try
+            {
+                var mng = new HistoryStudentRecruitedManager();
+                mng.Finish(historyStudent);
+
+                apiResp = new ApiResponse
+                {
+                    Message = "Estudiante se eliminó de la lista de reclutados de la entidad bancaria"
                 };
 
                 return Ok(apiResp);

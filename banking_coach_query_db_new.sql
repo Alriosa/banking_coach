@@ -1203,7 +1203,8 @@ BEGIN
 			status_Recruitment = 0,
 			Status_Economic_Test = 0,
 			Status_Psychometric_Test = 0,
-			Status_Interview = 0
+			Status_Interview = 0,
+			Status_Hired = 0
 			WHERE Student_ID = @SP_Student_ID;
 
 		END 
@@ -1217,13 +1218,17 @@ BEGIN
 		END
 	END
 GO
-
 CREATE PROCEDURE [dbo].[SP_FINISH_RECRUIT_STUDENT] 
         @SP_Student_ID INT AS
 BEGIN
 		UPDATE [dbo].[TBL_STUDENT] SET
 			Entity_Id = 0,
-			Status_Recruitment = 0
+			Status_Recruitment = 0,
+			IdHistoryRecruitment = null,
+			Status_Economic_Test = 0,
+			Status_Psychometric_Test = 0,
+			Status_Interview = 0,
+			Status_Hired = 0
 			WHERE Student_ID = @SP_Student_ID;
 		
 	END
@@ -2520,6 +2525,7 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_HISTORY_STUDENT_RECRUITED]
         @SP_Status_Interview VARCHAR(20),
         @SP_Status_Hired VARCHAR(20)
 AS
+		DECLARE @SP_New_Id INT
         INSERT INTO [dbo].[TBL_HISTORY_STUDENTS_RECRUITED]
 		([Student_ID]
            ,[First_Name]
@@ -2567,9 +2573,7 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_HISTORY_STUDENT_RECRUITED]
         @SP_Student_ID INT,
         @SP_Recruiter_User VARCHAR(100),
         @SP_Recruiter_Name VARCHAR(100),
-        @SP_Create_Date VARCHAR(50),
         @SP_Update_Date VARCHAR(50),
-        @SP_Finish_Date VARCHAR(50),
         @SP_Status_Economic VARCHAR(20),
         @SP_Status_Psychometric VARCHAR(20),
         @SP_Status_Interview VARCHAR(20),
@@ -2578,9 +2582,7 @@ AS
         UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] SET
 			   [Recruiter_User] = @SP_Recruiter_User
 			   ,[Recruiter_Name] = @SP_Recruiter_Name
-			   ,[Create_Date] = @SP_Create_Date
 			   ,[Update_Date] = @SP_Update_Date
-			   ,[Finish_Date] = @SP_Finish_Date
 			   ,[Status_Economic] = @SP_Status_Economic
 			   ,[Status_Psychometric] = @SP_Status_Psychometric
 			   ,[Status_Interview] = @SP_Status_Interview
@@ -2591,7 +2593,22 @@ AS
 				
 GO
 
-
+CREATE PROCEDURE [dbo].[SP_FINISH_TBL_HISTORY_STUDENT_RECRUITED]
+        @SP_Id INT,
+        @SP_Student_ID INT,
+        @SP_Recruiter_User VARCHAR(100),
+        @SP_Recruiter_Name VARCHAR(100),
+        @SP_Finish_Date VARCHAR(50)
+AS
+        UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] SET
+			   [Recruiter_User] = @SP_Recruiter_User
+			   ,[Recruiter_Name] = @SP_Recruiter_Name
+			   ,[Finish_Date] = @SP_Finish_Date
+				WHERE Id = @SP_Id and Student_ID = @SP_Student_ID;
+				
+				
+				
+GO
 
 CREATE PROCEDURE [dbo].[SP_SELECT_ALL_HISTORY_STUDENTS_RECRUITED]
 AS
