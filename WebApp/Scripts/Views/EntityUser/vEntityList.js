@@ -46,7 +46,7 @@
 					data[i].Id,
 					data[i].Quantity,
 					data[i].UserActiveStatus,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateEntity(' + data[i].EntityUserID + ')"><i class="fa fa-pen-to-square"></i></button ><button class="btn btn-danger" id="changeStatus' + data[i].EntityUserID + '"  onclick="changeStatusEntity(' + data[i].EntityUserID + ',\'' + data[i].UserActiveStatus + '\',this)"><i class="fa fa-eye"></i></button >',
+					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateEntity(' + data[i].EntityUserID + ')" id="updateEntity"><i class="fa fa-user-edit"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].EntityUserID + '"  onclick="changeStatusEntity(' + data[i].EntityUserID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >'
 
 				]).draw(false);
 
@@ -119,7 +119,8 @@ async function changeStatusEntity(data, data2, button) {
 		var index = t.row($(button).parents('tr')).index();
 		var data = t.row($(button).parents('tr')).data();
 		data[3] = (entityData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
-		data[4] = data[4].replace(/Activo|Inactivo/g, data[3]);
+		let btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateEntity(' + entityData.EntityUserID + ')" id="updateEntity"><i class="fa fa-user-edit"></i></button ><button ' + (data[3] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + entityData.EntityUserID + '"  onclick="changeStatusEntity(' + entityData.EntityUserID + ',\'' + data[3] + '\', this)">' + (data[3] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+		data[4] = btnActions
 		t.row(index).data(data).draw();
 		topFunction()
 	});

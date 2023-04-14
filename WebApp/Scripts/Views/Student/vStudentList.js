@@ -54,8 +54,7 @@ function vStudentList() {
                     '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
                     '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected disabled>Seleccione</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
                     '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID + '" aria-label="Contratación"><option value="0" selected disabled>Seleccione</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
-                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button><button class= "btn btn-danger" id = "changeStatus' + data[i].StudentID + '" onclick = "changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\',this);" > <i class="fa fa-eye"></i></button > ',
-
+                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user-edit"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >'
                 ]).draw(false);
 
 
@@ -180,7 +179,9 @@ async function changeStatusStudent(data, data2, button) {
         var index = t.row($(button).parents('tr')).index();
         var data = t.row($(button).parents('tr')).data();
         data[5] = (studentData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
-        data[8] = data[8].replace(/Activo|Inactivo/g, data[5]);
+
+        let btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + studentData.StudentID + ')" id="profileStudent"><i class="fa fa-user-edit"></i></button ><button ' + (data[5] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + studentData.StudentID + '"  onclick="changeStatusStudent(' + studentData.SysAdminUserID + ',\'' + data[5] + '\', this)">' + (data[5] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+        data[8] = btnActions
         t.row(index).data(data).draw();
         topFunction()
     });

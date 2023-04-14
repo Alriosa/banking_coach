@@ -47,7 +47,7 @@
                     data[i].Email,
                     data[i].EntityAssociationName,
 					data[i].UserActiveStatus,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateRecruiter(' + data[i].RecruiterUserID + ')" id="updateRecruiter"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="changeStatus' + data[i].RecruiterUserID + '" onclick="changeStatusRecruiter(' + data[i].RecruiterUserID + ', \'' + data[i].UserActiveStatus + '\',this)"><i class="fa fa-eye"></i></button >',
+					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateRecruiter(' + data[i].RecruiterUserID + ')" id="updateRecruiter"><i class="fa fa-user-edit"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].RecruiterUserID + '"  onclick="changeStatusRecruiter(' + data[i].RecruiterUserID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >'
 
                 ]).draw(false);
 
@@ -131,7 +131,8 @@ async function changeStatusRecruiter(data, data2, button) {
 		var index = t.row($(button).parents('tr')).index();
 		var data = t.row($(button).parents('tr')).data();
 		data[5] = (recruiterData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
-		data[6] = data[6].replace(/Activo|Inactivo/g, data[5]);
+		let btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateRecruiter(' + recruiterData.RecruiterUserID + ')" id="updateRecruiter"><i class="fa fa-user-edit"></i></button ><button ' + (data[5] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + recruiterData.RecruiterUserID + '"  onclick="changeStatusRecruiter(' + recruiterData.RecruiterUserID + ',\'' + data[5] + '\', this)">' + (data[5] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+		data[6] = btnActions
 		t.row(index).data(data).draw();
 		topFunction()
 	});

@@ -37,16 +37,17 @@
 			$('#tblSysAdmin tbody').on('click', 'tr', function () {
                 var data = t.row(this).data();
 				sessionStorage.setItem('tblSysAdmin_selected', JSON.stringify(data));
-            });
-            for (let i in data) {
+			});
+
+			for (let i in data) {
+				btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].SysAdminUserID + '"  onclick="changeStatusAdmin(' + data[i].SysAdminUserID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
                 t.row.add([
                     data[i].Name,
                     data[i].IdType,
                     data[i].IdentificationNumber,
 					data[i].Email,
 					data[i].UserActiveStatus,
-					'<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button class="btn btn-danger" id="changeStatus' + data[i].SysAdminUserID + '"  onclick="changeStatusAdmin(' + data[i].SysAdminUserID + ',\'' + data[i].UserActiveStatus + '\', this)"><i class="fa fa-eye"></i></button >',
-
+					btnActions
                 ]).draw(false);
 
             }
@@ -119,7 +120,10 @@ async function changeStatusAdmin(data, data2, button) {
 		var index = t.row($(button).parents('tr')).index();
 		var data = t.row($(button).parents('tr')).data();
 		data[4] = (adminData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
-		data[5] = data[5].replace(/Activo|Inactivo/g, data[4]);
+		let btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + adminData.SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button ' + (data[4] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + adminData.SysAdminUserID + '"  onclick="changeStatusAdmin(' + adminData.SysAdminUserID + ',\'' + data[4] + '\', this)">' + (data[4] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+		data[5] = btnActions
+
+
 		t.row(index).data(data).draw();
 		topFunction()
 	});
