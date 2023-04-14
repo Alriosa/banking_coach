@@ -1,6 +1,7 @@
 ﻿
 var students = [];
 var languageListStudents = [];
+var img = document.getElementById("logo");
 
 
 
@@ -227,8 +228,14 @@ function sleep(ms) {
 
 async function getData(StudentID) {
     this.ctrlActions = new ControlActions();
-
+    laboralList = [];
+    academicList = [];
+    courseList = [];
+    languageList = [];
+    referenceList = [];
     await this.ctrlActions.GetById("laboral/student/" + StudentID, (data) => {
+        $('#profileContent').innerHTML = ""
+
         if (data.length > 0) {
             laboralList = data
             for (let i in data) {
@@ -326,44 +333,44 @@ async function DowlandCV(student) {
     }
 
     $('.bg-gray').css("color", "black");
-
-    document.querySelector('#P_BankingStudent').innerHTML = "";
-    document.querySelector('#P_Location').innerHTML = "";
-    document.querySelector('#P_Country').innerHTML = "";
-    document.querySelector('#P_JobAvailability').innerHTML = "";
-    document.querySelector('#P_Id_Type').innerHTML = "";
-    document.querySelector('#P_DriverLicenses').innerHTML = "";
-    document.querySelector('#P_CompleteName').innerHTML = "";
-    document.querySelector('#P_IdentificationNumber').innerHTML = "";
-    document.querySelector('#P_Email').innerHTML = "";
-    document.querySelector('#P_PhoneNumber').innerHTML = "";
-    document.querySelector('#P_SecondPhoneNumber').innerHTML = "";
-    document.querySelector('#P_Vehicle').innerHTML = "";
+    
 
 
     let name = student['FirstName'] + ' ' + student['FirstLastName'] + ' ' + student['SecondLastName'];
+    document.querySelector('#P_JobAvailability').innerHTML = "";
     document.querySelector('#P_JobAvailability').append(student['JobAvailability']);
+    document.querySelector('#P_Id_Type').innerHTML = "";
     document.querySelector('#P_Id_Type').append(student['IdType']);
+    document.querySelector('#P_DriverLicenses').innerHTML = "";
     document.querySelector('#P_DriverLicenses').append(student['DriverLicenses']);
+    document.querySelector('#P_CompleteName').innerHTML = "";
     document.querySelector('#P_CompleteName').append(name);
+    document.querySelector('#P_IdentificationNumber').innerHTML = "";
     document.querySelector('#P_IdentificationNumber').append(student['IdentificationNumber']);
+    document.querySelector('#P_Email').innerHTML = "";
     document.querySelector('#P_Email').append(student['Email']);
+    document.querySelector('#P_PhoneNumber').innerHTML = "";
     document.querySelector('#P_PhoneNumber').append(student['FirstPhoneNumber']);
+    document.querySelector('#P_SecondPhoneNumber').innerHTML = "";
     document.querySelector('#P_SecondPhoneNumber').append(student['SecondPhoneNumber']);
+    document.querySelector('#P_Vehicle').innerHTML = "";
     document.querySelector('#P_Vehicle').append(student['Vehicle']);
+    document.querySelector('#P_Type_Vehicle').innerHTML = "";
     if (student['Type_Vehicle'] != null && student['Type_Vehicle'] != "") {
         document.querySelector('#P_Type_Vehicle').append("Tipo: " + student['Type_Vehicle']);
     }
+    document.querySelector('#P_Location').innerHTML = "";
     document.querySelector('#P_Location').append(student['NProvince'] + ", " + student['NCanton'] + ", " + student['NDistrict']);
 
+    document.querySelector('#P_Country').innerHTML = "";
     document.querySelector('#P_Country').append(student['Country']);
-
+     $('.selectedVehicle').hide();
     if (student['Vehicle'] == "Sí") {
         $('.selectedVehicle').show();
     } else {
         $('.selectedVehicle').hide();
     }
-
+    document.querySelector('#P_BankingStudent').innerHTML = "";
     document.querySelector('#P_BankingStudent').append(student['BankingStudent']);
 
     var studentProfileData = student;
@@ -538,7 +545,6 @@ async function DowlandCV(student) {
 
     //container.append(image);
 
-    var img = document.getElementById("logo");
 
     container.append(img);
     container.append(title);

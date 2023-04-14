@@ -1299,6 +1299,7 @@ $(document).ready(function () {
         setTimeout(async function () {
 
             await DowlandCV()
+            await $('.bg-gray').css("color", "white");
 
         }, 2000)
        
