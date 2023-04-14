@@ -291,6 +291,18 @@ async function getData(StudentID) {
                                     student['IdHistoryRecruitment'] = history.Data['Id'];
                                     await DowlandCV(student);
                                     await $('.bg-gray').css("color", "white");
+                                    document.querySelector('#P_BankingStudent').innerHTML = "";
+                                    document.querySelector('#P_Location').innerHTML = "";
+                                    document.querySelector('#P_Country').innerHTML = "";
+                                    document.querySelector('#P_JobAvailability').innerHTML = "";
+                                    document.querySelector('#P_Id_Type').innerHTML = "";
+                                    document.querySelector('#P_DriverLicenses').innerHTML = "";
+                                    document.querySelector('#P_CompleteName').innerHTML = "";
+                                    document.querySelector('#P_IdentificationNumber').innerHTML = "";
+                                    document.querySelector('#P_Email').innerHTML = "";
+                                    document.querySelector('#P_PhoneNumber').innerHTML = "";
+                                    document.querySelector('#P_SecondPhoneNumber').innerHTML = "";
+                                    document.querySelector('#P_Vehicle').innerHTML = "";
                                 })
                             })
                         }, 4000)
