@@ -49,11 +49,11 @@ function vStudentList() {
                     data[i].Email,
                     data[i].BankingStudent,
                     data[i].UserActiveStatus,
-                    '<select onchange="changeEntity(' + data[i].StudentID + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select>',
-                    '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID + '" aria-label="Pruebas económicas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Econoómicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >' +
-                    '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected disabled>Seleccione</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
-                    '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected disabled>Seleccione</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
-                    '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID + '" aria-label="Contratación"><option value="0" selected disabled>Seleccione</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
+                    '<select onchange="changeEntity(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select>',
+                    '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID + '" aria-label="Pruebas económicas"><option value="0" selected>Sin Realizar Pruebas Económicas</option ><option value="1" >Aprobó Pruebas Económicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >' +
+                    '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected>Sin Realizar Pruebas Psicométricas</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
+                    '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected>Sin Realizar Entrevista</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
+                    '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID + '" aria-label="Contratación"><option value="0" selected>Seleccione Opción Contratación</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
                     '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user-edit"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >'
                 ]).draw(false);
 
@@ -201,7 +201,7 @@ function updateProcessTestEconomic(studentID, selectId) {
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             student['StatusEconomicTest'] = parseInt(selectId.value);
             this.ctrlActions.PutToAPI('student/updateTestEconomic', student,
-                // setTimeout(function redirection() { window.location.reload() })
+                 setTimeout(function redirection() { window.location.reload() })
             );
         })
 }
@@ -215,7 +215,7 @@ function updateProcessTestPsychometric(studentID, selectId) {
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             student['StatusPsychometricTest'] = parseInt(selectId.value);
             this.ctrlActions.PutToAPI('student/updateTestPsychometric', student,
-                // setTimeout(function redirection() { window.location.reload() })
+                 setTimeout(function redirection() { window.location.reload() })
             );
         })
 }
@@ -231,7 +231,7 @@ function updateProcessInterview(studentID, selectId) {
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             student['StatusInterview'] = parseInt(selectId.value);
             this.ctrlActions.PutToAPI('student/updateProcessInterview', student,
-                //  setTimeout(function redirection() { window.location.reload() })
+                 setTimeout(function redirection() { window.location.reload() })
             );
         })
 }
@@ -247,26 +247,95 @@ function updateProcessHiring(studentID, selectId) {
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             student['StatusHired'] = parseInt(selectId.value);
             this.ctrlActions.PutToAPI('student/updateStatusHiring', student,
-                // setTimeout(function redirection() { window.location.reload() })
+                 setTimeout(function redirection() { window.location.reload() })
             );
         })
 }
 
 
 
-function changeEntity(studentID, selectId) {
+async function changeEntity(studentID, historyID, selectId) {
+    this.ctrlActions = new ControlActions();
+    let student = {
+        StudentID: studentID
+    }
+    let user = JSON.parse(getCookie('user'));
+    var historyData = {};
+
+    
+    await finishProcessRecruitment(studentID, historyID)
+
+     await this.ctrlActions.GetById('student/' + studentID, async function (student) {
+         if (selectId.value != '0') {
+
+             student['EntityId'] = Number(selectId.value);
+             student['StatusEconomicTest'] = 0;
+             student['StatusPsychometricTest'] = 0;
+             student['StatusInterview'] = 0;
+             student['StatusHired'] = 0;
+
+             historyData["StudentID"] = student["StudentID"]
+             historyData["FirstName"] = student["FirstName"]
+             historyData["FirstLastName"] = student["FirstLastName"]
+             historyData["SecondLastName"] = student["SecondLastName"]
+             historyData["IdType"] = student["IdType"]
+             historyData["IdentificationNumber"] = student["IdentificationNumber"]
+             historyData['EntityId'] = selectId.value;
+             historyData['EntityUser'] = selectId[selectId.value].text
+             historyData['RecruiterUser'] = user['UserLogin'];
+             historyData['RecruiterName'] = user['Name'];
+             historyData['StatusEconomic'] = "Sin realizar";
+             historyData['StatusPsychometric'] = "Sin realizar";
+             historyData['StatusInterview'] = "Sin realizar";
+             historyData['StatusHired'] = "Sin realizar";
+             historyData['CreateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+             historyData['UpdateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+
+             this.ctrlActions2 = new ControlActions();
+             await this.ctrlActions2.PostToAPI('history/recruited/student/', historyData, async function (history) {
+                 student['IdHistoryRecruitment'] = history.Data['Id'];
+                 this.ctrlActions3 = new ControlActions();
+
+                 await this.ctrlActions3.PutToAPI('student/recruitStudent', student, async function (data) {
+                     this.ctrlActions4 = new ControlActions();
+                     await this.ctrlActions4.PutToAPI('student/updateStatusRecruitment', student,
+                         setTimeout(function redirection(data) { window.location.reload() }, 5000));
+
+                 });
+             })
+         } else {
+             setTimeout(function redirection() { window.location.reload() }, 5000);
+         }
+    })
+   
+}
+
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+
+async function finishProcessRecruitment(studentID, historyID) {
+    let user = JSON.parse(getCookie('user'));
     this.ctrlActions = new ControlActions();
     let student = {
         StudentID: studentID
     }
 
-    student['EntityId'] = selectId.value;
+    var historyData = {};
+    historyData["Id"] = historyID;
+    historyData["StudentID"] = studentID
+    historyData['RecruiterUser'] = user['UserLogin'];
+    historyData['RecruiterName'] = user['Name'];
+    historyData['FinishDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
 
-    //setID Entity to studentData
-    this.ctrlActions.PutToAPI('student/recruitStudent', student,
-        setTimeout(function redirection() { window.location.reload() }, 5000));
-}
-function topFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    console.log(historyData)
+    await this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
+        //setID Entity to studentData
+       await  this.ctrlActions.PutToAPI('student/finishRecruitStudent', student);
+
+       await this.ctrlActions.PutToAPI("history/recruited/student/finish", historyData);
+
+    });
 }

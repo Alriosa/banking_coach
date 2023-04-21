@@ -397,10 +397,11 @@ namespace DataAccess.Mapper
                 StatusEconomicTest = GetIntValue(row, DB_COL_STATUS_ECONOMIC_TEST),
                 StatusPsychometricTest = GetIntValue(row, DB_COL_STATUS_PSYCHOMETRIC_TEST),
                 StatusInterview = GetIntValue(row, DB_COL_STATUS_INTERVIEW),
-                StatusHired = GetIntValue(row, DB_COL_STATUS_HIRED)
+                StatusHired = GetIntValue(row, DB_COL_STATUS_HIRED),
+                IdHistoryRecruitment = GetIntValue(row, DB_COL_ID_HISTORY_RECRUITED)
 
-            //UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
-        };
+                //UserLogin = GetStringValue(row, DB_COL_USER_EXIST),
+            };
 
             return student;
         }

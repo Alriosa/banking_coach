@@ -989,7 +989,7 @@ AS
 		WHEN S.User_Active_Status = '1' THEN 'Activo'
 		WHEN S.User_Active_Status = '0' THEN 'Inactivo'  
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
-		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired, S.Entity_Id, TE.Name AS Entity_Name, S.IdHistoryRecruitment
 		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
@@ -1010,7 +1010,9 @@ AS
 	   S.Curriculum, S.Agree_Job_Exchange,S.Province, S.Canton, S.District, LP.Name_Value AS 'N_Province', LC.Name_Value AS 'N_Canton', LD.Name_Value AS 'N_District', CASE  
 		WHEN S.User_Active_Status = '1' THEN 'Activo'
 		WHEN S.User_Active_Status = '0' THEN 'Inactivo'  
-		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date FROM [dbo].[TBL_STUDENT] AS S
+		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date
+		, S.IdHistoryRecruitment		
+		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
 		INNER JOIN 
@@ -1041,7 +1043,7 @@ AS
 	    WHEN S.User_Active_Status = '1' THEN 'Activo'
 		WHEN S.User_Active_Status = '0' THEN 'Inactivo'  
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
-		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired,  S.Entity_Id, TE.Name AS Entity_Name
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired,  S.Entity_Id, TE.Name AS Entity_Name, S.IdHistoryRecruitment
 		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
@@ -1063,7 +1065,7 @@ AS
 		WHEN S.User_Active_Status = '1' THEN 'Activo'
 		WHEN S.User_Active_Status = '0' THEN 'Inactivo' 
 		END AS 'User_Active_Status', S.User_Type, S.Student_User, S.Student_Password, S.Entry_Date, S.Status_Recruitment,
-		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired,  S.Entity_Id, TE.Name AS Entity_Name
+		S.Status_Economic_Test, S.Status_Psychometric_Test, S.Status_Interview, S.Status_Hired,  S.Entity_Id, TE.Name AS Entity_Name, S.IdHistoryRecruitment
 		FROM [dbo].[TBL_STUDENT] AS S
 		INNER JOIN 
 		LST_PROVINCES AS LP ON S.Province = LP.Code
@@ -1260,6 +1262,22 @@ CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_TEST_ECONOMIC]
         @SP_Status_Economic_Test INT
 AS
 BEGIN
+		DECLARE @Id_History INT
+		DECLARE @Test_Status VARCHAR(20)
+		SELECT @Id_History = IdHistoryRecruitment FROM [dbo].[TBL_STUDENT] WHERE Student_ID = @SP_Student_ID;
+
+		SET @Test_Status = CASE @SP_Status_Economic_Test
+		   WHEN 1 THEN 'Aprobado'
+		   WHEN 2 THEN 'Reprobado'
+		   ELSE 'Sin Realizar'
+		END
+		
+
+		UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED]
+		SET    [Update_Date] = GETDATE()
+			   ,[Status_Economic] = @Test_Status
+				WHERE Id = @Id_History and Student_ID = @SP_Student_ID;
+				
 		UPDATE [dbo].[TBL_STUDENT] SET
 			Status_Economic_Test = @SP_Status_Economic_Test
 			WHERE Student_ID = @SP_Student_ID;
@@ -1271,6 +1289,22 @@ CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_TEST_PSYCHOMETRIC]
         @SP_Status_Psychometric_Test INT
 AS
 BEGIN
+		DECLARE @Id_History INT
+		DECLARE @Test_Status VARCHAR(20)
+		SELECT @Id_History = IdHistoryRecruitment FROM [dbo].[TBL_STUDENT] WHERE Student_ID = @SP_Student_ID;
+
+		SET @Test_Status = CASE @SP_Status_Psychometric_Test
+		   WHEN 1 THEN 'Aprobado'
+		   WHEN 2 THEN 'Reprobado'
+		   ELSE 'Sin Realizar'
+		END
+		
+
+		UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] 
+		SET 	[Update_Date] = GETDATE()
+			   ,[Status_Psychometric] = @Test_Status
+				WHERE Id = @Id_History and Student_ID = @SP_Student_ID;
+			
 		UPDATE [dbo].[TBL_STUDENT] SET
 			Status_Psychometric_Test = @SP_Status_Psychometric_Test
 			WHERE Student_ID = @SP_Student_ID;
@@ -1282,8 +1316,24 @@ CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_INTERVIEW]
         @SP_Status_Interview INT
 AS
 BEGIN
-		UPDATE [dbo].[TBL_STUDENT] SET
-			Status_Interview = @SP_Status_Interview
+		DECLARE @Id_History INT
+		DECLARE @Test_Status VARCHAR(20)
+		SELECT @Id_History = IdHistoryRecruitment FROM [dbo].[TBL_STUDENT] WHERE Student_ID = @SP_Student_ID;
+
+		SET @Test_Status = CASE @SP_Status_Interview
+		   WHEN 1 THEN 'Aprobado'
+		   WHEN 2 THEN 'Reprobado'
+		   ELSE 'Sin Realizar'
+		END
+		
+
+		UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] SET
+			   [Update_Date] = GETDATE()
+			   ,[Status_Interview] = @Test_Status
+				WHERE Id = @Id_History and Student_ID = @SP_Student_ID;
+				
+		UPDATE [dbo].[TBL_STUDENT] 
+		SET Status_Interview = @SP_Status_Interview
 			WHERE Student_ID = @SP_Student_ID;
 	END
 GO
@@ -1293,10 +1343,25 @@ CREATE PROCEDURE [dbo].[SP_STUDENT_PROCESS_HIRING]
         @SP_Status_Hired INT
 AS
 BEGIN
+		DECLARE @Id_History INT
+		DECLARE @Test_Status VARCHAR(20)
+		SELECT @Id_History = IdHistoryRecruitment FROM [dbo].[TBL_STUDENT] WHERE Student_ID = @SP_Student_ID;
+
+		SET @Test_Status = CASE @SP_Status_Hired
+		   WHEN 1 THEN 'Aprobado'
+		   WHEN 2 THEN 'Reprobado'
+		   ELSE 'Sin Realizar'
+		END
+		
+
+		UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] 
+		SET   [Update_Date] = GETDATE()
+			   ,[Status_Hired] = @Test_Status
+				WHERE Id = @Id_History and Student_ID = @SP_Student_ID;
+				
 		UPDATE [dbo].[TBL_STUDENT] SET
 			Status_Hired = @SP_Status_Hired
 			WHERE Student_ID = @SP_Student_ID;
-
 		
 	END
 GO
