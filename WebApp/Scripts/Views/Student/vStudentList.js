@@ -42,19 +42,24 @@ function vStudentList() {
                 sessionStorage.setItem('tblStudent_selected', JSON.stringify(data));
             });
             for (let i in data) {
+
+                btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+
+
+
                 var newRow = t.row.add([
                     data[i].FirstName + ' ' + data[i].FirstLastName + ' ' + data[i].SecondLastName,
                     data[i].IdType,
                     data[i].IdentificationNumber,
                     data[i].Email,
                     data[i].BankingStudent,
-                    data[i].UserActiveStatus,
                     '<select onchange="changeEntity(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select>',
                     '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID + '" aria-label="Pruebas económicas"><option value="0" selected>Sin Realizar Pruebas Económicas</option ><option value="1" >Aprobó Pruebas Económicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >' +
                     '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected>Sin Realizar Pruebas Psicométricas</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
                     '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected>Sin Realizar Entrevista</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
                     '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID + '" aria-label="Contratación"><option value="0" selected>Seleccione Opción Contratación</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
-                    '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user-edit"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >'
+                     data[i].UserActiveStatus,
+                     btnActions
                 ]).draw(false);
 
 
