@@ -57,7 +57,6 @@ function StudentsRecruited() {
                             data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
                             data[i].DriverLicenses,
                             '<button title="Modificar Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + ',' + data[i].IdHistoryRecruitment + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button>',
-                            '<button title="Finalizar / Cancelar" onclick="finishProcessRecruitment(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment +')" type="button" class="btn btn-danger btn-radius"><i class="fa fa-close" style="cursor:pointer;"></i></button>',
                         ]).draw(false);
 
                         let select1 = $("#selectE" + data[i].StudentID);
