@@ -134,14 +134,8 @@ function intersection(first, second) {
 };
 
 $(document).ready(function () {
-
-
     var students = new Recruitment();
     students.RetrieveStudents();
-
-
- 
-
 });
 
 $(document).ready(function () {
@@ -233,9 +227,8 @@ async function getData(StudentID) {
     courseList = [];
     languageList = [];
     referenceList = [];
+    document.querySelector('#profileContent').innerHTML = "";
     await this.ctrlActions.GetById("laboral/student/" + StudentID, (data) => {
-        $('#profileContent').innerHTML = ""
-
         if (data.length > 0) {
             laboralList = data
             for (let i in data) {
@@ -333,8 +326,6 @@ async function DowlandCV(student) {
     }
 
     $('.bg-gray').css("color", "black");
-    
-
 
     let name = student['FirstName'] + ' ' + student['FirstLastName'] + ' ' + student['SecondLastName'];
     document.querySelector('#P_JobAvailability').innerHTML = "";
@@ -542,9 +533,7 @@ async function DowlandCV(student) {
     container.style.fontSize = "12px";
     // container.style.color = "#000";
     container.style.lineHeight = "1.2";  //important for knowing break lines.
-
     //container.append(image);
-
 
     container.append(img);
     container.append(title);
@@ -588,8 +577,3 @@ async function DowlandCV(student) {
     html2pdf(container, opt);
     //html2pdf().set(opt).from(container).save();
 }
-
-
-
-
-
