@@ -118,7 +118,7 @@ function Recruitment() {
                         data[i].Type_Vehicle,
                         data[i].DriverLicenses,
                         data[i].Sex,
-                        '<button class="btn btn-orange" onclick="getData(' + data[i].StudentID + ')"><i class="fas fa-download"></i></button>'
+                        '<button class="btn btn-orange" title="Descargar Currículum" onclick="getData(' + data[i].StudentID + ')"><i class="fas fa-download"></i></button>'
                     ]).draw(false);
                 }
             }

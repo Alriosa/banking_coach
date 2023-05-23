@@ -40,7 +40,7 @@
 			});
 
 			for (let i in data) {
-				btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].SysAdminUserID + '"  onclick="changeStatusAdmin(' + data[i].SysAdminUserID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+				btnActions = '<button class="btn btn-primary" title="Actualizar Administrador" style="margin-right: 10px;" onclick="updateAdmin(' + data[i].SysAdminUserID + ')" id="updateAdmin"><i class="fa fa-user-edit"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].SysAdminUserID + '" title="' + (data[i].UserActiveStatus == 'Activo' ? 'Desactivar Admin' : 'Activar Admin') + '" onclick="changeStatusAdmin(' + data[i].SysAdminUserID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
                 t.row.add([
                     data[i].Name,
                     data[i].IdType,
