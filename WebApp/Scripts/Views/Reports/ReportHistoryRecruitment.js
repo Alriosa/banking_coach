@@ -2,7 +2,6 @@
     this.tblRecruiterId = 'tblHistoryRecruitment';
     this.ctrlActions = new ControlActions();
     this.service = 'recruiter';
-    this.columns = "RecruiterLogin,Name,Email,EntityAssociationName,UserActiveStatus";
 
     this.BindFields = function (data) {
         localStorage.setItem('selectedID', data["RecruiterUserID"]);
@@ -48,7 +47,9 @@
                     data[i].StatusInterview,
                     data[i].StatusHired,
                     data[i].UpdateDate,
-                    (data[i].FinishDate != '') ? data[i].FinishDate : 'En proceso'
+                    data[i].UpdateBy,
+                    (data[i].FinishDate != '') ? data[i].FinishDate : 'En proceso',
+                    data[i].Observations
                 ]).draw(false);
             }
         });
