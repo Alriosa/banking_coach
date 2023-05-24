@@ -261,42 +261,46 @@ async function getData(StudentID) {
             this.ctrlActions.PutToAPI('recruiter/addQuantity', recruiter,
                 function (response) {
                     if (response) {
-                        setTimeout(function () {
-                            this.ctrlActions2 = new ControlActions();
+                        if (response.Data == "error") {
+                            console.log(response)
+                        } else {
+                            setTimeout(function () {
+                                this.ctrlActions2 = new ControlActions();
 
-                            this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
-                                student['EntityId'] = recruiter['EntityAssociation'];
+                                this.ctrlActions2.GetById('student/' + StudentID, async function (student) {
+                                    student['EntityId'] = recruiter['EntityAssociation'];
 
-                                var historyData = {};
-                                historyData["StudentID"] = student["StudentID"]
-                                historyData["FirstName"] = student["FirstName"]
-                                historyData["FirstLastName"] = student["FirstLastName"]
-                                historyData["SecondLastName"] = student["SecondLastName"]
-                                historyData["IdType"] = student["IdType"]
-                                historyData["IdentificationNumber"] = student["IdentificationNumber"]
-                                historyData['EntityId'] = recruiter['EntityAssociation']
-                                historyData['EntityUser'] = recruiter['EntityAssociationName']
-                                historyData['RecruiterUser'] = user['UserLogin'];
-                                historyData['RecruiterName'] = user['Name'];
-                                historyData['StatusEconomic'] = "Sin realizar";
-                                historyData['StatusPsychometric'] = "Sin realizar";
-                                historyData['StatusInterview'] = "Sin realizar";
-                                historyData['StatusHired'] = "Sin realizar";
-                                historyData['CreateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
-                                historyData['UpdateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
-                                console.log(historyData)
+                                    var historyData = {};
+                                    historyData["StudentID"] = student["StudentID"]
+                                    historyData["FirstName"] = student["FirstName"]
+                                    historyData["FirstLastName"] = student["FirstLastName"]
+                                    historyData["SecondLastName"] = student["SecondLastName"]
+                                    historyData["IdType"] = student["IdType"]
+                                    historyData["IdentificationNumber"] = student["IdentificationNumber"]
+                                    historyData['EntityId'] = recruiter['EntityAssociation']
+                                    historyData['EntityUser'] = recruiter['EntityAssociationName']
+                                    historyData['RecruiterUser'] = user['UserLogin'];
+                                    historyData['RecruiterName'] = user['Name'];
+                                    historyData['StatusEconomic'] = "Sin realizar";
+                                    historyData['StatusPsychometric'] = "Sin realizar";
+                                    historyData['StatusInterview'] = "Sin realizar";
+                                    historyData['StatusHired'] = "Sin realizar";
+                                    historyData['CreateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+                                    historyData['UpdateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+                                    console.log(historyData)
 
-                                this.ctrlActions3 = new ControlActions();
-                                this.ctrlActions3.PostToAPI('history/recruited/student/', historyData, async function (history) {
-                                    student['IdHistoryRecruitment'] = history.Data['Id'];
-                                    await DowlandCV(student);
-                                    await $('.bg-gray').css("color", "white");
-                                    
+                                    this.ctrlActions3 = new ControlActions();
+                                    this.ctrlActions3.PostToAPI('history/recruited/student/', historyData, async function (history) {
+                                        student['IdHistoryRecruitment'] = history.Data['Id'];
+                                        await DowlandCV(student);
+                                        await $('.bg-gray').css("color", "white");
+
+                                    })
                                 })
-                            })
-                        }, 4000)
+                            }, 4000)
+                        }
                     }
-                    else if (response.Data == "error") {
+                    else {
                         console.log(response)
                     }
                 }
