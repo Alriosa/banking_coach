@@ -237,7 +237,9 @@ CREATE TABLE TBL_HISTORY_STUDENTS_RECRUITED (
 	Status_Economic VARCHAR(20) NOT NULL, 
 	Status_Psychometric VARCHAR(20) NOT NULL, 
 	Status_Interview VARCHAR(20) NOT NULL, 
-	Status_Hired VARCHAR(20) NOT NULL
+	Status_Hired VARCHAR(20) NOT NULL,
+	Update_By varchar(100) NOT NULL DEFAULT "", 
+	Observations varchar(100) NULL DEFAULT "",
 );
 
 

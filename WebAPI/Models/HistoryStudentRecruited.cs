@@ -24,7 +24,9 @@ namespace WebAPI.Models
         public string StatusInterview { get; set; }
         public string StatusHired { get; set; }
         public string CreateDate { get; set; }
+        public string UpdateBy { get; set; }
         public string UpdateDate { get; set; }
         public string FinishDate { get; set; }
+        public string Observations { get; set; }
     }
 }

@@ -25,6 +25,8 @@ namespace DataAccess.Mapper
         private const string DB_COL_CREATE_DATE = "Create_Date";
         private const string DB_COL_UPDATE_DATE = "Update_Date";
         private const string DB_COL_FINISH_DATE = "Finish_Date";
+        private const string DB_COL_UPDATE_BY = "Update_By";
+        private const string DB_COL_OBSERVATIONS = "Observations";
 
 
 
@@ -50,6 +52,7 @@ namespace DataAccess.Mapper
             operation.AddVarcharParam(DB_COL_STATUS_HIRED, historyStudent.StatusHired);
             operation.AddVarcharParam(DB_COL_CREATE_DATE, historyStudent.CreateDate);
             operation.AddVarcharParam(DB_COL_UPDATE_DATE, historyStudent.UpdateDate);
+            operation.AddVarcharParam(DB_COL_UPDATE_BY, historyStudent.RecruiterName);
 
             return operation;
         }
@@ -67,13 +70,13 @@ namespace DataAccess.Mapper
             var historyStudent = (HistoryStudentRecruited)entity;
             operation.AddIntParam(DB_COL_ID, historyStudent.Id);
             operation.AddIntParam(DB_COL_STUDENT_ID, historyStudent.StudentID);
-            operation.AddVarcharParam(DB_COL_RECRUITER_USER, historyStudent.RecruiterUser);
-            operation.AddVarcharParam(DB_COL_RECRUITER_NAME, historyStudent.RecruiterName);
             operation.AddVarcharParam(DB_COL_STATUS_ECONOMIC, historyStudent.StatusEconomic);
             operation.AddVarcharParam(DB_COL_STATUS_PSYCHOMETRIC, historyStudent.StatusPsychometric);
             operation.AddVarcharParam(DB_COL_STATUS_INTERVIEW, historyStudent.StatusInterview);
             operation.AddVarcharParam(DB_COL_STATUS_HIRED, historyStudent.StatusHired);
             operation.AddVarcharParam(DB_COL_UPDATE_DATE, historyStudent.UpdateDate);
+            operation.AddVarcharParam(DB_COL_UPDATE_BY, historyStudent.RecruiterName);
+            operation.AddVarcharParam(DB_COL_OBSERVATIONS, historyStudent.Observations);
             return operation;
         }
 
@@ -85,8 +88,9 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_ID, historyStudent.Id);
             operation.AddIntParam(DB_COL_STUDENT_ID, historyStudent.StudentID);
             operation.AddVarcharParam(DB_COL_FINISH_DATE, historyStudent.FinishDate);
-            operation.AddVarcharParam(DB_COL_RECRUITER_USER, historyStudent.RecruiterUser);
-            operation.AddVarcharParam(DB_COL_RECRUITER_NAME, historyStudent.RecruiterName);
+            operation.AddVarcharParam(DB_COL_UPDATE_DATE, historyStudent.FinishDate);
+            operation.AddVarcharParam(DB_COL_UPDATE_BY, historyStudent.RecruiterName);
+            operation.AddVarcharParam(DB_COL_OBSERVATIONS, historyStudent.Observations);
             return operation;
         }
 
@@ -125,6 +129,8 @@ namespace DataAccess.Mapper
                 CreateDate = GetStringValue(row, DB_COL_CREATE_DATE),
                 UpdateDate = GetStringValue(row, DB_COL_UPDATE_DATE),
                 FinishDate = GetStringValue(row, DB_COL_FINISH_DATE),
+                UpdateBy = GetStringValue(row, DB_COL_UPDATE_BY),
+                Observations = GetStringValue(row, DB_COL_OBSERVATIONS),
             };
 
             return historyStudent;
