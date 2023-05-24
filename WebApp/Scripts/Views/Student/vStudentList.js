@@ -45,13 +45,18 @@ function vStudentList() {
 
                 btnActions = '<button title="Perfil de estudiante" class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '" title="' + (data[i].UserActiveStatus == 'Activo' ? 'Desactivar Estudiante' : 'Activar Estudiante') + '"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
 
+
+                 
+                btnFinish = (data[i]['EntityName'] == "F_DEFAULT" || data[i]['EntityName'] == "" ? '' : '<button style="cursor:pointer;" class="btn btn-danger" onclick="finishProcessRecruitment(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ')">Ya no trabaja en el banco</button>')
+
+
                 var newRow = t.row.add([
                     data[i].FirstName + ' ' + data[i].FirstLastName + ' ' + data[i].SecondLastName,
                     data[i].IdType,
                     data[i].IdentificationNumber,
                     data[i].Email,
                     data[i].BankingStudent,
-                    '<select onchange="changeEntity(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select><p style="cursor:pointer;color: #ffb8b8;text-decoration: underline;" onclick="finishProcessRecruitment(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment +')">Ya no trabaja en el banco</p>' ,
+                    '<select onchange="changeEntity(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select >' + btnFinish ,
                     '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID + '" aria-label="Pruebas económicas"><option value="0" selected>Sin Realizar Pruebas Económicas</option ><option value="1" >Aprobó Pruebas Económicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >' +
                     '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected>Sin Realizar Pruebas Psicométricas</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
                     '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected>Sin Realizar Entrevista</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +

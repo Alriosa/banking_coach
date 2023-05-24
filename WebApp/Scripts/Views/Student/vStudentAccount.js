@@ -105,8 +105,7 @@ function vStudentAccount() {
 
             document.querySelector('#P_BankingStudent').append(data['BankingStudent']);
 
-            var entityName = (data['EntityName'] == "F_DEFAULT" || data['EntityName'] == "") ? "Sin reclutar" : data['EntityName'];
-
+            var entityName = (data['EntityName'] == "F_DEFAULT" || data['EntityName'] == "") ? "Sin reclutar" : data['EntityName'] + ((data['StatusHired'] == 1) ? " ( Contratado )" : entityName + '( En Proceso de Reclutamiento )') ;
             document.querySelector('#P_EntityName').append(entityName);
             /*
             if (data['BankingStudent'] == "1") {

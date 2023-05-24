@@ -108,7 +108,7 @@ function StudentsRecruited() {
                     if (isError.checked || recruitmentData['StatusHired'] == 2) {
                         historyData['FinishDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
                         if (isError.checked) {
-                            historyData['Observations'] += " - Seleccionado por error";
+                            historyData['Observations'] += " ( Seleccionado por error )";
                         }
                         await finishProcessRecruitment(historyData)
                     } else {

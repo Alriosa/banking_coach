@@ -88,7 +88,6 @@ namespace DataAccess.Mapper
             operation.AddIntParam(DB_COL_ID, historyStudent.Id);
             operation.AddIntParam(DB_COL_STUDENT_ID, historyStudent.StudentID);
             operation.AddVarcharParam(DB_COL_FINISH_DATE, historyStudent.FinishDate);
-            operation.AddVarcharParam(DB_COL_UPDATE_DATE, historyStudent.FinishDate);
             operation.AddVarcharParam(DB_COL_UPDATE_BY, historyStudent.RecruiterName);
             operation.AddVarcharParam(DB_COL_OBSERVATIONS, historyStudent.Observations);
             return operation;
