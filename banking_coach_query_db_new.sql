@@ -875,6 +875,10 @@ INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'StudentsRecruited','Estudiantes en R
 INSERT INTO TBL_VIEWS VALUES ('Report', 'ReportHistoryRecruitment','Historial de Reclutados','Reportes')
 
 
+INSERT INTO TBL_VIEWS VALUES ('Recruiter', 'StudentsHired','Estudiantes Contratados','Área de Reclutamiento')
+
+
+
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '1')
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '2')
 INSERT INTO TBL_PERMISSIONS VALUES ('1', '5')
@@ -889,6 +893,7 @@ INSERT INTO TBL_PERMISSIONS VALUES ('1', '18')
 
 INSERT INTO TBL_PERMISSIONS VALUES ('3', '16')
 INSERT INTO TBL_PERMISSIONS VALUES ('3', '17')
+INSERT INTO TBL_PERMISSIONS VALUES ('3', '19')
 
 
 

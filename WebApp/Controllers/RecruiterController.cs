@@ -137,5 +137,23 @@ namespace WebApp.Controllers
             }
             return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
+        
+        public ActionResult StudentsHired()
+        {
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1 || typeNumber == 3)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
+        }
     }
 }
