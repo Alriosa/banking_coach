@@ -2654,7 +2654,7 @@ CREATE PROCEDURE [dbo].[SP_UPDATE_TBL_HISTORY_STUDENT_RECRUITED]
         @SP_Status_Psychometric VARCHAR(20),
         @SP_Status_Interview VARCHAR(20),
         @SP_Status_Hired VARCHAR(20),
-		@SP_Observations VARCHAR(100)
+		@SP_Observations VARCHAR(100) = NULL
 AS
         UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] SET
 			   [Update_By] = @SP_Update_By
@@ -2675,7 +2675,7 @@ CREATE PROCEDURE [dbo].[SP_FINISH_TBL_HISTORY_STUDENT_RECRUITED]
         @SP_Student_ID INT,
         @SP_Update_By VARCHAR(100),
         @SP_Finish_Date VARCHAR(50),
-		@SP_Observations VARCHAR(100)
+		@SP_Observations VARCHAR(100) = NULL
 AS
         UPDATE [dbo].[TBL_HISTORY_STUDENTS_RECRUITED] SET
 			   [Update_By] = @SP_Update_By
