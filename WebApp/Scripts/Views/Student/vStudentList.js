@@ -188,7 +188,7 @@ async function changeStatusStudent(data, data2, button) {
         var data = t.row($(button).parents('tr')).data();
         data[5] = (studentData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
 
-        let btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + studentData.StudentID + ')" id="profileStudent"><i class="fa fa-user-edit"></i></button ><button ' + (data[5] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + studentData.StudentID + '"  onclick="changeStatusStudent(' + studentData.SysAdminUserID + ',\'' + data[5] + '\', this)">' + (data[5] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+        let btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + studentData.StudentID + ')" id="profileStudent"><i class="fa fa-user-user"></i></button ><button ' + (data[5] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + studentData.StudentID + '"  onclick="changeStatusStudent(' + studentData.SysAdminUserID + ',\'' + data[5] + '\', this)">' + (data[5] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
         data[8] = btnActions
         t.row(index).data(data).draw();
         topFunction()
@@ -343,7 +343,10 @@ async function finishProcessRecruitment(studentID, historyID) {
         //setID Entity to studentData
        await  this.ctrlActions.PutToAPI('student/finishRecruitStudent', student);
 
-       await this.ctrlActions.PutToAPI("history/recruited/student/finish", historyData);
+        await this.ctrlActions.PutToAPI("history/recruited/student/finish", historyData, function () {
+            //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
+            setTimeout(function redirection() { window.location.reload() }, 3000)
+        });
 
     });
 }
