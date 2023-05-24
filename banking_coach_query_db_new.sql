@@ -2617,7 +2617,8 @@ AS
            ,[Status_Economic]
            ,[Status_Psychometric]
            ,[Status_Interview]
-           ,[Status_Hired])
+           ,[Status_Hired]
+		   ,[Update_By])
         VALUES
                 (@SP_Student_ID,
                 @SP_First_Name,
@@ -2634,7 +2635,8 @@ AS
                 @SP_Status_Economic,
                 @SP_Status_Psychometric,
                 @SP_Status_Interview,
-                @SP_Status_Hired
+                @SP_Status_Hired,
+				@SP_Recruiter_Name
 				);
 		
 		SET @SP_New_Id = SCOPE_IDENTITY(); 		

@@ -156,7 +156,7 @@
                             <div class="mb-4">
                                 <label for="errorSelection">              
                                     <input style="width: 15px;" type="checkbox" id="errorSelection" name="errorSelection" /> 
-                                    Error de seleccion del estudiante
+                                    Seleccione si por error seleccionó al estudiante
                                 </label>                           
                             </div>
                         </div>
@@ -165,8 +165,8 @@
                 </form>
             </div>
             <div class="modal-footer border-0">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                @Html.CtrlButton(viewName: "StudentsRecruited", type: "button", id: "btnUpdateStatusRecruitment", label: "Guardar cambios", onClickFunction: "UpdateStatusRecruitment", buttonType: "orange")
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No completar aún</button>
+                @Html.CtrlButton(viewName: "StudentsRecruited", type: "button", id: "btnUpdateStatusRecruitment", label: "Guardar cambios", onClickFunction: "ValidateFormStatus", buttonType: "orange")
 
             </div>
         </div>

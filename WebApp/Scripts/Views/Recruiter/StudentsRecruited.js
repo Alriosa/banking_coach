@@ -60,41 +60,6 @@ function StudentsRecruited() {
                                 '<button title="Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + ',' + data[i].IdHistoryRecruitment + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button><small> Completar</small>',
                             ]).draw(false);
 
-                            let select1 = $("#selectE" + data[i].StudentID);
-                            if (data[i].StatusEconomicTest == '1') {
-                                select1.val('1').attr('selected', 'selected');
-                            } else if (data[i].StatusEconomicTest == '2') {
-                                select1.val('2').attr('selected', 'selected');
-                            } else {
-                                select1.val('0').attr('selected', 'selected');
-                            }
-
-                            let select2 = $("#selectP" + data[i].StudentID);
-                            if (data[i].StatusPsychometricTest == '1') {
-                                select2.val('1').attr('selected', 'selected');
-                            } else if (data[i].StatusPsychometricTest == '2') {
-                                select2.val('2').attr('selected', 'selected');
-                            } else {
-                                select2.val('0').attr('selected', 'selected');
-                            }
-
-                            let select3 = $("#selectI" + data[i].StudentID);
-                            if (data[i].StatusInterview == '1') {
-                                select3.val('1').attr('selected', 'selected');
-                            } else if (data[i].StatusInterview == '2') {
-                                select3.val('2').attr('selected', 'selected');
-                            } else {
-                                select3.val('0').attr('selected', 'selected');
-                            }
-
-                            let select4 = $("#selectH" + data[i].StudentID);
-                            if (data[i].StatusHired == '1') {
-                                select4.val('1').attr('selected', 'selected');
-                            } else if (data[i].StatusHired == '2') {
-                                select4.val('2').attr('selected', 'selected');
-                            } else {
-                                select4.val('0').attr('selected', 'selected');
-                            }
                         }
                     }
                     students = data;
@@ -140,9 +105,11 @@ function StudentsRecruited() {
                     $('#statusRecruitment').modal('toggle');
 
                     var isError = document.querySelector('#errorSelection');
-                    if (isError.checked || recruitmentData['StatusHired'] != 1) {
+                    if (isError.checked || recruitmentData['StatusHired'] == 2) {
                         historyData['FinishDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
-
+                        if (isError.checked) {
+                            historyData['Observations'] += " - Seleccionado por error";
+                        }
                         await finishProcessRecruitment(historyData)
                     } else {
                         window.location.reload()
@@ -150,6 +117,8 @@ function StudentsRecruited() {
                 }, 3000)
         );
     }
+
+   
 }
 
 function intersection(first, second) {
@@ -211,6 +180,40 @@ $(document).ready(function () {
         modal.find('.modal-body #txtIdHistory').val(Number(identities[6]));
     })
 });
+
+this.ValidateFormStatus = function () {
+
+    if (document.querySelector('#selectEconomic').value == '0') {
+        $('#selectEconomic').addClass('error')
+    }
+    if (document.querySelector('#selectPsychometric').value == '0') {
+        $('#selectEconomic').addClass('error')
+    }
+    if (document.querySelector('#selectInterview').value == '0') {
+        $('#selectEconomic').addClass('error')
+    }
+    if (document.querySelector('#selectHired').value == '0') {
+        $('#selectEconomic').addClass('error')
+    }
+}
+
+this.ValidateFormStatus = function () {
+    $.validator.addMethod(
+        "regex",
+        function (value, element, regexp) {
+            if (regexp.constructor != RegExp)
+                regexp = new RegExp(regexp);
+            else if (regexp.global)
+                regexp.lastIndex = 0;
+            return this.optional(element) || regexp.test(value);
+        },
+        "Revisa los campos."
+    );
+
+
+  
+}
+
 
 function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
