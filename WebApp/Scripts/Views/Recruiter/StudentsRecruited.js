@@ -123,7 +123,6 @@ function StudentsRecruited() {
         historyData['StatusPsychometric'] = document.querySelector('#selectPsychometric').options[document.querySelector('#selectPsychometric').selectedIndex].text;
         historyData['StatusInterview'] = document.querySelector('#selectInterview').options[document.querySelector('#selectInterview').selectedIndex].text;
         historyData['StatusHired'] = document.querySelector('#selectHired').options[document.querySelector('#selectHired').selectedIndex].text;
-        historyData['RecruiterUser'] = user['UserLogin'];
         historyData['RecruiterName'] = user['Name'];
         historyData['UpdateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
         historyData['Observations'] = document.querySelector('#txtObservations').value;
@@ -144,7 +143,7 @@ function StudentsRecruited() {
                     if (isError.checked || recruitmentData['StatusHired'] != 1) {
                         historyData['FinishDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
 
-                        await finishProcessRecruitment(historyData["Id"], historyData["StudentID"], historyData['FinishDate'])
+                        await finishProcessRecruitment(historyData)
                     } else {
                         window.location.reload()
                     }
@@ -230,17 +229,12 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function finishProcessRecruitment(studentID, historyID, finishDate) {
+function finishProcessRecruitment(historyData) {
     let user = JSON.parse(getCookie('user'));
     this.ctrlActions = new ControlActions();
     let student = {
-        StudentID: studentID
+        StudentID: historyData['StudentID']
     }
-
-    var historyData = {};
-    historyData["Id"] = historyID;
-    historyData["StudentID"] = studentID
-    historyData['FinishDate'] = finishDate
 
     console.log(historyData)
     if (user['UserType'] == '3') {
