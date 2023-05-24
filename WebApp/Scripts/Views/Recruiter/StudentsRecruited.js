@@ -48,54 +48,55 @@ function StudentsRecruited() {
                     });
 
                     for (let i in data) {
-                        t.row.add([
-                            data[i].FirstName,
-                            data[i].FirstLastName,
-                            data[i].IdType,
-                            data[i].IdentificationNumber,
-                            data[i].Country,
-                            data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
-                            data[i].DriverLicenses,
-                            '<button title="Modificar Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + ',' + data[i].IdHistoryRecruitment + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button>',
-                        ]).draw(false);
+                        if (data[i].StatusHired != 1) {
+                            t.row.add([
+                                data[i].FirstName,
+                                data[i].FirstLastName,
+                                data[i].IdType,
+                                data[i].IdentificationNumber,
+                                data[i].Country,
+                                data[i].NProvince + ", " + data[i].NCanton + ", " + data[i].NDistrict,
+                                data[i].DriverLicenses,
+                                '<button title="Estado de Reclutamiento" type="button" data-toggle="modal" data-target="#statusRecruitment" data-whatever="' + data[i].StudentID + ',' + data[i].FirstName + ' ' + data[i].FirstLastName + ',' + data[i].StatusEconomicTest + ',' + data[i].StatusPsychometricTest + ',' + data[i].StatusInterview + ',' + data[i].StatusHired + ',' + data[i].IdHistoryRecruitment + '"  class="btn btn-success btn-radius"><i class="fa fa-list-check" style="cursor:pointer;"></i></button><small> Completar</small>',
+                            ]).draw(false);
 
-                        let select1 = $("#selectE" + data[i].StudentID);
-                        if (data[i].StatusEconomicTest == '1') {
-                            select1.val('1').attr('selected', 'selected');
-                        } else if (data[i].StatusEconomicTest == '2') {
-                            select1.val('2').attr('selected', 'selected');
-                        } else {
-                            select1.val('0').attr('selected', 'selected');
-                        }
+                            let select1 = $("#selectE" + data[i].StudentID);
+                            if (data[i].StatusEconomicTest == '1') {
+                                select1.val('1').attr('selected', 'selected');
+                            } else if (data[i].StatusEconomicTest == '2') {
+                                select1.val('2').attr('selected', 'selected');
+                            } else {
+                                select1.val('0').attr('selected', 'selected');
+                            }
 
-                        let select2 = $("#selectP" + data[i].StudentID);
-                        if (data[i].StatusPsychometricTest == '1') {
-                            select2.val('1').attr('selected', 'selected');
-                        } else if (data[i].StatusPsychometricTest == '2') {
-                            select2.val('2').attr('selected', 'selected');
-                        } else {
-                            select2.val('0').attr('selected', 'selected');
-                        }
+                            let select2 = $("#selectP" + data[i].StudentID);
+                            if (data[i].StatusPsychometricTest == '1') {
+                                select2.val('1').attr('selected', 'selected');
+                            } else if (data[i].StatusPsychometricTest == '2') {
+                                select2.val('2').attr('selected', 'selected');
+                            } else {
+                                select2.val('0').attr('selected', 'selected');
+                            }
 
-                        let select3 = $("#selectI" + data[i].StudentID);
-                        if (data[i].StatusInterview == '1') {
-                            select3.val('1').attr('selected', 'selected');
-                        } else if (data[i].StatusInterview == '2') {
-                            select3.val('2').attr('selected', 'selected');
-                        } else {
-                            select3.val('0').attr('selected', 'selected');
-                        }
+                            let select3 = $("#selectI" + data[i].StudentID);
+                            if (data[i].StatusInterview == '1') {
+                                select3.val('1').attr('selected', 'selected');
+                            } else if (data[i].StatusInterview == '2') {
+                                select3.val('2').attr('selected', 'selected');
+                            } else {
+                                select3.val('0').attr('selected', 'selected');
+                            }
 
-                        let select4 = $("#selectH" + data[i].StudentID);
-                        if (data[i].StatusHired == '1') {
-                            select4.val('1').attr('selected', 'selected');
-                        } else if (data[i].StatusHired == '2') {
-                            select4.val('2').attr('selected', 'selected');
-                        } else {
-                            select4.val('0').attr('selected', 'selected');
+                            let select4 = $("#selectH" + data[i].StudentID);
+                            if (data[i].StatusHired == '1') {
+                                select4.val('1').attr('selected', 'selected');
+                            } else if (data[i].StatusHired == '2') {
+                                select4.val('2').attr('selected', 'selected');
+                            } else {
+                                select4.val('0').attr('selected', 'selected');
+                            }
                         }
                     }
-
                     students = data;
                 });
             })
@@ -125,6 +126,10 @@ function StudentsRecruited() {
         historyData['RecruiterUser'] = user['UserLogin'];
         historyData['RecruiterName'] = user['Name'];
         historyData['UpdateDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+        historyData['Observations'] = document.querySelector('#txtObservations').value;
+
+       
+
 
         console.log(historyData)
 
@@ -132,9 +137,17 @@ function StudentsRecruited() {
 
         this.ctrlActions.PutToAPI('student/updateStatusRecruitment', recruitmentData,
             setTimeout(
-                function redirection() {
+                async function redirection() {
                     $('#statusRecruitment').modal('toggle');
-                    window.location.reload()
+
+                    var isError = document.querySelector('#errorSelection');
+                    if (isError.checked || recruitmentData['StatusHired'] != 1) {
+                        historyData['FinishDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+
+                        await finishProcessRecruitment(historyData["Id"], historyData["StudentID"], historyData['FinishDate'])
+                    } else {
+                        window.location.reload()
+                    }
                 }, 3000)
         );
     }
@@ -217,7 +230,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function finishProcessRecruitment(studentID, historyID) {
+function finishProcessRecruitment(studentID, historyID, finishDate) {
     let user = JSON.parse(getCookie('user'));
     this.ctrlActions = new ControlActions();
     let student = {
@@ -227,9 +240,7 @@ function finishProcessRecruitment(studentID, historyID) {
     var historyData = {};
     historyData["Id"] = historyID;
     historyData["StudentID"] = studentID
-    historyData['RecruiterUser'] = user['UserLogin'];
-    historyData['RecruiterName'] = user['Name'];
-    historyData['FinishDate'] = new Date().toLocaleString({ timeZone: 'America/Costa_Rica' });
+    historyData['FinishDate'] = finishDate
 
     console.log(historyData)
     if (user['UserType'] == '3') {
