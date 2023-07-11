@@ -13,38 +13,38 @@ CREATE TABLE TBL_STUDENT(
 Student_ID INT IDENTITY(1,1) NOT NULL, --PK
 Banking_Student VARCHAR(10) NOT NULL DEFAULT 'Sí',
 User_Active_Status VARCHAR(10) NOT NULL DEFAULT '1', /*True or False*/
-First_Name VARCHAR(100) NOT NULL,
-First_Last_Name VARCHAR(100) NOT NULL,
-Second_Last_Name VARCHAR(100) NULL,
+First_Name VARCHAR(100)  NULL DEFAULT '',
+First_Last_Name VARCHAR(100)  NULL DEFAULT '',
+Second_Last_Name VARCHAR(100) NULL DEFAULT '',
 Id_Type VARCHAR(30) NOT NULL,
 Identification_Number VARCHAR(20) NOT NULL UNIQUE, ---MUST BE UNIQUE ---
-Country VARCHAR(50) NOT NULL,
-Birthdate DATETIME NOT NULL,
-Age INT NOT NULL,
+Country VARCHAR(50)  NULL DEFAULT '',
+Birthdate DATETIME  NULL ,
+Age INT  NULL,
 Email VARCHAR(200) NOT NULL UNIQUE,
-Primary_Phone_Number VARCHAR(20) NOT NULL, ---MUST BE UNIQUE ---
-Second_Phone_Number VARCHAR(20) NOT NULL, ---MUST BE UNIQUE ---
-Province VARCHAR(3)  NULL,
-Canton VARCHAR(3)  NULL,
-District VARCHAR(3)  NULL,
-Laboral_Status VARCHAR(10) NULL, /*True or False*/
-Job_Availability VARCHAR(30) NULL,
-Transport_Availability VARCHAR(200) NOT NULL,
-Vehicle VARCHAR(10) NOT NULL,
-Sex VARCHAR(10) NOT NULL,
-Type_Vehicle VARCHAR(200)  NULL,
-Driver_Licenses VARCHAR(200) NULL,
+Primary_Phone_Number VARCHAR(20)  NULL DEFAULT '', ---MUST BE UNIQUE ---
+Second_Phone_Number VARCHAR(20)  NULL, 
+Province VARCHAR(3)  NULL  DEFAULT '1',
+Canton VARCHAR(3)  NULL DEFAULT '01',
+District VARCHAR(3)  NULL DEFAULT '01',
+Laboral_Status VARCHAR(10) NULL DEFAULT '', /*True or False*/
+Job_Availability VARCHAR(30) NULL DEFAULT '',
+Transport_Availability VARCHAR(200) NULL DEFAULT '',
+Vehicle VARCHAR(10)  NULL DEFAULT '',
+Sex VARCHAR(10)  NULL DEFAULT '',
+Type_Vehicle VARCHAR(200)  NULL DEFAULT '',
+Driver_Licenses VARCHAR(200) NULL DEFAULT '',
 Curriculum VARCHAR(400) NULL,
-Agree_Job_Exchange VARCHAR(200) NOT NULL,
+Agree_Job_Exchange VARCHAR(200)  NULL,
 Student_User VARCHAR(20) NOT NULL,---MUST BE UNIQUE ---
 Student_Password VARCHAR(50) NOT NULL,
 User_Type VARCHAR(1)  NOT NULL DEFAULT '2',
 Entry_Date DATETIME NOT NULL,
 Status_Recruitment INT DEFAULT 0,--proccess recruitment
-Entity_Id INT NULL, --proccess recruitment
+Entity_Id INT NULL DEFAULT 0, --proccess recruitment
 Status_Economic_Test INT DEFAULT 0,--proccess recruitment
 Status_Psychometric_Test INT DEFAULT 0,--proccess recruitment
-Status_Interview INT NULL,--proccess recruitment
+Status_Interview INT NULL DEFAULT 0,--proccess recruitment
 Status_Hired INT DEFAULT 0,--proccess recruitment,
 IdHistoryRecruitment INT NULL,
 PRIMARY KEY(Student_ID),
@@ -926,7 +926,30 @@ GO
 STORAGE PROCEDURES FOR STUDENT
 **/
 
+
 CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT] 
+		 @SP_Banking_Student VARCHAR(10),
+         @SP_User_Active_Status VARCHAR(10),
+        @SP_Id_Type VARCHAR(30),
+        @SP_Identification_Number VARCHAR(20),
+        @SP_Email VARCHAR(200),
+        @SP_Student_User VARCHAR(20),
+        @SP_Student_Password VARCHAR(50)
+
+AS
+        INSERT INTO [dbo].[TBL_STUDENT] (Banking_Student, User_Active_Status ,Id_Type ,Identification_Number, Email, Student_User ,Student_Password, User_Type, Entry_Date) VALUES (
+				@SP_Banking_Student,
+                @SP_User_Active_Status,
+				@SP_Id_Type,
+                @SP_Identification_Number,
+                @SP_Email,
+                @SP_Student_User,
+                HashBytes('MD5',@SP_Student_Password),
+				2,
+				GETDATE());
+GO
+
+CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT_ALL_DATA] 
 		 @SP_Banking_Student VARCHAR(10),
          @SP_User_Active_Status VARCHAR(10),
         @SP_First_Name VARCHAR(200),
@@ -941,9 +964,9 @@ CREATE PROCEDURE [dbo].[SP_INSERT_TBL_STUDENT]
         @SP_Primary_Phone_Number VARCHAR(200),
         @SP_Second_Phone_Number VARCHAR(200)= NULL,
         @SP_Country VARCHAR(200),
-		@SP_Province VARCHAR(200) = NULL,
-        @SP_Canton VARCHAR(200) = NULL,
-        @SP_District VARCHAR(200) = NULL,
+		@SP_Province VARCHAR(200) = 1,
+        @SP_Canton VARCHAR(200) = 01,
+        @SP_District VARCHAR(200) = 01,
 		@SP_Laboral_Status VARCHAR(10),
         @SP_Job_Availability VARCHAR(200),
         @SP_Transport_Availability VARCHAR(10),
@@ -1384,6 +1407,20 @@ AS
 		UPDATE [dbo].[TBL_STUDENT] SET
 			Student_Password = HashBytes('MD5',@SP_Student_Password)
 			WHERE Email = @SP_Email;
+		
+	END
+GO
+
+--- RESET STUDENT PASSWORD
+CREATE PROCEDURE [dbo].[SP_RESET_PASSWORD_TBL_STUDENT]
+        @SP_Student_ID INT,
+		@SP_Student_Password VARCHAR(10)
+AS
+	BEGIN
+		
+		UPDATE [dbo].[TBL_STUDENT] SET
+			Student_Password = HashBytes('MD5',@SP_Student_Password)
+			WHERE Student_ID = @SP_Student_ID;
 		
 	END
 GO
