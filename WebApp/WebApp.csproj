@@ -303,6 +303,7 @@
     <Content Include="Scripts\Views\Recruiter\StudentsRecruited.js" />
     <Content Include="Scripts\Views\Student\vStudentAccount.js" />
     <Content Include="Scripts\Views\Student\vStudentList.js" />
+    <Content Include="Scripts\Views\Student\vStudentRegistrationAllData.js" />
     <Content Include="Scripts\Views\Student\vStudentRegistration.js" />
     <Content Include="Scripts\Views\Student\vStudentUpdate.js" />
     <Content Include="Scripts\Views\Reports\ReportHistoryRecruitment.js" />
@@ -339,6 +340,7 @@
     <Content Include="Views\Recruiter\StudentsRecruited.cshtml" />
     <Content Include="Views\Report\ReportHistoryRecruitment.cshtml" />
     <Content Include="Views\Recruiter\StudentsHired.cshtml" />
+    <Content Include="Views\Student\vStudentRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -360,7 +362,7 @@
     <Content Include="Views\Recruiter\vRecruiterRegistration.cshtml" />
     <Content Include="Views\Recruiter\vRecruiterUpdate.cshtml" />
     <Content Include="Views\Student\vStudentList.cshtml" />
-    <Content Include="Views\Student\vStudentRegistration.cshtml" />
+    <Content Include="Views\Student\vStudentRegistrationAllData.cshtml" />
     <Content Include="Views\Student\vStudentUpdate.cshtml" />
     <Content Include="Views\SysAdmin\vSysAdminList.cshtml" />
     <Content Include="Views\SysAdmin\vSysAdminRegistration.cshtml" />

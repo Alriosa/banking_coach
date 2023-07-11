@@ -43,7 +43,7 @@ function vStudentList() {
             });
             for (let i in data) {
 
-                btnActions = '<button title="Perfil de estudiante" class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '" title="' + (data[i].UserActiveStatus == 'Activo' ? 'Desactivar Estudiante' : 'Activar Estudiante') + '"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+                btnActions = '<button title="Perfil de estudiante" class="btn btn-primary" style="margin: 5px 6px;width:46px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '" title="' + (data[i].UserActiveStatus == 'Activo' ? 'Desactivar Estudiante' : 'Activar Estudiante') + '" style="margin: 5px 6px;width:46px;"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\',\'' + data[i].Email + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button ><button class="btn btn-warning" style="margin: 5px 6px;width:46px;" title="Restablecer contraseña" onclick="resetPassword(' + data[i].StudentID + ', \'' + data[i].Email + '\')"  ><i class="fa fa-key"></i></button>';
 
 
                  
@@ -172,7 +172,7 @@ $(document).ready(async function () {
 	});
 });
 
-async function changeStatusStudent(data, data2, button) {
+async function changeStatusStudent(data, data2, dataEmail, button) {
     var studentList = new vStudentList();
     var studentData = {};
     studentData["StudentID"] = data;
@@ -188,7 +188,7 @@ async function changeStatusStudent(data, data2, button) {
         var data = t.row($(button).parents('tr')).data();
         data[5] = (studentData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
 
-        let btnActions = '<button class="btn btn-primary" style="margin-right: 10px;" onclick="profileStudent(' + studentData.StudentID + ')" id="profileStudent"><i class="fa fa-user-user"></i></button ><button ' + (data[5] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + studentData.StudentID + '"  onclick="changeStatusStudent(' + studentData.SysAdminUserID + ',\'' + data[5] + '\', this)">' + (data[5] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button >';
+        let btnActions = '<button class="btn btn-primary" style="margin: 5px 6px;width:46px;" onclick="profileStudent(' + studentData.StudentID + ')" id="profileStudent"><i class="fa fa-user-user"></i></button ><button ' + (data[5] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + studentData.StudentID + '" style="margin: 5px 6px;width:46px;" onclick="changeStatusStudent(' + studentData.SysAdminUserID + ',\'' + data[5] + '\',\'' + dataEmail + '\', this)">' + (data[5] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button ><button class="btn btn-warning" style="margin: 5px 6px;width:46px;" title="Restablecer contraseña" onclick="resetPassword(' + studentData.StudentID + ', \'' + dataEmail + '\')"  ><i class="fa fa-key"></i></button>';
         data[8] = btnActions
         t.row(index).data(data).draw();
         topFunction()
@@ -200,6 +200,20 @@ function profileStudent(selectedID) {
 
 };
 
+
+function resetPassword(selectedID, email) {
+    console.log(selectedID)
+    let user = JSON.parse(getCookie('user'));
+    this.ctrlActions = new ControlActions();
+    let student = {
+        StudentID: selectedID,
+        Email: email
+    }
+    this.ctrlActions.PostToAPI('student/resetPassword', student);
+
+    
+}
+
 function updateProcessTestEconomic(studentID, selectId) {
     let user = JSON.parse(getCookie('user'));
     this.ctrlActions = new ControlActions();
@@ -208,7 +222,8 @@ function updateProcessTestEconomic(studentID, selectId) {
     }
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             student['StatusEconomicTest'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateTestEconomic', student,
+            this.ctrlActions2 = new ControlActions();
+            this.ctrlActions2.PutToAPI('student/updateTestEconomic', student,
                  setTimeout(function redirection() { window.location.reload() })
             );
         })
@@ -222,7 +237,8 @@ function updateProcessTestPsychometric(studentID, selectId) {
     }
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             student['StatusPsychometricTest'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateTestPsychometric', student,
+            this.ctrlActions2 = new ControlActions();
+            this.ctrlActions2.PutToAPI('student/updateTestPsychometric', student,
                  setTimeout(function redirection() { window.location.reload() })
             );
         })
@@ -238,7 +254,8 @@ function updateProcessInterview(studentID, selectId) {
 
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             student['StatusInterview'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateProcessInterview', student,
+            this.ctrlActions2 = new ControlActions();
+            this.ctrlActions2.PutToAPI('student/updateProcessInterview', student,
                  setTimeout(function redirection() { window.location.reload() })
             );
         })
@@ -254,7 +271,8 @@ function updateProcessHiring(studentID, selectId) {
 
         this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
             student['StatusHired'] = parseInt(selectId.value);
-            this.ctrlActions.PutToAPI('student/updateStatusHiring', student,
+            this.ctrlActions2 = new ControlActions();
+            this.ctrlActions2.PutToAPI('student/updateStatusHiring', student,
                  setTimeout(function redirection() { window.location.reload() })
             );
         })
@@ -341,9 +359,11 @@ async function finishProcessRecruitment(studentID, historyID) {
     console.log(historyData)
     await this.ctrlActions.GetById('recruiter/getUser/' + user['UserLogin'], async function (recruiter) {
         //setID Entity to studentData
-       await  this.ctrlActions.PutToAPI('student/finishRecruitStudent', student);
+        this.ctrlActions2 = new ControlActions();
+        
+        await this.ctrlActions2.PutToAPI('student/finishRecruitStudent', student);
 
-        await this.ctrlActions.PutToAPI("history/recruited/student/finish", historyData, function () {
+        await this.ctrlActions2.PutToAPI("history/recruited/student/finish", historyData, function () {
             //setTimeout(function redirection() { window.location.href = '/Home/vLogin'; }, 5000);
             setTimeout(function redirection() { window.location.reload() }, 3000)
         });

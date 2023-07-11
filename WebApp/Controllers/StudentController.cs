@@ -16,6 +16,24 @@ namespace WebApp.Controllers
         {
             return View();
         }
+        public ActionResult vStudentRegistrationAllData()
+        {
+            if (Request.Cookies["user"] != null)
+            {
+                var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
+                int typeNumber = Convert.ToInt32(type);
+                if (typeNumber == 1)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction(actionName: "Index", controllerName: "Home");
+                }
+            }
+
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
+        }
 
         public ActionResult vStudentList()
         {
