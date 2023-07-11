@@ -27,6 +27,15 @@ namespace DataAccess.Crud
             dao.ExecuteProcedure(sqlOperation);
         }
 
+
+        public void CreateAllData(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            var sqlOperation = mapper.GetCreateStatementAllData(student);
+
+            dao.ExecuteProcedure(sqlOperation);
+        }
+
         public override T Retrieve<T>(BaseEntity entity)
         {
             var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveStatement(entity));
@@ -218,6 +227,12 @@ namespace DataAccess.Crud
         {
             var student = (Student)entity;
             dao.ExecuteProcedure(mapper.GetUpdateProcessHiringStatement(student));
+        }
+
+        public void ResetPassword(BaseEntity entity)
+        {
+            var student = (Student)entity;
+            dao.ExecuteProcedure(mapper.GetResetPasswordStatement(student));
         }
     }
 }

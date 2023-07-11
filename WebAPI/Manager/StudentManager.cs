@@ -23,6 +23,8 @@ namespace CoreAPI
             try{
 
                 // if (temp.AdminLogin.Equals("0"))
+
+
                 crudStudent.Create(student);
 
                 // else
@@ -35,6 +37,23 @@ namespace CoreAPI
             }
         }
 
+        public void CreateAllData(Student student)
+        {
+            try
+            {
+
+                // if (temp.AdminLogin.Equals("0"))
+                crudStudent.CreateAllData(student);
+
+                // else
+                //       throw new BussinessException(2);
+            }
+            catch (Exception ex)
+            {
+                // ExceptionManager.GetInstance().Process(ex);
+                throw new Exception("Error al insertar datos", ex);
+            }
+        }
 
         public List<Student> RetrieveAll()
         {
@@ -205,6 +224,11 @@ namespace CoreAPI
         public void StudentProcessHiring(Student student)
         {
             crudStudent.StudentProcessHiring(student);
+        }
+
+        public void ResetPassword(Student student)
+        {
+            crudStudent.ResetPassword(student);
         }
     }
 }

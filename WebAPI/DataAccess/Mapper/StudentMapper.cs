@@ -54,11 +54,26 @@ namespace DataAccess.Mapper
         private const string DB_COL_STATUS_HIRED = "Status_Hired";
 
 
-
-
         public SqlOperation GetCreateStatement(BaseEntity entity)
         {
             var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_STUDENT" };
+
+            var student = (Student)entity;
+            operation.AddVarcharParam(DB_COL_USER_BANKING_STUDENT, student.BankingStudent);
+            operation.AddVarcharParam(DB_COL_USER_ACTIVE_STATUS, student.UserActiveStatus);
+            operation.AddVarcharParam(DB_COL_ID_TYPE, student.IdType);
+            operation.AddVarcharParam(DB_COL_IDENTIFICATION_NUMBER, student.IdentificationNumber);
+            operation.AddVarcharParam(DB_COL_EMAIL, student.Email);
+            operation.AddVarcharParam(DB_COL_STUDENT_LOGIN, student.StudentLogin);
+            operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.StudentPassword);
+
+
+            return operation;
+        }
+
+        public SqlOperation GetCreateStatementAllData(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_INSERT_TBL_STUDENT_ALL_DATA" };
 
             var student = (Student)entity;
             operation.AddVarcharParam(DB_COL_USER_BANKING_STUDENT, student.BankingStudent);
@@ -303,6 +318,16 @@ namespace DataAccess.Mapper
             var student = (Student)entity;
             operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
             operation.AddIntParam(DB_COL_STATUS_HIRED, student.StatusHired);
+            return operation;
+        }
+
+        public SqlOperation GetResetPasswordStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "SP_RESET_PASSWORD_TBL_STUDENT" };
+
+            var student = (Student)entity;
+            operation.AddIntParam(DB_COL_STUDENT_ID, student.StudentID);
+            operation.AddVarcharParam(DB_COL_STUDENT_PASSWORD, student.StudentPassword);
             return operation;
         }
 

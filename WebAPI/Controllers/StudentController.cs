@@ -5,6 +5,7 @@ using System.Web.Http;
 using Models;
 using Exceptions;
 using System.Net.Http;
+using System.Text;
 
 namespace WebAPI.Controllers
 {
@@ -106,7 +107,6 @@ namespace WebAPI.Controllers
             }
         }
 
-
         [HttpPost]
         [Route("")]
         public IHttpActionResult Post(Student student)
@@ -131,8 +131,27 @@ namespace WebAPI.Controllers
                         break;
                     default:
                         student.UserActiveStatus = "1";
+                        student.StudentPassword = GenerateRandomPassword(8);
+
                         mng.Create(student);
-                        apiResp.Message = "Estudiante creado";
+
+                        var mailManager = new MailManager();
+                        try
+                        {
+                            string message = "<h1>Banking Academy: <h1/><h4> Se te ha creado una nueva cuenta en Banking Academy<h4/>";
+
+
+
+                            var text = @"<p>¡Hola!</p><p>Estas son las credenciales que se asignaron a tu usuario:</p><p>Usuario: " + student.IdentificationNumber + "</p><p>Contraseña: " + student.StudentPassword + "</p><span>Se recomienda cambiar la contraseña para mayor seguridad</span>";
+                            message = message + "\n" + text;
+                            mailManager.SendMail(student.Email, "Nueva Cuenta en Banking Academy", message);
+                            apiResp.Message = "Estudiante creado. Mensaje enviado a '" + student.Email + "'";
+                        }
+                        catch (Exception bex)
+                        {
+                            return InternalServerError(new Exception("Error al enviar el correo", bex));
+                        }
+
                         break;
                 }
 
@@ -148,6 +167,46 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("allData")]
+        public IHttpActionResult PostAllData(Student student)
+        {
+            try
+            {
+                apiResp = new ApiResponse();
+
+                var mng = new StudentManager();
+
+                var c = mng.ValidateExist(student);
+
+                switch (c)
+                {
+                    case "1":
+                        apiResp.Message = "Identificación ya existe";
+                        apiResp.Data = "error";
+                        break;
+                    case "2":
+                        apiResp.Message = "Email ya existe";
+                        apiResp.Data = "error";
+                        break;
+                    default:
+                        student.UserActiveStatus = "1";
+                        mng.CreateAllData(student);
+                        apiResp.Message = "Estudiante creado";
+                        break;
+                }
+
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
+            }
+        }
 
         [HttpPut]
         [Route("")]
@@ -402,6 +461,8 @@ namespace WebAPI.Controllers
                 var mng = new StudentManager();
                 mng.StudentProcessHiring(student);
 
+
+
                 apiResp = new ApiResponse
                 {
                     Message = "Estado de contratración actualizado"
@@ -414,6 +475,60 @@ namespace WebAPI.Controllers
                 bex.AppMessage.Message = "Hubo un error al cambiar el estado de contratación";
                 return InternalServerError(new Exception(bex.AppMessage.Message));
             }
+        }
+
+        [HttpPost]
+        [Route("resetPassword")]
+        public IHttpActionResult ResetPassword(Student student)
+        {
+            try
+            {
+                var mng = new StudentManager();
+                student.StudentPassword = GenerateRandomPassword(8);
+                mng.ResetPassword(student);
+
+
+                var mailManager = new MailManager();
+                try
+                {
+                    string message = "<h1>Banking Academy: <h1/><h4> Se ha restablecido su contraseña <h4/>";
+
+                    var text = @"<p>¡Hola!</p><p>Se ha creado una nueva contraseña para su cuenta en Banking Academy:</p><p>Nueva contraseña: " + student.StudentPassword + "</p><span>Ahora podrá usar esta contraseña para poder ingresar a la web.</span>";
+                    message = message + "\n" + text;
+                    mailManager.SendMail(student.Email, "Restablecimiento Contraseña", message);
+                    apiResp.Message = "Contraseña Restablecida. Mensaje enviado a '" + student.Email + "'";
+                }
+                catch (Exception bex)
+                {
+                    return InternalServerError(new Exception("Error al enviar el correo", bex));
+                }
+
+                return Ok(apiResp);
+            }
+            catch (Exception bex)
+            {
+                //  bex.AppMessage.Message = "Hubo un error al cambiar la contraseña del usuario";
+                Console.WriteLine(bex);
+                return ResponseMessage(
+                                            Request.CreateResponse(
+                                                HttpStatusCode.BadRequest,
+                                                bex));
+            }
+        }
+
+        private string GenerateRandomPassword(int length)
+        {
+            string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder password = new StringBuilder();
+            Random random = new Random();
+
+            for (int i = 0; i < length; i++)
+            {
+                int randomIndex = random.Next(0, validChars.Length);
+                password.Append(validChars[randomIndex]);
+            }
+
+            return password.ToString();
         }
     }
 }

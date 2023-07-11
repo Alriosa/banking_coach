@@ -26,7 +26,7 @@ namespace CoreAPI
             // string from = this.configuration.GetValue<string>("MailSettings:user");
 
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("mbonilla.guti@gmail.com");
+            mail.From = new MailAddress("educa@bankingcoachjyd.com");
             mail.To.Add(new MailAddress(email));
             mail.Subject = subject;
             mail.Body = message;
@@ -39,7 +39,7 @@ namespace CoreAPI
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("mbonilla.guti@gmail.com", "dzhddnepmfpdimxe"),
+                Credentials = new NetworkCredential("educa@bankingcoachjyd.com", "welvemmsmbxvjnqu"),
                 EnableSsl = true
                 // specify whether your host accepts SSL connections
             };
