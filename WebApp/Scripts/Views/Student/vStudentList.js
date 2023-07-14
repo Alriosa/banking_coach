@@ -186,9 +186,9 @@ async function changeStatusStudent(data, data2, dataEmail, button) {
         var t = $('#tblStudent').DataTable();
         var index = t.row($(button).parents('tr')).index();
         var data = t.row($(button).parents('tr')).data();
-        data[5] = (studentData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
+        data[7] = (studentData.UserActiveStatus == '1') ? 'Activo' : 'Inactivo'
 
-        let btnActions = '<button class="btn btn-primary" style="margin: 5px 6px;width:46px;" onclick="profileStudent(' + studentData.StudentID + ')" id="profileStudent"><i class="fa fa-user-user"></i></button ><button ' + (data[5] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + studentData.StudentID + '" style="margin: 5px 6px;width:46px;" onclick="changeStatusStudent(' + studentData.SysAdminUserID + ',\'' + data[5] + '\',\'' + dataEmail + '\', this)">' + (data[5] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button ><button class="btn btn-warning" style="margin: 5px 6px;width:46px;" title="Restablecer contraseña" onclick="resetPassword(' + studentData.StudentID + ', \'' + dataEmail + '\')"  ><i class="fa fa-key"></i></button>';
+        let btnActions = '<button class="btn btn-primary" style="margin: 5px 6px;width:46px;" onclick="profileStudent(' + studentData.StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button ' + (data[7] == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + studentData.StudentID + '" style="margin: 5px 6px;width:46px;" onclick="changeStatusStudent(' + studentData.StudentID + ',\'' + data[7] + '\',\'' + dataEmail + '\', this)">' + (data[7] == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button ><button class="btn btn-warning" style="margin: 5px 6px;width:46px;" title="Restablecer contraseña" onclick="resetPassword(' + studentData.StudentID + ', \'' + dataEmail + '\')"  ><i class="fa fa-key"></i></button>';
         data[8] = btnActions
         t.row(index).data(data).draw();
         topFunction()
