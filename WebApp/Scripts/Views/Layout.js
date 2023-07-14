@@ -17,13 +17,19 @@
     $("#btnLogout").click(function () {
         LogOut();
     });
+
+   
 });
 function LogOut() {
     sessionStorage.clear();
     localStorage.clear();
-    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "type=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    var date = new Date();
+    date.setTime(date.getTime() + (3 * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + date.toUTCString();
+
+    document.cookie = "user=; " + expires + "; path=/;";
+    document.cookie = "type=; " + expires + "; path=/;";
+    document.cookie = "token=; " + expires + "; path=/;";
     window.location.href = "/Home"
 }
 
