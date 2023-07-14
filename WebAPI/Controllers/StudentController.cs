@@ -144,6 +144,8 @@ namespace WebAPI.Controllers
 
                             var text = @"<p>¡Hola!</p><p>Estas son las credenciales que se asignaron a tu usuario:</p><p>Usuario: " + student.IdentificationNumber + "</p><p>Contraseña: " + student.StudentPassword + "</p><span>Se recomienda cambiar la contraseña para mayor seguridad</span>";
                             message = message + "\n" + text;
+                            var linkWebSite = "<p>Ahora puedes ingresar a tu cuenta en: <a href=\"www.bankingacademy.net\">Banking Academy</a></p>";
+                            message = message + "\n\n" + linkWebSite;
                             mailManager.SendMail(student.Email, "Nueva Cuenta en Banking Academy", message);
                             apiResp.Message = "Estudiante creado. Mensaje enviado a '" + student.Email + "'";
                         }
@@ -493,8 +495,9 @@ namespace WebAPI.Controllers
                 {
                     string message = "<h1>Banking Academy: <h1/><h4> Se ha restablecido su contraseña <h4/>";
 
-                    var text = @"<p>¡Hola!</p><p>Se ha creado una nueva contraseña para su cuenta en Banking Academy:</p><p>Nueva contraseña: " + student.StudentPassword + "</p><span>Ahora podrá usar esta contraseña para poder ingresar a la web.</span>";
+                    var text = @"<p>¡Hola!</p><p>Se ha creado una nueva contraseña para su cuenta en Banking Academy:</p><p>Nueva contraseña: " + student.StudentPassword + "</p><span>Ahora podrás usar esta contraseña para poder ingresar nuevamente a <a href=\"www.bankingacademy.net\">Banking Academy</a>.</span>";
                     message = message + "\n" + text;
+
                     mailManager.SendMail(student.Email, "Restablecimiento Contraseña", message);
                     apiResp.Message = "Contraseña Restablecida. Mensaje enviado a '" + student.Email + "'";
                 }

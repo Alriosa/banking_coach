@@ -14,18 +14,9 @@ namespace WebAPI.Controllers
     public class ViewPermissionController : ApiController
     {
 
-        [Route("")]
-        public IHttpActionResult Get()
-        {
-            ApiResponse apiResp = new ApiResponse();
-            var mng = new SysAdminManager();
-            apiResp.Data = mng.RetrieveAll();
-
-            return Ok(apiResp);
-        }
 
         [Route("{id}")]
-        public IHttpActionResult Get(string id)
+        public IHttpActionResult Get(string id = "")
         {
             try
             {
