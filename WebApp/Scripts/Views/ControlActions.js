@@ -101,6 +101,8 @@ function ControlActions() {
 			} else {
 				ctrlActions.ShowMessage('I', response.Message);
 				callBackFunction(response);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
 
 			}
 		})
@@ -108,6 +110,8 @@ function ControlActions() {
 				var data = response.responseJSON;
 				var ctrlActions = new ControlActions();
 				ctrlActions.ShowMessage('E', "Hubo un error al realizar la solicitud");
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
 				console.log(data);
 				callBackFunction("error data")
 			})
@@ -125,6 +129,8 @@ function ControlActions() {
 			} else {
 				ctrlActions.ShowMessage('I', response.Message);
 				callBackFunction(response);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
 
 			}
 		})
