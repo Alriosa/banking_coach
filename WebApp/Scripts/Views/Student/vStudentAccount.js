@@ -21,9 +21,21 @@ function vStudentAccount() {
         var studentData = {};
         var studentLogin = document.getElementById("P_Email").textContent;
         studentData = this.ctrlActions.GetDataForm('frmEditPassword');
-        studentData["Email"] = studentLogin;
-        this.ctrlActions.PutToAPI("student/changePassword", studentData,
-            setTimeout(function redirection() { window.location.reload() }, 3000));
+
+        if (studentData['StudentPassword'] == studentData['ConfirmNewPassword']) {
+            studentData["Email"] = studentLogin;
+            this.ctrlActions.PutToAPI("student/changePassword", studentData,
+                setTimeout(function redirection() { LogOut() }, 3000));
+        } else {
+            this.ctrlActions.ShowMessage('E', "Las contraseñas no coinciden");
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        
+
+       
     }
 
     this.GetData = function () {
