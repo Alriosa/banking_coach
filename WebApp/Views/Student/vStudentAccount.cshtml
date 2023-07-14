@@ -56,6 +56,11 @@
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+}
+
+    #studentAccount .nav-item:hover {
+        color: #f37b24;
+        text-decoration: underline;
     }
 
 @@keyframes rotation {
@@ -66,6 +71,8 @@
         transform: rotate(360deg);
     }
 }
+
+    
     
 </style>
 <div id="loader-section" class="loader-section loaded">
@@ -82,14 +89,14 @@
 <div id="studentAccount" class="container-fluid">
     <div class="row">
         <div class="col-lg-6">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="navbar navbar-expand-lg d-flex flex-column">
-                        <div class="col-lg-12">
-                            <div class="collapse navbar-collapse">
+                    <div class=" d-flex flex-column" style="padding: 1rem 0;">
+                        <div class="col-lg-12" style="padding: 0;">
+                            <div >
                                 <ul class="navbar-nav">
-                                    <li class="btn nav-item text-uppercase" data-toggle="modal" data-target="#editPassword">Ajustes</li>
-                                    <li class="btn nav-item text-uppercase" id="downloadCV">Descargar Currículum</li>
+                                    <li class="btn nav-item text-uppercase text-left" style="cursor:pointer;" data-toggle="modal" data-target="#editPassword">Ajustes</li>
+                                    <li class="btn nav-item text-uppercase text-left" style="cursor:pointer;" id="downloadCV">Descargar Currículum</li>
                                 </ul>
                             </div>
                         </div>
@@ -1390,7 +1397,7 @@
 </div>
 <div>
     <div class="modal fade" id="editPassword" tabindex="-1" aria-labelledby="editPasswordLabel" aria-hidden="true" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="top: 9rem;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editPasswordLabel">Cambiar Contraseña</h5>
@@ -1407,12 +1414,12 @@
                                         <input type="hidden" name="_token" value="">
                                         <div class="form-group">
                                             <div>
-                                                @Html.CtrlInputSecond(id: "txtNewPassword", type: "text", required: true, placeHolder: "Nueva Contraseña", columnDataName: "StudentPassword")
+                                                @Html.CtrlInputSecond(id: "txtNewPassword", type: "password", required: true, placeHolder: "Nueva Contraseña", columnDataName: "StudentPassword")
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div>
-                                                @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "text", required: true, placeHolder: "Confirmar Nueva Contraseña", columnDataName: "ConfirmNewPassword")
+                                                @Html.CtrlInputSecond(id: "txtConfirmNewPassword", type: "password", required: true, placeHolder: "Confirmar Nueva Contraseña", columnDataName: "ConfirmNewPassword")
                                             </div>
                                         </div>
 
@@ -1528,10 +1535,10 @@
 <script>
 
         $(document).ready(function () {
-        var vstundentAccount = new vStudentAccount();
-        document.getElementById("txtIdStudent").value = "@ViewBag.IdStudent";
+            var vstundentAccount = new vStudentAccount();
 
-        vstundentAccount.GetData();
+            document.getElementById("txtIdStudent").value = "@ViewBag.IdStudent";
+            vstundentAccount.GetData();
 
         });
 </script>
