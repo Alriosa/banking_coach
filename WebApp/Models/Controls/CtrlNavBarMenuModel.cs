@@ -99,6 +99,10 @@ namespace WebApp.Models.Controls
             {
                 Encoding = System.Text.Encoding.UTF8
             };
+            if(idUserType == "")
+            {
+                idUserType = "0";
+            }
             var response = client.DownloadString(URL_API_LISTs + idUserType);
             var options = JsonConvert.DeserializeObject<List<ViewPermission>>(response);
             return options;
