@@ -82,6 +82,7 @@ namespace WebApp.Controllers
         }
         public ActionResult vStudentAccount(string id)
         {
+
             if (Request.Cookies["user"] != null)
             {
                 if (id != null)
@@ -94,9 +95,38 @@ namespace WebApp.Controllers
                 }
                 var type = JsonConvert.DeserializeObject(Request.Cookies["type"].Value);
                 int typeNumber = Convert.ToInt32(type);
-                if (typeNumber == 1 || typeNumber == 2)
+                if(typeNumber == 1)
                 {
-                    return View();
+                    if(ViewBag.IdStudent == "null")
+                    {
+                        return RedirectToAction(actionName: "vStudentList", controllerName: "Student");
+                    } 
+                    else
+                    {
+                        return View();
+                    }
+                }
+                else if (typeNumber == 2)
+                {
+                    if (ViewBag.IdStudent == "null")
+                    {
+                        var idToken = JsonConvert.DeserializeObject(Request.Cookies["token"].Value);
+
+                        Console.WriteLine(idToken);
+
+                        if (idToken.ToString() == "")
+                        {
+                            return RedirectToAction(actionName: "Index", controllerName: "Home");
+                        }
+                        else
+                        {
+                            ViewBag.IdStudent = idToken;
+                            return View();
+                        }
+                    } else
+                    {
+                        return View();
+                    }
                 }
                 else
                 {
