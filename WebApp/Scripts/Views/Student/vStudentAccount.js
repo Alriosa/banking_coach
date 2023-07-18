@@ -1198,7 +1198,11 @@ $(document).ready(function () {
 
 
         var showCanton = function (selectedProvince) {
+            if (selectedProvince == null) {
+                selectedProvince = "01"
+            }
             $('#txtCanton option').hide();
+
             //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
             //$('#txtCanton').find(`option`).hide(); // hide all
 
@@ -1212,6 +1216,9 @@ $(document).ready(function () {
         };
 
         var showDistrict = function (selectedCanton) {
+            if (selectedCanton == null) {
+                selectedCanton = "01"
+            }
             $('#txtDistrict option').hide();
             //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
             $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
