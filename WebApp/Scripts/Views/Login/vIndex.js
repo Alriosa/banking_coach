@@ -6,6 +6,10 @@
     this.Login = function () {
         var data = {};
         data = this.ctrlActions.GetDataForm('frmLogin');
+
+        var studentLogin = $("#txtLogin").val().trim();;
+        data["UserLogin"] = studentLogin;
+
         this.ctrlActions.Login(this.service + "/login", data, function (response) {
             var control = new ControlActions();
             var userLogin = response["UserLogin"];

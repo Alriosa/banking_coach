@@ -3,38 +3,25 @@
     this.ctrlActions = new ControlActions();
 
     this.Create = function () {
-
         var studentData = {};
         studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
 
-        let user = getCookie('user');
-      
-        var studentLogin = $("#txtIdentificationNumber").val();
+        var studentLogin = $("#txtIdentificationNumber").val().trim();;
         studentData = this.ctrlActions.GetDataForm('frmStudentCreate');
        
         studentData["StudentLogin"] = studentLogin;
         studentData["UserLogin"] = studentLogin;
 
         this.ctrlActions.PostToAPI('student', studentData, function (response) {
-            console.log(response)
-           /* let user = getCookie('user');
-
-            if (user) {
-                setTimeout(function redirection() { window.location.href = '/Student/vStudentList'; }, 4000);
-
-            }*/
-       
         });
     }
 
     this.ValidateInputs = function () {
         if ($("#frmStudentCreate").valid()) {
             this.Create();
-
         }
     }
 }
-
 
 this.RulesValidateCreate = function () {
 
@@ -76,7 +63,6 @@ this.RulesValidateCreate = function () {
 }
 
 
-
 function resetForm() {
     $("#frmStudentCreate")[0].reset();
 }
@@ -116,27 +102,20 @@ $(document).ready(function () {
     $(function () {
         var showCanton = function (selectedProvince) {
             $('#txtCanton option').hide();
-          //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
-            //$('#txtCanton').find(`option`).hide(); // hide all
 
             $('#txtCanton').find(`option[data-parent=${selectedProvince}]`).show();
-
             //set default value
             var defaultCanton = "Seleccione una provincia";
-          //  $('#txtCanton').val(defaultCanton);
             $("#txtCanton").val($("#txtCanton option:first").val());
 
         };
 
         var showDistrict = function (selectedCanton) {
             $('#txtDistrict option').hide();
-            //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
             $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
             //set default value
             var defaultDistrito = "Seleccione un cantón";
-            //$('#txtDistrict').val(defaultDistrito);
             $("#txtDistrict").val($("#txtDistrict option:first").val());
-
         };
 
         //set default provincia
@@ -153,10 +132,6 @@ $(document).ready(function () {
             showDistrict($(this).val());
         });
 
-        $('#txtDistrict').change(function () {
-
-        });
-
         $('#txtBirthdate').change(function () {
             let edad = getEdad($('#txtBirthdate').val())
             $('#txtAge').val(edad);
@@ -166,7 +141,6 @@ $(document).ready(function () {
                 $('#btnRegister').removeAttr('disable')
             }
         });
-
 
         $("#txtVehicle").change(function () {
             if ($('#txtVehicle').val() == "Sí") {
@@ -179,5 +153,4 @@ $(document).ready(function () {
 
     RulesValidateCreate();
 });
-
 
