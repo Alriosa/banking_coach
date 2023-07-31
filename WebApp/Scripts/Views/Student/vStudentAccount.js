@@ -38,7 +38,7 @@ function vStudentAccount() {
        
     }
 
-    this.GetData = function () {
+    this.GetData = async function () {
         var idStudent = document.getElementById("txtIdStudent").value;
 
         if (idStudent != 'null') {
@@ -47,7 +47,7 @@ function vStudentAccount() {
             this.ctrlActions.GetById("academic/student/" + idStudent, this.GetAcademic);
             this.ctrlActions.GetById("extracourse/student/" + idStudent, this.GetCourse);
             this.ctrlActions.GetById("reference/student/" + idStudent, this.GetReference);
-            this.ctrlActions.GetById("language/student/" + idStudent, this.GetLanguages);
+            await this.ctrlActions.GetById("language/student/" + idStudent, this.GetLanguages);
         }
     }
 
@@ -76,6 +76,7 @@ function vStudentAccount() {
                 }
             })
             cont = -1;
+
             var array = data["Type_Vehicle"].split(", ");
             $("input[name=typeVehicles]").each(function () {
                 cont++;
@@ -110,21 +111,24 @@ function vStudentAccount() {
             document.querySelector('#P_Age').append(data['Age']);
 
             if (data['Vehicle'] == "Sí") {
-                $('.selectedVehicle').show();
+                $('#chkVehiclesTypes').show();
             } else {
-                $('.selectedVehicle').hide();
+                $('#chkVehiclesTypes').hide();
             }
 
             document.querySelector('#P_BankingStudent').append(data['BankingStudent']);
 
             var entityName = (data['EntityName'] == "F_DEFAULT" || data['EntityName'] == "") ? "Sin reclutar" : data['EntityName'] + ((data['StatusHired'] == 1) ? " ( Contratado )" : entityName + '( En Proceso de Reclutamiento )') ;
             document.querySelector('#P_EntityName').append(entityName);
-            /*
-            if (data['BankingStudent'] == "1") {
-                document.querySelector('#P_BankingStudent').append("Sí");
-            } else {
-                document.querySelector('#P_BankingStudent').append("No");
-            }*/
+
+            var province = $('#txtProvince').val();
+            showCanton(province);
+            $("#txtCanton").val(data['Canton']);
+            showDistrict($('#txtCanton').val());
+
+            var selectDistrict = $("#txtDistrict");
+            var districtSelected = selectDistrict.find("option[data-parent='" + data['Canton'] + "'][value='" + data['District'] + "']");
+            districtSelected.prop("selected", true);
         }
     }
 
@@ -151,7 +155,6 @@ function vStudentAccount() {
                 array.push(checkboxesV[i].value);
             }
             studentData["Type_Vehicle"] = array.join(', ');
-
         }
 
         array = [];
@@ -1193,42 +1196,42 @@ function getEdad(dateString) {
     return edad;
 }
 
+
+var showCanton = function (selectedProvince) {
+    if (selectedProvince == null) {
+        selectedProvince = "01"
+    }
+    $('#txtCanton option').hide();
+
+    //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
+    //$('#txtCanton').find(`option`).hide(); // hide all
+
+    $('#txtCanton').find(`option[data-parent=${selectedProvince}]`).show();
+
+    //set default value
+    var defaultCanton = "Seleccione una provincia";
+    //  $('#txtCanton').val(defaultCanton);
+    $("#txtCanton").val($("#txtCanton option:first").val());
+
+};
+
+
+var showDistrict = function (selectedCanton) {
+    if (selectedCanton == null) {
+        selectedCanton = "01"
+    }
+    $('#txtDistrict option').hide();
+    //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
+    $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
+    //set default value
+    var defaultDistrito = "Seleccione un cantón";
+    //$('#txtDistrict').val(defaultDistrito);
+    $("#txtDistrict").val($("#txtDistrict option:first").val());
+
+};
+
 $(document).ready(function () {
     $(function () {
-
-
-        var showCanton = function (selectedProvince) {
-            if (selectedProvince == null) {
-                selectedProvince = "01"
-            }
-            $('#txtCanton option').hide();
-
-            //  $('#txtCanton').find('option').filter("option[data ^= '" + selectedProvince + "']").show();
-            //$('#txtCanton').find(`option`).hide(); // hide all
-
-            $('#txtCanton').find(`option[data-parent=${selectedProvince}]`).show();
-
-            //set default value
-            var defaultCanton = "Seleccione una provincia";
-            //  $('#txtCanton').val(defaultCanton);
-            $("#txtCanton").val($("#txtCanton option:first").val());
-
-        };
-
-        var showDistrict = function (selectedCanton) {
-            if (selectedCanton == null) {
-                selectedCanton = "01"
-            }
-            $('#txtDistrict option').hide();
-            //$('#txtDistrict').find('option').filter("option[data.pc ^= '" + selectedCanton + "']").show();
-            $('#txtDistrict').find(`option[data-parent=${selectedCanton}]`).show()
-            //set default value
-            var defaultDistrito = "Seleccione un cantón";
-            //$('#txtDistrict').val(defaultDistrito);
-            $("#txtDistrict").val($("#txtDistrict option:first").val());
-
-        };
-
         //set default provincia
         var province = $('#txtProvince').val();
         showCanton(province);
@@ -1241,10 +1244,6 @@ $(document).ready(function () {
         showDistrict(canton);
         $('#txtCanton').change(function () {
             showDistrict($(this).val());
-        });
-
-        $('#txtDistrict').change(function () {
-
         });
 
         $('#txtStatusAcademic').change(function () {
@@ -1290,12 +1289,8 @@ $(document).ready(function () {
         $('#txtBirthdate').change(function () {
             $('#txtAge').val(getEdad($('#txtBirthdate').val()));
         });
-
-
         RulesValidateCreate();
-
     });
-
 
     $("#btnSaveChanges").attr("disabled", "disabled");
     // When the user clicks on the button, scroll to the top of the document
@@ -1315,27 +1310,19 @@ $(document).ready(function () {
 
     $("#downloadCV").click(async function () {
         setTimeout(async function () {
-
             await DowlandCV()
             await $('.bg-gray').css("color", "white");
-
         }, 2000)
-       
-
     });
 
     $("#txtVehicle").change(function () {
         if ($('#txtVehicle').val() == "Sí") {
-            $('.selectedVehicle').show();
+            $('#chkVehiclesTypes').show();
         } else {
-            $('.selectedVehicle').hide();
+            $('#chkVehiclesTypes').hide();
         }
     });
-   
-
 })
-
-
 
 function DownlandCertificateCourse(url, fileName) {
     const anchor = document.createElement("a");
@@ -1344,19 +1331,6 @@ function DownlandCertificateCourse(url, fileName) {
     anchor.setAttribute('target', '_blank');
 
     anchor.click();
-    /*
-        URL.revokeObjectURL(href);*/
-
-    /*$.ajax({
-        url: url,
-        type: "get",
-        contentType: false,
-        processData: false,
-        async: false,
-        success: function (response) {
-            console.log(response);
-        }
-    })*/
 }
 
 
@@ -1368,19 +1342,6 @@ function DownlandCertificateAcademic(url, fileName) {
     anchor.setAttribute('target', '_blank');
 
     anchor.click();
-/*
-    URL.revokeObjectURL(href);*/
-
-    /*$.ajax({
-        url: url,
-        type: "get",
-        contentType: false,
-        processData: false,
-        async: false,
-        success: function (response) {
-            console.log(response);
-        }
-    })*/  
 }
 
 async function DowlandCV() {
@@ -1397,8 +1358,6 @@ async function DowlandCV() {
         studentProfileData = dataStudent;
         nameFile = studentProfileData["FirstName"] + " " + studentProfileData["FirstLastName"] + " " + studentProfileData["SecondLastName"] + ".pdf";
     }
-
-
 
     elementHTML = "";
     var laboral = laboralList;
@@ -1418,11 +1377,6 @@ async function DowlandCV() {
         doc.text(20, 60 + (i * 20), text);
     }
 
-    /*doc.setFontSize(16);
-    doc.setTextColor(0, 170, 228);
-    doc.setFontType("bold");
-    doc.text('Formación Educativa', 80, 120, { align: 'center' });*/
-
     var academic = academicList;
     for (let i in academic) {
         doc.setFontSize(12);
@@ -1440,11 +1394,6 @@ async function DowlandCV() {
         doc.text(20, 135 + (i * 20), text);
     }
 
-    /*doc.setFontSize(16);
-    doc.setTextColor(0, 170, 228);
-    doc.setFontType("bold");
-    doc.text('Otros Cursos', 90, 190, { align: 'center' });*/
-    
     var course = courseList;
     for (let i in course) {
         doc.setFontSize(12);
@@ -1462,13 +1411,6 @@ async function DowlandCV() {
         doc.text(20, 200 + (i * 20), text);
     }
 
-    /*doc.addPage();
-
-    doc.setFontSize(16);
-    doc.setTextColor(0, 170, 228);
-    doc.setFontType("bold");
-    doc.text('Idiomas', 94, 20, { align: 'center' });*/
-
     var language = languageList;
     for (let i in language) {
         doc.setFontSize(12);
@@ -1478,11 +1420,6 @@ async function DowlandCV() {
         let text = language[i].LanguageName + "\n" + language[i].Level
         doc.text(20, 30 + (i * 15), text);
     }
-
-    /*doc.setFontSize(16);
-    doc.setTextColor(0, 170, 228);
-    doc.setFontType("bold");
-    doc.text('Referencias', 90, 70, { align: 'center' });*/
 
     var reference = referenceList;
     for (let i in reference) {
@@ -1496,22 +1433,18 @@ async function DowlandCV() {
 
     container = document.createElement('div');
 
-
     doc.setFontSize(18);
     doc.setTextColor(0, 170, 228);
     doc.setFontType("bold");
     doc.text('CURRICULUM VITAE', 70, 20, { align: 'center' });
 
-
     let title = document.createElement('h3');
     title.textContent = "CURRICULUM VITAE";
     title.style.textAlign = 'center';
 
-
     let image = document.createElement("img");
     image.src = "../../Content/Logos/Imagotipo Banking Academy 2.png";
     image.width = "50px";
-
 
     //clone is required because otherwise you alter the current page.
     let titleInfo = document.createElement('h5');
@@ -1541,7 +1474,6 @@ async function DowlandCV() {
     let titleLanguage = document.createElement('h5');
     titleLanguage.textContent = "Idiomas";
     titleLanguage.style.textAlign = 'center';
-
 
     let titleReference = document.createElement('h5');
     titleReference.textContent = "Referencias";
@@ -1707,7 +1639,6 @@ async function DowlandCV() {
         container.append(containerReference);
     }
 
-
     var opt = {
         margin: 2,
         filename: nameFile,
@@ -1718,9 +1649,5 @@ async function DowlandCV() {
 
     // New Promise-based usage:
     html2pdf(container, opt);
-
-
-    //html2pdf().set(opt).from(container).save();
-
 }
 
