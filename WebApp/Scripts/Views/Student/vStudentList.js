@@ -6,6 +6,7 @@ function vStudentList() {
 	this.ctrlActions = new ControlActions();
 	this.service = 'student';
 	this.columns = "FirstName,FirstLastName,SecondLastName,IdentificationNumber,Email,BankingStudent,UserActiveStatus";
+    this.userSelections = {};
 
 	this.BindFields = function (data) {
 		//window.location.href = "/student/vStudentUpdate/" + data["StudentID"];
@@ -46,7 +47,7 @@ function vStudentList() {
                 btnActions = '<button title="Perfil de estudiante" class="btn btn-primary" style="margin: 5px 6px;width:46px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '" title="' + (data[i].UserActiveStatus == 'Activo' ? 'Desactivar Estudiante' : 'Activar Estudiante') + '" style="margin: 5px 6px;width:46px;"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\',\'' + data[i].Email + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button ><button class="btn btn-warning" style="margin: 5px 6px;width:46px;" title="Restablecer contraseña" onclick="resetPassword(' + data[i].StudentID + ', \'' + data[i].Email + '\')"  ><i class="fa fa-key"></i></button>';
 
 
-                 
+
                 btnFinish = (data[i]['EntityName'] == "F_DEFAULT" || data[i]['EntityName'] == "" ? '' : '<button style="cursor:pointer;" class="btn btn-danger" onclick="finishProcessRecruitment(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ')">Ya no trabaja en el banco</button>')
 
 
@@ -56,7 +57,7 @@ function vStudentList() {
                     data[i].IdentificationNumber,
                     data[i].Email,
                     data[i].BankingStudent,
-                    '<select onchange="changeEntity(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select >' + btnFinish ,
+                    '<select data-entity-id="' + data[i].EntityId + '"  data-student-id="' + data[i].StudentID + '" onchange="changeEntity(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select >' + btnFinish ,
                     '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID + '" aria-label="Pruebas económicas"><option value="0" selected>Sin Realizar Pruebas Económicas</option ><option value="1" >Aprobó Pruebas Económicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >' +
                     '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected>Sin Realizar Pruebas Psicométricas</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
                     '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected>Sin Realizar Entrevista</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
@@ -119,9 +120,65 @@ function vStudentList() {
                     select4.val('0').attr('selected', 'selected');
                 }
 
+
+            }
+
+
+            t.on('draw.dt', function () {
+                // Restaura los valores de los elementos <select> después de cada operación de paginación y ordenación
+                restoreSelectValues();
+            });
+
+            async function restoreSelectValues() {
+                // Obtiene los datos de la API nuevamente
+                $('#tblStudent tbody tr').each(function () {
+                    var row = t.row($(this));
+                    var data = row.data();
+
+                    var regex = /data-student-id="([^"]*)"/;
+                    var match = data[5].match(regex);
+                    var studentId;
+
+                    if (match && match.length > 1) {
+                        studentId = match[1]; // Obtiene el valor de data-student-id
+                    }
+
+                    var regex2 = /data-entity-id="([^"]*)"/;
+                    var match2 = data[5].match(regex2);
+                    var entityId;
+
+                    if (match2 && match2.length > 1) {
+                        entityId = match2[1]; // Obtiene el valor de data-entity-id
+                    }
+
+
+                    // Borra todas las opciones existentes del selectEntity
+
+                    $("#selectEntity" + studentId).empty();
+
+                    $("#selectEntity" + studentId).append("<option value=\"0\" selected>Ninguna</option>");
+
+                    this.ctrlActions2 = new ControlActions();
+
+                    // Vuelve a agregar las opciones desde financials
+                    this.ctrlActions2.GetById('entity', function (financials) {
+                        $(financials).each(function (index, value) {
+                            if (value.UserActiveStatus == "Activo") {
+                                if (entityId == value.EntityUserID) {
+                                    $("#selectEntity" + studentId).append("<option value=" + value.EntityUserID + " selected> " + value.Name + "</option> ");
+
+                                } else {
+                                    $("#selectEntity" + studentId).append("<option value=" + value.EntityUserID + "> " + value.Name + "</option> ");
+
+                                }
+                            }
+                        });
+                    });
+                });
             }
 
         });
+
 
 	} 
 	

@@ -105,7 +105,7 @@ function Recruitment() {
     
 
             for (let i in data) {
-                if (data[i].StatusRecruitment == '0' && (data[i].UserActiveStatus == '1' || data[i].UserActiveStatus == 'Activo')) {
+                if (data[i].StatusRecruitment == '0' && (data[i].UserActiveStatus == '1' || data[i].UserActiveStatus == 'Activo') && data[i].FirstName != '') {
                     t.row.add([
                         data[i].FirstName,
                         data[i].FirstLastName,
