@@ -13,7 +13,14 @@ function vStudentList() {
 		localStorage.setItem('selectedID', data);
 	}
 
-	this.RetrieveAll = async function () {
+    this.RetrieveAll = async function () {
+        this.ctrlActions2 = new ControlActions();
+        var financialList = []
+        await this.ctrlActions2.GetById('entity', function (financials) {
+            financialList = financials
+        })
+
+
 		//await this.ctrlActions.FillTable(this.service, this.tblStudentId, false);
         await this.ctrlActions.GetById('student',async function (data) {
             var t = $('#tblStudent').DataTable({
@@ -42,6 +49,9 @@ function vStudentList() {
                 var data = t.row(this).data();
                 sessionStorage.setItem('tblStudent_selected', JSON.stringify(data));
             });
+
+            
+
             for (let i in data) {
 
                 btnActions = '<button title="Perfil de estudiante" class="btn btn-primary" style="margin: 5px 6px;width:46px;" onclick="profileStudent(' + data[i].StudentID + ')" id="profileStudent"><i class="fa fa-user"></i></button ><button ' + (data[i].UserActiveStatus == 'Activo' ? 'class="btn btn-danger"' : 'class="btn btn-success"') + ' id="changeStatus' + data[i].StudentID + '" title="' + (data[i].UserActiveStatus == 'Activo' ? 'Desactivar Estudiante' : 'Activar Estudiante') + '" style="margin: 5px 6px;width:46px;"  onclick="changeStatusStudent(' + data[i].StudentID + ',\'' + data[i].UserActiveStatus + '\',\'' + data[i].Email + '\', this)">' + (data[i].UserActiveStatus == 'Activo' ? '<i class="fa fa-eye-slash"></i>' : '<i class="fa fa-eye"></i>') + '</button ><button class="btn btn-warning" style="margin: 5px 6px;width:46px;" title="Restablecer contraseña" onclick="resetPassword(' + data[i].StudentID + ', \'' + data[i].Email + '\')"  ><i class="fa fa-key"></i></button>';
@@ -57,32 +67,29 @@ function vStudentList() {
                     data[i].IdentificationNumber,
                     data[i].Email,
                     data[i].BankingStudent,
-                    '<select data-entity-id="' + data[i].EntityId + '"  data-student-id="' + data[i].StudentID + '" onchange="changeEntity(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select >' + btnFinish ,
+                    '<select data-entity-id="' + data[i].EntityId + '"  data-student-id="' + data[i].StudentID + '" onchange="changeEntity(' + data[i].StudentID + ',' + data[i].IdHistoryRecruitment + ', selectEntity' + data[i].StudentID + ')"  class="form-select select-tests" id="selectEntity' + data[i].StudentID + '" aria-label="Entidad Bancaria"><option value="0" selected>Ninguna</option></select >' + btnFinish,
                     '<select onchange="updateProcessTestEconomic(' + data[i].StudentID + ', selectE' + data[i].StudentID + ')" class="form-select select-tests" id="selectE' + data[i].StudentID + '" aria-label="Pruebas económicas"><option value="0" selected>Sin Realizar Pruebas Económicas</option ><option value="1" >Aprobó Pruebas Económicas</option ><option value="2">Reprobó Pruebas Econoómicas</option></select >' +
                     '<select onchange="updateProcessTestPsychometric(' + data[i].StudentID + ', selectP' + data[i].StudentID + ')"  class="form-select select-tests" id="selectP' + data[i].StudentID + '" aria-label="Pruebas psicométricas"><option value="0" selected>Sin Realizar Pruebas Psicométricas</option ><option value="1" >Aprobó Pruebas Psicométricas</option ><option value="2">Reprobó Pruebas Psicométricas</option></select >' +
                     '<select onchange="updateProcessInterview(' + data[i].StudentID + ', selectI' + data[i].StudentID + ')"  class="form-select select-tests" id="selectI' + data[i].StudentID + '" aria-label="Entrevista"><option value="0" selected>Sin Realizar Entrevista</option ><option value="1" >Pasó Entrevista</option ><option value="2">No Pasó Entrevista</option></select>' +
                     '<select onchange="updateProcessHiring(' + data[i].StudentID + ', selectH' + data[i].StudentID + ')"  class="form-select select-tests" id="selectH' + data[i].StudentID + '" aria-label="Contratación"><option value="0" selected>Seleccione Opción Contratación</option ><option value="1" >Contratado</option ><option value="2">No Se Contrató</option></select >',
-                     data[i].UserActiveStatus,
-                     btnActions
+                    data[i].UserActiveStatus,
+                    btnActions
                 ]).draw(false);
 
-
-                this.ctrlActions2 = new ControlActions();
-
-                this.ctrlActions2.GetById('entity', function (financials) {
-                    $(financials).each(function (index, value) {
+                if (data[i].FirstName != "") {
+                    $(financialList).each(function (index, value) {
                         if (value.UserActiveStatus == "Activo") {
-                            if (data[i].EntityId == value.EntityUserID ) {
+                            if (data[i].EntityId == value.EntityUserID) {
                                 $("#selectEntity" + data[i].StudentID).append("<option value=" + value.EntityUserID + " selected> " + value.Name + "</option> ");
 
                             } else {
                                 $("#selectEntity" + data[i].StudentID).append("<option value=" + value.EntityUserID + "> " + value.Name + "</option> ");
-
                             }
                         }
                     });
-                })
-                
+                }
+
+                               
 
                 let select1 = $("#selectE" + data[i].StudentID);
                 if (data[i].StatusEconomicTest == '1') {
