@@ -88,46 +88,6 @@ function vStudentList() {
                         }
                     });
                 }
-
-                               
-
-                let select1 = $("#selectE" + data[i].StudentID);
-                if (data[i].StatusEconomicTest == '1') {
-                    select1.val('1').attr('selected', 'selected');
-                } else if (data[i].StatusEconomicTest == '2') {
-                    select1.val('2').attr('selected', 'selected');
-                } else {
-                    select1.val('0').attr('selected', 'selected');
-                }
-
-                let select2 = $("#selectP" + data[i].StudentID);
-                if (data[i].StatusPsychometricTest == '1') {
-                    select2.val('1').attr('selected', 'selected');
-                } else if (data[i].StatusPsychometricTest == '2') {
-                    select2.val('2').attr('selected', 'selected');
-                } else {
-                    select2.val('0').attr('selected', 'selected');
-                }
-
-                let select3 = $("#selectI" + data[i].StudentID);
-                if (data[i].StatusInterview == '1') {
-                    select3.val('1').attr('selected', 'selected');
-                } else if (data[i].StatusInterview == '2') {
-                    select3.val('2').attr('selected', 'selected');
-                } else {
-                    select3.val('0').attr('selected', 'selected');
-                }
-
-                let select4 = $("#selectH" + data[i].StudentID);
-                if (data[i].StatusHired == '1') {
-                    select4.val('1').attr('selected', 'selected');
-                } else if (data[i].StatusHired == '2') {
-                    select4.val('2').attr('selected', 'selected');
-                } else {
-                    select4.val('0').attr('selected', 'selected');
-                }
-
-
             }
 
 
@@ -168,8 +128,9 @@ function vStudentList() {
                     this.ctrlActions2 = new ControlActions();
 
                     // Vuelve a agregar las opciones desde financials
-                    this.ctrlActions2.GetById('entity', function (financials) {
-                        $(financials).each(function (index, value) {
+                    var name = data[0].replace(/\s/g, '');
+                    if (name != "") {
+                        $(financialList).each(function (index, value) {
                             if (value.UserActiveStatus == "Activo") {
                                 if (entityId == value.EntityUserID) {
                                     $("#selectEntity" + studentId).append("<option value=" + value.EntityUserID + " selected> " + value.Name + "</option> ");
@@ -180,7 +141,8 @@ function vStudentList() {
                                 }
                             }
                         });
-                    });
+                    }
+                   
                 });
             }
 
