@@ -364,7 +364,7 @@ async function changeEntity(studentID, historyID, selectId) {
              historyData["IdType"] = student["IdType"]
              historyData["IdentificationNumber"] = student["IdentificationNumber"]
              historyData['EntityId'] = selectId.value;
-             historyData['EntityUser'] = selectId[selectId.value].text
+             historyData['EntityUser'] = selectId.options[selectId.selectedIndex].text;
              historyData['RecruiterUser'] = user['UserLogin'];
              historyData['RecruiterName'] = user['Name'];
              historyData['StatusEconomic'] = "Sin realizar";
